@@ -1,0 +1,93 @@
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="IMAGEM E SOM"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#0099CC" />
+	<View
+	    android:layout_width="fill_parent"
+	    android:layout_height="0.1dp"
+	    android:background="#0099CC" />
+	
+	
+	<ImageButton 
+	    android:id="@+id/btnUploadImg"
+	    android:layout_width="96dp"
+	    android:layout_height="96dp"
+	    android:contentDescription="Selecione arquivo de Imagem"/>	
+        
+	
+	<Button
+	    android:id="@+id/btnUploadSom"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:text="Selecionar arquivo de som..." />
+	<TextView
+	    android:id="@+id/textView3"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="Arquivo de som selecionado:"
+	    android:textAppearance="?android:attr/textAppearanceMedium"
+	    android:visibility="gone" />
+	<TextView
+	    android:id="@+id/lblSomSel"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text=""
+	    android:textAppearance="?android:attr/textAppearanceSmall"
+	    android:visibility="gone" />    
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DADOS DA IMAGEM"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#0099CC" />
+	<View
+	    android:layout_width="fill_parent"
+	    android:layout_height="0.1dp"
+	    android:background="#0099CC" />        
+    
+	<EditText
+	    android:id="@+id/txtDesc"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:hint="Descrição"
+	    android:ems="10"
+	    android:inputType="text" >
+
+	</EditText>
+	
+	<RadioGroup
+	    android:id="@+id/optGTipo"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content" >
+	
+	    <RadioButton
+	        android:id="@+id/optSubs"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:checked="true"
+	        android:text="Substantivo" />
+	
+	    <RadioButton
+	        android:id="@+id/optVerb"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="Verbo" />
+	    
+	</RadioGroup>
+
+</LinearLayout>

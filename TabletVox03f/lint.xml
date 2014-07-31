@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="HandlerLeak" severity="ignore" />
+    <issue id="InflateParams">
+        <ignore path="src/com/example/tabletvox03f/management/ItemPerfilAdapter.java" />
+    </issue>
+    <issue id="Typos">
+        <ignore path="res/values/strings.xml" />
+    </issue>
+</lint>

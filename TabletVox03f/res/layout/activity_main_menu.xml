@@ -1,0 +1,43 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".MainMenuActivity" 
+    android:orientation="vertical">
+
+    <Button 
+        android:id="@+id/cmdLaunchModoTouch"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cmdLaunchModoTouchText"/>
+    <Button 
+        android:id="@+id/cmdLaunchModoVarredura"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cmdLaunchModoVarreduraText"/>
+
+    <Button
+        android:id="@+id/cmdLaunchMudarPerfil"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cmdLaunchMudarPerfilText"/>
+    
+	
+	<ProgressBar
+	    android:id="@+id/progressBarInicializar"
+	    style="?android:attr/progressBarStyleLarge"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:indeterminate="true"
+	    android:visibility="gone" />
+
+	<TextView
+	    android:id="@+id/lblCarregando"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="@string/texto_carregando"
+	    android:textAppearance="?android:attr/textAppearanceLarge"
+	    android:visibility="gone" />
+
+</LinearLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <categoria>bebidas</categoria>
+    <page numero="1">
+        <entrada id="88" />
+        <entrada id="89" />
+        <entrada id="90" />
+        <entrada id="91" />
+        <entrada id="92" />
+        <entrada id="93" />
+        <entrada id="94" />
+    </page>
+</root>

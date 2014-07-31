@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assoc_imagem_som>
+    <entrada id="1">
+        <desc>letraa</desc>
+        <titulo_imagem>letraa</titulo_imagem>
+        <titulo_som>s01002</titulo_som>
+        <ext>png</ext>
+        <tipo>n</tipo>
+    </entrada>
+    <entrada id="2">
+        <desc>letrab</desc>
+        <titulo_imagem>letrab</titulo_imagem>
+        <titulo_som>s02012</titulo_som>
+        <ext>png</ext>
+        <tipo>n</tipo>
+    </entrada>
+    <entrada id="3">
+        <desc>letrac</desc>
+        <titulo_imagem>letrac</titulo_imagem>
+        <titulo_som>s05012</titulo_som>
+        <ext>png</ext>
+        <tipo>n</tipo>        
+    </entrada>
+    <entrada id="4">
+        <desc>letracc</desc>
+        <titulo_imagem>letracc</titulo_imagem>
+        <titulo_som>cedilha</titulo_som>
+        <ext>png</ext>
+        <tipo>n</tipo>        
+    </entrada>
+    <entrada id="5">
+        <desc>letrad</desc>
+        <titulo_imagem>letrad</titulo_imagem>
+        <titulo_som>s10002</titulo_som>
+        <ext>png</ext>
+        <tipo>n</tipo>        
+    </entrada>
+    <entrada id="6">
+        <desc>letrae</desc>
+        <titulo_imagem>letrae</titulo_imagem>
+        <titulo_som>s12012</titulo_som>
+        <ext>png</ext>
+        <tipo>n</tipo>        
+    </entrada>
+    <entrada id="7">
+        <desc>letraf</desc>
+        <titulo_imagem>letraf</titulo_imagem>
+        <titulo_som>s13002</titulo_som>
+        <ext>png</ext>
+        <tipo>n</tipo>        
+    </entrada>
+    <entrada id="8">
+        <desc>letrag</desc>
+        <titulo_imagem>letrag</titulo_imagem>
+        <titulo_som>s16012</titulo_som>
+        <ext>png</ext>
+        <tipo>n</tipo>        
+    </entrada>
+    <entrada id="9">
+        <desc>letrah</desc>
+        <titulo_imagem>letrah</titulo_imagem>
+        <titulo_som>s19012</titulo_som>
+        <ext>png</ext>
+        <tipo>n</tipo>        
+    </entrada>
+    <entrada id="10">
+        <desc>letrai</desc>
+        <titulo_imagem>letrai</titulo_imagem>
+        <titulo_som>s20012</titulo_som>
+        <ext>png</ext>
+        <tipo>n</tipo>        
+    </entrada>
+    <entrada id="11">
+        <desc>letraj</desc>
+        <titulo_imagem>letraj</titulo_imagem>
+        <titulo_som>s21002</titulo_som>
+        <ext>png</ext>
+        <tipo>n</tipo>        
+    </entrada>   
+    <entrada id="12">
+        <desc>letrak</desc>
+        <titulo_imagem>letrak</titulo_imagem>
+        <titulo_som>k</titulo_som>
+        <ext>png</ext>
+        <tipo>n</tipo>        
+    </entrada>
+    <entrada id="13">
+        <desc>letral</desc>
+        <titulo_imagem>letral</titulo_imagem>
+        <titulo_som>s22012</titulo_som>
+        <ext>png</ext>
+        <tipo>n</tipo>        
+    </entrada>
+    <entrada id="14">
+        <desc>letram</desc>
+        <titulo_imagem>letram</titulo_imagem>
+        <titulo_som>s24002</titulo_som>
+        <ext>png</ext>
+        <tipo>n</tipo>        
+    </entrada>
+    <entrada id="15">
+        <desc>letran</desc>
+        <titulo_imagem>letran</titulo_imagem>
+        <titulo_som>s25012</titulo_som>
+        <ext>png</ext>
+        <tipo>n</tipo>        
+    </entrada>
+    <entrada id="16">
+        <desc>letrao</desc>
+        <titulo_imagem>letrao</titulo_imagem>
+        <titulo_som>s27012</titulo_som>
+        <ext>png</ext>
+        <tipo>n</tipo>        
+    </entrada>
+    <entrada id="17">
+        <desc>letrap</desc>
+        <titulo_imagem>letrap</titulo_imagem>
+        <titulo_som>s28012</titulo_som>
+        <ext>png</ext>
+        <tipo>n</tipo>        
+    </entrada>
+    <entrada id="18">
+        <desc>letraq</desc>
+        <titulo_imagem>letraq</titulo_imagem>
+        <titulo_som>s31002</titulo_som>
+        <ext>png</ext>
+        <tipo>n</tipo>        
+    </entrada>
+    <entrada id="19">
+        <desc>letrar</desc>
+        <titulo_imagem>letrar</titulo_imagem>
+        <titulo_som>s32002</titulo_som>
+        <ext>png</ext>
+        <tipo>n</tipo>        
+    </entrada>
+    <entrada id="20">
+        <desc>letras</desc>
+        <titulo_imagem>letras</titulo_imagem>
+        <titulo_som>s37002</titulo_som>
+        <ext>png</ext>
+        <tipo>n</tipo>        
+    </entrada>
+    <entrada id="21">
+        <desc>letrat</desc>
+        <titulo_imagem>letrat</titulo_imagem>
+        <titulo_som>s39002</titulo_som>
+        <ext>png</ext>
+        <tipo>n</tipo>        
+    </entrada>
+    <entrada id="22">
+        <desc>letrau</desc>
+        <titulo_imagem>letrau</titulo_imagem>
+        <titulo_som>s42002</titulo_som>
+        <ext>png</ext>
+        <tipo>n</tipo>        
+    </entrada>
+    <entrada id="23">
+        <desc>letrav</desc>
+        <titulo_imagem>letrav</titulo_imagem>
+        <titulo_som>s43012</titulo_som>
+        <ext>png</ext>
+        <tipo>n</tipo>        
+    </entrada>
+    <entrada id="24">
+        <desc>letraw</desc>
+        <titulo_imagem>letraw</titulo_imagem>
+        <titulo_som>letra_w</titulo_som>
+        <ext>png</ext>
+        <tipo>n</tipo>        
+    </entrada>
+    <entrada id="25">
+        <desc>letrax</desc>
+        <titulo_imagem>letrax</titulo_imagem>
+        <titulo_som>s45002</titulo_som>
+        <ext>png</ext>
+        <tipo>n</tipo>        
+    </entrada>
+    <entrada id="26">
+        <desc>letray</desc>
+        <titulo_imagem>letray</titulo_imagem>
+        <titulo_som>y</titulo_som>
+        <ext>png</ext>
+        <tipo>n</tipo>        
+    </entrada>
+    <entrada id="27">
+        <desc>letraz</desc>
+        <titulo_imagem>letraz</titulo_imagem>
+        <titulo_som>s47002</titulo_som>
+        <ext>png</ext>
+        <tipo>n</tipo>        
+    </entrada>
+    <entrada id="28">
+        <desc>comando falar</desc>
+        <titulo_imagem>cmd10</titulo_imagem>
+        <titulo_som>cmd10</titulo_som>
+        <ext>jpg</ext>
+        <tipo>n</tipo>
+        <cmd>1</cmd>
+    </entrada>                    
+</assoc_imagem_som>

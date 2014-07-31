@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.tabletvox03f"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="16" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.example.tabletvox03f.ModoTouchActivity"
+            android:label="@string/title_activity_modo_touch" >
+        </activity>
+
+        <service
+            android:name="com.example.tabletvox03f.SoundService"
+            android:exported="false" />
+
+        <activity
+            android:name="com.example.tabletvox03f.ModoVarreduraActivity"
+            android:label="@string/title_activity_modo_varredura" >
+        </activity>
+        <activity
+            android:name="com.example.tabletvox03f.MainMenuActivity"
+            android:label="@string/title_activity_main_menu" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.tabletvox03f.TelasCadastro"
+            android:label="@string/title_activity_telas_cadastro" >
+        </activity>
+        <activity
+            android:name="com.example.tabletvox03f.management.TelasCadastroActivity"
+            android:label="@string/title_activity_telas_cadastro" >
+        </activity>
+        <activity
+            android:name="com.example.tabletvox03f.management.IncluirAISActivity"
+            android:label="@string/title_activity_incluir_ais" >
+        </activity>
+        <activity
+            android:name="com.example.tabletvox03f.ModoTouchCategoriasActivity"
+            android:label="@string/title_activity_modo_touch_categorias" >
+        </activity>
+        <activity
+            android:name="com.example.tabletvox03f.ModoVarreduraCategoriasActivity"
+            android:label="@string/title_activity_modo_varredura_categorias" >
+        </activity>
+        <activity
+            android:name="com.example.tabletvox03f.management.SelecionarPerfilActivity"
+            android:label="@string/title_activity_selecionar_perfil" >
+        </activity>
+        <activity
+            android:name="com.example.tabletvox03f.management.FormularioPerfilActivity"
+            android:label="@string/title_activity_criar_perfil" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.tabletvox03f.SelecionarPerfilActivity" >
+            </meta-data>
+        </activity>
+        <activity
+            android:name="com.example.tabletvox03f.management.ListaCategoriasDoPerfilActivity"
+            android:label="@string/title_activity_perfil_manage" >
+        </activity>
+        
+        <activity 
+            android:name="com.example.tabletvox03f.management.FormularioCategoriaActivity"
+            android:label="@string/title_activity_criar_categoria">
+        </activity>
+        
+        <activity 
+            android:name="com.example.tabletvox03f.management.FormularioAssocImagemSomActivity"
+            android:label="@string/title_activity_incluir_ais">
+        </activity>
+    </application>
+
+</manifest>

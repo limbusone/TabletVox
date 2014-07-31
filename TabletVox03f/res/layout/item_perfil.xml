@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="6dip" >
+
+    <TextView
+        android:id="@+id/lblNomePerfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="3dip"        
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="2dip"
+        android:layout_below="@id/lblNomePerfil"
+        android:text="@string/itemPerfilDe"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/lblAutor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lblNomePerfil"
+        android:layout_toRightOf="@id/textView2"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ImageButton
+        android:id="@+id/btnDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="58dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/lblNomePerfil"
+        android:src="@android:drawable/ic_delete"
+        android:contentDescription="@string/blabla" />
+
+    <ImageButton
+        android:id="@+id/btnEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/lblAutor"
+        android:layout_alignTop="@id/btnDelete"
+        android:layout_toLeftOf="@id/btnDelete"
+        android:src="@android:drawable/ic_menu_edit"
+        android:contentDescription="@string/blabla" />
+    
+   <ImageButton 
+       	android:id="@+id/btnManage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/btnDelete"
+        android:layout_alignTop="@id/btnDelete"
+        android:layout_toLeftOf="@id/btnEdit"
+        android:src="@android:drawable/ic_menu_manage"
+        android:contentDescription="@string/blabla" />
+	
+</RelativeLayout>

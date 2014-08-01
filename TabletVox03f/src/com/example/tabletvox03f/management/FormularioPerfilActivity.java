@@ -1,11 +1,18 @@
 package com.example.tabletvox03f.management;
 
+import java.util.ArrayList;
+
 import android.content.Intent;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
+import android.widget.ListView;
 
 import com.example.tabletvox03f.Erro;
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.Utils;
+import com.example.tabletvox03f.dal.Categoria;
 import com.example.tabletvox03f.dal.Perfil;
 import com.example.tabletvox03f.dal.PerfilDAOSingleton;
 
@@ -13,6 +20,19 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 {
 	private Perfil pfl;
 
+	private ListView lv;
+	
+	private OnItemClickListener itemClick = new OnItemClickListener()
+	{
+
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+				long arg3)
+		{
+			
+		}
+	};	
+	
 	@Override
 	protected int[] getDadosForm()
 	{
@@ -25,7 +45,15 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 	@Override
 	protected void onCreateFilho()
 	{
-
+		// carregar evento do click em um item da lista
+		lv = (ListView) findViewById(R.id.listViewCat);
+		lv.setOnItemClickListener(itemClick);
+	}
+	
+	protected void onResumeSuper()
+	{
+		super.onResume();
+		carregarLista();
 	}
 	
 	protected void initCriarForm()
@@ -38,22 +66,33 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 		EditText txtNome = (EditText) findViewById(R.id.txtNomePerfil);
 		EditText txtAutor = (EditText) findViewById(R.id.txtAutorPerfil);
 		
-		pfl = new Perfil
-				(
-					intent.getIntExtra("pfl_id", 0), 
-					intent.getStringExtra("pfl_nome"), 
-					intent.getStringExtra("pfl_autor")
-				);
+		pfl = intent.getParcelableExtra("perfil");
+		
+//		pfl = new Perfil
+//				(
+//					intent.getIntExtra("pfl_id", 0), 
+//					intent.getStringExtra("pfl_nome"), 
+//					intent.getStringExtra("pfl_autor")
+//				);
 		
 		txtNome.setText(pfl.getNome());
 		txtAutor.setText(pfl.getAutor());
+		
+		if (pfl.getCategorias() == null)
+			pfl.setCategorias(new ArrayList<Categoria>());		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void incluir()
 	{
 		pfl.setNome(((EditText) findViewById(R.id.txtNomePerfil)).getText().toString());
 		pfl.setAutor(((EditText) findViewById(R.id.txtAutorPerfil)).getText().toString());
+		
+		// seta somente se há items 
+		pfl.setCategorias((lv.getCount() > 0) ? 
+						  (ArrayList<Categoria>)((ItemCategoriaAdapter)lv.getAdapter()).getCategorias().clone() : 
+						   null);
 		
 		retirarErros();
 		
@@ -146,6 +185,14 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 		
 		return retorno;
 	}	
+	
+	@SuppressWarnings("unchecked")
+	protected void carregarLista()
+	{
+		ArrayList<Categoria> lista = pfl.getCategorias();
+		
+		lv.setAdapter(new ItemCategoriaAdapter(this, (ArrayList<Categoria>) lista.clone()));
+	}
 	
 	private void retirarErros()
 	{

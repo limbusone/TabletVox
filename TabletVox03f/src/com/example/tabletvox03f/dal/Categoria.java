@@ -2,7 +2,10 @@ package com.example.tabletvox03f.dal;
 
 import java.util.ArrayList;
 
-public class Categoria
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Categoria implements Parcelable
 {
 	private int id;
 	private String nome;
@@ -102,6 +105,67 @@ public class Categoria
 		this.catImagens = catImagens;
 	}
 
+	/*** METODOS E ATRIBUTOS PARCELABLE ***/
 	
+	public Categoria(Parcel in) 
+	{
+		readFromParcel(in);
+	}
+	
+	@Override
+	public int describeContents()
+	{
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags)
+	{
+		// We just need to write each field into the
+		// parcel. When we read from parcel, they
+		// will come back in the same order
+		dest.writeInt(this.id);
+		dest.writeString(this.nome);
+		//dest.writeTypedList(this.categorias);
+		
+	}
+	
+	private void readFromParcel(Parcel in) 
+	{
+		 
+		// We just need to read back each
+		// field in the order that it was
+		// written to the parcel
+		this.id 		= in.readInt();
+		this.nome 		= in.readString();
+	}
+	
+    /**
+    *
+    * This field is needed for Android to be able to
+    * create new objects, individually or as arrays.
+    *
+    * This also means that you can use use the default
+    * constructor to create the object and use another
+    * method to hyrdate it as necessary.
+    *
+    * I just find it easier to use the constructor.
+    * It makes sense for the way my brain thinks ;-)
+    *
+    */
+	public static final Parcelable.Creator<Categoria> CREATOR = new Parcelable.Creator<Categoria>()
+   {
+	   public Categoria createFromParcel(Parcel in) 
+	   {
+	       return new Categoria(in);
+	   }
+	
+	   public Categoria[] newArray(int size) 
+	   {
+	       return new Categoria[size];
+	   }
+   };
+   
 	
 }

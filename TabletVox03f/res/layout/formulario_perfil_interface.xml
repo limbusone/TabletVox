@@ -8,7 +8,7 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="PREENCHA OS CAMPOS ABAIXO"
+        android:text="IDENTIFICAÇÃO"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
@@ -35,5 +35,24 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Autor" />
+    
+     <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CATEGORIAS"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#0099CC" />
 
+	<View
+	    android:layout_width="fill_parent"
+	    android:layout_height="0.1dp"
+	    android:background="#0099CC" />
+	
+    <ListView
+        android:id="@+id/listViewCat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

@@ -25,6 +25,11 @@ public class ItemCategoriaAdapter extends BaseAdapter
 	private ArrayList<Categoria> categorias;
 	private LayoutInflater inflator;	
 
+	
+	public ArrayList<Categoria> getCategorias()
+	{
+		return this.categorias;
+	}
 	@Override
 	public int getCount()
 	{

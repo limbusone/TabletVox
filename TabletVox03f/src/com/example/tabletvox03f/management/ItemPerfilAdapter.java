@@ -111,9 +111,11 @@ public class ItemPerfilAdapter extends BaseAdapter
 				// chamar form editar
 				Intent intent = new Intent(ItemPerfilAdapter.this.mContext, FormularioPerfilActivity.class);
 				intent.putExtra("tipo_form", false); // false para 'editar perfil'
-				intent.putExtra("pfl_id", perfil.getId());
-				intent.putExtra("pfl_nome", perfil.getNome());
-				intent.putExtra("pfl_autor", perfil.getAutor());
+				
+				intent.putExtra("perfil", perfil);
+//				intent.putExtra("pfl_id", perfil.getId());
+//				intent.putExtra("pfl_nome", perfil.getNome());
+//				intent.putExtra("pfl_autor", perfil.getAutor());
 				((Activity) ItemPerfilAdapter.this.mContext).startActivityForResult(intent, 2);
 			}
 		});

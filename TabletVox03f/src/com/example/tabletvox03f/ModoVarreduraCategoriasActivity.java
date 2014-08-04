@@ -4,21 +4,20 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.example.tabletvox03f.R;
-import com.example.tabletvox03f.dal.AssocImagemSom;
-import com.example.tabletvox03f.dal.CarregarImagensTelas;
-import com.example.tabletvox03f.dal.XmlUtilsTelas;
-import com.example.tabletvox03f.management.Opcoes;
-
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
+
+import com.example.tabletvox03f.dal.AssocImagemSom;
+import com.example.tabletvox03f.dal.CarregarImagensTelas;
+import com.example.tabletvox03f.dal.XmlUtilsTelas;
+import com.example.tabletvox03f.management.Opcoes;
 
 public class ModoVarreduraCategoriasActivity extends TelaBaseActivity
 {
@@ -183,12 +182,12 @@ public class ModoVarreduraCategoriasActivity extends TelaBaseActivity
 		};
 		cixml.execute(init_page);
 		
-		GridView gridview = (GridView) findViewById(R.id.gridview);
-		
-		RelativeLayout rl = (RelativeLayout) gridview.getParent();
-		
-		gridview.setOnItemClickListener(carregarCategoriaEventoItem);
-		rl.setOnClickListener(carregarCategoriaEvento);
+//		GridView gridview = (GridView) findViewById(R.id.gridview);
+//		
+//		RelativeLayout rl = (RelativeLayout) gridview.getParent();
+//		
+//		gridview.setOnItemClickListener(carregarCategoriaEventoItem);
+//		rl.setOnClickListener(carregarCategoriaEvento);
 		
 	}
 
@@ -235,6 +234,16 @@ public class ModoVarreduraCategoriasActivity extends TelaBaseActivity
 	{
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.modo_varredura_categorias, menu);
+		return true;
+	}
+	
+	// metodo que intercepta os clicks na tela
+	@Override
+	public boolean dispatchTouchEvent(MotionEvent ev)
+	{
+		// verifica se acao do touch é aquela quando "solta-se" o dedo da tela.
+		if (ev.getAction() == MotionEvent.ACTION_UP)
+			acaoDoEvento();
 		return true;
 	}
 

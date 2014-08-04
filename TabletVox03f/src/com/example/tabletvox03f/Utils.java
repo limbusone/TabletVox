@@ -387,7 +387,7 @@ public class Utils
 		dao_ais.create("sentar", 		"sf187", 	"sf187", 	"jpg", 'v', 0);
 		dao_ais.create("ser", 			"", 		"", 		"jpg", 'v', 0);
 		
-		
+		dao_ais.create("comando voltar", "cmd11", "cmd11", "jpg", 'n', 2);
 	}	
 	/**
 	 * Retrieve all IDs of the Resource-Classes (like

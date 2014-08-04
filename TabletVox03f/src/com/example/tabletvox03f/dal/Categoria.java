@@ -127,7 +127,6 @@ public class Categoria implements Parcelable
 		// will come back in the same order
 		dest.writeInt(this.id);
 		dest.writeString(this.nome);
-		//dest.writeTypedList(this.categorias);
 		
 	}
 	
@@ -155,17 +154,17 @@ public class Categoria implements Parcelable
     *
     */
 	public static final Parcelable.Creator<Categoria> CREATOR = new Parcelable.Creator<Categoria>()
-   {
-	   public Categoria createFromParcel(Parcel in) 
-	   {
+	{
+		public Categoria createFromParcel(Parcel in) 
+		{
 	       return new Categoria(in);
-	   }
+		}
 	
-	   public Categoria[] newArray(int size) 
-	   {
+		public Categoria[] newArray(int size) 
+		{
 	       return new Categoria[size];
-	   }
-   };
+		}
+	};
    
 	
 }

@@ -58,12 +58,7 @@ public class ModoTouchActivity extends TelaBaseActivity
 		{
 			ImgItem imgi = (ImgItem) v;
 			int cmd = imgi.getAssocImagemSom().getCmd();
-			if (cmd == 1) // tocar som frase
-			{
-				//Comandos.tocarSomFrase(ModoTouchActivity.this);
-				//Comandos.tocarSomFrase();
-				tocarSomFrase();
-			}
+			acionarComando(cmd);
 		}
 	};
 	

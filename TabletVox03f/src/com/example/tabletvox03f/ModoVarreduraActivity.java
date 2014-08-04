@@ -4,16 +4,10 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.example.tabletvox03f.R;
-import com.example.tabletvox03f.dal.AssocImagemSom;
-import com.example.tabletvox03f.dal.CarregarImagensComandos;
-import com.example.tabletvox03f.dal.CarregarImagensTelas;
-import com.example.tabletvox03f.dal.XmlUtilsTelas;
-import com.example.tabletvox03f.management.Opcoes;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -21,6 +15,12 @@ import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+
+import com.example.tabletvox03f.dal.AssocImagemSom;
+import com.example.tabletvox03f.dal.CarregarImagensComandos;
+import com.example.tabletvox03f.dal.CarregarImagensTelas;
+import com.example.tabletvox03f.dal.XmlUtilsTelas;
+import com.example.tabletvox03f.management.Opcoes;
 
 /*
  * Varredura Externa: 
@@ -63,91 +63,57 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 	private boolean adicionarImagemFrase;
 	private boolean	acionarComando;
 	
-	// evento principal relativo à localização da borda vermelha
-	private OnClickListener principalEvento = new OnClickListener()
+	public void acaoDoEventoPrincipal()
 	{
-
-		@Override
-		public void onClick(View v)
+		// TODO Auto-generated method stub
+		
+		if (estadoAtual == 1 || estadoAtual == 2 /*|| estadoAtual == 3*/)
 		{
-			// TODO Auto-generated method stub
 			
-			if (estadoAtual == 1 || estadoAtual == 2 /*|| estadoAtual == 3*/)
-			{
-				
-				if (iteracaoExternaAtiva)
-					entrar();
-				else if (iteracaoInternaAtiva)
-					sair();			
+			if (iteracaoExternaAtiva)
+				entrar();
+			else if (iteracaoInternaAtiva)
+				sair();			
+		
+		}
+		else if (estadoAtual == 3) // atalho
+		{
+			GridView gva = (GridView) findViewById(R.id.gridview_atalhos);
+			ImgItem imgi = (ImgItem) gva.getChildAt(0);
 			
-			}
-			else if (estadoAtual == 3) // atalho
+			int cmd = imgi.getAssocImagemSom().getCmd();
+			// tocar som frase
+			acionarComando(cmd);
+		
+		}
+		else if (estadoAtual == 4) // mostrar comandos / esconder comandos
+		{
+			if (mostrarComandos)
 			{
-				GridView gva = (GridView) findViewById(R.id.gridview_atalhos);
-				ImgItem imgi = (ImgItem) gva.getChildAt(0);
-				
-				int cmd = imgi.getAssocImagemSom().getCmd();
-				if (cmd == 1) // tocar som frase
-					//Comandos.tocarSomFrase();
-					tocarSomFrase();
-			
-			}
-			else if (estadoAtual == 4) // mostrar comandos / esconder comandos
-			{
-				if (mostrarComandos)
+				CarregarImagensComandos cixmlc = new CarregarImagensComandos()
 				{
-					CarregarImagensComandos cixmlc = new CarregarImagensComandos()
+
+					// metodo que roda na UI Thread antes da atividade em background
+					@Override
+					protected void onPreExecute()
 					{
-	
-						// metodo que roda na UI Thread antes da atividade em background
-						@Override
-						protected void onPreExecute()
-						{
-							super.onPreExecute();
-							activeContext = ModoVarreduraActivity.this;
-							gridview 	= (GridView) ModoVarreduraActivity.this.findViewById(R.id.gridview);
-//							wview 		= (WebView) ModoVarreduraActivity.this.findViewById(R.id.webview);
-							pgrbar		= (ProgressBar) ModoVarreduraActivity.this.findViewById(R.id.progressBar1);
-							
-							pgrbar.setVisibility(View.VISIBLE);							
-							//WebView view = (WebView) MainActivity.this.findViewById(R.id.webview);
-//							wview.loadUrl("file:///android_asset/loading.gif");
-//							wview.setVisibility(View.VISIBLE);
-							//gridview = (GridView) MainActivity.this.findViewById(R.id.gridview);
-						}
+						super.onPreExecute();
+						activeContext = ModoVarreduraActivity.this;
+						gridview 	= (GridView) ModoVarreduraActivity.this.findViewById(R.id.gridview);
+//						wview 		= (WebView) ModoVarreduraActivity.this.findViewById(R.id.webview);
+						pgrbar		= (ProgressBar) ModoVarreduraActivity.this.findViewById(R.id.progressBar1);
 						
-					};
-					cixmlc.execute(false); // false: mostrar todos os comandos
-				} 
-				else if (esconderComandos)
-				{
-					CarregarImagensTelas cixml = new CarregarImagensTelas()
-					{
-						// metodo que roda na UI Thread antes da atividade em background
-						@Override
-						protected void onPreExecute()
-						{
-							super.onPreExecute();
-							activeContext = ModoVarreduraActivity.this;
-							gridview 	= (GridView) ModoVarreduraActivity.this.findViewById(R.id.gridview);
-//							wview 		= (WebView) ModoVarreduraActivity.this.findViewById(R.id.webview);
-							pgrbar		= (ProgressBar) ModoVarreduraActivity.this.findViewById(R.id.progressBar1);
-							
-							pgrbar.setVisibility(View.VISIBLE);									
-							//WebView view = (WebView) MainActivity.this.findViewById(R.id.webview);
-//							wview.loadUrl("file:///android_asset/loading.gif");
-//							wview.setVisibility(View.VISIBLE);
-							//gridview = (GridView) MainActivity.this.findViewById(R.id.gridview);
-						}
-				
-					};
+						pgrbar.setVisibility(View.VISIBLE);							
+						//WebView view = (WebView) MainActivity.this.findViewById(R.id.webview);
+//						wview.loadUrl("file:///android_asset/loading.gif");
+//						wview.setVisibility(View.VISIBLE);
+						//gridview = (GridView) MainActivity.this.findViewById(R.id.gridview);
+					}
 					
-					cixml.execute(current_page);					
-				}
-				alternarEventoBtnShowHideCommands();
-				alternarEventoAoSelecionarImagemDeGridViewPrincipal();				
-			}
-			else if (estadoAtual == 5) // proxima pagina
+				};
+				cixmlc.execute(false); // false: mostrar todos os comandos
+			} 
+			else if (esconderComandos)
 			{
 				CarregarImagensTelas cixml = new CarregarImagensTelas()
 				{
@@ -161,7 +127,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 //						wview 		= (WebView) ModoVarreduraActivity.this.findViewById(R.id.webview);
 						pgrbar		= (ProgressBar) ModoVarreduraActivity.this.findViewById(R.id.progressBar1);
 						
-						pgrbar.setVisibility(View.VISIBLE);								
+						pgrbar.setVisibility(View.VISIBLE);									
 						//WebView view = (WebView) MainActivity.this.findViewById(R.id.webview);
 //						wview.loadUrl("file:///android_asset/loading.gif");
 //						wview.setVisibility(View.VISIBLE);
@@ -169,51 +135,87 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 					}
 			
 				};
-				//Comandos.vaiParaProximaPagina(ModoTouchActivity.this, cixml);
-				//Comandos.vaiParaProximaPagina(cixml);
-				vaiParaProximaPagina(cixml);
+				
+				cixml.execute(current_page);					
 			}
-			else if (estadoAtual == 6) // adicionar imagem a frase / acionar comando
+			alternarEventoBtnShowHideCommands();
+			alternarEventoAoSelecionarImagemDeGridViewPrincipal();				
+		}
+		else if (estadoAtual == 5) // proxima pagina
+		{
+			CarregarImagensTelas cixml = new CarregarImagensTelas()
 			{
-				GridView gv = (GridView) findViewById(R.id.gridview);
-				GridView gvf = (GridView) findViewById(R.id.gridview_frase);
-				
-				int indiceAtual = indiceItemPrincipal - 1;
-				indiceAtual = (indiceAtual < 0) ? 0 : indiceAtual;
-				ImgItem imgi = (ImgItem) gv.getChildAt(indiceAtual);
-				
-				if (adicionarImagemFrase)
+				// metodo que roda na UI Thread antes da atividade em background
+				@Override
+				protected void onPreExecute()
 				{
-					lista_imagens_frase.add(new ImgItem(imgi));
-					Utils.lista_imagens_frase_global.add(new ImgItem(imgi));
-					gvf.setAdapter(new ImageAdapterFrase(lista_imagens_frase));
+					super.onPreExecute();
+					activeContext = ModoVarreduraActivity.this;
+					gridview 	= (GridView) ModoVarreduraActivity.this.findViewById(R.id.gridview);
+//					wview 		= (WebView) ModoVarreduraActivity.this.findViewById(R.id.webview);
+					pgrbar		= (ProgressBar) ModoVarreduraActivity.this.findViewById(R.id.progressBar1);
 					
-					sservice_intent.putExtra("titulo_som", imgi.getAssocImagemSom().getTituloSom());
-					imgi.tocarSom(sservice_intent);
-					sservice_intent.removeExtra("titulo_som");
-				} 
-				else if (acionarComando)
-				{
-					int cmd = imgi.getAssocImagemSom().getCmd();
-					if (cmd == 1) // tocar som frase
-						//Comandos.tocarSomFrase();
-						tocarSomFrase();
+					pgrbar.setVisibility(View.VISIBLE);								
+					//WebView view = (WebView) MainActivity.this.findViewById(R.id.webview);
+//					wview.loadUrl("file:///android_asset/loading.gif");
+//					wview.setVisibility(View.VISIBLE);
+					//gridview = (GridView) MainActivity.this.findViewById(R.id.gridview);
 				}
-			}
-			else if (estadoAtual == 7) // remover imagem da frase
+		
+			};
+			//Comandos.vaiParaProximaPagina(ModoTouchActivity.this, cixml);
+			//Comandos.vaiParaProximaPagina(cixml);
+			vaiParaProximaPagina(cixml);
+		}
+		else if (estadoAtual == 6) // adicionar imagem a frase / acionar comando
+		{
+			GridView gv = (GridView) findViewById(R.id.gridview);
+			GridView gvf = (GridView) findViewById(R.id.gridview_frase);
+			
+			int indiceAtual = indiceItemPrincipal - 1;
+			indiceAtual = (indiceAtual < 0) ? 0 : indiceAtual;
+			ImgItem imgi = (ImgItem) gv.getChildAt(indiceAtual);
+			
+			if (adicionarImagemFrase)
 			{
-				GridView gvf = (GridView) findViewById(R.id.gridview_frase);
-				int indiceAtual = indiceItemFrase - 1;
-				indiceAtual = (indiceAtual < 0) ? 0 : indiceAtual;
-				
-				lista_imagens_frase.remove(indiceAtual);
-				Utils.lista_imagens_frase_global.remove(indiceAtual);
+				lista_imagens_frase.add(new ImgItem(imgi));
+				Utils.lista_imagens_frase_global.add(new ImgItem(imgi));
 				gvf.setAdapter(new ImageAdapterFrase(lista_imagens_frase));
-				// se não houver mais imagens, vai para varredura externa
-				if (lista_imagens_frase.isEmpty())
-					sair();
-				resetIndices();
+				
+				sservice_intent.putExtra("titulo_som", imgi.getAssocImagemSom().getTituloSom());
+				imgi.tocarSom(sservice_intent);
+				sservice_intent.removeExtra("titulo_som");
+			} 
+			else if (acionarComando)
+			{
+				int cmd = imgi.getAssocImagemSom().getCmd();
+				acionarComando(cmd);
 			}
+		}
+		else if (estadoAtual == 7) // remover imagem da frase
+		{
+			GridView gvf = (GridView) findViewById(R.id.gridview_frase);
+			int indiceAtual = indiceItemFrase - 1;
+			indiceAtual = (indiceAtual < 0) ? 0 : indiceAtual;
+			
+			lista_imagens_frase.remove(indiceAtual);
+			Utils.lista_imagens_frase_global.remove(indiceAtual);
+			gvf.setAdapter(new ImageAdapterFrase(lista_imagens_frase));
+			// se não houver mais imagens, vai para varredura externa
+			if (lista_imagens_frase.isEmpty())
+				sair();
+			resetIndices();
+		}		
+	}
+	
+	// evento principal relativo à localização da borda vermelha
+	private OnClickListener principalEvento = new OnClickListener()
+	{
+
+		@Override
+		public void onClick(View v)
+		{
+			acaoDoEventoPrincipal();
 		}
 		
 	};
@@ -244,8 +246,8 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 //		LinearLayout lLayoutCabecalho 	= (LinearLayout) findViewById(R.id.cabecalho);
 		LinearLayout lLayoutFrase 		= (LinearLayout) findViewById(R.id.frase);
 		
-		//findViewById(R.id.gridview);
-		//findViewById(R.id.gridview_frase);
+//		GridView gridview = (GridView) findViewById(R.id.gridview);
+//		GridView gridview_frase = (GridView) findViewById(R.id.gridview_frase);
 		
 		Button btnNext 					= (Button) findViewById(R.id.btnNext);
 		Button btnSHC 					= (Button) findViewById(R.id.btnShowHideCommands);
@@ -348,16 +350,16 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 		
 		// associar os cliques dos controles ao evento principal
 		
-		rLayoutPrincipal.setOnClickListener(principalEvento);
-		lLayoutFrase.setOnClickListener(principalEvento);
-//		lLayoutCabecalho.setOnClickListener(principalEvento);
-		
-//		gridview.setOnClickListener(principalEvento);
-//		gridview_frase.setOnClickListener(principalEvento);
-		
-
-		btnNext.setOnClickListener(principalEvento);
-		btnSHC.setOnClickListener(principalEvento);
+//		rLayoutPrincipal.setOnClickListener(principalEvento);
+//		lLayoutFrase.setOnClickListener(principalEvento);
+////		lLayoutCabecalho.setOnClickListener(principalEvento);
+//		
+////		gridview.setOnClickListener(principalEvento);
+////		gridview_frase.setOnClickListener(principalEvento);
+//		
+//
+//		btnNext.setOnClickListener(principalEvento);
+//		btnSHC.setOnClickListener(principalEvento);
 		
 	}
 
@@ -807,6 +809,16 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 			
 		}			
 	}
+	
+	// metodo que intercepta os clicks na tela
+	@Override
+	public boolean dispatchTouchEvent(MotionEvent ev)
+	{
+		// verifica se acao do touch é aquela quando "solta-se" o dedo da tela.
+		if (ev.getAction() == MotionEvent.ACTION_UP)
+			acaoDoEventoPrincipal();
+		return true;
+	}	
 		
 }
 	

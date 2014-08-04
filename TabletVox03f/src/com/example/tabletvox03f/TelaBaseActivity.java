@@ -125,6 +125,20 @@ public class TelaBaseActivity extends Activity
 	
 	/******* COMANDOS *******/
 	
+	protected void acionarComando(int cod_cmd)
+	{
+		if (cod_cmd == 1) // tocar som frase
+		{
+			//Comandos.tocarSomFrase(ModoTouchActivity.this);
+			//Comandos.tocarSomFrase();
+			tocarSomFrase();
+		}
+		else if (cod_cmd == 2) // voltar para tela anterior
+		{
+			finish();
+		}
+	}
+	
 	// paginacao circular
 	public void vaiParaProximaPagina(AsyncTask<Integer, ?, ?> ast)
 	{

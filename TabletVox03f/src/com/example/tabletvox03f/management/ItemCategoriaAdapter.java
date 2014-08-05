@@ -12,6 +12,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,6 +62,7 @@ public class ItemCategoriaAdapter extends BaseAdapter
 	
 	private class ViewHolder 
 	{
+		protected ImageView imgView;
 	    protected TextView lblNomeCategoria;
 	    protected ImageButton btnEdit, btnDelete, btnManage;
 	}
@@ -78,6 +80,7 @@ public class ItemCategoriaAdapter extends BaseAdapter
 			view = inflator.inflate(R.layout.item_categoria, null);
 			
 			ViewHolder viewHolder = new ViewHolder();
+			viewHolder.imgView		= (ImageView) view.findViewById(R.id.imgItem);
 			viewHolder.lblNomeCategoria = (TextView) 	view.findViewById(R.id.lblNomeCategoria);
 			viewHolder.btnEdit			= (ImageButton) view.findViewById(R.id.btnEdit);
 			viewHolder.btnDelete		= (ImageButton) view.findViewById(R.id.btnDelete);

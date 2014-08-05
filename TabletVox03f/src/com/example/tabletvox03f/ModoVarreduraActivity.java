@@ -9,12 +9,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 
 import com.example.tabletvox03f.dal.AssocImagemSom;
 import com.example.tabletvox03f.dal.CarregarImagensComandos;
@@ -209,16 +206,16 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 	}
 	
 	// evento principal relativo à localização da borda vermelha
-	private OnClickListener principalEvento = new OnClickListener()
-	{
-
-		@Override
-		public void onClick(View v)
-		{
-			acaoDoEventoPrincipal();
-		}
-		
-	};
+//	private OnClickListener principalEvento = new OnClickListener()
+//	{
+//
+//		@Override
+//		public void onClick(View v)
+//		{
+//			acaoDoEventoPrincipal();
+//		}
+//		
+//	};
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -241,16 +238,16 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 		
 		setEstadoVarredura(1);
 		
-		RelativeLayout rLayoutPrincipal = (RelativeLayout) findViewById(R.id.layoutPrincipal);
-		
-//		LinearLayout lLayoutCabecalho 	= (LinearLayout) findViewById(R.id.cabecalho);
-		LinearLayout lLayoutFrase 		= (LinearLayout) findViewById(R.id.frase);
-		
-//		GridView gridview = (GridView) findViewById(R.id.gridview);
-//		GridView gridview_frase = (GridView) findViewById(R.id.gridview_frase);
-		
-		Button btnNext 					= (Button) findViewById(R.id.btnNext);
-		Button btnSHC 					= (Button) findViewById(R.id.btnShowHideCommands);
+//		RelativeLayout rLayoutPrincipal = (RelativeLayout) findViewById(R.id.layoutPrincipal);
+//		
+////		LinearLayout lLayoutCabecalho 	= (LinearLayout) findViewById(R.id.cabecalho);
+//		LinearLayout lLayoutFrase 		= (LinearLayout) findViewById(R.id.frase);
+//		
+////		GridView gridview = (GridView) findViewById(R.id.gridview);
+////		GridView gridview_frase = (GridView) findViewById(R.id.gridview_frase);
+//		
+//		Button btnNext 					= (Button) findViewById(R.id.btnNext);
+//		Button btnSHC 					= (Button) findViewById(R.id.btnShowHideCommands);
 		
 		if (!(copiarFraseGlobalParaFraseLocal()))
 			lista_imagens_frase = new ArrayList<ImgItem>();

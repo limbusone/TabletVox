@@ -50,7 +50,8 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 		lv.setOnItemClickListener(itemClick);
 	}
 	
-	protected void onResumeSuper()
+	@Override
+	protected void onResume()
 	{
 		super.onResume();
 		carregarLista();
@@ -77,6 +78,7 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 		
 		txtNome.setText(pfl.getNome());
 		txtAutor.setText(pfl.getAutor());
+		carregarLista();
 		
 		if (pfl.getCategorias() == null)
 			pfl.setCategorias(new ArrayList<Categoria>());		

@@ -40,6 +40,8 @@ public abstract class FormularioBaseActivity extends Activity
 	
 		menu_action_id = dados[1];
 		
+		onCreateFilho();
+		
 		// inicializar form - 'criar' ou 'editar'
 		if (tipo_form)
 			// form do tipo 'criar'
@@ -54,7 +56,6 @@ public abstract class FormularioBaseActivity extends Activity
 			initEditarForm(intent);
 		}
 		
-		onCreateFilho();
 	}
 	
 	

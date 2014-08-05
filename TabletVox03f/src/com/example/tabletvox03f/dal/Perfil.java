@@ -80,6 +80,9 @@ public class Perfil implements Parcelable
 	
 	public Perfil(Parcel in) 
 	{
+		// inicializando arrayList para não dar nullPointerException ao chamar a linha 
+		// in.readTypedList(this.categorias, Categoria.CREATOR);
+		this.categorias = new ArrayList<Categoria>();
 		readFromParcel(in);
 	}
 	
@@ -99,7 +102,7 @@ public class Perfil implements Parcelable
 		dest.writeInt(this.id);
 		dest.writeString(this.nome);
 		dest.writeString(this.autor);
-		//dest.writeTypedList(this.categorias);
+		dest.writeTypedList(this.categorias);
 		
 	}
 	
@@ -112,7 +115,7 @@ public class Perfil implements Parcelable
 		this.id 		= in.readInt();
 		this.nome 		= in.readString();
 		this.autor 		= in.readString();
-		//in.readTypedList(this.categorias, Categoria.CREATOR);
+		in.readTypedList(this.categorias, Categoria.CREATOR);
 	}
 	
     /**

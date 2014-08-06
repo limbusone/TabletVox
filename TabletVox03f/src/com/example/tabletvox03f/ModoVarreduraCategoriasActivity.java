@@ -8,9 +8,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.ProgressBar;
 
@@ -39,27 +36,27 @@ public class ModoVarreduraCategoriasActivity extends TelaBaseActivity
 		carregarCategoriaModoVarredura(imgi.getAssocImagemSom().getDesc());
 	}
 	
-	private OnItemClickListener carregarCategoriaEventoItem = new OnItemClickListener()
-	{
-
-		@Override
-		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-				long arg3)
-		{
-			acaoDoEvento();
-		}
-		
-	};
-	private OnClickListener carregarCategoriaEvento = new OnClickListener()
-	{
-		
-		@Override
-		public void onClick(View v)
-		{
-			// TODO Auto-generated method stub
-			acaoDoEvento();
-		}
-	};	
+//	private OnItemClickListener carregarCategoriaEventoItem = new OnItemClickListener()
+//	{
+//
+//		@Override
+//		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+//				long arg3)
+//		{
+//			acaoDoEvento();
+//		}
+//		
+//	};
+//	private OnClickListener carregarCategoriaEvento = new OnClickListener()
+//	{
+//		
+//		@Override
+//		public void onClick(View v)
+//		{
+//			// TODO Auto-generated method stub
+//			acaoDoEvento();
+//		}
+//	};	
 	
 	private class Task implements Runnable // codigo do timer task interno
 	{

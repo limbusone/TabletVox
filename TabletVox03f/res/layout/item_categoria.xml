@@ -4,14 +4,24 @@
     android:layout_height="wrap_content"
     android:padding="6dip" >
 
+    <ImageView 
+        android:id="@+id/imgItem"
+	    android:layout_width="85dp"
+	    android:layout_height="85dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"	    
+	    android:contentDescription="@string/blabla"
+	    android:src="@drawable/ic_launcher"
+        />
+    
     <TextView
         android:id="@+id/lblNomeCategoria"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="3dip"        
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_toRightOf="@id/imgItem"
+        android:layout_marginBottom="3dip"
+        android:layout_alignParentBottom="true"        
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
 
     <ImageButton
         android:id="@+id/btnDelete"

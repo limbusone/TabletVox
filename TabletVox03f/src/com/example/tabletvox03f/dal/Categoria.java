@@ -126,6 +126,7 @@ public class Categoria implements Parcelable
 		// parcel. When we read from parcel, they
 		// will come back in the same order
 		dest.writeInt(this.id);
+		dest.writeParcelable(this.ais, flags);
 		dest.writeString(this.nome);
 		
 	}
@@ -137,6 +138,7 @@ public class Categoria implements Parcelable
 		// field in the order that it was
 		// written to the parcel
 		this.id 		= in.readInt();
+		this.ais		= in.readParcelable(AssocImagemSom.class.getClassLoader());
 		this.nome 		= in.readString();
 	}
 	

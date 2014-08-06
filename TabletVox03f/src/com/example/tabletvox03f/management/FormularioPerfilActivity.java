@@ -59,7 +59,9 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 	
 	protected void initCriarForm()
 	{
-		pfl = new Perfil();		
+		pfl = new Perfil();	
+		if (pfl.getCategorias() == null)
+			pfl.setCategorias(new ArrayList<Categoria>());			
 	}
 	
 	protected void initEditarForm(Intent intent)

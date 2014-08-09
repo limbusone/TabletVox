@@ -62,7 +62,6 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 	
 	public void acaoDoEventoPrincipal()
 	{
-		// TODO Auto-generated method stub
 		
 		if (estadoAtual == 1 || estadoAtual == 2 /*|| estadoAtual == 3*/)
 		{
@@ -167,37 +166,23 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 		else if (estadoAtual == 6) // adicionar imagem a frase / acionar comando
 		{
 			GridView gv = (GridView) findViewById(R.id.gridview);
-			GridView gvf = (GridView) findViewById(R.id.gridview_frase);
 			
 			int indiceAtual = indiceItemPrincipal - 1;
 			indiceAtual = (indiceAtual < 0) ? 0 : indiceAtual;
 			ImgItem imgi = (ImgItem) gv.getChildAt(indiceAtual);
 			
 			if (adicionarImagemFrase)
-			{
-				lista_imagens_frase.add(new ImgItem(imgi));
-				Utils.lista_imagens_frase_global.add(new ImgItem(imgi));
-				gvf.setAdapter(new ImageAdapterFrase(lista_imagens_frase));
-				
-				sservice_intent.putExtra("titulo_som", imgi.getAssocImagemSom().getTituloSom());
-				imgi.tocarSom(sservice_intent);
-				sservice_intent.removeExtra("titulo_som");
-			} 
+				addImagemFrase(imgi);
 			else if (acionarComando)
-			{
-				int cmd = imgi.getAssocImagemSom().getCmd();
-				acionarComando(cmd);
-			}
+				acionarComando(imgi);
 		}
 		else if (estadoAtual == 7) // remover imagem da frase
 		{
-			GridView gvf = (GridView) findViewById(R.id.gridview_frase);
 			int indiceAtual = indiceItemFrase - 1;
 			indiceAtual = (indiceAtual < 0) ? 0 : indiceAtual;
 			
-			lista_imagens_frase.remove(indiceAtual);
-			Utils.lista_imagens_frase_global.remove(indiceAtual);
-			gvf.setAdapter(new ImageAdapterFrase(lista_imagens_frase));
+			removerImagemDaFrase(indiceAtual);
+			
 			// se não houver mais imagens, vai para varredura externa
 			if (lista_imagens_frase.isEmpty())
 				sair();
@@ -232,6 +217,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 		
 		delayVarredura = Opcoes.getIntervalo_tempo_varredura();
 		
+		// inicializando variaveis booleanas com valores default
 		alternarVarredura();
 		alternarEventoBtnShowHideCommands();
 		alternarEventoAoSelecionarImagemDeGridViewPrincipal();
@@ -264,7 +250,6 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 			@Override
 			public void run()
 			{	
-				// TODO Auto-generated method stub
 				// o timer tem que rodar na UI Thread porque se não não funciona!
 				runOnUiThread(new Task1());
 			}
@@ -277,7 +262,6 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 			@Override
 			public void run()
 			{
-				// TODO Auto-generated method stub
 				// o timer tem que rodar na UI Thread porque se não não funciona!
 				runOnUiThread(new Task2());				
 			}
@@ -487,10 +471,6 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 			setBorda(llNext, false);
 			setBorda(llShowHideCommands, false);
 			
-//			iteracaoExternaPrincipalAtiva = iteracaoExternaFraseAtiva = 
-//			iteracaoExternaAtalhosAtiva = iteracaoExternaComandosAtiva = 
-//			iteracaoExternaProximaTelaAtiva = iteracaoInternaPrincipalAtiva =
-//			iteracaoInternaFraseAtiva = iteracaoInternaAtalhosAtiva = false;
 			iteracaoInternaPrincipalAtiva = iteracaoInternaFraseAtiva = false;
 		}
 		else if (estado == 1) // gridview principal ativo
@@ -500,10 +480,6 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 			setBorda(llAtalhos, false);
 			setBorda(llNext, false);
 			setBorda(llShowHideCommands, false);
-			
-//			iteracaoExternaPrincipalAtiva = true;
-//			iteracaoExternaFraseAtiva = iteracaoExternaAtalhosAtiva = 
-//			iteracaoExternaComandosAtiva = iteracaoExternaProximaTelaAtiva = false;			
 		}
 		else if (estado == 2) // gridview frase ativo
 		{
@@ -512,10 +488,6 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 			setBorda(llAtalhos, false);
 			setBorda(llNext, false);
 			setBorda(llShowHideCommands, false);
-			
-//			iteracaoExternaFraseAtiva = true;
-//			iteracaoExternaPrincipalAtiva = iteracaoExternaAtalhosAtiva = 
-//			iteracaoExternaComandosAtiva = iteracaoExternaProximaTelaAtiva = false;
 		}
 		else if (estado == 3) // gridview atalhos ativo
 		{
@@ -524,10 +496,6 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 			setBorda(llFrase, false);
 			setBorda(llNext, false);
 			setBorda(llShowHideCommands, false);
-			
-//			iteracaoExternaAtalhosAtiva = true;
-//			iteracaoExternaPrincipalAtiva = iteracaoExternaFraseAtiva = 
-//			iteracaoExternaComandosAtiva = iteracaoExternaProximaTelaAtiva = false;
 		}
 		else if (estado == 4) // botao mostrar/esconder comandos ativo
 		{
@@ -535,11 +503,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 			setBorda(gridview, false);
 			setBorda(llFrase, false);
 			setBorda(llAtalhos, false);
-			setBorda(llNext, false);
-			
-//			iteracaoExternaComandosAtiva = true;
-//			iteracaoExternaPrincipalAtiva = iteracaoExternaFraseAtiva = 
-//			iteracaoExternaAtalhosAtiva = iteracaoExternaProximaTelaAtiva = false;			
+			setBorda(llNext, false);			
 		}
 		else if (estado == 5) // botao ir para proxima tela ativo
 		{
@@ -547,11 +511,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 			setBorda(gridview, false);
 			setBorda(llFrase, false);
 			setBorda(llAtalhos, false);
-			setBorda(llShowHideCommands, false);
-			
-//			iteracaoExternaProximaTelaAtiva = true;
-//			iteracaoExternaPrincipalAtiva = iteracaoExternaFraseAtiva = 
-//			iteracaoExternaAtalhosAtiva = iteracaoExternaComandosAtiva = false;			
+			setBorda(llShowHideCommands, false);			
 		}
 		else if (estado == 6) // iterando em gridview Principal 
 		{
@@ -712,7 +672,6 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 			@Override
 			public void run()
 			{
-				// TODO Auto-generated method stub
 				runOnUiThread(new Task1());
 			}
 			
@@ -733,7 +692,6 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 			@Override
 			public void run()
 			{
-				// TODO Auto-generated method stub
 				runOnUiThread(new Task2());
 			}
 			
@@ -746,17 +704,6 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 		@Override
 		public void run()
 		{
-			// TODO Auto-generated method stub
-//			if (iteracaoExternaPrincipalAtiva)
-//				setEstadoAtividadeVarredura(transicaoIteracaoExternaPartindoDe(1));
-//			else if (iteracaoExternaFraseAtiva)
-//				setEstadoAtividadeVarredura(transicaoIteracaoExternaPartindoDe(2));
-//			else if (iteracaoExternaAtalhosAtiva)
-//				setEstadoAtividadeVarredura(transicaoIteracaoExternaPartindoDe(3));
-//			else if (iteracaoExternaComandosAtiva)
-//				setEstadoAtividadeVarredura(transicaoIteracaoExternaPartindoDe(4));
-//			else if (iteracaoExternaProximaTelaAtiva)
-//				setEstadoAtividadeVarredura(transicaoIteracaoExternaPartindoDe(5));
 			setEstadoVarredura(transicaoIteracaoExternaPartindoDe(estadoAtual));
 		}
 		
@@ -768,7 +715,6 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 		@Override
 		public void run()
 		{
-			// TODO Auto-generated method stub
 			GridView gv = (GridView) findViewById(R.id.gridview);
 			GridView gvf = (GridView) findViewById(R.id.gridview_frase);
 			int cc;

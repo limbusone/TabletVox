@@ -22,9 +22,7 @@ public class ModoTouchCategoriasActivity extends TelaBaseActivity
 		public void onItemClick(AdapterView<?> arg0, View v, int arg2,
 				long arg3)
 		{
-			ImgItem imgi = (ImgItem) v;
-			imgi.tocarSom(ModoTouchCategoriasActivity.this);
-			carregarCategoriaModoTouch(imgi.getAssocImagemSom().getDesc());
+			carregarCategoriaModoTouch((ImgItem) v);
 		}
 	};	
 

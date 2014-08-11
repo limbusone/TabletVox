@@ -98,13 +98,18 @@ public class TelaBaseActivity extends Activity
 
 	}
 	
+	public void carregarCategoriaModoTouch(ImgItem imgi)
+	{
+		if (Opcoes.isTocar_som_ao_selecionar_imagem())
+			imgi.tocarSom(this);
+
+		carregarCategoriaModoTouch(imgi.getAssocImagemSom().getDesc());
+	}
+	
 	public void carregarCategoriaModoTouch(long id)
 	{
-		
-		
 		Intent intent = new Intent(this, ModoTouchActivity.class);
 		startActivity(intent); 
-
 	}
 	
 
@@ -116,6 +121,14 @@ public class TelaBaseActivity extends Activity
 		Intent intent = new Intent(this, ModoVarreduraActivity.class);
 		startActivity(intent); 
 
+	}
+	
+	public void carregarCategoriaModoVarredura(ImgItem imgi)
+	{
+		if (Opcoes.isTocar_som_ao_selecionar_imagem())
+			imgi.tocarSom(this);
+		
+		carregarCategoriaModoVarredura(imgi.getAssocImagemSom().getDesc());
 	}
 	
 	public boolean hasItens(GridView gv)

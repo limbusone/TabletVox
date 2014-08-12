@@ -12,12 +12,14 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tabletvox03f.ImgItem;
 import com.example.tabletvox03f.R;
+import com.example.tabletvox03f.dal.AssocImagemSom;
 import com.example.tabletvox03f.dal.Categoria;
+import com.example.tabletvox03f.dal.FilesIO;
 
 public class ItemCategoriaAdapter extends BaseAdapter
 {
@@ -62,7 +64,7 @@ public class ItemCategoriaAdapter extends BaseAdapter
 	
 	private class ViewHolder 
 	{
-		protected ImageView imgView;
+		protected ImgItem imgItem;
 	    protected TextView lblNomeCategoria;
 	    protected ImageButton btnEdit, btnDelete, btnManage;
 	}
@@ -80,7 +82,7 @@ public class ItemCategoriaAdapter extends BaseAdapter
 			view = inflator.inflate(R.layout.item_categoria, null);
 			
 			ViewHolder viewHolder = new ViewHolder();
-			viewHolder.imgView		= (ImageView) view.findViewById(R.id.imgItem);
+			viewHolder.imgItem			= (ImgItem) 	view.findViewById(R.id.imgItem);
 			viewHolder.lblNomeCategoria = (TextView) 	view.findViewById(R.id.lblNomeCategoria);
 			viewHolder.btnEdit			= (ImageButton) view.findViewById(R.id.btnEdit);
 			viewHolder.btnDelete		= (ImageButton) view.findViewById(R.id.btnDelete);
@@ -101,7 +103,12 @@ public class ItemCategoriaAdapter extends BaseAdapter
 		
 		final Categoria categoria = categorias.get(position);
 		
+		AssocImagemSom ais = categoria.getAIS();
+		FilesIO fIO = new FilesIO(mContext);
 		holder.lblNomeCategoria.setText(categoria.getNome());
+		// recuperar imagem
+		holder.imgItem.setImageDrawable(fIO.getGetImgItemDrawableFromInternalStorageOrAssets(ais));
+		holder.imgItem.setAssocImagemSom(ais);
 		
 		// eventos click dos botoes
 		

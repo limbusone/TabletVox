@@ -11,12 +11,13 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
-import com.example.tabletvox03f.Utils;
-
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
+
+import com.example.tabletvox03f.Utils;
 
 public class FilesIO
 {
@@ -194,5 +195,32 @@ public class FilesIO
 	{
 		int last_idx = p.lastIndexOf('/');
 		return p.substring(last_idx + 1);
+	}
+	
+	// aqui recupera-se a imagem em si
+	// a imagem está sendo recuperada da pasta assets/imagens
+	// ou da pasta imagens em internal storage
+	public Drawable getGetImgItemDrawableFromInternalStorageOrAssets(AssocImagemSom ais)
+	{
+		Context mContext = activeContext;
+		Drawable drawable = null;
+		try
+		{
+			// aqui recupera-se a imagem em si
+			// a imagem está sendo recuperada da pasta assets/imagens
+			// ou da pasta imagens em internal storage			
+			File f_from_internal_storage = new File(mContext.getDir("imagens", Context.MODE_PRIVATE).getPath() + "/" +  ais.getTituloImagem() + ais.getExt());
+
+			InputStream ims = (f_from_internal_storage.exists()) 
+							   ? new FileInputStream(f_from_internal_storage) 
+							   : mContext.getAssets().open("imagens/" + ais.getTituloImagem() + ais.getExt());
+			drawable = Drawable.createFromStream(ims, null);
+		}
+		catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return drawable;		
 	}
 }

@@ -26,15 +26,7 @@ public class ModoTouchActivity extends TelaBaseActivity
 	{
 		public void onItemClick(AdapterView<?> parent, View v, int position, long id)
 		{
-			ImgItem imgi = (ImgItem) v;
-			lista_imagens_frase.add(new ImgItem(imgi));
-			Utils.lista_imagens_frase_global.add(new ImgItem(imgi));
-			((GridView) findViewById(R.id.gridview_frase))
-			.setAdapter(new ImageAdapterFrase(lista_imagens_frase));
-			sservice_intent.putExtra("titulo_som", imgi.getAssocImagemSom().getTituloSom());
-			imgi.tocarSom(sservice_intent);
-			sservice_intent.removeExtra("titulo_som");
-
+			addImagemFrase((ImgItem) v);
 		}
 	};
 
@@ -44,10 +36,7 @@ public class ModoTouchActivity extends TelaBaseActivity
 		public void onItemClick(AdapterView<?> parent, View v, int position, long id)
 		{
 			//ImgItem imgi = (ImgItem) v;
-			lista_imagens_frase.remove(position);
-			Utils.lista_imagens_frase_global.remove(position);
-			((GridView) findViewById(R.id.gridview_frase))
-					.setAdapter(new ImageAdapterFrase(lista_imagens_frase));			
+			removerImagemDaFrase(position);
 		}
 	};
 	
@@ -56,9 +45,7 @@ public class ModoTouchActivity extends TelaBaseActivity
 	{
 		public void onItemClick(AdapterView<?> parent, View v, int position, long id)
 		{
-			ImgItem imgi = (ImgItem) v;
-			int cmd = imgi.getAssocImagemSom().getCmd();
-			acionarComando(cmd);
+			acionarComando((ImgItem) v);
 		}
 	};
 	

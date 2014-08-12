@@ -59,7 +59,10 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 	
 	protected void initCriarForm()
 	{
-		pfl = new Perfil();	
+		pfl = new Perfil();
+		
+		// inicializa categorias caso não vier setada
+		// serve para não bugar o metodo carregarLista()		
 		if (pfl.getCategorias() == null)
 			pfl.setCategorias(new ArrayList<Categoria>());			
 	}
@@ -80,10 +83,13 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 		
 		txtNome.setText(pfl.getNome());
 		txtAutor.setText(pfl.getAutor());
-		carregarLista();
 		
+		// inicializa categorias caso não vier setada
+		// serve para não bugar o metodo carregarLista()
 		if (pfl.getCategorias() == null)
-			pfl.setCategorias(new ArrayList<Categoria>());		
+			pfl.setCategorias(new ArrayList<Categoria>());
+		
+		carregarLista();
 	}
 
 	@SuppressWarnings("unchecked")

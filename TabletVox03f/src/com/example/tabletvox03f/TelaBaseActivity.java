@@ -98,13 +98,18 @@ public class TelaBaseActivity extends Activity
 
 	}
 	
+	public void carregarCategoriaModoTouch(ImgItem imgi)
+	{
+		if (Opcoes.isTocar_som_ao_selecionar_imagem())
+			imgi.tocarSom(this);
+
+		carregarCategoriaModoTouch(imgi.getAssocImagemSom().getDesc());
+	}
+	
 	public void carregarCategoriaModoTouch(long id)
 	{
-		
-		
 		Intent intent = new Intent(this, ModoTouchActivity.class);
 		startActivity(intent); 
-
 	}
 	
 
@@ -116,6 +121,14 @@ public class TelaBaseActivity extends Activity
 		Intent intent = new Intent(this, ModoVarreduraActivity.class);
 		startActivity(intent); 
 
+	}
+	
+	public void carregarCategoriaModoVarredura(ImgItem imgi)
+	{
+		if (Opcoes.isTocar_som_ao_selecionar_imagem())
+			imgi.tocarSom(this);
+		
+		carregarCategoriaModoVarredura(imgi.getAssocImagemSom().getDesc());
 	}
 	
 	public boolean hasItens(GridView gv)
@@ -137,6 +150,42 @@ public class TelaBaseActivity extends Activity
 		{
 			finish();
 		}
+	}
+	
+	public void acionarComando(ImgItem imgi)
+	{
+		int cod_cmd = imgi.getAssocImagemSom().getCmd();
+		if (cod_cmd == 1) // tocar som frase
+		{
+			//Comandos.tocarSomFrase(ModoTouchActivity.this);
+			//Comandos.tocarSomFrase();
+			tocarSomFrase();
+		}
+		else if (cod_cmd == 2) // voltar para tela anterior
+		{
+			finish();
+		}		
+	}
+	
+	// adicionar imagem para a frase
+	public void addImagemFrase(ImgItem imgi)
+	{
+		lista_imagens_frase.add(new ImgItem(imgi));
+		Utils.lista_imagens_frase_global.add(new ImgItem(imgi));
+		((GridView) findViewById(R.id.gridview_frase))
+		.setAdapter(new ImageAdapterFrase(lista_imagens_frase));
+		sservice_intent.putExtra("titulo_som", imgi.getAssocImagemSom().getTituloSom());
+		imgi.tocarSom(sservice_intent);
+		sservice_intent.removeExtra("titulo_som");		
+	}
+	
+	// remover imagem da frase
+	public void removerImagemDaFrase(int position)
+	{
+		lista_imagens_frase.remove(position);
+		Utils.lista_imagens_frase_global.remove(position);
+		((GridView) findViewById(R.id.gridview_frase))
+				.setAdapter(new ImageAdapterFrase(lista_imagens_frase));
 	}
 	
 	// paginacao circular

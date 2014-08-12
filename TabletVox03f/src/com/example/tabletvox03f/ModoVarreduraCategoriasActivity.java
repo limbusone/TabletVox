@@ -32,8 +32,7 @@ public class ModoVarreduraCategoriasActivity extends TelaBaseActivity
 		indiceAtual = (indiceAtual < 0) ? 0 : indiceAtual;
 		ImgItem imgi = (ImgItem) gv.getChildAt(indiceAtual);
 		
-		imgi.tocarSom(this);
-		carregarCategoriaModoVarredura(imgi.getAssocImagemSom().getDesc());
+		carregarCategoriaModoVarredura(imgi);
 	}
 	
 //	private OnItemClickListener carregarCategoriaEventoItem = new OnItemClickListener()

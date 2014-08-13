@@ -214,6 +214,7 @@ public class TelaBaseActivity extends Activity
 			public void run()
 			{
 				int length = lif.size();
+				// varrendo a frase e tocando o som de cada imagem
 				for (int i = 0; i < length; i++)
 				{
 					ImgItem imgi = lif.get(i);

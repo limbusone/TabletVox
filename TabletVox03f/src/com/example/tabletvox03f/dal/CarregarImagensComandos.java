@@ -26,12 +26,12 @@ public class CarregarImagensComandos extends AsyncTask<Boolean, Void, ArrayList<
 		
 //		CategoriaAssocImagemSomDAO cat_ais_dao = new CategoriaAssocImagemSomDAO(activeContext);
 //		
-//		// params[0] contem booleano que indica se eh para retornar os atalhos ou todos os comandos		
+//		// params[0] contem booleano que indica se eh para retornar os atalhos (true) ou todos os comandos (false)		
 //		list = cat_ais_dao.getAISComandos(params[0]); 
 		
 		xml = new XmlUtilsComandos(activeContext);
 		
-		// params[0] contem booleano que indica se eh para retornar os atalhos ou todos os comandos		
+		// params[0] contem booleano que indica se eh para retornar os atalhos (true) ou todos os comandos (false)		
 		list = (params[0]) ? xml.getRegsAtalhos() : xml.getRegs();
 
 		return list;

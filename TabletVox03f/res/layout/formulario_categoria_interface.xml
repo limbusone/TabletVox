@@ -19,8 +19,9 @@
 	    android:background="#0099CC" />
 	<ImageButton
 	    android:id="@+id/imgImagem"
-	    android:layout_width="100dp"
-	    android:layout_height="100dp"
+	    android:layout_width="96dp"
+	    android:layout_height="96dp"
+	    android:layout_gravity="center_horizontal"
 	    android:contentDescription="Imagem"
 	    />
 	

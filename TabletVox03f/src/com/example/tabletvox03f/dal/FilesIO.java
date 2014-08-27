@@ -200,7 +200,7 @@ public class FilesIO
 	// aqui recupera-se a imagem em si
 	// a imagem está sendo recuperada da pasta assets/imagens
 	// ou da pasta imagens em internal storage
-	public Drawable getGetImgItemDrawableFromInternalStorageOrAssets(AssocImagemSom ais)
+	public Drawable getImgItemDrawableFromInternalStorageOrAssets(AssocImagemSom ais)
 	{
 		Context mContext = activeContext;
 		Drawable drawable = null;

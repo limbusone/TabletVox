@@ -1,11 +1,14 @@
 package com.example.tabletvox03f.management;
 
 import android.content.Intent;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.dal.Categoria;
+import com.example.tabletvox03f.dal.FilesIO;
 
 public class FormularioCategoriaActivity extends FormularioBaseActivity
 {
@@ -36,8 +39,13 @@ public class FormularioCategoriaActivity extends FormularioBaseActivity
 	@Override
 	protected void initEditarForm(Intent intent)
 	{
-		// TODO Auto-generated method stub
-
+		ImageButton imgBItem 	= (ImageButton) findViewById(R.id.imgImagem);
+		EditText txtNome 		= (EditText) findViewById(R.id.txtNomeCategoria);
+		
+		cat = intent.getParcelableExtra("categoria");
+		
+		imgBItem.setImageDrawable((new FilesIO(this)).getImgItemDrawableFromInternalStorageOrAssets(cat.getAIS()));
+		txtNome.setText(cat.getNome());
 	}
 
 	@Override

@@ -129,11 +129,17 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void editar()
 	{
 		pfl.setNome(((EditText) findViewById(R.id.txtNomePerfil)).getText().toString());
 		pfl.setAutor(((EditText) findViewById(R.id.txtAutorPerfil)).getText().toString());
+		
+		// seta somente se há items 
+		pfl.setCategorias((lv.getCount() > 0) ? 
+						  (ArrayList<Categoria>)((ItemCategoriaAdapter)lv.getAdapter()).getCategorias().clone() : 
+						   null);
 		
 		retirarErros();
 		

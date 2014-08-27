@@ -107,7 +107,7 @@ public class ItemCategoriaAdapter extends BaseAdapter
 		FilesIO fIO = new FilesIO(mContext);
 		holder.lblNomeCategoria.setText(categoria.getNome());
 		// recuperar imagem
-		holder.imgItem.setImageDrawable(fIO.getGetImgItemDrawableFromInternalStorageOrAssets(ais));
+		holder.imgItem.setImageDrawable(fIO.getImgItemDrawableFromInternalStorageOrAssets(ais));
 		holder.imgItem.setAssocImagemSom(ais);
 		
 		// eventos click dos botoes

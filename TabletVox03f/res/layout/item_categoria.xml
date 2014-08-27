@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/imgItem"
         android:layout_alignTop="@id/imgItem"
-        android:layout_marginLeft="6dp"
+        android:layout_marginLeft="10dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="TESTE"/>
 
@@ -52,5 +52,6 @@
         android:layout_toLeftOf="@id/btnEdit"
         android:src="@android:drawable/ic_menu_manage"
         android:contentDescription="@string/blabla" />
+
 	
 </RelativeLayout>

@@ -17,25 +17,25 @@ public class AssocImagemSom implements Parcelable
 	public AssocImagemSom()
 	{}
 	
-	public AssocImagemSom(String dsc, String ti, String ts, String ex, char tp, int cm) 
+	public AssocImagemSom(String desc, String titulo_imagem, String titulo_som, String ext, char tipo, int cmd) 
 	{
-		this.desc			= dsc;
-		this.titulo_imagem 	= ti;
-		this.titulo_som 	= ts;
-		this.ext 			= ex;
-		this.tipo			= tp;
-		this.cmd 			= cm;
+		this.desc			= desc;
+		this.titulo_imagem 	= titulo_imagem;
+		this.titulo_som 	= titulo_som;
+		this.ext 			= ext;
+		this.tipo			= tipo;
+		this.cmd 			= cmd;
 	}
 
-	public AssocImagemSom(String dsc, String ti, String ts, String ex, char tp, int cm, boolean ata)
+	public AssocImagemSom(String desc, String titulo_imagem, String titulo_som, String ext, char tipo, int cmd, boolean atalho)
 	{
-		this.desc			= dsc;
-		this.titulo_imagem 	= ti;
-		this.titulo_som 	= ts;
-		this.ext 			= ex;
-		this.tipo			= tp;
-		this.cmd 			= cm;
-		this.atalho			= ata;
+		this.desc			= desc;
+		this.titulo_imagem 	= titulo_imagem;
+		this.titulo_som 	= titulo_som;
+		this.ext 			= ext;
+		this.tipo			= tipo;
+		this.cmd 			= cmd;
+		this.atalho			= atalho;
 	}
 	
 	// construtor de cópia
@@ -152,6 +152,13 @@ public class AssocImagemSom implements Parcelable
 		// parcel. When we read from parcel, they
 		// will come back in the same order
 		dest.writeInt(this.id);
+		dest.writeString(this.desc);
+		dest.writeString(this.titulo_imagem);
+		dest.writeString(this.titulo_som);
+		dest.writeString(this.ext);
+		dest.writeString("" + this.tipo);
+		dest.writeInt(this.cmd);
+		dest.writeInt((this.atalho) ? 1 : 0);
 		
 	}
 	
@@ -161,7 +168,14 @@ public class AssocImagemSom implements Parcelable
 		// We just need to read back each
 		// field in the order that it was
 		// written to the parcel
-		this.id 		= in.readInt();
+		this.id 			= in.readInt();
+		this.desc			= in.readString();
+		this.titulo_imagem 	= in.readString();
+		this.titulo_som		= in.readString();
+		this.ext			= in.readString();
+		this.tipo			= in.readString().charAt(0);
+		this.cmd			= in.readInt();
+		this.atalho			= (in.readInt() == 1) ? true : false;
 	}
 	
     /**

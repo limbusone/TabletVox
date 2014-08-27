@@ -1,13 +1,8 @@
 package com.example.tabletvox03f;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -15,6 +10,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.example.tabletvox03f.dal.AssocImagemSom;
+import com.example.tabletvox03f.dal.FilesIO;
 
 public class ImageAdapter extends BaseAdapter 
 {
@@ -72,29 +68,8 @@ public class ImageAdapter extends BaseAdapter
 			imagemItem = (ImgItem) convertView;
 		}
 
-		String titulo = (ais = ais_list.get(position)).getTituloImagem();
-		String ext 	  = "." + ais.getExt();
-		try
-		{
-			// aqui recupera-se a imagem em si
-			// a imagem está sendo recuperada da pasta assets/imagens
-			// ou da pasta imagens em internal storage			
-			File f_from_internal_storage = new File(mContext.getDir("imagens", Context.MODE_PRIVATE).getPath() + "/" +  titulo + ext);
-
-			InputStream ims = (f_from_internal_storage.exists()) 
-							   ? new FileInputStream(f_from_internal_storage) 
-							   : mContext.getAssets().open("imagens/" + titulo + ext);
-			Drawable d = Drawable.createFromStream(ims, null);
-			imagemItem.setImageDrawable(d);
-		}
-		catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		//Uri path = Uri.parse("file:///android_asset/imagens/" + titulo + ".png");
-		
-		//imagemItem.setImageResource(id);
+		ais = ais_list.get(position);
+		imagemItem.setImageDrawable((new FilesIO(mContext)).getImgItemDrawableFromInternalStorageOrAssets(ais));
 		imagemItem.setAssocImagemSom(ais);
 
 		return imagemItem;

@@ -2,11 +2,14 @@ package com.example.tabletvox03f.management;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnKeyListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.tabletvox03f.R;
@@ -14,6 +17,18 @@ import com.example.tabletvox03f.R;
 public abstract class ListaManageActivity extends Activity
 {
 	protected ListView lv;
+	protected EditText txtBusca;
+	
+	private OnKeyListener buscarKeyEvent = new OnKeyListener()
+	{
+		
+		@Override
+		public boolean onKey(View v, int keyCode, KeyEvent event)
+		{
+			acaoDoEventoBuscar(v, keyCode, event);
+			return false;
+		}
+	};
 	
 	private OnItemClickListener itemClick = new OnItemClickListener()
 	{
@@ -36,6 +51,10 @@ public abstract class ListaManageActivity extends Activity
 		// carregar evento do click em um item da lista
 		lv = (ListView) findViewById(R.id.listView1);
 		lv.setOnItemClickListener(itemClick);
+		
+		// carregar evento do txtBusca
+		txtBusca = (EditText) findViewById(R.id.txtBusca);
+		txtBusca.setOnKeyListener(buscarKeyEvent);
 		
 		onCreateFilho();
 	}
@@ -71,6 +90,8 @@ public abstract class ListaManageActivity extends Activity
 	protected abstract void acaoDoEventoItemClick(AdapterView<?> parent, View v, int position, long arg3);
 	
 	protected abstract void acaoDosEventosDoMenu(MenuItem item);
+	
+	protected abstract void acaoDoEventoBuscar(View v, int keyCode, KeyEvent event);
 	
 	protected abstract String getOptionMenuTitle();
 	

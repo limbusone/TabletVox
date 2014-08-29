@@ -2,6 +2,7 @@ package com.example.tabletvox03f.management;
 
 import java.util.ArrayList;
 
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -70,6 +71,12 @@ public class ListaCategoriasDoPerfilActivity extends ListaManageActivity
 	protected int getMenuID()
 	{
 		return R.menu.um_action_add;
+	}
+
+	@Override
+	protected void acaoDoEventoBuscar(View v, int keyCode, KeyEvent event)
+	{
+		
 	}
 
 }

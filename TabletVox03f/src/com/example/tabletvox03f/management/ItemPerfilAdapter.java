@@ -17,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tabletvox03f.R;
-import com.example.tabletvox03f.Utils;
 import com.example.tabletvox03f.dal.Perfil;
 import com.example.tabletvox03f.dal.PerfilDAOSingleton;
 
@@ -94,10 +93,10 @@ public class ItemPerfilAdapter extends BaseAdapter
 			public void onClick(View v)
 			{
 				// setar PERFIL_ATIVO e abrir o activity ListaCategoriasDoPerfilActivity 
-//				Toast.makeText(ItemPerfilAdapter.this.mContext, "Você clicou no botão Gerenciar!", Toast.LENGTH_SHORT).show();
-				Utils.PERFIL_ATIVO = perfil;
-				Intent intent = new Intent(ItemPerfilAdapter.this.mContext, ListaCategoriasDoPerfilActivity.class);
-				ItemPerfilAdapter.this.mContext.startActivity(intent);
+				Toast.makeText(ItemPerfilAdapter.this.mContext, "Você clicou no botão Gerenciar!", Toast.LENGTH_SHORT).show();
+//				Utils.PERFIL_ATIVO = perfil;
+//				Intent intent = new Intent(ItemPerfilAdapter.this.mContext, ListaCategoriasDoPerfilActivity.class);
+//				ItemPerfilAdapter.this.mContext.startActivity(intent);
 			}
 		});
 		

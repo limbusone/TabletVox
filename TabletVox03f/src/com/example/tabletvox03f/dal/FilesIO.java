@@ -213,7 +213,7 @@ public class FilesIO
 
 			InputStream ims = (f_from_internal_storage.exists()) 
 							   ? new FileInputStream(f_from_internal_storage) 
-							   : mContext.getAssets().open("imagens/" + ais.getTituloImagem() + ais.getExt());
+							   : mContext.getAssets().open("imagens/" + ais.getTituloImagem() + "." + ais.getExt());
 			drawable = Drawable.createFromStream(ims, null);
 		}
 		catch (IOException e)

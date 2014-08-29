@@ -97,8 +97,8 @@ public class CategoriaDAO
 			Categoria cat = new Categoria
 			(
 				cursor.getInt(0),
-				ais_dao.getAISById(cursor.getInt(1)),
-				cursor.getString(2)
+				cursor.getString(2),
+				ais_dao.getAISById(cursor.getInt(1))
 			 );
 			cat_list.add(cat);
 			cursor.moveToNext();
@@ -122,8 +122,8 @@ public class CategoriaDAO
 		return new Categoria
 		(
 			cursor.getInt(0),
-			ais_dao.getAISById(cursor.getInt(1)),
-			cursor.getString(2)
+			cursor.getString(2),
+			ais_dao.getAISById(cursor.getInt(1))
 		 );		
 	}	
 	

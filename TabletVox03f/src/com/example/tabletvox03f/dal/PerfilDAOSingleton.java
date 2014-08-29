@@ -24,8 +24,8 @@ public class PerfilDAOSingleton
 	private void inicializar()
 	{
 		ArrayList<Categoria> categorias = new ArrayList<Categoria>();
-		categorias.add(new Categoria(1, "animais"));
-		categorias.add(new Categoria(2, "pessoas"));
+		categorias.add(new Categoria(1, "animais", new AssocImagemSom("animais", 		"ANIMAIS", 		"ANIMAIS", 		"jpg", 'c', 0)));
+		categorias.add(new Categoria(2, "pessoas", new AssocImagemSom("pessoas", 		"PESSOAS", 		"PESSOAS", 		"jpg", 'c', 0)));
 		
 		listaPerfil.add(new Perfil(1, "Perfil 1", "Autor 1", categorias));
 		listaPerfil.add(new Perfil(2, "Perfil 2", "Autor 2"));

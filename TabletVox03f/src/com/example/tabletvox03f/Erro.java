@@ -1,7 +1,7 @@
 package com.example.tabletvox03f;
 
 import android.view.View;
-
+//teste
 public class Erro
 {
 	private String msgErro;

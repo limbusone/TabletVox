@@ -155,6 +155,7 @@ public class TelaBaseActivity extends Activity
 	public void acionarComando(ImgItem imgi)
 	{
 		int cod_cmd = imgi.getAssocImagemSom().getCmd();
+
 		if (cod_cmd == 1) // tocar som frase
 		{
 			//Comandos.tocarSomFrase(ModoTouchActivity.this);
@@ -164,7 +165,10 @@ public class TelaBaseActivity extends Activity
 		else if (cod_cmd == 2) // voltar para tela anterior
 		{
 			finish();
-		}		
+		}
+		else if(cod_cmd == 3) {
+			removerTodasImagensDaFrase();
+		}
 	}
 	
 	// adicionar imagem para a frase
@@ -186,6 +190,18 @@ public class TelaBaseActivity extends Activity
 		Utils.lista_imagens_frase_global.remove(position);
 		((GridView) findViewById(R.id.gridview_frase))
 				.setAdapter(new ImageAdapterFrase(lista_imagens_frase));
+	}
+	
+	// remover todas as imagens da lista
+	public void removerTodasImagensDaFrase() {
+	
+		
+		lista_imagens_frase.clear();
+		Utils.lista_imagens_frase_global.clear();
+		
+		((GridView) findViewById(R.id.gridview_frase))
+		.setAdapter(new ImageAdapterFrase(lista_imagens_frase));
+		
 	}
 	
 	// paginacao circular

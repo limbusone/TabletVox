@@ -168,6 +168,7 @@ public class Utils
 		dao_ais.create("letray", "letray", 	"y", 		"png", 'n', 0);
 		dao_ais.create("letraz", "letraz", 	"s47002", 	"png", 'n', 0);
 		
+		
 		dao_ais.create("comando falar", "cmd10", "cmd10", "jpg", 'n', 1);
 		
 		// registros da versao categorizada
@@ -388,6 +389,8 @@ public class Utils
 		dao_ais.create("ser", 			"", 		"", 		"jpg", 'v', 0);
 		
 		dao_ais.create("comando voltar", "cmd11", "cmd11", "jpg", 'n', 2);
+		
+		dao_ais.create("apagarTudo", "lf152", 	"", 	"jpg", 'n', 3);
 	}	
 	/**
 	 * Retrieve all IDs of the Resource-Classes (like

@@ -40,7 +40,6 @@ public class ModoTouchActivity extends TelaBaseActivity
 		}
 	};
 	
-	
 	// evento acionar comando da lista de imagens-comandos
 	private OnItemClickListener startImagemComando = new OnItemClickListener()
 	{
@@ -258,7 +257,6 @@ public class ModoTouchActivity extends TelaBaseActivity
 		// carregando evento remover a imagem da frase
 		gridview_frase.setOnItemClickListener(removeImagemFraseEvento);
 		
-
 		// carregando evento acionar imagem-comando
 		gridview_atalhos.setOnItemClickListener(startImagemComando);
 

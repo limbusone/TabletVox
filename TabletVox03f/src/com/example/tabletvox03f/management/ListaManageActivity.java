@@ -25,7 +25,7 @@ public abstract class ListaManageActivity extends Activity
 		@Override
 		public boolean onKey(View v, int keyCode, KeyEvent event)
 		{
-			acaoDoEventoBuscar(v, keyCode, event);
+			ListaManageActivity.this.acaoDoEventoBuscar(v, keyCode, event);
 			return false;
 		}
 	};

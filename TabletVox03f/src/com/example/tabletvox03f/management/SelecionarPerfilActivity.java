@@ -20,7 +20,6 @@ public class SelecionarPerfilActivity extends ListaManageActivity
 	@Override
 	protected void onCreateFilho()
 	{
-		// TODO Auto-generated method stub
 		
 	}
 	

@@ -3,7 +3,7 @@ package com.example.tabletvox03f.management;
 import java.util.ArrayList;
 
 import android.content.Intent;
-import android.view.KeyEvent;
+import android.text.Editable;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -51,6 +51,11 @@ public class SelecionarPerfilActivity extends ListaManageActivity
 		lv.setAdapter(new ItemPerfilAdapter(this, (ArrayList<Perfil>) lista.clone()));		
 	}
 	
+	protected void carregarLista(ArrayList<Perfil> perfis)
+	{
+		lv.setAdapter(new ItemPerfilAdapter(this, perfis));
+	}
+	
 	private void selecionarPerfil(Perfil perfil)
 	{
 		Utils.PERFIL_ATIVO = perfil;
@@ -78,7 +83,6 @@ public class SelecionarPerfilActivity extends ListaManageActivity
 			intent.putExtra("tipo_form", true); // true, para form do tipo 'criar' e false para form do tipo 'editar'
 			startActivityForResult(intent, 1);
 		}
-		
 	}
 
 	@Override
@@ -93,11 +97,13 @@ public class SelecionarPerfilActivity extends ListaManageActivity
 		return R.menu.um_action_add;
 	}
 
-
+	// buscar por nome e autor
 	@Override
-	protected void acaoDoEventoBuscar(View v, int keyCode, KeyEvent event)
+	protected void acaoDoEventoBuscar(Editable s)
 	{
-		
+		String texto_para_pesquisa  = s.toString();
+		carregarLista(PerfilDAOSingleton.getInstance().getPerfisByNomeOrAutor(texto_para_pesquisa, texto_para_pesquisa));
+		Toast.makeText(this, s.toString(), Toast.LENGTH_SHORT).show();
 	}
 
 }

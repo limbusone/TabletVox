@@ -2,11 +2,11 @@ package com.example.tabletvox03f.management;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.KeyEvent;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnKeyListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
@@ -19,16 +19,29 @@ public abstract class ListaManageActivity extends Activity
 	protected ListView lv;
 	protected EditText txtBusca;
 	
-	private OnKeyListener buscarKeyEvent = new OnKeyListener()
+	private TextWatcher buscarEvent = new TextWatcher()
 	{
 		
 		@Override
-		public boolean onKey(View v, int keyCode, KeyEvent event)
+		public void onTextChanged(CharSequence s, int start, int before, int count)
 		{
-			ListaManageActivity.this.acaoDoEventoBuscar(v, keyCode, event);
-			return false;
+			
 		}
-	};
+		
+		@Override
+		public void beforeTextChanged(CharSequence s, int start, int count,
+				int after)
+		{
+
+			
+		}
+		
+		@Override
+		public void afterTextChanged(Editable s)
+		{
+			ListaManageActivity.this.acaoDoEventoBuscar(s);
+		}
+	};	
 	
 	private OnItemClickListener itemClick = new OnItemClickListener()
 	{
@@ -37,7 +50,6 @@ public abstract class ListaManageActivity extends Activity
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 				long arg3)
 		{
-			// TODO Auto-generated method stub
 			ListaManageActivity.this.acaoDoEventoItemClick(arg0, arg1, arg2, arg3);
 		}
 	};
@@ -54,7 +66,7 @@ public abstract class ListaManageActivity extends Activity
 		
 		// carregar evento do txtBusca
 		txtBusca = (EditText) findViewById(R.id.txtBusca);
-		txtBusca.setOnKeyListener(buscarKeyEvent);
+		txtBusca.addTextChangedListener(buscarEvent);
 		
 		onCreateFilho();
 	}
@@ -91,7 +103,7 @@ public abstract class ListaManageActivity extends Activity
 	
 	protected abstract void acaoDosEventosDoMenu(MenuItem item);
 	
-	protected abstract void acaoDoEventoBuscar(View v, int keyCode, KeyEvent event);
+	protected abstract void acaoDoEventoBuscar(Editable s);
 	
 	protected abstract String getOptionMenuTitle();
 	

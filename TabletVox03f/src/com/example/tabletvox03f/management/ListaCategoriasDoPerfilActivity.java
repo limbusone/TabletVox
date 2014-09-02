@@ -2,7 +2,7 @@ package com.example.tabletvox03f.management;
 
 import java.util.ArrayList;
 
-import android.view.KeyEvent;
+import android.text.Editable;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -74,7 +74,7 @@ public class ListaCategoriasDoPerfilActivity extends ListaManageActivity
 	}
 
 	@Override
-	protected void acaoDoEventoBuscar(View v, int keyCode, KeyEvent event)
+	protected void acaoDoEventoBuscar(Editable s)
 	{
 		
 	}

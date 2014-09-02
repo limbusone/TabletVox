@@ -7,6 +7,7 @@ import android.text.Editable;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.Toast;
 
 import com.example.tabletvox03f.R;
@@ -44,11 +45,12 @@ public class SelecionarPerfilActivity extends ListaManageActivity
 	// carregar todos os perfis
 	@SuppressWarnings("unchecked")
 	@Override
-	protected void carregarLista()
+	protected BaseAdapter carregarLista()
 	{
 		ArrayList<Perfil> lista = PerfilDAOSingleton.getInstance().getPerfis();
 		
-		lv.setAdapter(new ItemPerfilAdapter(this, (ArrayList<Perfil>) lista.clone()));		
+		return (new ItemPerfilAdapter(this, (ArrayList<Perfil>) lista.clone()));
+		
 	}
 	
 	protected void carregarLista(ArrayList<Perfil> perfis)

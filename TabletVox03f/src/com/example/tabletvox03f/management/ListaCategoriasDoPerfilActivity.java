@@ -6,6 +6,7 @@ import android.text.Editable;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.Utils;
@@ -35,12 +36,12 @@ public class ListaCategoriasDoPerfilActivity extends ListaManageActivity
 
 	@SuppressWarnings("unchecked")
 	@Override
-	protected void carregarLista()
+	protected BaseAdapter carregarLista()
 	{
 		// TODO Auto-generated method stub
 		ArrayList<Categoria> lista = perfil.getCategorias();
 		
-		lv.setAdapter(new ItemCategoriaAdapter(this, (ArrayList<Categoria>) lista.clone()));
+		return (new ItemCategoriaAdapter(this, (ArrayList<Categoria>) lista.clone()));
 	}
 
 	@Override

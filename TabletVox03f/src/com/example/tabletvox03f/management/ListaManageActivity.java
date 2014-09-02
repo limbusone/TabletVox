@@ -9,8 +9,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.tabletvox03f.R;
 
@@ -18,6 +20,8 @@ public abstract class ListaManageActivity extends Activity
 {
 	protected ListView lv;
 	protected EditText txtBusca;
+	protected TextView lblNumEncontrados;
+	protected TextView lblEncontrados;
 	
 	private TextWatcher buscarEvent = new TextWatcher()
 	{
@@ -76,10 +80,32 @@ public abstract class ListaManageActivity extends Activity
 	protected void onResumeSuper()
 	{
 		super.onResume();
-		carregarLista();
+		carregarListaPai();
 	}
-
-	protected abstract void carregarLista();
+	
+	protected void carregarListaPai()
+	{
+		lv.setAdapter(carregarLista());
+		showLblNumEncontrados(lv.getChildCount());
+	}
+	
+	protected void showLblNumEncontrados(int num)
+	{
+		lblNumEncontrados.setVisibility(View.VISIBLE);
+		lblEncontrados.setVisibility(View.VISIBLE);
+		
+		lblNumEncontrados.setText(Integer.toString(num));
+		
+	}
+	
+	protected void hideLblNumEncontrados()
+	{
+		lblNumEncontrados.setVisibility(View.INVISIBLE);
+		lblEncontrados.setVisibility(View.INVISIBLE);
+	}
+	
+	
+	protected abstract BaseAdapter carregarLista();
 	
 	// trata os eventos ligados ao menu do action bar
 	@Override

@@ -2,10 +2,11 @@ package com.example.tabletvox03f.management;
 
 import java.util.ArrayList;
 
-import android.view.KeyEvent;
+import android.text.Editable;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.Utils;
@@ -35,12 +36,12 @@ public class ListaCategoriasDoPerfilActivity extends ListaManageActivity
 
 	@SuppressWarnings("unchecked")
 	@Override
-	protected void carregarLista()
+	protected BaseAdapter carregarLista()
 	{
 		// TODO Auto-generated method stub
 		ArrayList<Categoria> lista = perfil.getCategorias();
 		
-		lv.setAdapter(new ItemCategoriaAdapter(this, (ArrayList<Categoria>) lista.clone()));
+		return (new ItemCategoriaAdapter(this, (ArrayList<Categoria>) lista.clone()));
 	}
 
 	@Override
@@ -74,7 +75,7 @@ public class ListaCategoriasDoPerfilActivity extends ListaManageActivity
 	}
 
 	@Override
-	protected void acaoDoEventoBuscar(View v, int keyCode, KeyEvent event)
+	protected void acaoDoEventoBuscar(Editable s)
 	{
 		
 	}

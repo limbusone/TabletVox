@@ -108,6 +108,19 @@ public class PerfilDAOSingleton
 		return perfil;
 	}
 	
+	public ArrayList<Perfil> getPerfisByNomeOrAutor(String nome, String autor)
+	{
+		Perfil perfil;
+		ArrayList<Perfil> result = new ArrayList<Perfil>();
+		for (int i = 0, length = listaPerfil.size(); i < length; i++)
+		{
+			perfil = listaPerfil.get(i);
+			if (perfil.getNome().contains(nome) || perfil.getAutor().contains(autor))
+				result.add(new Perfil(perfil));
+		}
+		
+		return result;
+	}
 	
 	private int generateRandomInteger(int min, int max)
 	{

@@ -24,9 +24,9 @@ import com.example.tabletvox03f.dal.FilesIO;
 public class ItemCategoriaAdapter extends BaseAdapter
 {
 
-	private Context mContext;
-	private ArrayList<Categoria> categorias;
-	private LayoutInflater inflator;	
+	protected Context mContext;
+	protected ArrayList<Categoria> categorias;
+	protected LayoutInflater inflator;	
 
 	
 	public ArrayList<Categoria> getCategorias()
@@ -81,7 +81,7 @@ public class ItemCategoriaAdapter extends BaseAdapter
 		{
 			view = inflator.inflate(R.layout.item_categoria, null);
 			
-			ViewHolder viewHolder = new ViewHolder();
+			ViewHolder viewHolder 		= new ViewHolder();
 			viewHolder.imgv				= (ImageView) 	view.findViewById(R.id.imgItem);
 			viewHolder.lblNomeCategoria = (TextView) 	view.findViewById(R.id.lblNomeCategoria);
 			viewHolder.btnEdit			= (ImageButton) view.findViewById(R.id.btnEdit);

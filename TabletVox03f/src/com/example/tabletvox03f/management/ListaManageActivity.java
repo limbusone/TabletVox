@@ -72,6 +72,9 @@ public abstract class ListaManageActivity extends Activity
 		txtBusca = (EditText) findViewById(R.id.txtBusca);
 		txtBusca.addTextChangedListener(buscarEvent);
 		
+		lblEncontrados 		= (TextView) findViewById(R.id.lblEncontrados);
+		lblNumEncontrados 	= (TextView) findViewById(R.id.lblNumEncontrados);
+		
 		onCreateFilho();
 	}
 	
@@ -86,7 +89,7 @@ public abstract class ListaManageActivity extends Activity
 	protected void carregarListaPai()
 	{
 		lv.setAdapter(carregarLista());
-		showLblNumEncontrados(lv.getChildCount());
+		showLblNumEncontrados(lv.getAdapter().getCount());
 	}
 	
 	protected void showLblNumEncontrados(int num)
@@ -94,7 +97,7 @@ public abstract class ListaManageActivity extends Activity
 		lblNumEncontrados.setVisibility(View.VISIBLE);
 		lblEncontrados.setVisibility(View.VISIBLE);
 		
-		lblNumEncontrados.setText(Integer.toString(num));
+		atualizarLblNumEncontrados(num);
 		
 	}
 	
@@ -104,6 +107,10 @@ public abstract class ListaManageActivity extends Activity
 		lblEncontrados.setVisibility(View.INVISIBLE);
 	}
 	
+	protected void atualizarLblNumEncontrados(int num)
+	{
+		lblNumEncontrados.setText(Integer.toString(num));
+	}
 	
 	protected abstract BaseAdapter carregarLista();
 	

@@ -8,7 +8,7 @@
         android:id="@+id/imgItem"
 	    android:layout_width="58dp"
 	    android:layout_height="58dp"
-        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
         android:layout_alignParentLeft="true"	    
 	    android:contentDescription="@string/blabla"
 	    android:src="@drawable/ic_launcher"
@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/imgItem"
-        android:layout_alignTop="@id/imgItem"
+        android:layout_centerInParent="true"
         android:layout_marginLeft="10dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="TESTE"/>
@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="58dp"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@id/imgItem"
+		android:layout_centerInParent="true"
         android:src="@android:drawable/ic_delete"
         android:contentDescription="@string/blabla" />
 

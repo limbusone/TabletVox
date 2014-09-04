@@ -105,7 +105,7 @@ public class SelecionarPerfilActivity extends ListaManageActivity
 	{
 		String texto_para_pesquisa  = s.toString();
 		carregarLista(PerfilDAOSingleton.getInstance().getPerfisByNomeOrAutor(texto_para_pesquisa, texto_para_pesquisa));
-		Toast.makeText(this, s.toString(), Toast.LENGTH_SHORT).show();
+		atualizarLblNumEncontrados(lv.getAdapter().getCount());
 	}
 
 }

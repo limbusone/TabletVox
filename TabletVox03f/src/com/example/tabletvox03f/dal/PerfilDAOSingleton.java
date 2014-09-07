@@ -115,7 +115,9 @@ public class PerfilDAOSingleton
 		for (int i = 0, length = listaPerfil.size(); i < length; i++)
 		{
 			perfil = listaPerfil.get(i);
-			if (perfil.getNome().contains(nome) || perfil.getAutor().contains(autor))
+			
+			if (perfil.getNome().toLowerCase().contains(nome.toLowerCase()) || 
+				perfil.getAutor().toLowerCase().contains(autor.toLowerCase()))
 				result.add(new Perfil(perfil));
 		}
 		

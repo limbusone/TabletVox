@@ -22,9 +22,9 @@ public class CategoriaDAOSingleton
 	
 	private void inicializar()
 	{
-//		listaCategoria.add(new Categoria(1, "Categoria 1", "Autor 1"));
-//		listaCategoria.add(new Categoria(2, "Categoria 2", "Autor 2"));
-//		listaCategoria.add(new Categoria(3, "Categoria 3", "Autor 3"));
+		listaCategoria.add(new Categoria(1, "Categoria 1"));
+		listaCategoria.add(new Categoria(2, "Categoria 2"));
+		listaCategoria.add(new Categoria(3, "Categoria 3"));
 	}
 	
 	public ArrayList<Categoria> getCategorias() 
@@ -107,6 +107,21 @@ public class CategoriaDAOSingleton
 		}
 		
 		return categoria;
+	}
+	
+	public ArrayList<Categoria> getCategoriasByNome(String nome)
+	{
+		Categoria categoria;
+		ArrayList<Categoria> result = new ArrayList<Categoria>();
+		for (int i = 0, length = listaCategoria.size(); i < length; i++)
+		{
+			categoria = listaCategoria.get(i);
+			
+			if (categoria.getNome().toLowerCase().contains(nome.toLowerCase()))
+				result.add(new Categoria(categoria));
+		}
+		
+		return result;		
 	}
 	
 	private int generateRandomInteger(int min, int max)

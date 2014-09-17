@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,14 +19,17 @@ import com.example.tabletvox03f.dal.FilesIO;
 public class ItemSelectCategoriaAdapter extends ItemCategoriaAdapter
 {
 
-
+	private ArrayList<Categoria> selecionados;
+	
 	public ItemSelectCategoriaAdapter(Context context, ArrayList<Categoria> lista)
 	{
 		super(context, lista);
+		selecionados = new ArrayList<Categoria>();
 	}
 	
 	private class ViewHolder 
 	{
+		protected CheckBox checkbox;
 		protected ImageView imgv;
 	    protected TextView lblNomeCategoria;
 	}
@@ -39,11 +44,29 @@ public class ItemSelectCategoriaAdapter extends ItemCategoriaAdapter
 		
 		if (convertView == null)
 		{
-			view = inflator.inflate(R.layout.item_categoria, null);
+			view = inflator.inflate(R.layout.item_categoria_checkbox, null);
 			
 			ViewHolder viewHolder 		= new ViewHolder();
+			viewHolder.checkbox			= (CheckBox) 	view.findViewById(R.id.checkBox);
 			viewHolder.imgv				= (ImageView) 	view.findViewById(R.id.imgItem);
 			viewHolder.lblNomeCategoria = (TextView) 	view.findViewById(R.id.lblNomeCategoria);
+			
+			viewHolder.checkbox.setOnClickListener(new OnClickListener()
+			{
+				
+				@Override
+				public void onClick(View v)
+				{
+					CheckBox chk = (CheckBox) v;
+					Categoria categoria = (Categoria) chk.getTag();
+					
+					if (chk.isChecked())
+						selecionados.add(categoria);
+					else
+						selecionados.remove(categoria);
+				}
+			});
+			
 			
 			view.setTag(viewHolder);
 		}
@@ -60,9 +83,19 @@ public class ItemSelectCategoriaAdapter extends ItemCategoriaAdapter
 		// recuperar imagem
 		holder.imgv.setImageDrawable(fIO.getImgItemDrawableFromInternalStorageOrAssets(ais));
 		//holder.imgv.setAssocImagemSom(ais);
-		
+		holder.checkbox.setTag(categoria);
 		
 		return view;
+	}
+
+	public ArrayList<Categoria> getSelecionados()
+	{
+		return selecionados;
+	}
+
+	public void setSelecionados(ArrayList<Categoria> selecionados)
+	{
+		this.selecionados = selecionados;
 	}
 	
 }

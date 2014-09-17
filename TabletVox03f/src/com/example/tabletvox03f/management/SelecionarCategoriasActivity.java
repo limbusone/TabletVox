@@ -36,12 +36,17 @@ public class SelecionarCategoriasActivity extends ListaManageActivity
 		
 		return (new ItemSelectCategoriaAdapter(this, (ArrayList<Categoria>) lista.clone()));
 	}
+	
+	private void carregarLista(ArrayList<Categoria> categorias)
+	{
+		lv.setAdapter(new ItemSelectCategoriaAdapter(this, categorias));
+	}
 
 	@Override
 	protected void acaoDoEventoItemClick(AdapterView<?> parent, View v,
 			int position, long arg3)
 	{
-
+		
 	}
 
 	@Override
@@ -53,20 +58,22 @@ public class SelecionarCategoriasActivity extends ListaManageActivity
 		}
 		else if (item.getItemId() == R.id.action_cancelar)
 		{
-			
+			this.setResult(2);
+			finish();
 		}
 	}
 
 	@Override
 	protected void acaoDoEventoBuscar(Editable s)
 	{
-
+		String texto_para_pesquisa = s.toString();
+		carregarLista(CategoriaDAOSingleton.getInstance().getCategoriasByNome(texto_para_pesquisa));
 	}
 
 	@Override
 	protected String getOptionMenuTitle()
 	{
-		return "Categorias";
+		return "";
 	}
 
 	@Override

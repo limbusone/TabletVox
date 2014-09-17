@@ -81,6 +81,11 @@
             android:name="com.example.tabletvox03f.management.FormularioAssocImagemSomActivity"
             android:label="@string/title_activity_incluir_ais">
         </activity>
+        
+        <activity
+            android:name="com.example.tabletvox03f.management.SelecionarCategoriasActivity"
+            android:label="@string/title_activity_selecionar_categorias">
+        </activity>
     </application>
 
 </manifest>

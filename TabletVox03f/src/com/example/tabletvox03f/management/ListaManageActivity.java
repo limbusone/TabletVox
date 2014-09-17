@@ -44,6 +44,7 @@ public abstract class ListaManageActivity extends Activity
 		public void afterTextChanged(Editable s)
 		{
 			ListaManageActivity.this.acaoDoEventoBuscar(s);
+			atualizarLblNumEncontrados(lv.getAdapter().getCount());
 		}
 	};	
 	
@@ -112,8 +113,6 @@ public abstract class ListaManageActivity extends Activity
 		lblNumEncontrados.setText(Integer.toString(num));
 	}
 	
-	protected abstract BaseAdapter carregarLista();
-	
 	// trata os eventos ligados ao menu do action bar
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
@@ -127,10 +126,13 @@ public abstract class ListaManageActivity extends Activity
 	{
 		// Inflate the menu; this adds items to the action bar if it is present.		
 		getMenuInflater().inflate(getMenuID(), menu);
-		// setar titulo do menu
-		menu.getItem(0).setTitle(getOptionMenuTitle());
+		// setar titulo do menu caso não for null ou branco
+		if (!(getOptionMenuTitle().equals("") || getOptionMenuTitle() == null))
+			menu.getItem(0).setTitle(getOptionMenuTitle());
 		return true;
 	}	
+
+	protected abstract BaseAdapter carregarLista();
 	
 	protected abstract void acaoDoEventoItemClick(AdapterView<?> parent, View v, int position, long arg3);
 	

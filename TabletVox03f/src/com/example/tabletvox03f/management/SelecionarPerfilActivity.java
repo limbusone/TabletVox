@@ -50,7 +50,6 @@ public class SelecionarPerfilActivity extends ListaManageActivity
 		ArrayList<Perfil> lista = PerfilDAOSingleton.getInstance().getPerfis();
 		
 		return (new ItemPerfilAdapter(this, (ArrayList<Perfil>) lista.clone()));
-		
 	}
 	
 	protected void carregarLista(ArrayList<Perfil> perfis)
@@ -103,9 +102,8 @@ public class SelecionarPerfilActivity extends ListaManageActivity
 	@Override
 	protected void acaoDoEventoBuscar(Editable s)
 	{
-		String texto_para_pesquisa  = s.toString();
+		String texto_para_pesquisa = s.toString();
 		carregarLista(PerfilDAOSingleton.getInstance().getPerfisByNomeOrAutor(texto_para_pesquisa, texto_para_pesquisa));
-		atualizarLblNumEncontrados(lv.getAdapter().getCount());
 	}
 
 }

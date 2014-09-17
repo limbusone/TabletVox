@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 import android.content.Intent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -21,6 +23,20 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 	private Perfil pfl;
 
 	private ListView lv;
+	
+	private Button btnAddCategoria;
+	
+	private OnClickListener addCategoriaEvento = new OnClickListener()
+	{
+
+		@Override
+		public void onClick(View v)
+		{
+			// chamar tela para selecionar categorias
+			Intent intent = new Intent(FormularioPerfilActivity.this, SelecionarCategoriasActivity.class);
+			FormularioPerfilActivity.this.startActivityForResult(intent, 1);
+		}
+	};
 	
 	private OnItemClickListener itemClick = new OnItemClickListener()
 	{
@@ -48,6 +64,10 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 		// carregar evento do click em um item da lista
 		lv = (ListView) findViewById(R.id.listViewCat);
 		lv.setOnItemClickListener(itemClick);
+		
+		// carregar evento do botão adicionar categoria
+		btnAddCategoria = (Button) findViewById(R.id.btnAddCategoria);
+		btnAddCategoria.setOnClickListener(addCategoriaEvento);
 	}
 	
 	@Override
@@ -216,5 +236,18 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 		((EditText) findViewById(R.id.txtNomePerfil)).setError(null);
 		((EditText) findViewById(R.id.txtAutorPerfil)).setError(null);
 	}
+
+	// callback ao voltar da tela adicionar categorias
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		// adicionar categoria cancelado
+		if (resultCode == 2)
+		{
+			
+		}
+	}	
 
 }

@@ -54,7 +54,7 @@
 	    android:background="#0099CC" />
 
 	<Button
-	    android:id="@+id/button1"
+	    android:id="@+id/btnAddCategoria"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
 	    android:text="Adicionar Categoria" />

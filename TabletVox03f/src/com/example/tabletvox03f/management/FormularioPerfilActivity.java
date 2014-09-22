@@ -10,6 +10,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.tabletvox03f.Erro;
 import com.example.tabletvox03f.R;
@@ -70,13 +71,6 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 		btnAddCategoria.setOnClickListener(addCategoriaEvento);
 	}
 	
-	@Override
-	protected void onResume()
-	{
-		super.onResume();
-		carregarLista();
-	}
-	
 	protected void initCriarForm()
 	{
 		pfl = new Perfil();
@@ -84,7 +78,9 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 		// inicializa categorias caso não vier setada
 		// serve para não bugar o metodo carregarLista()		
 		if (pfl.getCategorias() == null)
-			pfl.setCategorias(new ArrayList<Categoria>());			
+			pfl.setCategorias(new ArrayList<Categoria>());
+		
+		carregarLista();
 	}
 	
 	protected void initEditarForm(Intent intent)
@@ -171,7 +167,8 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 		
 //		Toast.makeText(this, "Você clicou em editar Perfil!", Toast.LENGTH_SHORT).show();
 		
-		PerfilDAOSingleton.getInstance().editarPerfil(pfl, pfl.getId());
+		//PerfilDAOSingleton.getInstance().editarPerfil(pfl, pfl.getId());
+		PerfilDAOSingleton.getInstance().editarPerfilComCategorias(pfl, pfl.getId());
 		
 //		Intent intent = new Intent(this, SelecionarPerfilActivity.class);
 		
@@ -237,17 +234,35 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 		((EditText) findViewById(R.id.txtAutorPerfil)).setError(null);
 	}
 
+
+	private void addNovasCategorias(ArrayList<Categoria> categorias)
+	{
+		ItemCategoriaAdapter ica = (ItemCategoriaAdapter) lv.getAdapter();
+		for (int i = 0, length = categorias.size(); i < length; i++)
+			ica.addItem(categorias.get(i));
+
+		ica.refresh();
+		
+	}
+	
 	// callback ao voltar da tela adicionar categorias
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
 		super.onActivityResult(requestCode, resultCode, data);
 		
+		// adicionar categoria com sucesso
+		if (resultCode == 1)
+		{
+			ArrayList<Categoria> categorias = data.getParcelableArrayListExtra("selecionados"); 
+			addNovasCategorias(categorias);
+		}
+			
+			
+		
 		// adicionar categoria cancelado
 		if (resultCode == 2)
-		{
-			
-		}
+			Toast.makeText(this, "Cancelado!", Toast.LENGTH_SHORT).show();
 	}	
 
 }

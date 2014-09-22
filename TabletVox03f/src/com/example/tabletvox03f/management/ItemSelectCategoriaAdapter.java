@@ -38,7 +38,6 @@ public class ItemSelectCategoriaAdapter extends ItemCategoriaAdapter
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
-		// TODO Auto-generated method stub
 		
 		View view = null;
 		
@@ -51,6 +50,7 @@ public class ItemSelectCategoriaAdapter extends ItemCategoriaAdapter
 			viewHolder.imgv				= (ImageView) 	view.findViewById(R.id.imgItem);
 			viewHolder.lblNomeCategoria = (TextView) 	view.findViewById(R.id.lblNomeCategoria);
 			
+			// adicionando ou excluindo da lista de selecionados conforme estado do checkbox
 			viewHolder.checkbox.setOnClickListener(new OnClickListener()
 			{
 				
@@ -67,7 +67,7 @@ public class ItemSelectCategoriaAdapter extends ItemCategoriaAdapter
 				}
 			});
 			
-			
+			viewHolder.checkbox.setFocusable(false);
 			view.setTag(viewHolder);
 		}
 		else

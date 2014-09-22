@@ -2,11 +2,13 @@ package com.example.tabletvox03f.management;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.text.Editable;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.dal.Categoria;
@@ -46,7 +48,9 @@ public class SelecionarCategoriasActivity extends ListaManageActivity
 	protected void acaoDoEventoItemClick(AdapterView<?> parent, View v,
 			int position, long arg3)
 	{
-		
+		// selecionar/desselecionar checkbox
+		CheckBox checkbox = (CheckBox) v.findViewById(R.id.checkBox);
+		checkbox.performClick();
 	}
 
 	@Override
@@ -54,6 +58,11 @@ public class SelecionarCategoriasActivity extends ListaManageActivity
 	{
 		if (item.getItemId() == R.id.action_concluir)
 		{
+			ArrayList<Categoria> selecionados = ((ItemSelectCategoriaAdapter)lv.getAdapter()).getSelecionados();
+			Intent intent = new Intent();
+			intent.putParcelableArrayListExtra("selecionados", (ArrayList<Categoria>) selecionados.clone());
+			this.setResult(1, intent);
+			finish();
 			
 		}
 		else if (item.getItemId() == R.id.action_cancelar)

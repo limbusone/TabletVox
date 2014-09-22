@@ -200,6 +200,11 @@ public class ItemCategoriaAdapter extends BaseAdapter
 	{
 		categorias.remove(categoria);
 	}
+	
+	public void addItem(Categoria categoria)
+	{
+		categorias.add(categoria);
+	}
 
 	public void refresh()
 	{

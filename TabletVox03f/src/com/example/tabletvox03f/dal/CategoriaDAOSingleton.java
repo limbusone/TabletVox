@@ -22,9 +22,8 @@ public class CategoriaDAOSingleton
 	
 	private void inicializar()
 	{
-		listaCategoria.add(new Categoria(1, "Categoria 1"));
-		listaCategoria.add(new Categoria(2, "Categoria 2"));
-		listaCategoria.add(new Categoria(3, "Categoria 3"));
+		listaCategoria.add(new Categoria(1, "animais", new AssocImagemSom("animais", 		"ANIMAIS", 		"ANIMAIS", 		"jpg", 'c', 0)));
+		listaCategoria.add(new Categoria(2, "pessoas", new AssocImagemSom("pessoas", 		"PESSOAS", 		"PESSOAS", 		"jpg", 'c', 0)));
 	}
 	
 	public ArrayList<Categoria> getCategorias() 

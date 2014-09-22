@@ -30,6 +30,7 @@
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:indeterminate="true"
+	    android:layout_gravity="center_horizontal"
 	    android:visibility="gone" />
 
 	<TextView
@@ -37,6 +38,7 @@
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:text="@string/texto_carregando"
+	    android:layout_gravity="center_horizontal"
 	    android:textAppearance="?android:attr/textAppearanceLarge"
 	    android:visibility="gone" />
 

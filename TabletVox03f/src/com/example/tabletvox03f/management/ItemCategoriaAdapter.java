@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -129,6 +130,9 @@ public class ItemCategoriaAdapter extends BaseAdapter
 			public void onClick(View v)
 			{
 				Toast.makeText(ItemCategoriaAdapter.this.mContext, "Você clicou no botão Editar!", Toast.LENGTH_SHORT).show();
+				Intent intent = new Intent(ItemCategoriaAdapter.this.mContext, FormularioCategoriaActivity.class);
+				intent.putExtra("tipo_form", false);
+				ItemCategoriaAdapter.this.mContext.startActivity(intent);
 			}
 		});
 		

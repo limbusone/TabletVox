@@ -56,6 +56,7 @@ public class SelecionarCategoriasActivity extends ListaManageActivity
 	@Override
 	protected void acaoDosEventosDoMenu(MenuItem item)
 	{
+		// resgata array de selecionados do adapter e manda uma cópia para o formulario 
 		if (item.getItemId() == R.id.action_concluir)
 		{
 			ArrayList<Categoria> selecionados = ((ItemSelectCategoriaAdapter)lv.getAdapter()).getSelecionados();
@@ -65,6 +66,7 @@ public class SelecionarCategoriasActivity extends ListaManageActivity
 			finish();
 			
 		}
+		// cancela a ação e volta pro formulario
 		else if (item.getItemId() == R.id.action_cancelar)
 		{
 			this.setResult(2);

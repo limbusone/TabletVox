@@ -104,8 +104,8 @@ public class FormularioAssocImagemSomActivity extends FormularioBaseActivity
 	protected void incluir()
 	{
 		EditText txtDesc = (EditText) findViewById(R.id.txtDesc);
-		RadioButton optSubs = (RadioButton) findViewById(R.id.optSubs);
-		RadioButton optVerb = (RadioButton) findViewById(R.id.optVerb);
+//		RadioButton optSubs = (RadioButton) findViewById(R.id.optSubs);
+//		RadioButton optVerb = (RadioButton) findViewById(R.id.optVerb);
 
 		FilesIO fio = new FilesIO(this);
 		
@@ -114,7 +114,7 @@ public class FormularioAssocImagemSomActivity extends FormularioBaseActivity
 		new_ais.setTituloImagem(fio.getNomeDoArquivoSemExtensao(caminho_destino_img));
 		new_ais.setTituloSom(fio.getNomeDoArquivoSemExtensao(caminho_destino_som));
 		new_ais.setExt(fio.getExtensaoDoArquivo(caminho_destino_img));
-		new_ais.setTipo((optSubs.isChecked()) ? 'n' : optVerb.isChecked()? 'v' : 'c');		
+//		new_ais.setTipo((optSubs.isChecked()) ? 'n' : optVerb.isChecked()? 'v' : 'c');		
 		new_ais.setCmd(0);
 		new_ais.setAtalho(false);
 		

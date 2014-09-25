@@ -132,6 +132,7 @@ public class ItemCategoriaAdapter extends BaseAdapter
 				Toast.makeText(ItemCategoriaAdapter.this.mContext, "Você clicou no botão Editar!", Toast.LENGTH_SHORT).show();
 				Intent intent = new Intent(ItemCategoriaAdapter.this.mContext, FormularioCategoriaActivity.class);
 				intent.putExtra("tipo_form", false);
+				intent.putExtra("categoria", categoria);
 				ItemCategoriaAdapter.this.mContext.startActivity(intent);
 			}
 		});

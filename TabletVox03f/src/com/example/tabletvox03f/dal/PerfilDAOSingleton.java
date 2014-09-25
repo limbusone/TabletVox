@@ -23,9 +23,13 @@ public class PerfilDAOSingleton
 	
 	private void inicializar()
 	{
-		listaPerfil.add(new Perfil(1, "Perfil 1", "Autor 1",
-						(ArrayList<Categoria>)
-						CategoriaDAOSingleton.getInstance().getCategorias().clone()));
+		ArrayList<Categoria> lista = new ArrayList<Categoria>(); 
+		lista.add(CategoriaDAOSingleton.getInstance().getCategoriaById(1));
+		lista.add(CategoriaDAOSingleton.getInstance().getCategoriaById(2));
+		
+		listaPerfil.add(new Perfil(1, "perfil01", "default_author", 
+					   (ArrayList<Categoria>) lista.clone()));
+		
 		listaPerfil.add(new Perfil(2, "Perfil 2", "Autor 2"));
 		listaPerfil.add(new Perfil(3, "Perfil 3", "Autor 3"));
 	}

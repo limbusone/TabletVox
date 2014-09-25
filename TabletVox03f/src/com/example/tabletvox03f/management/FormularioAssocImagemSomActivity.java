@@ -11,7 +11,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,7 +38,9 @@ public class FormularioAssocImagemSomActivity extends FormularioBaseActivity
 	private String caminho_destino_img;
 	private String caminho_destino_som;
 	
-	private AssocImagemSom new_ais;
+	private AssocImagemSom ais;
+	
+	private AssocImagemSom old_ais;
 	
 	
 
@@ -78,7 +79,6 @@ public class FormularioAssocImagemSomActivity extends FormularioBaseActivity
 			@Override
 			public void onClick(View arg0)
 			{
-				// TODO Auto-generated method stub
 				current_file_code = REQUEST_CODE_PICK_SOUND;
 				openFile();
 			}
@@ -89,15 +89,23 @@ public class FormularioAssocImagemSomActivity extends FormularioBaseActivity
 	protected void initCriarForm()
 	{
 		// TODO Auto-generated method stub
-		new_ais = new AssocImagemSom();
+		ais = new AssocImagemSom();
 		caminho_origem_img = caminho_origem_som = caminho_destino_img = caminho_destino_som = "";
 	}
 
 	@Override
 	protected void initEditarForm(Intent intent)
 	{
-		// TODO Auto-generated method stub
-
+		EditText txtDesc = (EditText) findViewById(R.id.txtDesc);
+		
+		ais = intent.getParcelableExtra("ais");
+		
+		old_ais = new AssocImagemSom(ais);
+		
+		txtDesc.setText(ais.getDesc());
+		caminho_destino_img = ais.getTituloImagem() + "." + ais.getExt();
+		caminho_destino_som = ais.getTituloSom() + "." + Utils.EXTENSAO_ARQUIVO_SOM;
+		
 	}
 
 	@Override
@@ -110,13 +118,13 @@ public class FormularioAssocImagemSomActivity extends FormularioBaseActivity
 		FilesIO fio = new FilesIO(this);
 		
 		// populando objeto AssocImagemSom
-		new_ais.setDesc(txtDesc.getText().toString());
-		new_ais.setTituloImagem(fio.getNomeDoArquivoSemExtensao(caminho_destino_img));
-		new_ais.setTituloSom(fio.getNomeDoArquivoSemExtensao(caminho_destino_som));
-		new_ais.setExt(fio.getExtensaoDoArquivo(caminho_destino_img));
-//		new_ais.setTipo((optSubs.isChecked()) ? 'n' : optVerb.isChecked()? 'v' : 'c');		
-		new_ais.setCmd(0);
-		new_ais.setAtalho(false);
+		ais.setDesc(txtDesc.getText().toString());
+		ais.setTituloImagem(fio.getNomeDoArquivoSemExtensao(caminho_destino_img));
+		ais.setTituloSom(fio.getNomeDoArquivoSemExtensao(caminho_destino_som));
+		ais.setExt(fio.getExtensaoDoArquivo(caminho_destino_img));
+//		ais.setTipo((optSubs.isChecked()) ? 'n' : optVerb.isChecked()? 'v' : 'c');		
+		ais.setCmd(0);
+		ais.setAtalho(false);
 		
 		
 		retirarErros();
@@ -139,10 +147,10 @@ public class FormularioAssocImagemSomActivity extends FormularioBaseActivity
 
 		// *** grava dados no banco ***
 			AssocImagemSomDAOSingleton dao_ais = AssocImagemSomDAOSingleton.getInstance();
-			dao_ais.incluirAssocImagemSomWithRandomGeneratedID(new_ais);
+			dao_ais.incluirAssocImagemSomWithRandomGeneratedID(ais);
 //			AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(this);
 //			dao_ais.open();
-//			dao_ais.create(new_ais);
+//			dao_ais.create(ais);
 //			dao_ais.close();
 			
 			Toast.makeText(this, "Inclusão bem sucedida!", Toast.LENGTH_SHORT).show();
@@ -157,8 +165,54 @@ public class FormularioAssocImagemSomActivity extends FormularioBaseActivity
 	@Override
 	protected void editar()
 	{
-		// TODO Auto-generated method stub
+		EditText txtDesc = (EditText) findViewById(R.id.txtDesc);
+		
+		FilesIO fio = new FilesIO(this);
+		
+		// populando objeto AssocImagemSom
+		ais.setDesc(txtDesc.getText().toString());
+		ais.setTituloImagem(fio.getNomeDoArquivoSemExtensao(caminho_destino_img));
+		ais.setTituloSom(fio.getNomeDoArquivoSemExtensao(caminho_destino_som));
+		ais.setExt(fio.getExtensaoDoArquivo(caminho_destino_img));
+//		ais.setTipo((optSubs.isChecked()) ? 'n' : optVerb.isChecked()? 'v' : 'c');		
+		ais.setCmd(0);
+		ais.setAtalho(false);		
 
+		retirarErros();
+		
+		// *** validacao ***
+		if (!(validarUpload() & validarDados()))
+		{
+			Utils.exibirErros(this);
+			return;
+		}
+		
+		try 
+		{
+		// *** upload *** obs: uploada caso o usuario troque os arquivos
+			
+			// upload imagem
+			if ( ! ( ais.getTituloImagem().equals(old_ais.getTituloImagem()) && ais.getExt().equals(old_ais.getExt()) ) )
+				fio.copiarArquivoDeSomOuImagemParaInternalStorage(caminho_origem_img, caminho_destino_img, 0);
+			// upload som
+			if ( ! ( ais.getTituloSom().equals(old_ais.getTituloSom()) ) )
+				fio.copiarArquivoDeSomOuImagemParaInternalStorage(caminho_origem_som, caminho_destino_som, 1);
+
+		// *** grava dados no banco ***
+			AssocImagemSomDAOSingleton dao_ais = AssocImagemSomDAOSingleton.getInstance();
+			dao_ais.editarAssocImagemSom(ais, ais.getId());
+//			AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(this);
+//			dao_ais.open();
+//			dao_ais.create(ais);
+//			dao_ais.close();
+			
+			Toast.makeText(this, "Inclusão bem sucedida!", Toast.LENGTH_SHORT).show();
+		}
+		catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}				
 	}
 
 	private boolean validarDados()
@@ -166,7 +220,7 @@ public class FormularioAssocImagemSomActivity extends FormularioBaseActivity
 		boolean retorno = true;
 		
 		// descrição não pode ser vazia
-		if (new_ais.getDesc().length() == 0)
+		if (ais.getDesc().length() == 0)
 		{
 			Utils.erros.add(new Erro("Descrição vazia, campo obrigatório", findViewById(R.id.txtDesc), "EditText"));
 			retorno = false;

@@ -28,6 +28,8 @@ public class Utils
 	
 	public static Perfil PERFIL_ATIVO = new Perfil(1, "perfil01", "default_author"); // perfil default
 	
+	public static String EXTENSAO_ARQUIVO_SOM = "wav";
+	
 	public static ArrayList<Erro> erros = new ArrayList<Erro>();
 	
 	// frase global utilizada principalmente no perfil categorizado

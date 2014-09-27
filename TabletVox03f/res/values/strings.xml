@@ -15,6 +15,9 @@
     <string name="title_activity_criar_categoria">Criar Categoria</string>
     <string name="title_activity_editar_categoria">Editar Categoria</string>
     <string name="title_activity_selecionar_categorias">Selecione as categorias</string>
+    <string name="title_activity_lista_categorias">Categorias</string>
+    <string name="title_activity_selecionar_imagem">Selecione uma imagem</string>
+    <string name="title_activity_lista_imagens">Imagens</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_title">Menu Principal</string>
     <string name="cmdLaunchModoTouchText">Modo Touch</string>

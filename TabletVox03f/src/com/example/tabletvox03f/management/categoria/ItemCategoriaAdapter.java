@@ -1,4 +1,4 @@
-package com.example.tabletvox03f.management;
+package com.example.tabletvox03f.management.categoria;
 
 import java.util.ArrayList;
 
@@ -37,21 +37,18 @@ public class ItemCategoriaAdapter extends BaseAdapter
 	@Override
 	public int getCount()
 	{
-		// TODO Auto-generated method stub
 		return categorias.size();
 	}
 
 	@Override
 	public Object getItem(int position)
 	{
-		// TODO Auto-generated method stub
 		return categorias.get(position);
 	}
 
 	@Override
 	public long getItemId(int position)
 	{
-		// TODO Auto-generated method stub
 		return 0;
 	}
 	
@@ -60,7 +57,6 @@ public class ItemCategoriaAdapter extends BaseAdapter
 		this.mContext = context;
 		this.categorias = lista;
 		this.inflator = LayoutInflater.from(this.mContext);
-		// TODO Auto-generated constructor stub
 	}
 	
 	private class ViewHolder 
@@ -74,7 +70,6 @@ public class ItemCategoriaAdapter extends BaseAdapter
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
-		// TODO Auto-generated method stub
 		
 		View view = null;
 		
@@ -158,7 +153,6 @@ public class ItemCategoriaAdapter extends BaseAdapter
 					@Override
 					public void onClick(DialogInterface dialog, int which)
 					{
-						// TODO Auto-generated method stub
 						//PerfilDAOSingleton.getInstance().excluirPerfil(perfil.getId());
 						
 						Toast.makeText(ItemCategoriaAdapter.this.mContext, 
@@ -178,7 +172,6 @@ public class ItemCategoriaAdapter extends BaseAdapter
 					@Override
 					public void onClick(DialogInterface dialog, int which)
 					{
-						// TODO Auto-generated method stub
 						Toast.makeText(ItemCategoriaAdapter.this.mContext, "Cancelado!", Toast.LENGTH_SHORT).show();
 						return;
 					}

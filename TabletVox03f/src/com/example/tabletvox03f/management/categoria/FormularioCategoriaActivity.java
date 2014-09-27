@@ -1,4 +1,6 @@
-package com.example.tabletvox03f.management;
+package com.example.tabletvox03f.management.categoria;
+
+import java.util.ArrayList;
 
 import android.content.Intent;
 import android.widget.EditText;
@@ -9,6 +11,7 @@ import android.widget.Toast;
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.dal.Categoria;
 import com.example.tabletvox03f.dal.FilesIO;
+import com.example.tabletvox03f.management.FormularioBaseActivity;
 
 public class FormularioCategoriaActivity extends FormularioBaseActivity
 {
@@ -66,6 +69,23 @@ public class FormularioCategoriaActivity extends FormularioBaseActivity
 	{
 		// TODO Auto-generated method stub
 		Toast.makeText(this, "Você clicou em editar!", Toast.LENGTH_SHORT).show();
+	}
+	
+	// callback ao voltar da tela selecionar uma imagem
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		// selecionar uma imagem com sucesso
+		if (resultCode == 1)
+		{
+		
+		}
+
+		// selecionar uma imagem cancelado
+		if (resultCode == 2)
+			Toast.makeText(this, "Cancelado!", Toast.LENGTH_SHORT).show();
 	}
 
 }

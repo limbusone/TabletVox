@@ -130,6 +130,21 @@ public class AssocImagemSomDAOSingleton
 		return ais;
 	}
 	
+	public ArrayList<AssocImagemSom> getImagensByDesc(String desc)
+	{
+		AssocImagemSom ais;
+		ArrayList<AssocImagemSom> result = new ArrayList<AssocImagemSom>();
+		for (int i = 0, length = listaAssocImagemSom.size(); i < length; i++)
+		{
+			ais = listaAssocImagemSom.get(i);
+			
+			if (ais.getDesc().toLowerCase().contains(desc.toLowerCase()))
+				result.add(new AssocImagemSom(ais));
+		}
+		
+		return result;		
+	}	
+	
 	private int generateRandomInteger(int min, int max)
 	{
 		return min + (int)(Math.random() * ((max - min) + 1));

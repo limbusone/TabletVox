@@ -1,4 +1,4 @@
-package com.example.tabletvox03f.management;
+package com.example.tabletvox03f.management.categoria;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,7 @@ import android.widget.BaseAdapter;
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.dal.Categoria;
 import com.example.tabletvox03f.dal.CategoriaDAOSingleton;
-import com.example.tabletvox03f.dal.Perfil;
+import com.example.tabletvox03f.management.ListaManageActivity;
 
 public class ListaCategoriasActivity extends ListaManageActivity
 {
@@ -41,7 +41,7 @@ public class ListaCategoriasActivity extends ListaManageActivity
 	
 	private void carregarLista(ArrayList<Categoria> categorias)
 	{
-		lv.setAdapter(new ItemCategoriaAdapter(this, categorias));
+		lv.setAdapter(new ItemCategoriaAdapter(this, (ArrayList<Categoria>) categorias.clone()));
 	}
 
 	@Override

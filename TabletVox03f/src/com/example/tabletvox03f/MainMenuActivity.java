@@ -14,7 +14,7 @@ import android.widget.ProgressBar;
 
 import com.example.tabletvox03f.dal.AssocImagemSomDAO;
 import com.example.tabletvox03f.dal.FilesIO;
-import com.example.tabletvox03f.management.SelecionarPerfilActivity;
+import com.example.tabletvox03f.management.perfil.SelecionarPerfilActivity;
 
 public class MainMenuActivity extends Activity
 {

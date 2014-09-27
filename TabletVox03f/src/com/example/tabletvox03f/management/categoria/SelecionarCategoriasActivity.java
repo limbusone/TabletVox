@@ -1,4 +1,4 @@
-package com.example.tabletvox03f.management;
+package com.example.tabletvox03f.management.categoria;
 
 import java.util.ArrayList;
 
@@ -13,6 +13,7 @@ import android.widget.CheckBox;
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.dal.Categoria;
 import com.example.tabletvox03f.dal.CategoriaDAOSingleton;
+import com.example.tabletvox03f.management.ListaManageActivity;
 
 public class SelecionarCategoriasActivity extends ListaManageActivity
 {

@@ -1,4 +1,4 @@
-package com.example.tabletvox03f.management;
+package com.example.tabletvox03f.management.perfil;
 
 import java.util.ArrayList;
 
@@ -18,6 +18,9 @@ import com.example.tabletvox03f.Utils;
 import com.example.tabletvox03f.dal.Categoria;
 import com.example.tabletvox03f.dal.Perfil;
 import com.example.tabletvox03f.dal.PerfilDAOSingleton;
+import com.example.tabletvox03f.management.FormularioBaseActivity;
+import com.example.tabletvox03f.management.categoria.ItemCategoriaAdapter;
+import com.example.tabletvox03f.management.categoria.SelecionarCategoriasActivity;
 
 public class FormularioPerfilActivity extends FormularioBaseActivity
 {

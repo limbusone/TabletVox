@@ -1,4 +1,4 @@
-package com.example.tabletvox03f.management;
+package com.example.tabletvox03f.management.categoria;
 
 import java.util.ArrayList;
 

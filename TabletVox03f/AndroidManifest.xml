@@ -5,8 +5,8 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="16" />
+        android:minSdkVersion="4"
+        android:targetSdkVersion="19" />
 
     <application
         android:allowBackup="true"
@@ -56,11 +56,11 @@
             android:label="@string/title_activity_modo_varredura_categorias" >
         </activity>
         <activity
-            android:name="com.example.tabletvox03f.management.SelecionarPerfilActivity"
+            android:name="com.example.tabletvox03f.management.perfil.SelecionarPerfilActivity"
             android:label="@string/title_activity_selecionar_perfil" >
         </activity>
         <activity
-            android:name="com.example.tabletvox03f.management.FormularioPerfilActivity"
+            android:name="com.example.tabletvox03f.management.perfil.FormularioPerfilActivity"
             android:label="@string/title_activity_criar_perfil" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -73,19 +73,36 @@
         </activity>
         
         <activity 
-            android:name="com.example.tabletvox03f.management.FormularioCategoriaActivity"
+            android:name="com.example.tabletvox03f.management.categoria.FormularioCategoriaActivity"
             android:label="@string/title_activity_criar_categoria">
         </activity>
+
+        <activity
+            android:name="com.example.tabletvox03f.management.categoria.ListaCategoriasActivity"
+            android:label="@string/title_activity_lista_categorias">
+        </activity>        
+        
+        <activity
+            android:name="com.example.tabletvox03f.management.categoria.SelecionarCategoriasActivity"
+            android:label="@string/title_activity_selecionar_categorias">
+        </activity>        
         
         <activity 
-            android:name="com.example.tabletvox03f.management.FormularioAssocImagemSomActivity"
+            android:name="com.example.tabletvox03f.management.assocImagemSom.FormularioAssocImagemSomActivity"
             android:label="@string/title_activity_incluir_ais">
         </activity>
         
         <activity
-            android:name="com.example.tabletvox03f.management.SelecionarCategoriasActivity"
-            android:label="@string/title_activity_selecionar_categorias">
+            android:name="com.example.tabletvox03f.management.assocImagemSom.ListaImagensActivity"
+            android:label="@string/title_activity_lista_imagens">
         </activity>
+        
+        <activity
+            android:name="com.example.tabletvox03f.management.assocImagemSom.SelecionarImagemActiviy"
+            android:label="@string/title_activity_selecionar_imagem">
+        </activity>
+        
+
     </application>
 
 </manifest>

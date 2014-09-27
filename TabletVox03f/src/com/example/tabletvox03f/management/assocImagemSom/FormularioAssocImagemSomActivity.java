@@ -1,4 +1,4 @@
-package com.example.tabletvox03f.management;
+package com.example.tabletvox03f.management.assocImagemSom;
 
 import java.io.IOException;
 
@@ -20,6 +20,7 @@ import com.example.tabletvox03f.Utils;
 import com.example.tabletvox03f.dal.AssocImagemSom;
 import com.example.tabletvox03f.dal.AssocImagemSomDAOSingleton;
 import com.example.tabletvox03f.dal.FilesIO;
+import com.example.tabletvox03f.management.FormularioBaseActivity;
 
 public class FormularioAssocImagemSomActivity extends FormularioBaseActivity
 {

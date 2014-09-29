@@ -27,7 +27,7 @@ public class CategoriaDAOSingleton
 			(
 				1, 
 				"animais", 
-				new AssocImagemSom("animais", "ANIMAIS", "ANIMAIS", "jpg", 'c', 0)
+				AssocImagemSomDAOSingleton.getInstance().getAssocImagemSomById(1)
 			)
 		);
 		
@@ -36,7 +36,7 @@ public class CategoriaDAOSingleton
 			(
 				2, 
 				"pessoas", 
-				new AssocImagemSom("pessoas", "PESSOAS", "PESSOAS", "jpg", 'c', 0)
+				AssocImagemSomDAOSingleton.getInstance().getAssocImagemSomById(2)
 			)
 		);
 		
@@ -45,7 +45,7 @@ public class CategoriaDAOSingleton
 			(
 				3, 
 				"banheiro", 
-				new AssocImagemSom("banheiro", "BANHEIR", "BANHEIR", "jpg", 'c', 0)
+				AssocImagemSomDAOSingleton.getInstance().getAssocImagemSomById(3)
 			)
 		);
 

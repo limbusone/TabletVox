@@ -15,6 +15,7 @@ import com.example.tabletvox03f.dal.AssocImagemSomDAOSingleton;
 import com.example.tabletvox03f.dal.Categoria;
 import com.example.tabletvox03f.dal.CategoriaAssocImagemSom;
 import com.example.tabletvox03f.dal.CategoriaDAOSingleton;
+import com.example.tabletvox03f.dal.FilesIO;
 import com.example.tabletvox03f.dal.Perfil;
 import com.example.tabletvox03f.dal.PerfilDAOSingleton;
 
@@ -72,6 +73,22 @@ public class Utils
 		}
 		Toast.makeText(ctx, "Ops. Há algo errado!", Toast.LENGTH_SHORT).show();
 	}
+	
+	
+	public static void carregarDadosIniciais(Context context)
+	{
+		// se não houver registros, inicializar o banco
+		AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(context);
+		
+		dao_ais.open();
+		if (!(dao_ais.regs_exist()))
+			Utils.inicializarBD(dao_ais);
+		dao_ais.close();
+		
+		(new FilesIO(context)).copiarArquivosXmlDeAssetsParaInternalStorage();
+		
+		//Utils.copiarArquivosXmlDeAssetsParaInternalStorage(this);
+	}	
 	
 	
 	public static void inicializarBDSingleton()

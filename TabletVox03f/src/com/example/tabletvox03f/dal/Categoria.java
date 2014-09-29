@@ -105,7 +105,7 @@ public class Categoria implements Parcelable
 		this.catImagens = catImagens;
 	}
 
-	/*** METODOS E ATRIBUTOS PARCELABLE ***/
+	/* METODOS E ATRIBUTOS PARCELABLE */
 	
 	public Categoria(Parcel in) 
 	{

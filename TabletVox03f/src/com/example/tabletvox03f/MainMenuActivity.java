@@ -5,23 +5,20 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ProgressBar;
 
-import com.example.tabletvox03f.dal.AssocImagemSomDAO;
 import com.example.tabletvox03f.dal.FilesIO;
+import com.example.tabletvox03f.management.assocImagemSom.ListaImagensActivity;
+import com.example.tabletvox03f.management.categoria.ListaCategoriasActivity;
 import com.example.tabletvox03f.management.perfil.SelecionarPerfilActivity;
 
 public class MainMenuActivity extends Activity
 {
 	
-	ProgressBar mProgress;
-	Handler mHandler = new Handler();
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -33,14 +30,6 @@ public class MainMenuActivity extends Activity
 		
 		Button cmd_modo_touch 		= (Button) findViewById(R.id.cmdLaunchModoTouch);
 		Button cmd_modo_varredura 	= (Button) findViewById(R.id.cmdLaunchModoVarredura);
-		Button cmd_mudarPerfil		= (Button) findViewById(R.id.cmdLaunchMudarPerfil);
-		
-		
-		cmd_modo_touch.setVisibility(View.GONE);
-		cmd_modo_varredura.setVisibility(View.GONE);
-		cmd_mudarPerfil.setVisibility(View.GONE);
-		
-		
 		
 		// evento que starta modo touch
 		cmd_modo_touch.setOnClickListener(new OnClickListener() {
@@ -77,7 +66,6 @@ public class MainMenuActivity extends Activity
 			@Override
 			public void onClick(View v)
 			{
-				// TODO Auto-generated method stub
 				
 				Intent intent;
 				FilesIO fio = new FilesIO(MainMenuActivity.this);
@@ -102,68 +90,6 @@ public class MainMenuActivity extends Activity
 		});		
 		
 	
-		cmd_mudarPerfil.setOnClickListener(new OnClickListener()
-		{
-			
-			@Override
-			public void onClick(View arg0)
-			{
-				// TODO Auto-generated method stub
-				Intent intent = new Intent(MainMenuActivity.this, SelecionarPerfilActivity.class);
-				startActivity(intent);
-			}
-		});
-		
-
-		
-		mProgress = (ProgressBar) findViewById(R.id.progressBarInicializar);
-		mProgress.setVisibility(View.VISIBLE);
-		findViewById(R.id.lblCarregando).setVisibility(View.VISIBLE);
-		
-		// thread de carregamento inicial dos dados do aplicativo
-		new Thread(new Runnable()
-		{
-			
-			@Override
-			public void run()
-			{
-				// TODO Auto-generated method stub
-				carregarDadosIniciais();
-				
-				// acao pos carregamento
-				mHandler.post(new Runnable()
-				{
-					public void run()
-					{
-						mProgress.setVisibility(View.GONE);
-						findViewById(R.id.lblCarregando).setVisibility(View.GONE);
-						findViewById(R.id.cmdLaunchModoTouch).setVisibility(View.VISIBLE);
-						findViewById(R.id.cmdLaunchModoVarredura).setVisibility(View.VISIBLE);
-						findViewById(R.id.cmdLaunchMudarPerfil).setVisibility(View.VISIBLE);
-						
-						// abrindo formulario para teste
-//						Intent intent = new Intent(MainMenuActivity.this, FormularioAssocImagemSomActivity.class);
-//						startActivity(intent);
-					}
-				});
-			}
-		}).start();
-		
-	}
-	
-	private void carregarDadosIniciais()
-	{
-		// se não houver registros, inicializar o banco
-		AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(this);
-		
-		dao_ais.open();
-		if (!(dao_ais.regs_exist()))
-			Utils.inicializarBD(dao_ais);
-		dao_ais.close();
-		
-		(new FilesIO(this)).copiarArquivosXmlDeAssetsParaInternalStorage();
-		
-		//Utils.copiarArquivosXmlDeAssetsParaInternalStorage(this);
 	}
 	
 	@Override
@@ -180,5 +106,30 @@ public class MainMenuActivity extends Activity
 		getMenuInflater().inflate(R.menu.main_menu, menu);
 		return true;
 	}
+	
+	// trata os eventos ligados ao menu do action bar
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		Intent intent;
+		switch(item.getItemId())
+		{
+			case R.id.action_selecionar_perfil:
+				intent = new Intent(MainMenuActivity.this, SelecionarPerfilActivity.class);
+				startActivity(intent);				
+				break;
+			case R.id.action_gerenciar_imagens:
+				intent = new Intent(this, ListaImagensActivity.class);
+				startActivity(intent);				
+				break;
+			case R.id.action_gerenciar_categorias:
+				intent = new Intent(this, ListaCategoriasActivity.class);
+				startActivity(intent);
+				break;
+		}
+		
+		return false;
+		
+	}	
 
 }

@@ -16,30 +16,5 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/cmdLaunchModoVarreduraText"/>
-
-    <Button
-        android:id="@+id/cmdLaunchMudarPerfil"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/cmdLaunchMudarPerfilText"/>
-    
 	
-	<ProgressBar
-	    android:id="@+id/progressBarInicializar"
-	    style="?android:attr/progressBarStyleLarge"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:indeterminate="true"
-	    android:layout_gravity="center_horizontal"
-	    android:visibility="gone" />
-
-	<TextView
-	    android:id="@+id/lblCarregando"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:text="@string/texto_carregando"
-	    android:layout_gravity="center_horizontal"
-	    android:textAppearance="?android:attr/textAppearanceLarge"
-	    android:visibility="gone" />
-
 </LinearLayout>

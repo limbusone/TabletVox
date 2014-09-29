@@ -22,9 +22,9 @@ public class AssocImagemSomDAOSingleton
 	
 	private void inicializar()
 	{
-//		listaAssocImagemSom.add(new AssocImagemSom(1, "AssocImagemSom 1", "Autor 1"));
-//		listaAssocImagemSom.add(new AssocImagemSom(2, "AssocImagemSom 2", "Autor 2"));
-//		listaAssocImagemSom.add(new AssocImagemSom(3, "AssocImagemSom 3", "Autor 3"));
+		listaAssocImagemSom.add(new AssocImagemSom(1, "animais", "ANIMAIS", "ANIMAIS", "jpg", 'c', 0));
+		listaAssocImagemSom.add(new AssocImagemSom(2, "pessoas", "PESSOAS", "PESSOAS", "jpg", 'c', 0));
+		listaAssocImagemSom.add(new AssocImagemSom(3, "banheiro", "BANHEIR", "BANHEIR", "jpg", 'c', 0));
 	}
 	
 	public ArrayList<AssocImagemSom> getAssocImagemSoms() 

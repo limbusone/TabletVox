@@ -29,6 +29,10 @@
     <string name="cmdLaunchFormCategoria">Formulario Categoria</string>
     <string name="menu_settings">Settings</string>
     <string name="action_settings">Settings</string>
+    <string name="action_opcoes">Opções</string>
+    <string name="action_selecionar_perfil">Mudar Perfil</string>
+    <string name="action_gerenciar_imagens">Gerenciar Imagens</string>
+    <string name="action_gerenciar_categorias">Gerenciar Categorias</string>
     <string name="telas_pagina_title">Escolha a Página</string>
     <string name="pagina_telas_cadastro">Página</string>
     <string name="entrada_telas_cadastro">ID da imagem</string>
@@ -38,5 +42,7 @@
     <string name="itemPerfilDe">De:</string>
     <string name="blabla">blabla</string>
     <string name="title_activity_perfil_manage">PerfilManageActivity</string>
+    <string name="imagens_text">Imagens</string>
+    <string name="categorias_text">Categorias</string>
 
 </resources>

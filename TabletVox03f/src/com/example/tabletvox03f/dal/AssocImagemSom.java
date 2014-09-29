@@ -17,6 +17,18 @@ public class AssocImagemSom implements Parcelable
 	public AssocImagemSom()
 	{}
 	
+
+	public AssocImagemSom(int id, String desc, String titulo_imagem, String titulo_som, String ext, char tipo, int cmd) 
+	{
+		this.id				= id;
+		this.desc			= desc;
+		this.titulo_imagem 	= titulo_imagem;
+		this.titulo_som 	= titulo_som;
+		this.ext 			= ext;
+		this.tipo			= tipo;
+		this.cmd 			= cmd;
+	}	
+	
 	public AssocImagemSom(String desc, String titulo_imagem, String titulo_som, String ext, char tipo, int cmd) 
 	{
 		this.desc			= desc;

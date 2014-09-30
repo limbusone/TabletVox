@@ -105,6 +105,7 @@ public class CategoriaDAOSingleton
 	{
 		Categoria categoria = getCategoriaById(id);
 		categoria.setNome(categoriaNovo.getNome());
+		categoria.setAIS(categoriaNovo.getAIS());
 //		categoria.setAutor(categoriaNovo.getAutor());
 	}
 	

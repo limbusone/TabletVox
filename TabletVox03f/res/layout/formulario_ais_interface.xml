@@ -31,12 +31,12 @@
 	    android:id="@+id/btnUploadSom"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
-	    android:text="Selecionar arquivo de som..." />
+	    android:text="@string/selecione_som" />
 	<TextView
 	    android:id="@+id/textView3"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:text="Arquivo de som selecionado:"
+	    android:text="@string/som_selecionado"
 	    android:textAppearance="?android:attr/textAppearanceMedium"
 	    android:visibility="gone" />
 	<TextView
@@ -45,7 +45,7 @@
 	    android:layout_height="wrap_content"
 	    android:text=""
 	    android:textAppearance="?android:attr/textAppearanceSmall"
-	    android:visibility="gone" />    
+	    android:visibility="gone" />
     
     <TextView
         android:layout_width="wrap_content"

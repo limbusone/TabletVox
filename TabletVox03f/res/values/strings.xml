@@ -41,8 +41,14 @@
     <string name="texto_carregando">Carregando dados iniciais, aguarde um momento &#8230;</string>
     <string name="itemPerfilDe">De:</string>
     <string name="blabla">blabla</string>
+    <string name="som_selecionado">Arquivo de som selecionado:</string>
+    <string name="selecione_som">Selecionar arquivo de som &#8230;</string>
     <string name="title_activity_perfil_manage">PerfilManageActivity</string>
     <string name="imagens_text">Imagens</string>
     <string name="categorias_text">Categorias</string>
+    <string name="imagem_e_som_text">IMAGEM E SOM</string>
+    <string name="descricao_text">DESCRIÇÃO:</string>
+    <string name="nome_text">Nome</string>
+    <string name="selecione_uma_imagem_btn">Selecione uma Imagem</string>
 
 </resources>

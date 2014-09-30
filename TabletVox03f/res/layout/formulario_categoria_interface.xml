@@ -8,30 +8,52 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="IMAGEM E SOM"
+        android:text="@string/imagem_e_som_text"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#0099CC" />
 	<View
 	    android:layout_width="fill_parent"
 	    android:layout_height="0.1dp"
 	    android:background="#0099CC" />
-	<ImageButton
+	<Button 
+	    android:id="@+id/btnEscolherImagem"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:text="@string/selecione_uma_imagem_btn" />
+	<ImageView
 	    android:id="@+id/imgImagem"
 	    android:layout_width="96dp"
 	    android:layout_height="96dp"
 	    android:layout_gravity="center_horizontal"
-	    android:contentDescription="Imagem"
+	    android:contentDescription="@string/blabla"
+	    android:visibility="gone"
 	    />
-	
+	<TextView
+	    android:id="@+id/textView3"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="@string/som_selecionado"
+	    android:textAppearance="?android:attr/textAppearanceMedium"
+	    android:visibility="gone" />
+	<TextView
+	    android:id="@+id/lblSomSel"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text=""
+	    android:textAppearance="?android:attr/textAppearanceSmall"
+	    android:visibility="gone" />
+	    
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DESCRIÇÃO"
+        android:text="@string/descricao_text"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
+        android:layout_marginStart="5dp"
         android:layout_marginLeft="5dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#0099CC" />
@@ -46,7 +68,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Nome" >
+        android:hint="@string/nome_text" >
 
         <requestFocus />
     </EditText>

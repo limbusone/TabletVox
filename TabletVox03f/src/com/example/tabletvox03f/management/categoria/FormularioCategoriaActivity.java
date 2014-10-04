@@ -1,15 +1,20 @@
 package com.example.tabletvox03f.management.categoria;
 
+import java.util.ArrayList;
+
 import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tabletvox03f.Erro;
+import com.example.tabletvox03f.ImgItem;
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.Utils;
 import com.example.tabletvox03f.dal.AssocImagemSom;
@@ -23,6 +28,8 @@ public class FormularioCategoriaActivity extends FormularioBaseActivity
 {
 	
 	private Categoria cat;
+	
+	private RelativeLayout laySom;
 	
 	private ImageView imgImagem;
 	
@@ -40,6 +47,33 @@ public class FormularioCategoriaActivity extends FormularioBaseActivity
 			FormularioCategoriaActivity thisContext = FormularioCategoriaActivity.this;
 			Intent intent = new Intent(thisContext, SelecionarImagemActivity.class);
 			thisContext.startActivityForResult(intent, 1);
+		
+		}
+	};
+	
+	private OnClickListener tocarSomEvento = new OnClickListener()
+	{
+		
+		@Override
+		public void onClick(View v)
+		{
+			FormularioCategoriaActivity thisContext = FormularioCategoriaActivity.this;
+			ImgItem imgItem = new ImgItem(thisContext);
+			imgItem.setAssocImagemSom(ais_selecionado);
+			imgItem.tocarSom(thisContext);
+		}
+	};
+	
+	private OnClickListener definirImagensEvento = new OnClickListener()
+	{
+		
+		@Override
+		public void onClick(View arg0)
+		{
+			FormularioCategoriaActivity thisContext = FormularioCategoriaActivity.this;
+			Intent intent = new Intent(thisContext, ListaImagensCategoriaActivity.class);
+			intent.putExtra("categoria", cat);
+			thisContext.startActivityForResult(intent, 1);
 		}
 	};
 	
@@ -56,9 +90,17 @@ public class FormularioCategoriaActivity extends FormularioBaseActivity
 	{
 		imgImagem = (ImageView) findViewById(R.id.imgImagem);
 		lblSomSel = (TextView) findViewById(R.id.lblSomSel);
+		laySom	  = (RelativeLayout) findViewById(R.id.laySom);
 		
 		Button btnEscolherImagem = (Button) findViewById(R.id.btnEscolherImagem);
 		btnEscolherImagem.setOnClickListener(escolherImagemEvento);
+		
+		ImageButton btnTocar = (ImageButton) findViewById(R.id.btnTocar);
+		btnTocar.setOnClickListener(tocarSomEvento);
+		
+		Button btnDefinirImagens = (Button) findViewById(R.id.btnDefinirImagens);
+		btnDefinirImagens.setOnClickListener(definirImagensEvento);
+		
 	}
 	
 	@Override
@@ -174,20 +216,32 @@ public class FormularioCategoriaActivity extends FormularioBaseActivity
 		// selecionar uma imagem cancelado
 		if (resultCode == 2)
 			Toast.makeText(this, "Cancelado!", Toast.LENGTH_SHORT).show();
+		
+		// definir imagens com sucesso
+		if (resultCode == 3)
+		{
+			ArrayList<AssocImagemSom> imagens = data.getParcelableArrayListExtra("imagens");
+			cat.setImagens(imagens);
+		}
+		
+		// definir imagens cancelado
+		if (resultCode == 4);
 	}
 	
 	private void atribuirDadosAISAosControles(AssocImagemSom ais)
 	{
-		FilesIO fio = new FilesIO();
-		
-		imgImagem.setImageDrawable(fio.getImgItemDrawableFromInternalStorageOrAssets(ais));
-		
-		lblSomSel.setText(ais.getTituloSom());
-		
-		imgImagem.setVisibility(View.VISIBLE);
-		
-		lblSomSel.setVisibility(View.VISIBLE);
-		
+		if (!(ais == null))
+		{
+			FilesIO fio = new FilesIO(this);
+
+			imgImagem.setImageDrawable(fio.getImgItemDrawableFromInternalStorageOrAssets(ais));
+
+			lblSomSel.setText(ais.getTituloSom() + "." + ais.getExt());
+			
+			imgImagem.setVisibility(View.VISIBLE);
+
+			laySom.setVisibility(View.VISIBLE);
+		}
 	}
 	
 	private void retirarErros()

@@ -14,9 +14,9 @@ import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.Utils;
 import com.example.tabletvox03f.dal.Perfil;
 import com.example.tabletvox03f.dal.PerfilDAOSingleton;
-import com.example.tabletvox03f.management.ListaManageActivity;
+import com.example.tabletvox03f.management.ListaComBuscaManageActivity;
 
-public class SelecionarPerfilActivity extends ListaManageActivity
+public class SelecionarPerfilActivity extends ListaComBuscaManageActivity
 {
 
 	@Override

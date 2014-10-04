@@ -12,9 +12,9 @@ import android.widget.BaseAdapter;
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.dal.AssocImagemSom;
 import com.example.tabletvox03f.dal.AssocImagemSomDAOSingleton;
-import com.example.tabletvox03f.management.ListaManageActivity;
+import com.example.tabletvox03f.management.ListaComBuscaManageActivity;
 
-public class ListaImagensActivity extends ListaManageActivity
+public class ListaImagensActivity extends ListaComBuscaManageActivity
 {
 
 	@Override
@@ -27,7 +27,7 @@ public class ListaImagensActivity extends ListaManageActivity
 	@Override
 	protected BaseAdapter carregarLista()
 	{
-		ArrayList<AssocImagemSom> lista = AssocImagemSomDAOSingleton.getInstance().getAssocImagemSoms();
+		ArrayList<AssocImagemSom> lista = AssocImagemSomDAOSingleton.getInstance().getImagens();
 		
 		return (new ItemAssocImagemSomAdapter(this, (ArrayList<AssocImagemSom>) lista.clone()));
 	}
@@ -35,7 +35,7 @@ public class ListaImagensActivity extends ListaManageActivity
 	protected void carregarLista(ArrayList<AssocImagemSom> imagens)
 	{
 		lv.setAdapter(new ItemAssocImagemSomAdapter(this, (ArrayList<AssocImagemSom>) imagens.clone()));
-	}	
+	}
 
 	@Override
 	protected void acaoDoEventoItemClick(AdapterView<?> parent, View v,

@@ -1,12 +1,16 @@
 package com.example.tabletvox03f.management.assocImagemSom;
 
+import java.util.ArrayList;
+
 import android.content.Intent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.dal.AssocImagemSom;
+import com.example.tabletvox03f.dal.AssocImagemSomDAOSingleton;
 
 public class SelecionarImagemActivity extends ListaImagensActivity
 {
@@ -24,6 +28,19 @@ public class SelecionarImagemActivity extends ListaImagensActivity
 		finish();
 	}
 	
+	@Override
+	protected BaseAdapter carregarLista()
+	{
+		ArrayList<AssocImagemSom> lista = AssocImagemSomDAOSingleton.getInstance().getImagens();
+		
+		return (new ItemSimplesAssocImagemSomAdapter(this, (ArrayList<AssocImagemSom>) lista.clone()));
+	}
+	
+	@Override
+	protected void carregarLista(ArrayList<AssocImagemSom> imagens)
+	{
+		lv.setAdapter(new ItemSimplesAssocImagemSomAdapter(this, (ArrayList<AssocImagemSom>) imagens.clone()));
+	}	
 	
 	@Override
 	protected void acaoDosEventosDoMenu(MenuItem item)

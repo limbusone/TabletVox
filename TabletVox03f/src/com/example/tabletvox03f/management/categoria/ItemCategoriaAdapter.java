@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.dal.AssocImagemSom;
 import com.example.tabletvox03f.dal.Categoria;
+import com.example.tabletvox03f.dal.CategoriaDAOSingleton;
 import com.example.tabletvox03f.dal.FilesIO;
 
 public class ItemCategoriaAdapter extends BaseAdapter
@@ -153,13 +154,15 @@ public class ItemCategoriaAdapter extends BaseAdapter
 					@Override
 					public void onClick(DialogInterface dialog, int which)
 					{
-						//PerfilDAOSingleton.getInstance().excluirPerfil(perfil.getId());
 						
 						Toast.makeText(ItemCategoriaAdapter.this.mContext, 
 						"Excluido com sucesso! ID: " + Integer.toString(categoria.getId()), 
 						Toast.LENGTH_SHORT).show();
 						
 						removeItem(categoria);
+						
+						CategoriaDAOSingleton.getInstance().excluirCategoria(categoria.getId());
+						
 						// refresh na lista
 						ItemCategoriaAdapter.this.refresh();
 					}

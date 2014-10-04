@@ -12,9 +12,9 @@ import android.widget.BaseAdapter;
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.dal.Categoria;
 import com.example.tabletvox03f.dal.CategoriaDAOSingleton;
-import com.example.tabletvox03f.management.ListaManageActivity;
+import com.example.tabletvox03f.management.ListaComBuscaManageActivity;
 
-public class ListaCategoriasActivity extends ListaManageActivity
+public class ListaCategoriasActivity extends ListaComBuscaManageActivity
 {
 
 	@Override

@@ -106,7 +106,7 @@
         </activity>
         
         <activity
-            android:name="com.example.tabletvox03f.management.assocImagemSom.SelecionarImagemActiviy"
+            android:name="com.example.tabletvox03f.management.assocImagemSom.SelecionarImagemActivity"
             android:label="@string/title_activity_selecionar_imagem">
         </activity>
         

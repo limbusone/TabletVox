@@ -14,7 +14,7 @@ import com.example.tabletvox03f.dal.Categoria;
 import com.example.tabletvox03f.dal.Perfil;
 import com.example.tabletvox03f.management.categoria.ItemCategoriaAdapter;
 
-public class ListaCategoriasDoPerfilActivity extends ListaManageActivity
+public class ListaCategoriasDoPerfilActivity extends ListaComBuscaManageActivity
 {
 
 	private Perfil perfil; 

@@ -18,15 +18,16 @@ import android.widget.Toast;
 
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.dal.AssocImagemSom;
+import com.example.tabletvox03f.dal.AssocImagemSomDAOSingleton;
 import com.example.tabletvox03f.dal.FilesIO;
 
 
 public class ItemAssocImagemSomAdapter extends BaseAdapter
 {
 
-	private Context mContext;
-	private ArrayList<AssocImagemSom> imagens;
-	private LayoutInflater inflator;
+	protected Context mContext;
+	protected ArrayList<AssocImagemSom> imagens;
+	protected LayoutInflater inflator;
 	
 	public ItemAssocImagemSomAdapter(Context context, ArrayList<AssocImagemSom> lista)
 	{
@@ -114,13 +115,15 @@ public class ItemAssocImagemSomAdapter extends BaseAdapter
 					@Override
 					public void onClick(DialogInterface dialog, int which)
 					{
-						//PerfilDAOSingleton.getInstance().excluirPerfil(perfil.getId());
 						
 						Toast.makeText(ItemAssocImagemSomAdapter.this.mContext, 
 						"Excluido com sucesso! ID: " + Integer.toString(ais.getId()), 
 						Toast.LENGTH_SHORT).show();
 						
 						removeItem(ais);
+						
+						AssocImagemSomDAOSingleton.getInstance().excluirAssocImagemSom(ais.getId());
+						
 						// refresh na lista
 						ItemAssocImagemSomAdapter.this.refresh();
 					}
@@ -177,7 +180,17 @@ public class ItemAssocImagemSomAdapter extends BaseAdapter
 	public void removeItem(AssocImagemSom ais)
 	{
 		imagens.remove(ais);
-	}	
+	}
+	
+	public void addItem(AssocImagemSom ais)
+	{
+		imagens.add(ais);
+	}
+	
+	public ArrayList<AssocImagemSom> getItems()
+	{
+		return imagens;
+	}
 	
 	public void refresh()
 	{

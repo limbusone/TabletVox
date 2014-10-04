@@ -23,9 +23,6 @@ public class FilesIO
 {
 	private Context activeContext;
 	
-	public FilesIO()
-	{}
-	
 	public FilesIO(Context c)
 	{
 		activeContext = c;
@@ -209,7 +206,11 @@ public class FilesIO
 			// aqui recupera-se a imagem em si
 			// a imagem está sendo recuperada da pasta assets/imagens
 			// ou da pasta imagens em internal storage			
-			File f_from_internal_storage = new File(mContext.getDir("imagens", Context.MODE_PRIVATE).getPath() + "/" +  ais.getTituloImagem() + ais.getExt());
+			File f_from_internal_storage = new File
+			(
+				mContext.getDir("imagens", Context.MODE_PRIVATE).getPath() + 
+				"/" +  ais.getTituloImagem() + "." + ais.getExt()
+			);
 
 			InputStream ims = (f_from_internal_storage.exists()) 
 							   ? new FileInputStream(f_from_internal_storage) 

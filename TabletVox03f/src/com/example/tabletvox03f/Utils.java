@@ -77,18 +77,29 @@ public class Utils
 	
 	public static void carregarDadosIniciais(Context context)
 	{
-		// se não houver registros, inicializar o banco
+		// inicializar o banco
 		AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(context);
 		
 		dao_ais.open();
-		if (!(dao_ais.regs_exist()))
-			Utils.inicializarBD(dao_ais);
+		Utils.inicializarBD(dao_ais);
 		dao_ais.close();
 		
 		(new FilesIO(context)).copiarArquivosXmlDeAssetsParaInternalStorage();
 		
-		//Utils.copiarArquivosXmlDeAssetsParaInternalStorage(this);
-	}	
+	}
+	
+	public static boolean isAppCarregado(Context context)
+	{
+		boolean retorno = true;
+		AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(context);
+		dao_ais.open();
+		
+		// verifica se existem registros no banco
+		retorno = dao_ais.regs_exist();
+			
+		
+		return retorno;
+	}
 	
 	
 	public static void inicializarBDSingleton()

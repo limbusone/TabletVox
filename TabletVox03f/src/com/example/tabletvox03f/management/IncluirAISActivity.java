@@ -232,7 +232,7 @@ public class IncluirAISActivity extends Activity
 //		TextView lblImgSel 		 = (TextView) findViewById(R.id.lblImgSel);
 //		TextView lblSomSel 		 = (TextView) findViewById(R.id.lblSomSel);
 		
-		FilesIO fio = new FilesIO();
+		FilesIO fio = new FilesIO(this);
 		
 		// imagem não selecionada
 		if ((caminho_origem_img.length() == 0) && (caminho_destino_img.length() == 0))

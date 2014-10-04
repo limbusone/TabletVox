@@ -17,31 +17,44 @@ public class SplashScreenActivity extends Activity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.loading_interface);
 		
-		// thread de carregamento inicial dos dados do aplicativo
-		new Thread(new Runnable()
+		// carrega dados iniciais do aplicativo caso este não esteja já carregado
+		if (!(Utils.isAppCarregado(this)))
 		{
-			
-			@Override
-			public void run()
+			setContentView(R.layout.loading_interface);
+
+			// thread de carregamento inicial dos dados do aplicativo
+			new Thread(new Runnable()
 			{
-				Utils.carregarDadosIniciais(SplashScreenActivity.this);
-				
-				// acao pos carregamento
-				mHandler.postDelayed(new Runnable()
+
+				@Override
+				public void run()
 				{
-					public void run()
+					Utils.carregarDadosIniciais(SplashScreenActivity.this);
+
+					// acao pos carregamento
+					mHandler.postDelayed(new Runnable()
 					{
-						// abrindo main menu
-						Intent intent = new Intent(SplashScreenActivity.this, MainMenuActivity.class);
-						startActivity(intent);
-						
-						finish();
-					}
-				}, SPLASH_TIME_OUT);
-			}
-		}).start();		
+						public void run()
+						{
+							// abrindo menu principal
+							SplashScreenActivity.this.abrirMainMenu();
+						}
+					}, SPLASH_TIME_OUT);
+				}
+			}).start();
+		}
+		else // caso já esteja carregado, simplesmente vai para o menu principal
+			abrirMainMenu();
+
+	}
+	
+	private void abrirMainMenu()
+	{
+		Intent intent = new Intent(this, MainMenuActivity.class);
+		startActivity(intent);
+		
+		finish();
 	}
 	
 }

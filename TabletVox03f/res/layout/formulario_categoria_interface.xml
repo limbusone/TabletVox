@@ -31,20 +31,40 @@
 	    android:contentDescription="@string/blabla"
 	    android:visibility="gone"
 	    />
-	<TextView
-	    android:id="@+id/textView3"
-	    android:layout_width="wrap_content"
+	
+	<RelativeLayout 
+	    android:id="@+id/laySom"
+	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:text="@string/som_selecionado"
-	    android:textAppearance="?android:attr/textAppearanceMedium"
-	    android:visibility="gone" />
-	<TextView
-	    android:id="@+id/lblSomSel"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:text=""
-	    android:textAppearance="?android:attr/textAppearanceSmall"
-	    android:visibility="gone" />
+	    android:padding="6dip"
+	    android:visibility="gone">
+
+	    <ImageButton
+	        android:id="@+id/btnTocar"
+	        android:layout_width="wrap_content"
+			android:layout_height="58dp"
+	        android:layout_alignParentRight="true"
+			android:layout_centerInParent="true"	        
+	        android:src="@android:drawable/ic_media_play"
+	        android:contentDescription="@string/blabla" />
+	    	    	    
+		<TextView
+		    android:id="@+id/textView3"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentLeft="true"
+		    android:text="@string/som_selecionado"
+		    android:textAppearance="?android:attr/textAppearanceMedium"/>
+		<TextView
+		    android:id="@+id/lblSomSel"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="@string/blabla"
+		    android:textAppearance="?android:attr/textAppearanceSmall"
+		    android:layout_alignParentLeft="true"
+		    android:layout_alignBottom="@id/btnTocar"/>
+		
+	</RelativeLayout>
 	    
     <TextView
         android:id="@+id/textView2"
@@ -72,6 +92,15 @@
 
         <requestFocus />
     </EditText>
+    
+	<Button 
+	    android:id="@+id/btnDefinirImagens"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:text="@string/definir_imagens" />
+	
+	
+    
 
 
 </LinearLayout>

@@ -27,7 +27,7 @@ public class AssocImagemSomDAOSingleton
 		listaAssocImagemSom.add(new AssocImagemSom(3, "banheiro", "BANHEIR", "BANHEIR", "jpg", 'c', 0));
 	}
 	
-	public ArrayList<AssocImagemSom> getAssocImagemSoms() 
+	public ArrayList<AssocImagemSom> getImagens() 
 	{
 		return listaAssocImagemSom;
 	}

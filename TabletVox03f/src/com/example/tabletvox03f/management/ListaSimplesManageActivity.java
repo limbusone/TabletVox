@@ -16,37 +16,9 @@ import android.widget.TextView;
 
 import com.example.tabletvox03f.R;
 
-public abstract class ListaManageActivity extends Activity
+public abstract class ListaSimplesManageActivity extends Activity
 {
 	protected ListView lv;
-	protected EditText txtBusca;
-	protected TextView lblNumEncontrados;
-	protected TextView lblEncontrados;
-	
-	private TextWatcher buscarEvent = new TextWatcher()
-	{
-		
-		@Override
-		public void onTextChanged(CharSequence s, int start, int before, int count)
-		{
-			
-		}
-		
-		@Override
-		public void beforeTextChanged(CharSequence s, int start, int count,
-				int after)
-		{
-
-			
-		}
-		
-		@Override
-		public void afterTextChanged(Editable s)
-		{
-			ListaManageActivity.this.acaoDoEventoBuscar(s);
-			atualizarLblNumEncontrados(lv.getAdapter().getCount());
-		}
-	};	
 	
 	private OnItemClickListener itemClick = new OnItemClickListener()
 	{
@@ -55,7 +27,7 @@ public abstract class ListaManageActivity extends Activity
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 				long arg3)
 		{
-			ListaManageActivity.this.acaoDoEventoItemClick(arg0, arg1, arg2, arg3);
+			ListaSimplesManageActivity.this.acaoDoEventoItemClick(arg0, arg1, arg2, arg3);
 		}
 	};
 	
@@ -68,13 +40,6 @@ public abstract class ListaManageActivity extends Activity
 		// carregar evento do click em um item da lista
 		lv = (ListView) findViewById(R.id.listView1);
 		lv.setOnItemClickListener(itemClick);
-		
-		// carregar evento do txtBusca
-		txtBusca = (EditText) findViewById(R.id.txtBusca);
-		txtBusca.addTextChangedListener(buscarEvent);
-		
-		lblEncontrados 		= (TextView) findViewById(R.id.lblEncontrados);
-		lblNumEncontrados 	= (TextView) findViewById(R.id.lblNumEncontrados);
 		
 		onCreateFilho();
 	}
@@ -90,27 +55,6 @@ public abstract class ListaManageActivity extends Activity
 	protected void carregarListaPai()
 	{
 		lv.setAdapter(carregarLista());
-		showLblNumEncontrados(lv.getAdapter().getCount());
-	}
-	
-	protected void showLblNumEncontrados(int num)
-	{
-		lblNumEncontrados.setVisibility(View.VISIBLE);
-		lblEncontrados.setVisibility(View.VISIBLE);
-		
-		atualizarLblNumEncontrados(num);
-		
-	}
-	
-	protected void hideLblNumEncontrados()
-	{
-		lblNumEncontrados.setVisibility(View.INVISIBLE);
-		lblEncontrados.setVisibility(View.INVISIBLE);
-	}
-	
-	protected void atualizarLblNumEncontrados(int num)
-	{
-		lblNumEncontrados.setText(Integer.toString(num));
 	}
 	
 	// trata os eventos ligados ao menu do action bar
@@ -137,8 +81,6 @@ public abstract class ListaManageActivity extends Activity
 	protected abstract void acaoDoEventoItemClick(AdapterView<?> parent, View v, int position, long arg3);
 	
 	protected abstract void acaoDosEventosDoMenu(MenuItem item);
-	
-	protected abstract void acaoDoEventoBuscar(Editable s);
 	
 	protected abstract String getOptionMenuTitle();
 	

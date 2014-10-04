@@ -1,4 +1,4 @@
-package com.example.tabletvox03f.management.categoria;
+package com.example.tabletvox03f.management.assocImagemSom;
 
 import java.util.ArrayList;
 
@@ -11,11 +11,11 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 
 import com.example.tabletvox03f.R;
-import com.example.tabletvox03f.dal.Categoria;
-import com.example.tabletvox03f.dal.CategoriaDAOSingleton;
+import com.example.tabletvox03f.dal.AssocImagemSom;
+import com.example.tabletvox03f.dal.AssocImagemSomDAOSingleton;
 import com.example.tabletvox03f.management.ListaComBuscaManageActivity;
 
-public class SelecionarCategoriasActivity extends ListaComBuscaManageActivity
+public class SelecionarImagensActivity extends ListaComBuscaManageActivity
 {
 
 	@Override
@@ -35,14 +35,14 @@ public class SelecionarCategoriasActivity extends ListaComBuscaManageActivity
 	@Override
 	protected BaseAdapter carregarLista()
 	{
-		ArrayList<Categoria> lista = CategoriaDAOSingleton.getInstance().getCategorias();
+		ArrayList<AssocImagemSom> lista = AssocImagemSomDAOSingleton.getInstance().getImagens();
 		
-		return (new ItemSelectCategoriaAdapter(this, (ArrayList<Categoria>) lista.clone()));
+		return (new ItemSelectAssocImagemSomAdapter(this, (ArrayList<AssocImagemSom>) lista.clone()));
 	}
 	
-	private void carregarLista(ArrayList<Categoria> categorias)
+	private void carregarLista(ArrayList<AssocImagemSom> categorias)
 	{
-		lv.setAdapter(new ItemSelectCategoriaAdapter(this, categorias));
+		lv.setAdapter(new ItemSelectAssocImagemSomAdapter(this, categorias));
 	}
 
 	@Override
@@ -57,17 +57,17 @@ public class SelecionarCategoriasActivity extends ListaComBuscaManageActivity
 	@Override
 	protected void acaoDosEventosDoMenu(MenuItem item)
 	{
-		// resgata array de selecionados do adapter e manda uma cópia para o formulario 
+		// resgata array de selecionados do adapter e manda uma cópia para a tela de lista de imagens da categoria 
 		if (item.getItemId() == R.id.action_concluir)
 		{
-			ArrayList<Categoria> selecionados = ((ItemSelectCategoriaAdapter)lv.getAdapter()).getSelecionados();
+			ArrayList<AssocImagemSom> selecionados = ((ItemSelectAssocImagemSomAdapter)lv.getAdapter()).getSelecionados();
 			Intent intent = new Intent();
-			intent.putParcelableArrayListExtra("selecionados", (ArrayList<Categoria>) selecionados.clone());
+			intent.putParcelableArrayListExtra("selecionados", (ArrayList<AssocImagemSom>) selecionados.clone());
 			this.setResult(1, intent);
 			finish();
 			
 		}
-		// cancela a ação e volta pro formulario
+		// cancela a ação e volta para tela de lista de imagens da categoria
 		else if (item.getItemId() == R.id.action_cancelar)
 		{
 			this.setResult(2);
@@ -79,7 +79,7 @@ public class SelecionarCategoriasActivity extends ListaComBuscaManageActivity
 	protected void acaoDoEventoBuscar(Editable s)
 	{
 		String texto_para_pesquisa = s.toString();
-		carregarLista(CategoriaDAOSingleton.getInstance().getCategoriasByNome(texto_para_pesquisa));
+		carregarLista(AssocImagemSomDAOSingleton.getInstance().getImagensByDesc(texto_para_pesquisa));
 	}
 
 	@Override

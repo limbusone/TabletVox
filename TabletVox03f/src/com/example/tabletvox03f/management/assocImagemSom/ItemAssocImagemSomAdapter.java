@@ -156,7 +156,6 @@ public class ItemAssocImagemSomAdapter extends BaseAdapter
 	@Override
 	public int getCount()
 	{
-		// TODO Auto-generated method stub
 		return imagens.size();
 	}
 
@@ -189,7 +188,7 @@ public class ItemAssocImagemSomAdapter extends BaseAdapter
 	
 	public ArrayList<AssocImagemSom> getItems()
 	{
-		return imagens;
+		return this.imagens;
 	}
 	
 	public void refresh()

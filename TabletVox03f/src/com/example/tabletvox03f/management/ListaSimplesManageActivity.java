@@ -35,7 +35,7 @@ public abstract class ListaSimplesManageActivity extends Activity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.lista_c_busca_interface);
+		setContentView(R.layout.lista_interface);
 		
 		// carregar evento do click em um item da lista
 		lv = (ListView) findViewById(R.id.listView1);

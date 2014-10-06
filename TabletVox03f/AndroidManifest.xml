@@ -110,6 +110,15 @@
             android:label="@string/title_activity_selecionar_imagem">
         </activity>
         
+        <activity
+            android:name="com.example.tabletvox03f.management.assocImagemSom.SelecionarImagensActivity"
+            android:label="@string/title_activity_selecionar_imagem">
+        </activity>
+        
+        <activity
+            android:name="com.example.tabletvox03f.management.categoria.ListaImagensCategoriaActivity"
+            android:label="@string/title_activity_lista_imagens_categoria">
+        </activity>
 
     </application>
 

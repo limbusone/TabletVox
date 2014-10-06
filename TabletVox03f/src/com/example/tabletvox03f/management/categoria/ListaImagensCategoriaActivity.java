@@ -29,6 +29,8 @@ public class ListaImagensCategoriaActivity extends ListaSimplesManageActivity
 		categoria = (Categoria) intent.getParcelableExtra("categoria");
 		if (categoria.getImagens() == null)
 			categoria.setImagens(new ArrayList<AssocImagemSom>());
+		
+		carregarListaPai();
 	}
 	
 	@Override
@@ -57,8 +59,8 @@ public class ListaImagensCategoriaActivity extends ListaSimplesManageActivity
 		{
 		case R.id.action_concluir:
 			ArrayList<AssocImagemSom> imagens = ((ItemSimplesAssocImagemSomAdapter)lv.getAdapter()).getItems();
-			intent.putParcelableArrayListExtra("imagens", (ArrayList<Categoria>) imagens.clone());			
-			this.setResult(3);
+			intent.putParcelableArrayListExtra("imagens", (ArrayList<AssocImagemSom>) imagens.clone());			
+			this.setResult(3, intent);
 			finish();
 			break;
 		case R.id.action_add:
@@ -74,13 +76,6 @@ public class ListaImagensCategoriaActivity extends ListaSimplesManageActivity
 
 	}
 
-	// recarregar/carregar a lista ao voltar para esse activity
-	@Override
-	protected void onResume()
-	{
-		onResumeSuper();
-	}
-	
 	@Override
 	protected String getOptionMenuTitle()
 	{

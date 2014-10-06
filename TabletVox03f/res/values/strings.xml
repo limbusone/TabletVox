@@ -18,6 +18,8 @@
     <string name="title_activity_lista_categorias">Categorias</string>
     <string name="title_activity_selecionar_imagem">Selecione uma imagem</string>
     <string name="title_activity_lista_imagens">Imagens</string>
+    <string name="title_activity_selecionar_imagens">Selecione as imagens</string>
+    <string name="title_activity_lista_imagens_categoria">Imagens da categoria</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_title">Menu Principal</string>
     <string name="cmdLaunchModoTouchText">Modo Touch</string>
@@ -51,5 +53,6 @@
     <string name="nome_text">Nome</string>
     <string name="selecione_uma_imagem_btn">Selecione uma Imagem</string>
     <string name="definir_imagens">Definir Imagens</string>
+    
 
 </resources>

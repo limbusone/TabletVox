@@ -47,7 +47,7 @@ public class ItemSelectAssocImagemSomAdapter extends ItemAssocImagemSomAdapter
 			ViewHolder viewHolder 		= new ViewHolder();
 			viewHolder.checkbox			= (CheckBox) 	view.findViewById(R.id.checkBox);
 			viewHolder.imgv				= (ImageView) 	view.findViewById(R.id.imgItem);
-			viewHolder.lblDesc = (TextView) 	view.findViewById(R.id.lblDesc);
+			viewHolder.lblDesc 			= (TextView) 	view.findViewById(R.id.lblDesc);
 			
 			// adicionando ou excluindo da lista de selecionados conforme estado do checkbox
 			viewHolder.checkbox.setOnClickListener(new OnClickListener()

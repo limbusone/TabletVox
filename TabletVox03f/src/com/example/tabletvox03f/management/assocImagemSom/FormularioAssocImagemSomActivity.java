@@ -11,10 +11,12 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tabletvox03f.Erro;
+import com.example.tabletvox03f.ImgItem;
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.Utils;
 import com.example.tabletvox03f.dal.AssocImagemSom;
@@ -43,13 +45,41 @@ public class FormularioAssocImagemSomActivity extends FormularioBaseActivity
 	
 	private AssocImagemSom old_ais;
 	
+	private boolean isSomChanged; 
 	
+	private OnClickListener tocarSomEvento = new OnClickListener()
+	{
+		
+		@Override
+		public void onClick(View v)
+		{
+			FormularioAssocImagemSomActivity thisContext = FormularioAssocImagemSomActivity.this;
+			ImgItem imgItem = new ImgItem(thisContext);
+			
+			if (tipo_form == 1) 
+			{
+				// se o form for tipo editar
+				
+				// se o usuario não trocou o som
+				if (!isSomChanged)
+				{
+					imgItem.setAssocImagemSom(ais);
+					imgItem.tocarSom(thisContext);
+				}
+				else
+					imgItem.tocarSom(caminho_origem_som);
+			}
+			else
+				// se o form for tipo incluir
+				imgItem.tocarSom(caminho_origem_som);
+		}
+	};
 
 	@Override
 	protected int[] getDadosForm()
 	{
 		int[] dados = {R.layout.formulario_ais_interface, R.menu.um_action_salvar, 
-				R.string.title_activity_incluir_ais, R.string.title_activity_incluir_ais};
+				R.string.title_activity_criar_imagem, R.string.title_activity_editar_imagem};
 		return dados;
 	}	
 	
@@ -67,7 +97,6 @@ public class FormularioAssocImagemSomActivity extends FormularioBaseActivity
 			@Override
 			public void onClick(View arg0)
 			{
-				// TODO Auto-generated method stub
 				current_file_code = REQUEST_CODE_PICK_IMG;
 				openFile();
 			}
@@ -83,13 +112,17 @@ public class FormularioAssocImagemSomActivity extends FormularioBaseActivity
 				current_file_code = REQUEST_CODE_PICK_SOUND;
 				openFile();
 			}
-		});		
+		});
+		
+		ImageButton btnTocar = (ImageButton) findViewById(R.id.btnTocar);
+		btnTocar.setOnClickListener(tocarSomEvento);
+		
+		isSomChanged = false;
 	}
 	
 	@Override
 	protected void initCriarForm()
 	{
-		// TODO Auto-generated method stub
 		ais = new AssocImagemSom();
 		caminho_origem_img = caminho_origem_som = caminho_destino_img = caminho_destino_som = "";
 	}
@@ -97,7 +130,13 @@ public class FormularioAssocImagemSomActivity extends FormularioBaseActivity
 	@Override
 	protected void initEditarForm(Intent intent)
 	{
-		EditText txtDesc = (EditText) findViewById(R.id.txtDesc);
+		EditText txtDesc 		 = (EditText) findViewById(R.id.txtDesc);
+		RelativeLayout laySom 	 = (RelativeLayout) findViewById(R.id.laySom);
+		TextView lblSomSel 		 = (TextView) findViewById(R.id.lblSomSel);
+		ImageButton	btnUploadImg = (ImageButton) findViewById(R.id.btnUploadImg);
+		//CheckBox chkIsCategoria	 = (CheckBox) findViewById(R.id.chkIsCategoria);
+		
+		FilesIO fio = new FilesIO(this);
 		
 		ais = intent.getParcelableExtra("ais");
 		
@@ -107,12 +146,20 @@ public class FormularioAssocImagemSomActivity extends FormularioBaseActivity
 		caminho_destino_img = ais.getTituloImagem() + "." + ais.getExt();
 		caminho_destino_som = ais.getTituloSom() + "." + Utils.EXTENSAO_ARQUIVO_SOM;
 		
+		btnUploadImg.setImageDrawable(fio.getImgItemDrawableFromInternalStorageOrAssets(ais));
+		lblSomSel.setText(caminho_destino_som);
+		laySom.setVisibility(View.VISIBLE);
+		
+//		if (ais.getTipo() == 'c')
+//			chkIsCategoria.setChecked(true);
+			
 	}
 
 	@Override
 	protected void incluir()
 	{
-		EditText txtDesc = (EditText) findViewById(R.id.txtDesc);
+		EditText txtDesc 		 = (EditText) findViewById(R.id.txtDesc);
+//		CheckBox chkIsCategoria	 = (CheckBox) findViewById(R.id.chkIsCategoria);
 //		RadioButton optSubs = (RadioButton) findViewById(R.id.optSubs);
 //		RadioButton optVerb = (RadioButton) findViewById(R.id.optVerb);
 
@@ -123,6 +170,7 @@ public class FormularioAssocImagemSomActivity extends FormularioBaseActivity
 		ais.setTituloImagem(fio.getNomeDoArquivoSemExtensao(caminho_destino_img));
 		ais.setTituloSom(fio.getNomeDoArquivoSemExtensao(caminho_destino_som));
 		ais.setExt(fio.getExtensaoDoArquivo(caminho_destino_img));
+		//ais.setTipo((chkIsCategoria.isChecked()) ? 'c' : 'n');
 //		ais.setTipo((optSubs.isChecked()) ? 'n' : optVerb.isChecked()? 'v' : 'c');		
 		ais.setCmd(0);
 		ais.setAtalho(false);
@@ -154,11 +202,13 @@ public class FormularioAssocImagemSomActivity extends FormularioBaseActivity
 //			dao_ais.create(ais);
 //			dao_ais.close();
 			
-			Toast.makeText(this, "Inclusão bem sucedida!", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(this, "Inclusão bem sucedida!", Toast.LENGTH_SHORT).show();
+			
+			this.setResult(1);
+			finish();
 		}
 		catch (IOException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
 	}
@@ -167,6 +217,7 @@ public class FormularioAssocImagemSomActivity extends FormularioBaseActivity
 	protected void editar()
 	{
 		EditText txtDesc = (EditText) findViewById(R.id.txtDesc);
+//		CheckBox chkIsCategoria	 = (CheckBox) findViewById(R.id.chkIsCategoria);
 		
 		FilesIO fio = new FilesIO(this);
 		
@@ -175,6 +226,7 @@ public class FormularioAssocImagemSomActivity extends FormularioBaseActivity
 		ais.setTituloImagem(fio.getNomeDoArquivoSemExtensao(caminho_destino_img));
 		ais.setTituloSom(fio.getNomeDoArquivoSemExtensao(caminho_destino_som));
 		ais.setExt(fio.getExtensaoDoArquivo(caminho_destino_img));
+		//ais.setTipo((chkIsCategoria.isChecked()) ? 'c' : 'n');
 //		ais.setTipo((optSubs.isChecked()) ? 'n' : optVerb.isChecked()? 'v' : 'c');		
 		ais.setCmd(0);
 		ais.setAtalho(false);		
@@ -207,11 +259,13 @@ public class FormularioAssocImagemSomActivity extends FormularioBaseActivity
 //			dao_ais.create(ais);
 //			dao_ais.close();
 			
-			Toast.makeText(this, "Inclusão bem sucedida!", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(this, "Inclusão bem sucedida!", Toast.LENGTH_SHORT).show();
+			
+			this.setResult(2);
+			finish();
 		}
 		catch (IOException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}				
 	}
@@ -239,26 +293,35 @@ public class FormularioAssocImagemSomActivity extends FormularioBaseActivity
 		FilesIO fio = new FilesIO(this);
 		
 		// imagem não selecionada
-		if ((caminho_origem_img.length() == 0) && (caminho_destino_img.length() == 0))
+		if 	(
+				(caminho_origem_img  == null || caminho_origem_img.length()  == 0) 
+				&& 
+				(caminho_destino_img == null || caminho_destino_img.length() == 0)
+				
+			)
 		{
 			Utils.erros.add(new Erro("Imagem não selecionada, por favor selecione"));
 			retorno = false;
 		}
 		// extensao img errada
-		else if (!(fio.verificarExtensaoImagem(caminho_origem_img)))
+		else if (!(fio.verificarExtensaoImagem((caminho_origem_img == null) ? caminho_destino_img : caminho_origem_img)))
 		{
 			Utils.erros.add(new Erro("Arquivo não é uma imagem, por favor corrija"));
 			retorno = false;			
 		}
 		
 		// som não selecionado
-		if ((caminho_origem_som.length() == 0) && (caminho_destino_som.length() == 0))
+		if 	(
+				(caminho_origem_som  == null || caminho_origem_som.length()  == 0) 
+				&& 
+				(caminho_destino_som == null || caminho_destino_som.length() == 0)
+			)
 		{
 			Utils.erros.add(new Erro("Som não selecionado, por favor selecione"));
 			retorno = false;
 		}
 		// extensao som errada
-		else if (!(fio.verificarExtensaoSom(caminho_origem_som)))
+		else if (!(fio.verificarExtensaoSom((caminho_origem_som == null) ? caminho_destino_som : caminho_origem_som)))
 		{
 			Utils.erros.add(new Erro("Arquivo não é um som, por favor corrija"));
 			retorno = false;			
@@ -326,18 +389,21 @@ public class FormularioAssocImagemSomActivity extends FormularioBaseActivity
 			// setar caminho do som no lblSom e outras configs			
 			else if (current_file_code == REQUEST_CODE_PICK_SOUND)
 			{
-				TextView lblTituloSomSel = (TextView) findViewById(R.id.textView3);
+				RelativeLayout laySom 	 = (RelativeLayout) findViewById(R.id.laySom);
 				TextView lblSomSel 		 = (TextView) findViewById(R.id.lblSomSel);
+				
 				lblSomSel.setText(lastPathSegment);
 
 				caminho_origem_som  = realPath;
 				caminho_destino_som = lastPathSegment;
 				
-				lblTituloSomSel.setVisibility(View.VISIBLE);
-				lblSomSel.setVisibility(View.VISIBLE);				
+				laySom.setVisibility(View.VISIBLE);
+				
+				isSomChanged = true;
 			}
 			
-			Toast.makeText(this, "Caminho selecionado: " + lastPathSegment, 0).show();			
+			Toast.makeText(this, "Caminho selecionado: " + lastPathSegment, 0).show();
+			
 		}
 
 	}

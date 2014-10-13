@@ -13,7 +13,7 @@ import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.dal.AssocImagemSom;
 import com.example.tabletvox03f.dal.Categoria;
 import com.example.tabletvox03f.management.ListaSimplesManageActivity;
-import com.example.tabletvox03f.management.assocImagemSom.ItemSimplesAssocImagemSomAdapter;
+import com.example.tabletvox03f.management.assocImagemSom.ItemDeleteAssocImagemSomAdapter;
 import com.example.tabletvox03f.management.assocImagemSom.SelecionarImagensActivity;
 
 public class ListaImagensCategoriaActivity extends ListaSimplesManageActivity
@@ -47,7 +47,7 @@ public class ListaImagensCategoriaActivity extends ListaSimplesManageActivity
 	{
 		ArrayList<AssocImagemSom> lista = categoria.getImagens();
 		
-		return (new ItemSimplesAssocImagemSomAdapter(this, (ArrayList<AssocImagemSom>) lista.clone()));
+		return (new ItemDeleteAssocImagemSomAdapter(this, (ArrayList<AssocImagemSom>) lista.clone()));
 	}
 	
 	@Override
@@ -57,21 +57,20 @@ public class ListaImagensCategoriaActivity extends ListaSimplesManageActivity
 		
 		switch(item.getItemId())
 		{
-		case R.id.action_concluir:
-			ArrayList<AssocImagemSom> imagens = ((ItemSimplesAssocImagemSomAdapter)lv.getAdapter()).getItems();
-			intent.putParcelableArrayListExtra("imagens", (ArrayList<AssocImagemSom>) imagens.clone());			
-			this.setResult(3, intent);
-			finish();
-			break;
-		case R.id.action_add:
-			intent = new Intent(this, SelecionarImagensActivity.class);
-			startActivityForResult(intent, 1);
-			break;
-		case R.id.action_cancelar:
-			this.setResult(4);
-			finish();
-			break;
-		
+			case R.id.action_concluir:
+				ArrayList<AssocImagemSom> imagens = ((ItemDeleteAssocImagemSomAdapter)lv.getAdapter()).getItems();
+				intent.putParcelableArrayListExtra("imagens", (ArrayList<AssocImagemSom>) imagens.clone());			
+				this.setResult(3, intent);
+				finish();
+				break;
+			case R.id.action_add:
+				intent = new Intent(this, SelecionarImagensActivity.class);
+				startActivityForResult(intent, 1);
+				break;
+			case R.id.action_cancelar:
+				this.setResult(4);
+				finish();
+				break;
 		}
 
 	}
@@ -108,7 +107,7 @@ public class ListaImagensCategoriaActivity extends ListaSimplesManageActivity
 
 	private void addNovasImagens(ArrayList<AssocImagemSom> imagens)
 	{
-		ItemSimplesAssocImagemSomAdapter isaisa = (ItemSimplesAssocImagemSomAdapter) lv.getAdapter();
+		ItemDeleteAssocImagemSomAdapter isaisa = (ItemDeleteAssocImagemSomAdapter) lv.getAdapter();
 		for (int i = 0, length = imagens.size(); i < length; i++)
 			isaisa.addItem(imagens.get(i));
 

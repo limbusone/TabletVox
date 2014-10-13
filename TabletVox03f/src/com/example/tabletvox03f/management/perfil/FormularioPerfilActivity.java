@@ -16,6 +16,7 @@ import com.example.tabletvox03f.Erro;
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.Utils;
 import com.example.tabletvox03f.dal.Categoria;
+import com.example.tabletvox03f.dal.CategoriaDAOSingleton;
 import com.example.tabletvox03f.dal.Perfil;
 import com.example.tabletvox03f.dal.PerfilDAOSingleton;
 import com.example.tabletvox03f.management.FormularioBaseActivity;
@@ -29,6 +30,10 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 	private ListView lv;
 	
 	private Button btnAddCategoria;
+	
+	private ArrayList<Categoria> novasCategorias;
+	
+	private ArrayList<Categoria> antigasCategorias;
 	
 	private OnClickListener addCategoriaEvento = new OnClickListener()
 	{
@@ -72,18 +77,15 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 		// carregar evento do botão adicionar categoria
 		btnAddCategoria = (Button) findViewById(R.id.btnAddCategoria);
 		btnAddCategoria.setOnClickListener(addCategoriaEvento);
+		
+		novasCategorias = new ArrayList<Categoria>();
 	}
 	
 	protected void initCriarForm()
 	{
 		pfl = new Perfil();
 		
-		// inicializa categorias caso não vier setada
-		// serve para não bugar o metodo carregarLista()		
-		if (pfl.getCategorias() == null)
-			pfl.setCategorias(new ArrayList<Categoria>());
-		
-		carregarLista();
+		inicializarLista();
 	}
 	
 	protected void initEditarForm(Intent intent)
@@ -103,12 +105,8 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 		txtNome.setText(pfl.getNome());
 		txtAutor.setText(pfl.getAutor());
 		
-		// inicializa categorias caso não vier setada
-		// serve para não bugar o metodo carregarLista()
-		if (pfl.getCategorias() == null)
-			pfl.setCategorias(new ArrayList<Categoria>());
+		inicializarLista();
 		
-		carregarLista();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -119,9 +117,10 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 		pfl.setAutor(((EditText) findViewById(R.id.txtAutorPerfil)).getText().toString());
 		
 		// seta somente se há items 
-		pfl.setCategorias((lv.getCount() > 0) ? 
-						  (ArrayList<Categoria>)((ItemCategoriaAdapter)lv.getAdapter()).getCategorias().clone() : 
-						   null);
+//		pfl.setCategorias((lv.getCount() > 0) ? 
+//						  (ArrayList<Categoria>)((ItemCategoriaAdapter)lv.getAdapter()).getCategorias().clone() : 
+//						   null);
+		
 		
 		retirarErros();
 		
@@ -130,21 +129,20 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 			Utils.exibirErros(this);
 			return;
 		}
+
+		//assumindo que todas as categorias são novas (e são! pois estamos incluindo um novo perfil)
 		
-//		Toast.makeText(this, "Você clicou em incluir Perfil!", Toast.LENGTH_SHORT).show();
+		ArrayList<Categoria> categoriasDoAdapter = (ArrayList<Categoria>)((ItemCategoriaAdapter)lv.getAdapter()).getCategorias().clone();
+		
+		concatenarAutorComNomeDaCategoria(categoriasDoAdapter);
+		
+		// seta items
+		pfl.setCategorias(CategoriaDAOSingleton.getInstance().incluirCategoriasWithRandomGeneratedID(categoriasDoAdapter));
 		
 		PerfilDAOSingleton.getInstance().incluirPerfilWithRandomGeneratedID(pfl);
 		
-//		Intent intent = new Intent(this, SelecionarPerfilActivity.class);
-		
-		// setando flag que chama um activity existente (se houver)
-//		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//		
-//		startActivity(intent);
-//		finishActivity(3);
 		this.setResult(1);
 		finish();
-		//NavUtils.navigateUpFromSameTask(this);
 		
 	}
 
@@ -156,9 +154,9 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 		pfl.setAutor(((EditText) findViewById(R.id.txtAutorPerfil)).getText().toString());
 		
 		// seta somente se há items 
-		pfl.setCategorias((lv.getCount() > 0) ? 
-						  (ArrayList<Categoria>)((ItemCategoriaAdapter)lv.getAdapter()).getCategorias().clone() : 
-						   null);
+//		pfl.setCategorias((lv.getCount() > 0) ? 
+//						  (ArrayList<Categoria>)((ItemCategoriaAdapter)lv.getAdapter()).getCategorias().clone() : 
+//						   null);
 		
 		retirarErros();
 		
@@ -168,18 +166,22 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 			return;
 		}
 		
-//		Toast.makeText(this, "Você clicou em editar Perfil!", Toast.LENGTH_SHORT).show();
+		concatenarAutorComNomeDaCategoria(novasCategorias);
+
+		// edita as categorias numa eventual mudança destas
+		CategoriaDAOSingleton.getInstance().editarCategorias(antigasCategorias);
 		
-		//PerfilDAOSingleton.getInstance().editarPerfil(pfl, pfl.getId());
+		// adicionar eventuais novos itens
+		novasCategorias = CategoriaDAOSingleton.getInstance().incluirCategoriasWithRandomGeneratedID(novasCategorias);
+		
+		// adicionar itens das novas categorias na lista das antigas
+		antigasCategorias.addAll(novasCategorias);
+		
+		// seta items
+		pfl.setCategorias((ArrayList<Categoria>) antigasCategorias.clone());
+		
 		PerfilDAOSingleton.getInstance().editarPerfilComCategorias(pfl, pfl.getId());
 		
-//		Intent intent = new Intent(this, SelecionarPerfilActivity.class);
-		
-		// setando flag que chama um activity existente (se houver)
-//		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//		
-//		startActivity(intent);		
-//		finishActivity(4);
 		this.setResult(2);
 		finish();
 	}
@@ -221,13 +223,23 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 		
 		return retorno;
 	}	
+
+	// inicializa categorias caso não vier setada
+	private void inicializarLista()
+	{
+		if (pfl.getCategorias() == null)
+			pfl.setCategorias(new ArrayList<Categoria>());
+		
+		carregarLista();
+	}
 	
-	@SuppressWarnings("unchecked")
 	protected void carregarLista()
 	{
 		ArrayList<Categoria> lista = pfl.getCategorias();
 		
-		lv.setAdapter(new ItemCategoriaAdapter(this, (ArrayList<Categoria>) lista.clone()));
+		antigasCategorias = (ArrayList<Categoria>) lista.clone();
+		
+		lv.setAdapter(new ItemCategoriaAdapter(this, (ArrayList<Categoria>) antigasCategorias.clone()));
 	}
 	
 	private void retirarErros()
@@ -242,30 +254,68 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 	{
 		ItemCategoriaAdapter ica = (ItemCategoriaAdapter) lv.getAdapter();
 		for (int i = 0, length = categorias.size(); i < length; i++)
-			ica.addItem(categorias.get(i));
+		{
+			Categoria categoria = categorias.get(i);
+			
+			ica.addItem(categoria);
+			novasCategorias.add(categoria);
+		}
 
 		ica.refresh();
 		
 	}
 	
-	// callback ao voltar da tela adicionar categorias
+	// callback ao voltar da tela adicionar categorias ou da tela do formulario de categoria
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
 		super.onActivityResult(requestCode, resultCode, data);
 		
-		// adicionar categoria com sucesso
-		if (resultCode == 1)
+		switch(resultCode)
 		{
-			ArrayList<Categoria> categorias = data.getParcelableArrayListExtra("selecionados"); 
-			addNovasCategorias(categorias);
+			case 3: // adicionar categoria com sucesso
+				ArrayList<Categoria> categorias = data.getParcelableArrayListExtra("selecionados"); 
+				addNovasCategorias(categorias);			
+				break;
+			case 4:	// adicionar categoria cancelado 
+				Toast.makeText(this, "Cancelado!", Toast.LENGTH_SHORT).show();
+				break;
+			case 5: // edição não persistente sucedida
+				atualizarCategoriaEditadaNP((Categoria) data.getParcelableExtra("categoria"));
+				break;
 		}
-			
-			
+	}
+	
+	// concatenar o nome da categoria com o autor do perfil 
+	// para diferenciá-la das outras categorias
+	private void concatenarAutorComNomeDaCategoria(Categoria categoria)
+	{
+		String autor = pfl.getAutor();
 		
-		// adicionar categoria cancelado
-		if (resultCode == 2)
-			Toast.makeText(this, "Cancelado!", Toast.LENGTH_SHORT).show();
-	}	
-
+		categoria.setNome(categoria.getNome().concat(" - " + autor));		
+	}
+	
+	private void concatenarAutorComNomeDaCategoria(ArrayList<Categoria> categorias)
+	{
+		for (int i = 0, length = categorias.size(); i < length; i++)
+			concatenarAutorComNomeDaCategoria(categorias.get(i));
+	}
+	
+	private void atualizarCategoriaEditadaNP(Categoria categoria)
+	{
+		ItemCategoriaAdapter ica = (ItemCategoriaAdapter) lv.getAdapter();
+		ica.editItem(categoria, categoria.getId());
+		ica.refresh();		
+	}
+	
+	public void excluirCategoriaDasNovasCategorias(Categoria categoria)
+	{
+		novasCategorias.remove(categoria);
+	}
+	
+	public void excluirCategoriaDasAntigasCategorias(Categoria categoria)
+	{
+		antigasCategorias.remove(categoria);
+	}
+	
 }

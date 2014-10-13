@@ -108,7 +108,7 @@ public abstract class ListaComBuscaManageActivity extends Activity
 		lblEncontrados.setVisibility(View.INVISIBLE);
 	}
 	
-	protected void atualizarLblNumEncontrados(int num)
+	public void atualizarLblNumEncontrados(int num)
 	{
 		lblNumEncontrados.setText(Integer.toString(num));
 	}

@@ -16,6 +16,8 @@
     <string name="title_activity_editar_categoria">Editar Categoria</string>
     <string name="title_activity_selecionar_categorias">Selecione as categorias</string>
     <string name="title_activity_lista_categorias">Categorias</string>
+    <string name="title_activity_criar_imagem">Criar Imagem</string>
+    <string name="title_activity_editar_imagem">Editar Imagem</string>
     <string name="title_activity_selecionar_imagem">Selecione uma imagem</string>
     <string name="title_activity_lista_imagens">Imagens</string>
     <string name="title_activity_selecionar_imagens">Selecione as imagens</string>
@@ -53,6 +55,14 @@
     <string name="nome_text">Nome</string>
     <string name="selecione_uma_imagem_btn">Selecione uma Imagem</string>
     <string name="definir_imagens">Definir Imagens</string>
+    <string name="selecione_arquivo_imagem">Selecione arquivo de Imagem</string>
+    <string name="dados_imagem">DADOS DA IMAGEM</string>
+    <string name="descricao">Descrição</string>
+    <string name="categoria">Categoria</string>
+    <string name="identificacao">IDENTIFICAÇÃO</string>
+    <string name="autor">Autor</string>
+    <string name="categorias_uppercase">CATEGORIAS</string>
+    <string name="add_categoria">Adicionar Categoria</string>
     
 
 </resources>

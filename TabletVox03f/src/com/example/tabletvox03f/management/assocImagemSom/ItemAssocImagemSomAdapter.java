@@ -20,6 +20,7 @@ import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.dal.AssocImagemSom;
 import com.example.tabletvox03f.dal.AssocImagemSomDAOSingleton;
 import com.example.tabletvox03f.dal.FilesIO;
+import com.example.tabletvox03f.management.categoria.ListaImagensCategoriaActivity;
 
 
 public class ItemAssocImagemSomAdapter extends BaseAdapter
@@ -88,7 +89,7 @@ public class ItemAssocImagemSomAdapter extends BaseAdapter
 			{
 				Toast.makeText(ItemAssocImagemSomAdapter.this.mContext, "Você clicou no botão Editar!", Toast.LENGTH_SHORT).show();
 				Intent intent = new Intent(ItemAssocImagemSomAdapter.this.mContext, FormularioAssocImagemSomActivity.class);
-				intent.putExtra("tipo_form", false);
+				intent.putExtra("tipo_form", 1);
 				intent.putExtra("ais", ais);
 				ItemAssocImagemSomAdapter.this.mContext.startActivity(intent);
 			}
@@ -126,6 +127,14 @@ public class ItemAssocImagemSomAdapter extends BaseAdapter
 						
 						// refresh na lista
 						ItemAssocImagemSomAdapter.this.refresh();
+						
+						// verifica se o "parent" desse adapter é a lista de imagens
+						if (ItemAssocImagemSomAdapter.this.mContext instanceof ListaImagensActivity)
+						{
+							// atualiza o label dos registros encontrados
+							ListaImagensActivity lia = (ListaImagensActivity) ItemAssocImagemSomAdapter.this.mContext;
+							lia.atualizarLblNumEncontrados(ItemAssocImagemSomAdapter.this.getCount());
+						}
 					}
 				});
 				

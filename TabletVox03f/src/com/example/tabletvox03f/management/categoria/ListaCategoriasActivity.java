@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Toast;
 
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.dal.Categoria;
@@ -58,7 +59,7 @@ public class ListaCategoriasActivity extends ListaComBuscaManageActivity
 		{
 			// chamar activity criar categoria
 			Intent intent = new Intent(this, FormularioCategoriaActivity.class);
-			intent.putExtra("tipo_form", true); // true, para form do tipo 'criar' e false para form do tipo 'editar'
+			intent.putExtra("tipo_form", 0); // 0, para form do tipo 'criar' e 1 para form do tipo 'editar'
 			startActivityForResult(intent, 1);
 		}
 	}
@@ -73,7 +74,7 @@ public class ListaCategoriasActivity extends ListaComBuscaManageActivity
 	@Override
 	protected String getOptionMenuTitle()
 	{
-		return "Categorias";
+		return "Categoria";
 	}
 
 	@Override
@@ -81,5 +82,17 @@ public class ListaCategoriasActivity extends ListaComBuscaManageActivity
 	{
 		return R.menu.um_action_add;
 	}
+	
+	// callback ao voltar da tela adicionar / editar categoria
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		if (resultCode == 1)
+			Toast.makeText(this, "Categoria incluida com sucesso!", Toast.LENGTH_SHORT).show();
+		else if (resultCode == 2)
+			Toast.makeText(this, "Categoria editada com sucesso", Toast.LENGTH_SHORT).show();
+	}	
 
 }

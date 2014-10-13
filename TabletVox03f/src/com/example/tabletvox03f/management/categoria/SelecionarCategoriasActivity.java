@@ -63,14 +63,14 @@ public class SelecionarCategoriasActivity extends ListaComBuscaManageActivity
 			ArrayList<Categoria> selecionados = ((ItemSelectCategoriaAdapter)lv.getAdapter()).getSelecionados();
 			Intent intent = new Intent();
 			intent.putParcelableArrayListExtra("selecionados", (ArrayList<Categoria>) selecionados.clone());
-			this.setResult(1, intent);
+			this.setResult(3, intent);
 			finish();
 			
 		}
 		// cancela a ação e volta pro formulario
 		else if (item.getItemId() == R.id.action_cancelar)
 		{
-			this.setResult(2);
+			this.setResult(4);
 			finish();
 		}
 	}

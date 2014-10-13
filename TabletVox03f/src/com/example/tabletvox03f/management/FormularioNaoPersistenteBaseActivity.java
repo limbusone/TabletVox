@@ -1,31 +1,14 @@
 package com.example.tabletvox03f.management;
 
-import com.example.tabletvox03f.R;
-
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 
-public abstract class FormularioBaseActivity extends Activity
+import com.example.tabletvox03f.R;
+
+public abstract class FormularioNaoPersistenteBaseActivity extends FormularioBaseActivity
 {
 
-	protected int tipo_form; // 0 para 'criar'; 1 para 'editar'
-	
-	protected int menu_action_id;
-	
-	protected abstract void onCreateFilho();
-	
-	protected abstract int[] getDadosForm();
-	
-	protected abstract void initCriarForm();
-	
-	protected abstract void initEditarForm(Intent intent);
-	
-	protected abstract void incluir();
-	
-	protected abstract void editar();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -53,11 +36,21 @@ public abstract class FormularioBaseActivity extends Activity
 				setTitle(dados[3]);
 				initEditarForm(intent);				
 				break;
+			case 2: // form do tipo 'editar' não persistente
+				setTitle(dados[3]);
+				initEditarNPForm(intent);
+				break;
 		}
 		
 	}
 	
+	// NP: Não Persistente
 	
+	protected abstract void initEditarNPForm(Intent intent);
+	
+	protected abstract void editarNP();
+
+
 	// trata os eventos ligados ao menu do action bar
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
@@ -72,19 +65,14 @@ public abstract class FormularioBaseActivity extends Activity
 				case 1: // form do tipo 'editar'
 					editar(); // aciona editar
 					break;
+				case 2: // form do tipo 'editar' não persistente
+					editarNP(); // aciona editar não persistente
+					break;
 			}			
 				
 		}
 		return false;
 		
-	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu)
-	{
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(menu_action_id, menu);
-		return true;
 	}
 	
 }

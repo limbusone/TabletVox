@@ -54,21 +54,21 @@ public class ImgItem extends ImageView
 			// o som está sendo recuperado de internal storage
 			// ou da pasta assets/sons
 			
-			File f_from_internal_storage = new File(c.getDir("sons", Context.MODE_PRIVATE).getPath() + "/" +  ais.getTituloSom() + ".wav");
+			File f_from_internal_storage = new File(c.getDir("sons", Context.MODE_PRIVATE).getPath() + "/" +  ais.getTituloSom() + "." + Utils.EXTENSAO_ARQUIVO_SOM );
 			
 			if (f_from_internal_storage.exists())
 				mp.setDataSource(f_from_internal_storage.getAbsolutePath());
 			else
 			{
 
-				AssetFileDescriptor afd = c.getAssets().openFd("sons/" + ais.getTituloSom() + ".wav");
+				AssetFileDescriptor afd = c.getAssets().openFd("sons/" + ais.getTituloSom() + "." + Utils.EXTENSAO_ARQUIVO_SOM);
 				mp.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
 			}
 			mp.prepare();
 		} 
 		catch (IOException e)
 		{
-			// TODO Auto-generated catch block
+			// Auto-generated catch block
 			e.printStackTrace();
 		}
 		mp.start();
@@ -83,6 +83,34 @@ public class ImgItem extends ImageView
 	public void tocarSom(Intent ss)
 	{
 		this.getContext().startService(ss);		
+	}
+	
+	public void tocarSom(String caminho_absoluto)
+	{
+		mp = new MediaPlayer();
+		try
+		{
+			mp.setDataSource(caminho_absoluto);
+			mp.prepare();
+		} catch (IllegalArgumentException e)
+		{
+			// Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e)
+		{
+			// Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalStateException e)
+		{
+			// Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e)
+		{
+			// Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		mp.start();
 	}
 	
 }

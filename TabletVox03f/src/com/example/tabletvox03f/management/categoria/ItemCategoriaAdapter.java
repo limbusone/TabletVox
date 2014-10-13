@@ -3,6 +3,7 @@ package com.example.tabletvox03f.management.categoria;
 import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -22,6 +23,7 @@ import com.example.tabletvox03f.dal.AssocImagemSom;
 import com.example.tabletvox03f.dal.Categoria;
 import com.example.tabletvox03f.dal.CategoriaDAOSingleton;
 import com.example.tabletvox03f.dal.FilesIO;
+import com.example.tabletvox03f.management.perfil.FormularioPerfilActivity;
 
 public class ItemCategoriaAdapter extends BaseAdapter
 {
@@ -91,6 +93,9 @@ public class ItemCategoriaAdapter extends BaseAdapter
 			viewHolder.btnEdit.setFocusable(false);
 			viewHolder.btnManage.setFocusable(false);
 			
+			// esconder botão gerenciar
+			viewHolder.btnManage.setVisibility(View.GONE);
+			
 			view.setTag(viewHolder);
 		}
 		else
@@ -109,15 +114,15 @@ public class ItemCategoriaAdapter extends BaseAdapter
 		
 		// eventos click dos botoes
 		
-		holder.btnManage.setOnClickListener(new OnClickListener()
-		{
-			
-			@Override
-			public void onClick(View v)
-			{
-				Toast.makeText(ItemCategoriaAdapter.this.mContext, "Você clicou no botão Gerenciar!", Toast.LENGTH_SHORT).show();
-			}
-		});
+//		holder.btnManage.setOnClickListener(new OnClickListener()
+//		{
+//			
+//			@Override
+//			public void onClick(View v)
+//			{
+//				Toast.makeText(ItemCategoriaAdapter.this.mContext, "Você clicou no botão Gerenciar!", Toast.LENGTH_SHORT).show();
+//			}
+//		});
 		
 		holder.btnEdit.setOnClickListener(new OnClickListener()
 		{
@@ -127,9 +132,23 @@ public class ItemCategoriaAdapter extends BaseAdapter
 			{
 				Toast.makeText(ItemCategoriaAdapter.this.mContext, "Você clicou no botão Editar!", Toast.LENGTH_SHORT).show();
 				Intent intent = new Intent(ItemCategoriaAdapter.this.mContext, FormularioCategoriaActivity.class);
-				intent.putExtra("tipo_form", false);
 				intent.putExtra("categoria", categoria);
-				ItemCategoriaAdapter.this.mContext.startActivity(intent);
+				
+				// verifica se o "parent" desse adapter é a lista de categorias
+				if (ItemCategoriaAdapter.this.mContext instanceof ListaCategoriasActivity)
+				{
+					intent.putExtra("tipo_form", 1);
+					((Activity) ItemCategoriaAdapter.this.mContext).startActivityForResult(intent, 2);
+				}
+				// verifica se o "parent" desse adapter é o formulario do perfil
+				else if (ItemCategoriaAdapter.this.mContext instanceof FormularioPerfilActivity)
+				{
+					intent.putExtra("tipo_form", 2);
+					((Activity) ItemCategoriaAdapter.this.mContext).startActivityForResult(intent, 3);
+				}
+					
+					
+					
 			}
 		});
 		
@@ -161,10 +180,26 @@ public class ItemCategoriaAdapter extends BaseAdapter
 						
 						removeItem(categoria);
 						
-						CategoriaDAOSingleton.getInstance().excluirCategoria(categoria.getId());
 						
 						// refresh na lista
 						ItemCategoriaAdapter.this.refresh();
+						
+						// verifica se o "parent" desse adapter é a lista de categorias
+						if (ItemCategoriaAdapter.this.mContext instanceof ListaCategoriasActivity)
+						{
+							// exclui efetivamente a categoria
+							CategoriaDAOSingleton.getInstance().excluirCategoria(categoria.getId());
+							
+							// atualiza o label dos registros encontrados
+							ListaCategoriasActivity lca = (ListaCategoriasActivity) ItemCategoriaAdapter.this.mContext;
+							lca.atualizarLblNumEncontrados(ItemCategoriaAdapter.this.getCount());
+						}
+						// verifica se o "parent" desse adapter é o formulario do perfil
+						else if (ItemCategoriaAdapter.this.mContext instanceof FormularioPerfilActivity)
+						{
+							((FormularioPerfilActivity) ItemCategoriaAdapter.this.mContext).excluirCategoriaDasNovasCategorias(categoria);
+							((FormularioPerfilActivity) ItemCategoriaAdapter.this.mContext).excluirCategoriaDasAntigasCategorias(categoria);
+						}
 					}
 				});
 				
@@ -206,7 +241,33 @@ public class ItemCategoriaAdapter extends BaseAdapter
 	{
 		categorias.add(categoria);
 	}
+	
+	public void editItem(Categoria categoriaNova, int id)
+	{
+		Categoria categoria = getCategoriaById(id);
+		categoria.setNome(categoriaNova.getNome());
+		categoria.setAIS(categoriaNova.getAIS());
+		categoria.setImagens(categoriaNova.getImagens());	
+	}
+	
+	private Categoria getCategoriaById(int id)
+	{
+		Categoria categoria = null;
+		Categoria categoria_temp;
+		for (int i = 0, length = categorias.size(); i < length; i++)
+		{
+			categoria_temp = categorias.get(i);
+			if (categoria_temp.getId() == id)
+			{
+				categoria = categoria_temp;
+				break;
+			}
 
+		}
+		
+		return categoria;
+	}	
+	
 	public void refresh()
 	{
 		// informar o adapter que houve uma mudança na lista de views (tipo um refresh na lista)

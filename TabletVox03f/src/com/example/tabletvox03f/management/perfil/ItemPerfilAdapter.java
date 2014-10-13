@@ -56,6 +56,8 @@ public class ItemPerfilAdapter extends BaseAdapter
 			viewHolder.btnDelete		= (ImageButton) view.findViewById(R.id.btnDelete);
 			viewHolder.btnManage		= (ImageButton) view.findViewById(R.id.btnManage);
 			
+			
+			
 //			viewHolder.btnDelete.setOnClickListener(new OnClickListener()
 //			{
 //				
@@ -73,6 +75,9 @@ public class ItemPerfilAdapter extends BaseAdapter
 			viewHolder.btnEdit.setFocusable(false);
 			viewHolder.btnManage.setFocusable(false);
 			
+			//esconder botão gerenciar
+			viewHolder.btnManage.setVisibility(View.GONE);
+			
 			view.setTag(viewHolder);
 		}
 		else
@@ -85,19 +90,19 @@ public class ItemPerfilAdapter extends BaseAdapter
 		holder.lblAutor.setText(perfil.getAutor());
 		holder.lblNomePerfil.setText(perfil.getNome());
 
-		holder.btnManage.setOnClickListener(new OnClickListener()
-		{
-			
-			@Override
-			public void onClick(View v)
-			{
-				// setar PERFIL_ATIVO e abrir o activity ListaCategoriasDoPerfilActivity 
-				Toast.makeText(ItemPerfilAdapter.this.mContext, "Você clicou no botão Gerenciar!", Toast.LENGTH_SHORT).show();
-//				Utils.PERFIL_ATIVO = perfil;
-//				Intent intent = new Intent(ItemPerfilAdapter.this.mContext, ListaCategoriasDoPerfilActivity.class);
-//				ItemPerfilAdapter.this.mContext.startActivity(intent);
-			}
-		});
+//		holder.btnManage.setOnClickListener(new OnClickListener()
+//		{
+//			
+//			@Override
+//			public void onClick(View v)
+//			{
+//				// setar PERFIL_ATIVO e abrir o activity ListaCategoriasDoPerfilActivity 
+//				Toast.makeText(ItemPerfilAdapter.this.mContext, "Você clicou no botão Gerenciar!", Toast.LENGTH_SHORT).show();
+////				Utils.PERFIL_ATIVO = perfil;
+////				Intent intent = new Intent(ItemPerfilAdapter.this.mContext, ListaCategoriasDoPerfilActivity.class);
+////				ItemPerfilAdapter.this.mContext.startActivity(intent);
+//			}
+//		});
 		
 		holder.btnEdit.setOnClickListener(new OnClickListener()
 		{
@@ -108,7 +113,7 @@ public class ItemPerfilAdapter extends BaseAdapter
 				//Toast.makeText(ItemPerfilAdapter.this.mContext, "Você clicou no botão Editar!", Toast.LENGTH_SHORT).show();
 				// chamar form editar
 				Intent intent = new Intent(ItemPerfilAdapter.this.mContext, FormularioPerfilActivity.class);
-				intent.putExtra("tipo_form", false); // false para 'editar perfil'
+				intent.putExtra("tipo_form", 1); // 1 para 'editar perfil'
 				
 				intent.putExtra("perfil", perfil);
 //				intent.putExtra("pfl_id", perfil.getId());
@@ -148,6 +153,14 @@ public class ItemPerfilAdapter extends BaseAdapter
 						removeItem(perfil);
 						// refresh na lista
 						ItemPerfilAdapter.this.refresh();
+						
+						// verifica se o "parent" desse adapter é a tela de selecionarPerfilActivity
+						if (ItemPerfilAdapter.this.mContext instanceof SelecionarPerfilActivity)
+						{
+							// atualiza o label dos registros encontrados
+							SelecionarPerfilActivity spa = (SelecionarPerfilActivity) ItemPerfilAdapter.this.mContext;
+							spa.atualizarLblNumEncontrados(ItemPerfilAdapter.this.getCount());
+						}
 					}
 				});
 				

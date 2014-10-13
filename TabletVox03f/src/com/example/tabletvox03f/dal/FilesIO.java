@@ -99,13 +99,15 @@ public class FilesIO
 	
 	public boolean verificarExtensaoImagem(String path)
 	{
+		
 		String ext = getExtensaoDoArquivo(path);
-		return (
+		return (ext == null) ? false :
+				(
 					ext.equals("jpg")  ||
-					ext.equals("png") ||
-					ext.equals("gif") ||
-					ext.equals("JPG") ||
-					ext.equals("PNG") ||
+					ext.equals("png")  ||
+					ext.equals("gif")  ||
+					ext.equals("JPG")  ||
+					ext.equals("PNG")  ||
 					ext.equals("GIF")
 				);
 			
@@ -114,7 +116,8 @@ public class FilesIO
 	public boolean verificarExtensaoSom(String path)
 	{
 		String ext = getExtensaoDoArquivo(path);
-		return  (
+		return (ext == null) ? false :
+				(
 					ext.equals("wav") ||
 					ext.equals("WAV")
 				);		
@@ -122,12 +125,12 @@ public class FilesIO
 	
 	public String getExtensaoDoArquivo(String path)
 	{
-		return path.substring(path.lastIndexOf('.') + 1);
+		return (!(path == null) && path.length() > 0) ? path.substring(path.lastIndexOf('.') + 1) : path;
 	}
 	
 	public String getNomeDoArquivoSemExtensao(String path)
 	{
-		return path.substring(path.lastIndexOf('/') + 1, path.lastIndexOf('.'));
+		return (!(path == null) && path.length() > 0) ? path.substring(path.lastIndexOf('/') + 1, path.lastIndexOf('.')) : path;
 	}
 	
 //	public static void teste_arquivos(Context c)

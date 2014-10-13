@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.tabletvox03f.dal.FilesIO;
 import com.example.tabletvox03f.management.assocImagemSom.ListaImagensActivity;
@@ -24,6 +25,8 @@ public class MainMenuActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_menu);
+
+		mudaTituloConformePerfilSelecionado();
 		
 		// inicializa frase global
 		Utils.lista_imagens_frase_global = new ArrayList<ImgItem>();
@@ -116,7 +119,7 @@ public class MainMenuActivity extends Activity
 		{
 			case R.id.action_selecionar_perfil:
 				intent = new Intent(MainMenuActivity.this, SelecionarPerfilActivity.class);
-				startActivity(intent);				
+				startActivityForResult(intent, 1);				
 				break;
 			case R.id.action_gerenciar_imagens:
 				intent = new Intent(this, ListaImagensActivity.class);
@@ -130,6 +133,30 @@ public class MainMenuActivity extends Activity
 		
 		return false;
 		
-	}	
+	}
+	
+	// callback ao voltar da tela selecionar perfil
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+		super.onActivityResult(requestCode, resultCode, data);
+
+		switch (resultCode)
+		{
+			case 1: // selecionado com sucesso
+				Toast.makeText(MainMenuActivity.this, "Perfil selecionado!", Toast.LENGTH_SHORT).show();
+				mudaTituloConformePerfilSelecionado();
+				break;
+			case 2: // seleção cancelada
+			default:
+				break;
+		}
+		
+	}
+	
+	public void mudaTituloConformePerfilSelecionado()
+	{
+		setTitle(Utils.PERFIL_ATIVO.getNome());
+	}
 
 }

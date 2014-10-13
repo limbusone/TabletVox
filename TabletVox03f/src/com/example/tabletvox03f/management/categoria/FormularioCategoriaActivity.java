@@ -21,10 +21,10 @@ import com.example.tabletvox03f.dal.AssocImagemSom;
 import com.example.tabletvox03f.dal.Categoria;
 import com.example.tabletvox03f.dal.CategoriaDAOSingleton;
 import com.example.tabletvox03f.dal.FilesIO;
-import com.example.tabletvox03f.management.FormularioBaseActivity;
+import com.example.tabletvox03f.management.FormularioNaoPersistenteBaseActivity;
 import com.example.tabletvox03f.management.assocImagemSom.SelecionarImagemActivity;
 
-public class FormularioCategoriaActivity extends FormularioBaseActivity
+public class FormularioCategoriaActivity extends FormularioNaoPersistenteBaseActivity
 {
 	
 	private Categoria cat;
@@ -91,6 +91,7 @@ public class FormularioCategoriaActivity extends FormularioBaseActivity
 		imgImagem = (ImageView) findViewById(R.id.imgImagem);
 		lblSomSel = (TextView) findViewById(R.id.lblSomSel);
 		laySom	  = (RelativeLayout) findViewById(R.id.laySom);
+		txtNome	  = (EditText) findViewById(R.id.txtNomeCategoria);
 		
 		Button btnEscolherImagem = (Button) findViewById(R.id.btnEscolherImagem);
 		btnEscolherImagem.setOnClickListener(escolherImagemEvento);
@@ -112,8 +113,6 @@ public class FormularioCategoriaActivity extends FormularioBaseActivity
 	@Override
 	protected void initEditarForm(Intent intent)
 	{
-		txtNome = (EditText) findViewById(R.id.txtNomeCategoria);
-		
 		cat = intent.getParcelableExtra("categoria");
 		
 		ais_selecionado = cat.getAIS();
@@ -139,8 +138,10 @@ public class FormularioCategoriaActivity extends FormularioBaseActivity
 		}
 		
 		
-		CategoriaDAOSingleton.getInstance().incluirCategoria(cat);
+		CategoriaDAOSingleton.getInstance().incluirCategoriaWithRandomGeneratedID(cat);
 		
+		this.setResult(1);
+		finish();
 	}
 
 	@Override
@@ -157,7 +158,10 @@ public class FormularioCategoriaActivity extends FormularioBaseActivity
 			return;
 		}
 		
-		CategoriaDAOSingleton.getInstance().editarCategoria(cat, cat.getId());		
+		CategoriaDAOSingleton.getInstance().editarCategoria(cat, cat.getId());
+		
+		this.setResult(2);
+		finish();
 	}
 	
 	private boolean validarIncluir()
@@ -236,7 +240,7 @@ public class FormularioCategoriaActivity extends FormularioBaseActivity
 
 			imgImagem.setImageDrawable(fio.getImgItemDrawableFromInternalStorageOrAssets(ais));
 
-			lblSomSel.setText(ais.getTituloSom() + "." + ais.getExt());
+			lblSomSel.setText(ais.getTituloSom() + ".wav");
 			
 			imgImagem.setVisibility(View.VISIBLE);
 
@@ -247,7 +251,41 @@ public class FormularioCategoriaActivity extends FormularioBaseActivity
 	private void retirarErros()
 	{
 		Utils.limpaErros();
-		((EditText) findViewById(R.id.txtNomePerfil)).setError(null);
-		((EditText) findViewById(R.id.txtAutorPerfil)).setError(null);
+		txtNome.setError(null);
+	}
+
+	@Override
+	protected void initEditarNPForm(Intent intent)
+	{
+		cat = intent.getParcelableExtra("categoria");
+		
+		ais_selecionado = cat.getAIS();
+		
+		atribuirDadosAISAosControles(ais_selecionado);
+		txtNome.setText(cat.getNome());
+		
+	}
+
+	@Override
+	protected void editarNP()
+	{
+	
+		cat.setNome(txtNome.getText().toString());
+		cat.setAIS(ais_selecionado);
+
+		retirarErros();
+		
+		if (!(validarEditar()))
+		{
+			Utils.exibirErros(this);
+			return;
+		}
+		
+		
+		Intent data = new Intent();
+		data.putExtra("categoria", cat);
+		this.setResult(5, data);
+		finish();
+		
 	}	
 }

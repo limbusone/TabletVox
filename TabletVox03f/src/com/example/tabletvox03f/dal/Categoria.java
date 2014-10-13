@@ -109,6 +109,8 @@ public class Categoria implements Parcelable
 	
 	public Categoria(Parcel in) 
 	{
+		// inicializando arrayList para não dar nullPointerException ao chamar a linha
+		this.imagens = new ArrayList<AssocImagemSom>();
 		readFromParcel(in);
 	}
 	
@@ -128,6 +130,7 @@ public class Categoria implements Parcelable
 		dest.writeInt(this.id);
 		dest.writeParcelable(this.ais, flags);
 		dest.writeString(this.nome);
+		dest.writeTypedList(this.imagens);
 		
 	}
 	
@@ -140,6 +143,7 @@ public class Categoria implements Parcelable
 		this.id 		= in.readInt();
 		this.ais		= in.readParcelable(AssocImagemSom.class.getClassLoader());
 		this.nome 		= in.readString();
+		in.readTypedList(this.imagens, AssocImagemSom.CREATOR);
 	}
 	
     /**

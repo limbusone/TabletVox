@@ -72,13 +72,24 @@ public class CategoriaDAOSingleton
 	
 	public void incluirCategoriaWithRandomGeneratedID(Categoria categoria)
 	{
-		int generated_id;
-		// entra em loop até gerar um id único
-		while ( ! ( getCategoriaById( generated_id = generateRandomInteger(1, 9999) ) == null ) );
-		
-		categoria.setId(generated_id);
+		categoria.setId(gerarIdUnico());
 		
 		listaCategoria.add(categoria);
+	}
+	
+	public ArrayList<Categoria> incluirCategoriasWithRandomGeneratedID(ArrayList<Categoria> categorias)
+	{
+		ArrayList<Categoria> retorno = new ArrayList<Categoria>();
+		
+		for (int i = 0, length = categorias.size(); i < length; i++)
+		{
+			Categoria categoria = categorias.get(i);
+			categoria.setId(gerarIdUnico());
+			listaCategoria.add(categoria);
+			retorno.add(categoria);
+		}
+		
+		return retorno;
 	}
 	
 	public void editarCategoria(Categoria categoriaAntigo, Categoria categoriaNovo)
@@ -86,7 +97,8 @@ public class CategoriaDAOSingleton
 		if (listaCategoria.indexOf(categoriaAntigo) >= 0)
 		{
 			categoriaAntigo.setNome(categoriaNovo.getNome());
-//			categoriaAntigo.setAutor(categoriaNovo.getAutor());
+			categoriaAntigo.setAIS(categoriaNovo.getAIS());
+			categoriaAntigo.setImagens(categoriaNovo.getImagens());
 		}
 	}
 	
@@ -97,7 +109,8 @@ public class CategoriaDAOSingleton
 		{
 			Categoria categoria = (Categoria) listaCategoria.get(idx);
 			categoria.setNome(categoriaNovo.getNome());
-//			categoria.setAutor(categoriaNovo.getAutor());
+			categoria.setAIS(categoriaNovo.getAIS());
+			categoria.setImagens(categoriaNovo.getImagens());
 		}
 	}
 	
@@ -106,7 +119,19 @@ public class CategoriaDAOSingleton
 		Categoria categoria = getCategoriaById(id);
 		categoria.setNome(categoriaNovo.getNome());
 		categoria.setAIS(categoriaNovo.getAIS());
-//		categoria.setAutor(categoriaNovo.getAutor());
+		categoria.setImagens(categoriaNovo.getImagens());
+	}
+	
+	public void editarCategorias(ArrayList<Categoria> categoriasNovas)
+	{
+		for (int i = 0, length = categoriasNovas.size(); i < length; i++)
+		{
+			Categoria categoriaNova = categoriasNovas.get(i);
+			Categoria categoria = getCategoriaById(categoriaNova.getId());
+			categoria.setNome(categoriaNova.getNome());
+			categoria.setAIS(categoriaNova.getAIS());
+			categoria.setImagens(categoriaNova.getImagens());
+		}
 	}
 	
 	public void excluirCategoria(Categoria categoria)
@@ -156,6 +181,15 @@ public class CategoriaDAOSingleton
 		}
 		
 		return result;		
+	}
+	
+	public int gerarIdUnico()
+	{
+		int generated_id;
+		// entra em loop até gerar um id único
+		while ( ! ( getCategoriaById( generated_id = generateRandomInteger(1, 9999) ) == null ) );
+		
+		return generated_id;
 	}
 	
 	private int generateRandomInteger(int min, int max)

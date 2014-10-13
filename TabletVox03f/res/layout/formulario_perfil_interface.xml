@@ -8,7 +8,7 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="IDENTIFICAÇÃO"
+        android:text="@string/identificacao"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Nome" >
+        android:hint="@string/nome_text" >
 
         <requestFocus />
     </EditText>
@@ -35,13 +35,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Autor" />
+        android:hint="@string/autor" />
     
      <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CATEGORIAS"
+        android:text="@string/categorias_uppercase"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
@@ -57,7 +57,7 @@
 	    android:id="@+id/btnAddCategoria"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:text="Adicionar Categoria" />
+	    android:text="@string/add_categoria" />
 	
     <ListView
         android:id="@+id/listViewCat"

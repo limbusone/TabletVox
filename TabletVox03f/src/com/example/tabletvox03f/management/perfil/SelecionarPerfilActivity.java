@@ -29,9 +29,8 @@ public class SelecionarPerfilActivity extends ListaComBuscaManageActivity
 	protected void acaoDoEventoItemClick(AdapterView<?> parent, View v,
 			int position, long arg3)
 	{
-		// TODO Auto-generated method stub
 		Perfil pfl = (Perfil) parent.getItemAtPosition(position);
-		Toast.makeText(SelecionarPerfilActivity.this, "item: " + pfl.getNome(), Toast.LENGTH_SHORT).show();
+//		Toast.makeText(SelecionarPerfilActivity.this, "item: " + pfl.getNome(), Toast.LENGTH_SHORT).show();
 		// selecionar o perfil
 		selecionarPerfil(pfl);
 	}
@@ -61,8 +60,11 @@ public class SelecionarPerfilActivity extends ListaComBuscaManageActivity
 	private void selecionarPerfil(Perfil perfil)
 	{
 		Utils.PERFIL_ATIVO = perfil;
+		setResult(1);
+		finish();
 	}
 	
+	// callback ao voltar da tela adicionar /editar perfil
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
@@ -81,7 +83,7 @@ public class SelecionarPerfilActivity extends ListaComBuscaManageActivity
 		{
 			// chamar activity criar perfil
 			Intent intent = new Intent(this, FormularioPerfilActivity.class);
-			intent.putExtra("tipo_form", true); // true, para form do tipo 'criar' e false para form do tipo 'editar'
+			intent.putExtra("tipo_form", 0); // 0, para form do tipo 'criar' e 1 para form do tipo 'editar'
 			startActivityForResult(intent, 1);
 		}
 	}
@@ -89,7 +91,7 @@ public class SelecionarPerfilActivity extends ListaComBuscaManageActivity
 	@Override
 	protected String getOptionMenuTitle()
 	{
-		return "Criar Perfil";
+		return "Perfil";
 	}
 
 	@Override

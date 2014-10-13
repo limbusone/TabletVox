@@ -226,7 +226,6 @@ public class TelaBaseActivity extends Activity
 					} 
 					catch (InterruptedException e)
 					{
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					imgi.encerrarMediaPlayer();

@@ -6,7 +6,6 @@ import java.util.TimerTask;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.GridView;
@@ -38,29 +37,29 @@ import com.example.tabletvox03f.management.Opcoes;
 public class ModoVarreduraActivity extends TelaBaseActivity
 {
 	
-	private int estadoAtual;
+	protected int estadoAtual;
 	
-	private Timer animationTimer;
-	private int delayVarredura;
-	private int indiceItemPrincipal;
-	private int indiceItemFrase;
-	private boolean iteracaoExternaAtiva;
-	private boolean iteracaoInternaAtiva;
+	protected Timer animationTimer;
+	protected int delayVarredura;
+	protected int indiceItemPrincipal;
+	protected int indiceItemFrase;
+	protected boolean iteracaoExternaAtiva;
+	protected boolean iteracaoInternaAtiva;
 	
 		
-	private boolean iteracaoInternaPrincipalAtiva;
-	private boolean iteracaoInternaFraseAtiva;
-	private TimerTask taskVarreduraExterna;
-	private TimerTask taskVarreduraInterna;
+	protected boolean iteracaoInternaPrincipalAtiva;
+	protected boolean iteracaoInternaFraseAtiva;
+	protected TimerTask taskVarreduraExterna;
+	protected TimerTask taskVarreduraInterna;
 	
 	
-	private boolean mostrarComandos;
-	private boolean esconderComandos;
+	protected boolean mostrarComandos;
+	protected boolean esconderComandos;
 	
-	private boolean adicionarImagemFrase;
-	private boolean	acionarComando;
+	protected boolean adicionarImagemFrase;
+	protected boolean acionarComando;
 	
-	public void acaoDoEventoPrincipal()
+	protected void acaoDoEventoPrincipal()
 	{
 		
 		if (estadoAtual == 1 || estadoAtual == 2 /*|| estadoAtual == 3*/)
@@ -96,14 +95,9 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 						super.onPreExecute();
 						activeContext = ModoVarreduraActivity.this;
 						gridview 	= (GridView) ModoVarreduraActivity.this.findViewById(R.id.gridview);
-//						wview 		= (WebView) ModoVarreduraActivity.this.findViewById(R.id.webview);
 						pgrbar		= (ProgressBar) ModoVarreduraActivity.this.findViewById(R.id.progressBar1);
 						
 						pgrbar.setVisibility(View.VISIBLE);							
-						//WebView view = (WebView) MainActivity.this.findViewById(R.id.webview);
-//						wview.loadUrl("file:///android_asset/loading.gif");
-//						wview.setVisibility(View.VISIBLE);
-						//gridview = (GridView) MainActivity.this.findViewById(R.id.gridview);
 					}
 					
 				};
@@ -120,14 +114,9 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 						super.onPreExecute();
 						activeContext = ModoVarreduraActivity.this;
 						gridview 	= (GridView) ModoVarreduraActivity.this.findViewById(R.id.gridview);
-//						wview 		= (WebView) ModoVarreduraActivity.this.findViewById(R.id.webview);
 						pgrbar		= (ProgressBar) ModoVarreduraActivity.this.findViewById(R.id.progressBar1);
 						
 						pgrbar.setVisibility(View.VISIBLE);									
-						//WebView view = (WebView) MainActivity.this.findViewById(R.id.webview);
-//						wview.loadUrl("file:///android_asset/loading.gif");
-//						wview.setVisibility(View.VISIBLE);
-						//gridview = (GridView) MainActivity.this.findViewById(R.id.gridview);
 					}
 			
 				};
@@ -148,19 +137,12 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 					super.onPreExecute();
 					activeContext = ModoVarreduraActivity.this;
 					gridview 	= (GridView) ModoVarreduraActivity.this.findViewById(R.id.gridview);
-//					wview 		= (WebView) ModoVarreduraActivity.this.findViewById(R.id.webview);
 					pgrbar		= (ProgressBar) ModoVarreduraActivity.this.findViewById(R.id.progressBar1);
 					
 					pgrbar.setVisibility(View.VISIBLE);								
-					//WebView view = (WebView) MainActivity.this.findViewById(R.id.webview);
-//					wview.loadUrl("file:///android_asset/loading.gif");
-//					wview.setVisibility(View.VISIBLE);
-					//gridview = (GridView) MainActivity.this.findViewById(R.id.gridview);
 				}
 		
 			};
-			//Comandos.vaiParaProximaPagina(ModoTouchActivity.this, cixml);
-			//Comandos.vaiParaProximaPagina(cixml);
 			vaiParaProximaPagina(cixml);
 		}
 		else if (estadoAtual == 6) // adicionar imagem a frase / acionar comando
@@ -190,17 +172,11 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 		}		
 	}
 	
-	// evento principal relativo à localização da borda vermelha
-//	private OnClickListener principalEvento = new OnClickListener()
-//	{
-//
-//		@Override
-//		public void onClick(View v)
-//		{
-//			acaoDoEventoPrincipal();
-//		}
-//		
-//	};
+	
+	protected void onCreateSuper(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+	}	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -223,17 +199,6 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 		alternarEventoAoSelecionarImagemDeGridViewPrincipal();
 		
 		setEstadoVarredura(1);
-		
-//		RelativeLayout rLayoutPrincipal = (RelativeLayout) findViewById(R.id.layoutPrincipal);
-//		
-////		LinearLayout lLayoutCabecalho 	= (LinearLayout) findViewById(R.id.cabecalho);
-//		LinearLayout lLayoutFrase 		= (LinearLayout) findViewById(R.id.frase);
-//		
-////		GridView gridview = (GridView) findViewById(R.id.gridview);
-////		GridView gridview_frase = (GridView) findViewById(R.id.gridview_frase);
-//		
-//		Button btnNext 					= (Button) findViewById(R.id.btnNext);
-//		Button btnSHC 					= (Button) findViewById(R.id.btnShowHideCommands);
 		
 		if (!(copiarFraseGlobalParaFraseLocal()))
 			lista_imagens_frase = new ArrayList<ImgItem>();
@@ -278,12 +243,9 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 				super.onPreExecute();
 				activeContext = ModoVarreduraActivity.this;
 				gridview 	= (GridView) ModoVarreduraActivity.this.findViewById(R.id.gridview);
-//				wview 		= (WebView) ModoVarreduraActivity.this.findViewById(R.id.webview);
 				pgrbar		= (ProgressBar) ModoVarreduraActivity.this.findViewById(R.id.progressBar1);
 				
 				pgrbar.setVisibility(View.VISIBLE);		
-//				wview.loadUrl("file:///android_asset/loading.gif");
-//				wview.setVisibility(View.VISIBLE);
 			}
 			
 			// metodo que roda na UI Thread depois da atividade em background
@@ -292,7 +254,6 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 			{
 				if (ais_list != null)
 					gridview.setAdapter(new ImageAdapter(ModoVarreduraActivity.this, ais_list));
-				//wview.setVisibility(View.INVISIBLE);
 				pgrbar.setVisibility(View.GONE);
 				// ativa o timer de varredura
 				ModoVarreduraActivity.this.animationTimer.schedule(ModoVarreduraActivity.this.taskVarreduraExterna, 
@@ -314,12 +275,6 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 				super.onPreExecute();
 				activeContext = ModoVarreduraActivity.this;
 				gridview 	= (GridView) ModoVarreduraActivity.this.findViewById(R.id.gridview_atalhos);
-				//wview 		= (WebView) ModoVarreduraActivity.this.findViewById(R.id.webview);
-				
-				//WebView view = (WebView) MainActivity.this.findViewById(R.id.webview);
-				//wview.loadUrl("file:///android_asset/loading.gif");
-				//wview.setVisibility(View.VISIBLE);
-				//gridview = (GridView) MainActivity.this.findViewById(R.id.gridview);
 			}
 			
 		};
@@ -329,34 +284,12 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 		// aqui carrega-se o service de reprodução de som
 		sservice_intent = new Intent(this, SoundService.class);
 		
-		// associar os cliques dos controles ao evento principal
-		
-//		rLayoutPrincipal.setOnClickListener(principalEvento);
-//		lLayoutFrase.setOnClickListener(principalEvento);
-////		lLayoutCabecalho.setOnClickListener(principalEvento);
-//		
-////		gridview.setOnClickListener(principalEvento);
-////		gridview_frase.setOnClickListener(principalEvento);
-//		
-//
-//		btnNext.setOnClickListener(principalEvento);
-//		btnSHC.setOnClickListener(principalEvento);
-		
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu)
-	{
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.modo_varredura, menu);
-		return true;
-	}
-	
 	@Override
 	protected void onDestroy()
 	{
 		super.onDestroy();
-		//stopService(sservice_intent);
 		taskVarreduraExterna.cancel();
 		taskVarreduraInterna.cancel();
 		animationTimer.cancel();
@@ -450,7 +383,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 	}
 	
 	// metodo que descreve os estados
-	private void setEstadoVarredura(int estado)
+	protected void setEstadoVarredura(int estado)
 	{
 		
 		
@@ -528,7 +461,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 			
 	}
 	
-	private void iteracaoTimerGridViewPrincipal()
+	protected void iteracaoTimerGridViewPrincipal()
 	{
 		GridView gv  = (GridView) findViewById(R.id.gridview);
 		if (!(indiceItemPrincipal == gv.getChildCount()))
@@ -583,13 +516,13 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 		v.setBackgroundResource((s) ? R.drawable.borda : 0);
 	}
 	
-	private void resetIndices()
+	protected void resetIndices()
 	{
 		indiceItemPrincipal = indiceItemFrase = 0;
 	}
 	
 	// alternar varredura de externa pra interna ou vice versa
-	private void alternarVarredura()
+	protected void alternarVarredura()
 	{
 		if (iteracaoExternaAtiva)
 		{
@@ -610,7 +543,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 	
 	// alterna entre evento mostrar comandos e evento esconder comandos no botão
 	// btnShowHideCommands
-	private void alternarEventoBtnShowHideCommands()
+	protected void alternarEventoBtnShowHideCommands()
 	{
 		if (mostrarComandos)
 		{
@@ -631,7 +564,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 	
 	// alterna entre evento adicionar imagem a frase e evento acionar comando no
 	// gridview principal	
-	private void alternarEventoAoSelecionarImagemDeGridViewPrincipal()
+	protected void alternarEventoAoSelecionarImagemDeGridViewPrincipal()
 	{
 		if (adicionarImagemFrase)
 		{
@@ -652,7 +585,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 	}
 	
 	// transição da varredura externa para interna
-	private void entrar()
+	protected void entrar()
 	{
 		GridView gvf = (GridView) findViewById(R.id.gridview_frase);
 		
@@ -679,7 +612,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 	}
 
 	// transição da varredura interna para externa
-	private void sair()
+	protected void sair()
 	{
 		setEstadoVarredura(transicaoSairPartindoDe(estadoAtual));
 		alternarVarredura();
@@ -698,7 +631,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 		};		
 	}
 	
-	private class Task1 implements Runnable // codigo do timer task externo
+	protected class Task1 implements Runnable // codigo do timer task externo
 	{
 
 		@Override
@@ -709,7 +642,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 		
 	}
 	
-	private class Task2 implements Runnable // codigo do timer task interno
+	protected class Task2 implements Runnable // codigo do timer task interno
 	{
 
 		@Override
@@ -752,6 +685,18 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 			
 		}			
 	}
+	
+	@Override
+	protected void onRestart()
+	{
+		super.onRestart();
+		
+		if (!(copiarFraseGlobalParaFraseLocal()))
+			lista_imagens_frase = new ArrayList<ImgItem>();
+		else // transferindo as imagens globais para o gridview frase 
+			((GridView) findViewById(R.id.gridview_frase))
+			.setAdapter(new ImageAdapterFrase(lista_imagens_frase));
+	}		
 	
 	// metodo que intercepta os clicks na tela
 	@Override

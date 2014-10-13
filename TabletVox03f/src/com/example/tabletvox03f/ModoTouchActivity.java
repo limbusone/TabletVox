@@ -2,14 +2,8 @@ package com.example.tabletvox03f;
 
 import java.util.ArrayList;
 
-import com.example.tabletvox03f.R;
-import com.example.tabletvox03f.dal.CarregarImagensComandos;
-import com.example.tabletvox03f.dal.CarregarImagensTelas;
-import com.example.tabletvox03f.dal.XmlUtilsTelas;
-
-import android.os.Bundle;
 import android.content.Intent;
-import android.view.Menu;
+import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -17,6 +11,10 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ProgressBar;
+
+import com.example.tabletvox03f.dal.CarregarImagensComandos;
+import com.example.tabletvox03f.dal.CarregarImagensTelas;
+import com.example.tabletvox03f.dal.XmlUtilsTelas;
 
 public class ModoTouchActivity extends TelaBaseActivity 
 {
@@ -31,17 +29,16 @@ public class ModoTouchActivity extends TelaBaseActivity
 	};
 
 	// evento remover a imagem da frase
-	private OnItemClickListener removeImagemFraseEvento = new OnItemClickListener()
+	protected OnItemClickListener removeImagemFraseEvento = new OnItemClickListener()
 	{
 		public void onItemClick(AdapterView<?> parent, View v, int position, long id)
 		{
-			//ImgItem imgi = (ImgItem) v;
 			removerImagemDaFrase(position);
 		}
 	};
 	
 	// evento acionar comando da lista de imagens-comandos
-	private OnItemClickListener startImagemComando = new OnItemClickListener()
+	protected OnItemClickListener startImagemComando = new OnItemClickListener()
 	{
 		public void onItemClick(AdapterView<?> parent, View v, int position, long id)
 		{
@@ -50,7 +47,7 @@ public class ModoTouchActivity extends TelaBaseActivity
 	};
 	
 	// vai para a proxima pagina
-	private OnClickListener proximaPaginaEvento = new OnClickListener()
+	protected OnClickListener proximaPaginaEvento = new OnClickListener()
 	{
 		public void onClick(View v)
 		{
@@ -63,19 +60,12 @@ public class ModoTouchActivity extends TelaBaseActivity
 					super.onPreExecute();
 					activeContext = ModoTouchActivity.this;
 					gridview 	= (GridView) ModoTouchActivity.this.findViewById(R.id.gridview);
-					//wview 		= (WebView) ModoTouchActivity.this.findViewById(R.id.webview);
 					pgrbar		= (ProgressBar) ModoTouchActivity.this.findViewById(R.id.progressBar1);
 					
 					pgrbar.setVisibility(View.VISIBLE);
-					//WebView view = (WebView) MainActivity.this.findViewById(R.id.webview);
-					//wview.loadUrl("file:///android_asset/loading.gif");
-					//wview.setVisibility(View.VISIBLE);
-					//gridview = (GridView) MainActivity.this.findViewById(R.id.gridview);
 				}
 				
 			};
-			//Comandos.vaiParaProximaPagina(ModoTouchActivity.this, cixml);
-			//Comandos.vaiParaProximaPagina(cixml);
 			vaiParaProximaPagina(cit);
 		}
 	};
@@ -107,17 +97,11 @@ public class ModoTouchActivity extends TelaBaseActivity
 					super.onPreExecute();
 					activeContext = ModoTouchActivity.this;
 					gridview 	= (GridView) ModoTouchActivity.this.findViewById(R.id.gridview);
-//					wview 		= (WebView) ModoTouchActivity.this.findViewById(R.id.webview);
 					pgrbar 		= (ProgressBar) ModoTouchActivity.this.findViewById(R.id.progressBar1);
 					
 					pgrbar.setVisibility(View.VISIBLE);
-					//WebView view = (WebView) MainActivity.this.findViewById(R.id.webview);
-//					wview.loadUrl("file:///android_asset/loading.gif");
-//					wview.setVisibility(View.VISIBLE);
-					//gridview = (GridView) MainActivity.this.findViewById(R.id.gridview);
 				}
 			};
-			//Comandos.mostrarComandos(cixmlc);
 			cic.execute(false); // false: mostrar todos os comandos
 		}
 	};
@@ -147,35 +131,28 @@ public class ModoTouchActivity extends TelaBaseActivity
 					super.onPreExecute();
 					activeContext = ModoTouchActivity.this;
 					gridview 	= (GridView) ModoTouchActivity.this.findViewById(R.id.gridview);
-					//wview 		= (WebView) ModoTouchActivity.this.findViewById(R.id.webview);
 					pgrbar		= (ProgressBar) ModoTouchActivity.this.findViewById(R.id.progressBar1);
 					
 					pgrbar.setVisibility(View.VISIBLE);					
-					//WebView view = (WebView) MainActivity.this.findViewById(R.id.webview);
-//					wview.loadUrl("file:///android_asset/loading.gif");
-//					wview.setVisibility(View.VISIBLE);
-					//gridview = (GridView) MainActivity.this.findViewById(R.id.gridview);
 				}
 				
 			};
 			cixml.execute(current_page);
-			//Comandos.mostrarComandos(cixmlc);
 		}
 	};	
 	
 	
+	protected void onCreateSuper(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
-		//setContentView(R.layout.activity_modo_touch);
 		setContentView(R.layout.telas_interface);
 
-		//Utils.MODO_ATIVO = "modo_touch";
-		//Utils.TELAS_NOME_ARQUIVO_XML_ATIVO = "perfil01";
-		
-		//Utils.TELAS_NOME_ARQUIVO_XML_ATIVO = Utils.PERFIL_ATIVO;
 		
 		// inicializa paginação
 		current_page = init_page = 1;
@@ -191,8 +168,7 @@ public class ModoTouchActivity extends TelaBaseActivity
 		if (!(copiarFraseGlobalParaFraseLocal()))
 			lista_imagens_frase = new ArrayList<ImgItem>();
 		else // transferindo as imagens globais para o gridview frase 
-			((GridView) findViewById(R.id.gridview_frase))
-			.setAdapter(new ImageAdapterFrase(lista_imagens_frase));			
+			gridview_frase.setAdapter(new ImageAdapterFrase(lista_imagens_frase));			
 
 		// aqui carregam-se as imagens da primeira pagina
 		CarregarImagensTelas cixml = new CarregarImagensTelas()
@@ -228,19 +204,10 @@ public class ModoTouchActivity extends TelaBaseActivity
 				super.onPreExecute();
 				activeContext = ModoTouchActivity.this;
 				gridview 	= (GridView) ModoTouchActivity.this.findViewById(R.id.gridview_atalhos);
-				//wview 		= (WebView) ModoTouchActivity.this.findViewById(R.id.webview);
-				
-				//WebView view = (WebView) MainActivity.this.findViewById(R.id.webview);
-				//wview.loadUrl("file:///android_asset/loading.gif");
-				//wview.setVisibility(View.VISIBLE);
-				//gridview = (GridView) MainActivity.this.findViewById(R.id.gridview);
 			}
 			
 		};
 		cixmlc.execute(true); // true: mostrar atalhos
-		
-		// especifica o objeto de TelaBaseActivity para classe Comandos
-		//Comandos.actb = this;
 		
 		// aqui carrega-se o service de reprodução de som
 		sservice_intent = new Intent(this, SoundService.class);
@@ -263,13 +230,16 @@ public class ModoTouchActivity extends TelaBaseActivity
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) 
+	protected void onRestart()
 	{
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.modo_touch, menu);
-		return true;
-	}
-	
+		super.onRestart();
+		
+		if (!(copiarFraseGlobalParaFraseLocal()))
+			lista_imagens_frase = new ArrayList<ImgItem>();
+		else // transferindo as imagens globais para o gridview frase 
+			((GridView) findViewById(R.id.gridview_frase))
+			.setAdapter(new ImageAdapterFrase(lista_imagens_frase));
+	}	
 	
 	@Override
 	protected void onDestroy()

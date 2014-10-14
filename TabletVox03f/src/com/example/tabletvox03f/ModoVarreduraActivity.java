@@ -686,6 +686,12 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 		}			
 	}
 	
+	
+	protected void onRestartSuper()
+	{
+		super.onRestart();
+	}
+	
 	@Override
 	protected void onRestart()
 	{

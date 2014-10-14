@@ -297,42 +297,47 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 	@Override
 	protected void onRestart()
 	{
-		super.onRestart();
+		onRestartSuper();
 		
 		Utils.TELAS_NOME_ARQUIVO_XML_ATIVO = Utils.PERFIL_ATIVO.getNome() + "_categorias";
 		
+		if (!(copiarFraseGlobalParaFraseLocal()))
+			lista_imagens_frase = new ArrayList<ImgItem>();
+		else // transferindo as imagens globais para o gridview frase 
+			((GridView) findViewById(R.id.gridview_frase))
+			.setAdapter(new ImageAdapterFrase(lista_imagens_frase));		
+		
 		// quando a interface desta activity voltar ao foco, reiniciar/recriar o timer
-		if (iteracaoInternaAtiva)
-		{
-			taskVarreduraInterna = new TimerTask()
-			{
 	
-				@Override
-				public void run()
-				{
-					runOnUiThread(new Task2());
-				}
-				
-			};
-			animationTimer.schedule(taskVarreduraInterna, 0, delayVarredura);
-		}
-		else if (iteracaoExternaAtiva)
+		// task do timer de varredura externa
+		taskVarreduraExterna = new TimerTask()
 		{
-			// task do timer de varredura externa
-			taskVarreduraExterna = new TimerTask()
-			{
 
-				@Override
-				public void run()
-				{	
-					// o timer tem que rodar na UI Thread porque se não não funciona!
-					runOnUiThread(new Task1());
-				}
-				
-			};
+			@Override
+			public void run()
+			{	
+				// o timer tem que rodar na UI Thread porque se não não funciona!
+				runOnUiThread(new Task1());
+			}
 			
+		};
+		
+		taskVarreduraInterna = new TimerTask()
+		{
+
+			@Override
+			public void run()
+			{
+				runOnUiThread(new Task2());
+			}
+			
+		};
+		
+		
+		if (iteracaoInternaAtiva)
+			animationTimer.schedule(taskVarreduraInterna, 0, delayVarredura);
+		else if (iteracaoExternaAtiva)
 			animationTimer.schedule(taskVarreduraExterna, 0, delayVarredura);
-		}
 	}
 	
 }

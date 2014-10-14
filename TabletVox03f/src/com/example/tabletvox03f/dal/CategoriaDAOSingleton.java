@@ -22,41 +22,41 @@ public class CategoriaDAOSingleton
 	
 	private void inicializar()
 	{
-		listaCategoria.add
-		(new Categoria
-			(
-				1, 
-				"animais", 
-				AssocImagemSomDAOSingleton.getInstance().getAssocImagemSomById(1)
-			)
-		);
-		
-		listaCategoria.add
-		(new Categoria
-			(
-				2, 
-				"pessoas", 
-				AssocImagemSomDAOSingleton.getInstance().getAssocImagemSomById(2)
-			)
-		);
-		
-		listaCategoria.add
-		(new Categoria
-			(
-				3, 
-				"banheiro", 
-				AssocImagemSomDAOSingleton.getInstance().getAssocImagemSomById(3)
-			)
-		);
-
-		listaCategoria.add
-		(new Categoria
-			(
-				4, 
-				"bebidas", 
-				new AssocImagemSom("bebidas", "BEBIDAS", "BEBIDAS", "jpg", 'c', 0)
-			)
-		);
+//		listaCategoria.add
+//		(new Categoria
+//			(
+//				1, 
+//				"animais", 
+//				AssocImagemSomDAOSingleton.getInstance().getAssocImagemSomById(1)
+//			)
+//		);
+//		
+//		listaCategoria.add
+//		(new Categoria
+//			(
+//				2, 
+//				"pessoas", 
+//				AssocImagemSomDAOSingleton.getInstance().getAssocImagemSomById(2)
+//			)
+//		);
+//		
+//		listaCategoria.add
+//		(new Categoria
+//			(
+//				3, 
+//				"banheiro", 
+//				AssocImagemSomDAOSingleton.getInstance().getAssocImagemSomById(3)
+//			)
+//		);
+//
+//		listaCategoria.add
+//		(new Categoria
+//			(
+//				4, 
+//				"bebidas", 
+//				new AssocImagemSom("bebidas", "BEBIDAS", "BEBIDAS", "jpg", 'c', 0)
+//			)
+//		);
 		
 	}
 	

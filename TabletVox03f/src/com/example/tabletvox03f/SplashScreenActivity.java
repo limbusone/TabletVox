@@ -18,34 +18,61 @@ public class SplashScreenActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		
-		// carrega dados iniciais do aplicativo caso este não esteja já carregado
-		if (!(Utils.isAppCarregado(this)))
+//		// carrega dados iniciais do aplicativo caso este não esteja já carregado
+//		if (!(Utils.isAppCarregado(this)))
+//		{
+//			setContentView(R.layout.loading_interface);
+//
+//			// thread de carregamento inicial dos dados do aplicativo
+//			new Thread(new Runnable()
+//			{
+//
+//				@Override
+//				public void run()
+//				{
+//					Utils.carregarDadosIniciais(SplashScreenActivity.this);
+//
+//					// acao pos carregamento
+//					mHandler.postDelayed(new Runnable()
+//					{
+//						public void run()
+//						{
+//							// abrindo menu principal
+//							SplashScreenActivity.this.abrirMainMenu();
+//						}
+//					}, SPLASH_TIME_OUT);
+//				}
+//			}).start();
+//		}
+//		else // caso já esteja carregado, simplesmente vai para o menu principal
+//			abrirMainMenu();
+		
+		setContentView(R.layout.loading_interface);
+
+		// thread de carregamento inicial dos dados do aplicativo
+		new Thread(new Runnable()
 		{
-			setContentView(R.layout.loading_interface);
 
-			// thread de carregamento inicial dos dados do aplicativo
-			new Thread(new Runnable()
+			@Override
+			public void run()
 			{
-
-				@Override
-				public void run()
-				{
+				if (!(Utils.isAppCarregado(SplashScreenActivity.this)))
 					Utils.carregarDadosIniciais(SplashScreenActivity.this);
+				
+				Utils.inicializarMock(SplashScreenActivity.this);
 
-					// acao pos carregamento
-					mHandler.postDelayed(new Runnable()
+				// acao pos carregamento
+				mHandler.postDelayed(new Runnable()
+				{
+					public void run()
 					{
-						public void run()
-						{
-							// abrindo menu principal
-							SplashScreenActivity.this.abrirMainMenu();
-						}
-					}, SPLASH_TIME_OUT);
-				}
-			}).start();
-		}
-		else // caso já esteja carregado, simplesmente vai para o menu principal
-			abrirMainMenu();
+						// abrindo menu principal
+						SplashScreenActivity.this.abrirMainMenu();
+					}
+				}, SPLASH_TIME_OUT);
+			}
+		}).start();
+		
 
 	}
 	

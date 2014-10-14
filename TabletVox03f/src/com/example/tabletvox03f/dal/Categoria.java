@@ -29,6 +29,14 @@ public class Categoria implements Parcelable
 		this.ais 	= ais;
 	}
 	
+	public Categoria(int id, String nome, AssocImagemSom ais, ArrayList<AssocImagemSom> imagens)
+	{
+		this.id 		= id;
+		this.nome 		= nome;
+		this.ais 		= ais;
+		this.imagens 	= imagens;
+	}
+	
 	public Categoria(String nome)
 	{
 		this.nome = nome;

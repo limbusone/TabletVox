@@ -66,7 +66,7 @@ public class ModoTouchActivity extends TelaBaseActivity
 				}
 				
 			};
-			vaiParaProximaPagina(cit);
+			vaiParaProximaPagina(cit, 0, current_categoriaId);
 		}
 	};
 	
@@ -137,7 +137,7 @@ public class ModoTouchActivity extends TelaBaseActivity
 				}
 				
 			};
-			cixml.execute(current_page);
+			cixml.execute(current_page, 0, current_categoriaId);
 		}
 	};	
 	
@@ -153,10 +153,12 @@ public class ModoTouchActivity extends TelaBaseActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.telas_interface);
 
+		current_categoriaId = (int) getIntent().getLongExtra("categoriaId", 0);
 		
 		// inicializa paginação
 		current_page = init_page = 1;
-		final_page = (new XmlUtilsTelas(this, Utils.TELAS_NOME_ARQUIVO_XML_ATIVO, "root")).getLastPage();
+		//final_page = (new XmlUtilsTelas(this, Utils.TELAS_NOME_ARQUIVO_XML_ATIVO, "root")).getLastPage();
+		final_page = 1;
 		
 		GridView gridview = (GridView) findViewById(R.id.gridview);
 		GridView gridview_frase = (GridView) findViewById(R.id.gridview_frase);
@@ -191,7 +193,7 @@ public class ModoTouchActivity extends TelaBaseActivity
 			}
 	
 		};
-		cixml.execute(init_page);
+		cixml.execute(init_page, 0, current_categoriaId);
 		
 		// aqui carregam-se as imagens-comandos que sao atalhos
 		CarregarImagensComandos cixmlc = new CarregarImagensComandos()

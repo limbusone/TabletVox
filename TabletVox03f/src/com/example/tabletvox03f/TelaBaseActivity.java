@@ -20,6 +20,8 @@ public class TelaBaseActivity extends Activity
 	protected int init_page;
 	protected int final_page;
 	private Executor ex;
+	
+	protected int current_categoriaId;
 
 	public TelaBaseActivity()
 	{
@@ -74,6 +76,16 @@ public class TelaBaseActivity extends Activity
 		this.sservice_intent = sservice_intent;
 	}
 	
+	public int getCurrent_categoriaId()
+	{
+		return current_categoriaId;
+	}
+
+	public void setCurrent_categoriaId(int current_categoriaId)
+	{
+		this.current_categoriaId = current_categoriaId;
+	}
+
 	// copia frase global para frase local
 	@SuppressWarnings("unchecked")
 	public boolean copiarFraseGlobalParaFraseLocal()
@@ -103,12 +115,14 @@ public class TelaBaseActivity extends Activity
 		if (Opcoes.isTocar_som_ao_selecionar_imagem())
 			imgi.tocarSom(this);
 
-		carregarCategoriaModoTouch(imgi.getAssocImagemSom().getDesc());
+		//carregarCategoriaModoTouch(imgi.getAssocImagemSom().getDesc());
+		carregarCategoriaModoTouch(imgi.getAssocImagemSom().getCategoriaId());
 	}
 	
 	public void carregarCategoriaModoTouch(long id)
 	{
 		Intent intent = new Intent(this, ModoTouchActivity.class);
+		intent.putExtra("categoriaId", id);
 		startActivity(intent); 
 	}
 	
@@ -128,8 +142,16 @@ public class TelaBaseActivity extends Activity
 		if (Opcoes.isTocar_som_ao_selecionar_imagem())
 			imgi.tocarSom(this);
 		
-		carregarCategoriaModoVarredura(imgi.getAssocImagemSom().getDesc());
+		//carregarCategoriaModoVarredura(imgi.getAssocImagemSom().getDesc());
+		carregarCategoriaModoVarredura(imgi.getAssocImagemSom().getCategoriaId());
 	}
+	
+	public void carregarCategoriaModoVarredura(long id)
+	{
+		Intent intent = new Intent(this, ModoVarreduraActivity.class);
+		intent.putExtra("categoriaId", id);
+		startActivity(intent); 
+	}	
 	
 	public boolean hasItens(GridView gv)
 	{
@@ -200,6 +222,32 @@ public class TelaBaseActivity extends Activity
 		ast.execute(cp);
 		Toast.makeText(this, "Página: " + Integer.toString(cp), Toast.LENGTH_SHORT).show();
 	}
+	
+	// paginacao circular
+	public void vaiParaProximaPagina(AsyncTask<Integer, ?, ?> ast, int opcao)
+	{
+		int cp = current_page; 
+		
+		if (++cp <= final_page)
+			current_page = cp;
+		else
+			current_page = cp = 1; // aqui volta para a primeira pagina
+		ast.execute(cp, opcao);
+		Toast.makeText(this, "Página: " + Integer.toString(cp), Toast.LENGTH_SHORT).show();
+	}
+	
+	// paginacao circular
+	public void vaiParaProximaPagina(AsyncTask<Integer, ?, ?> ast, int opcao, int categoriaId)
+	{
+		int cp = current_page; 
+		
+		if (++cp <= final_page)
+			current_page = cp;
+		else
+			current_page = cp = 1; // aqui volta para a primeira pagina
+		ast.execute(cp, opcao, categoriaId);
+		Toast.makeText(this, "Página: " + Integer.toString(cp), Toast.LENGTH_SHORT).show();
+	}	
 	
 	public void tocarSomFrase()
 	{

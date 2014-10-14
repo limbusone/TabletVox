@@ -1,6 +1,5 @@
 package com.example.tabletvox03f;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -9,11 +8,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tabletvox03f.dal.AssocImagemSom;
 import com.example.tabletvox03f.dal.AssocImagemSomDAO;
-import com.example.tabletvox03f.dal.AssocImagemSomDAOSingleton;
 import com.example.tabletvox03f.dal.Categoria;
-import com.example.tabletvox03f.dal.CategoriaAssocImagemSom;
 import com.example.tabletvox03f.dal.CategoriaDAOSingleton;
 import com.example.tabletvox03f.dal.FilesIO;
 import com.example.tabletvox03f.dal.Perfil;
@@ -27,7 +23,8 @@ public class Utils
 	
 	//public static String PERFIL_ATIVO_STR = "perfil01"; // default : perfil01
 	
-	public static Perfil PERFIL_ATIVO = new Perfil(1, "perfil01", "default_author"); // perfil default
+	//public static Perfil PERFIL_ATIVO = new Perfil(1, "perfil01", "default_author"); // perfil default
+	public static Perfil PERFIL_ATIVO = PerfilDAOSingleton.getInstance().getPerfilById(1); // perfil default
 	
 	public static String EXTENSAO_ARQUIVO_SOM = "wav";
 	
@@ -102,69 +99,94 @@ public class Utils
 	}
 	
 	
-	public static void inicializarBDSingleton()
+	public static void inicializarMock(Context context)
 	{
-		AssocImagemSomDAOSingleton dao_ais 	= AssocImagemSomDAOSingleton.getInstance();
-		CategoriaDAOSingleton dao_categoria = CategoriaDAOSingleton.getInstance();
-		PerfilDAOSingleton dao_perfil		= PerfilDAOSingleton.getInstance(); 
+		AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(context);
 		
-		AssocImagemSom ais_para_categoria = new AssocImagemSom("alimentos", "ALIMENT", "ALIMENT", "jpg", 'c', 0);
-		dao_ais.incluirAssocImagemSomWithRandomGeneratedID(new AssocImagemSom(ais_para_categoria));
+		dao_ais.open();
 		
-		ArrayList<CategoriaAssocImagemSom> cat_ais_list = new ArrayList<CategoriaAssocImagemSom>();
+		ArrayList<Categoria> categorias = new ArrayList<Categoria>();
 		
+		Categoria categoria = null;
 		
-		cat_ais_list.add
-		(
-			new CategoriaAssocImagemSom
-			(
-				null, 
-				dao_ais.incluirAssocImagemSomWithRandomGeneratedID(new AssocImagemSom("arroz", 	"af357", 	"af357", 	"jpg", 'n', 0)), 
-				1
-			)
-		);
-		cat_ais_list.add
-		(
-			new CategoriaAssocImagemSom
-			(
-				null, 
-				dao_ais.incluirAssocImagemSomWithRandomGeneratedID(new AssocImagemSom("batata", 	"bf190", 	"bf190", 	"jpg", 'n', 0)), 
-				1
-			)
-		);
-		cat_ais_list.add
-		(
-			new CategoriaAssocImagemSom
-			(
-				null, 
-				dao_ais.incluirAssocImagemSomWithRandomGeneratedID(new AssocImagemSom("carne", 	"cf133_1", 	"cf133_1", 	"jpg", 'n', 0)), 
-				1
-			)
-		);
-		cat_ais_list.add
-		(
-			new CategoriaAssocImagemSom
-			(
-				null, 
-				dao_ais.incluirAssocImagemSomWithRandomGeneratedID(new AssocImagemSom("churrasco", "cf286_1", 	"cf286_1", 	"jpg", 'n', 0)), 
-				1
-			)
-		);
-		cat_ais_list.add
-		(
-			new CategoriaAssocImagemSom
-			(
-				null, 
-				dao_ais.incluirAssocImagemSomWithRandomGeneratedID(new AssocImagemSom("frango", 	"ff118", 	"ff118", 	"jpg", 'n', 0)), 
-				1
-			)
-		);
+		// alimentos
+		CategoriaDAOSingleton.getInstance().
+		incluirCategoria(categoria = new Categoria(1, "alimentos", dao_ais.getAISById(29), dao_ais.getAISListbyIdInterval(43, 54)));
+		categorias.add(categoria);
 		
-		dao_categoria.incluirCategoriaWithRandomGeneratedID(new Categoria(ais_para_categoria, "Alimentos", cat_ais_list));
+		// animais
+		CategoriaDAOSingleton.getInstance().
+		incluirCategoria(categoria = new Categoria(2, "animais", dao_ais.getAISById(30), dao_ais.getAISListbyIdInterval(55, 66)));
+		categorias.add(categoria);
 		
-		Perfil perfil = new Perfil(PERFIL_ATIVO);
-		perfil.setCategorias(dao_categoria.getAll());
-		dao_perfil.incluirPerfilWithRandomGeneratedID(new Perfil(perfil));
+		// aparelhos
+		CategoriaDAOSingleton.getInstance().
+		incluirCategoria(categoria = new Categoria(3, "aparelhos", dao_ais.getAISById(31), dao_ais.getAISListbyIdInterval(67, 75)));
+		categorias.add(categoria);
+		
+		// banheiro
+		CategoriaDAOSingleton.getInstance().
+		incluirCategoria(categoria = new Categoria(4, "banheiro", dao_ais.getAISById(32), dao_ais.getAISListbyIdInterval(76, 87)));
+		categorias.add(categoria);
+		
+		// bebidas
+		CategoriaDAOSingleton.getInstance().
+		incluirCategoria(categoria = new Categoria(5, "bebidas", dao_ais.getAISById(33), dao_ais.getAISListbyIdInterval(88, 94)));
+		categorias.add(categoria);
+		
+		// corpo
+		CategoriaDAOSingleton.getInstance().
+		incluirCategoria(categoria = new Categoria(6, "corpo", dao_ais.getAISById(34), dao_ais.getAISListbyIdInterval(95, 106)));
+		categorias.add(categoria);
+		
+		// familia 1
+		CategoriaDAOSingleton.getInstance().
+		incluirCategoria(categoria = new Categoria(7, "familia 1", dao_ais.getAISById(35), dao_ais.getAISListbyIdInterval(107, 122)));
+		categorias.add(categoria);
+		
+		// familia 2
+		CategoriaDAOSingleton.getInstance().
+		incluirCategoria(categoria = new Categoria(8, "familia 2", dao_ais.getAISById(36), dao_ais.getAISListbyIdInterval(123, 136)));
+		categorias.add(categoria);		
+		
+		// frutas
+		CategoriaDAOSingleton.getInstance().
+		incluirCategoria(categoria = new Categoria(9, "frutas", dao_ais.getAISById(37), dao_ais.getAISListbyIdInterval(137, 148)));
+		categorias.add(categoria);		
+		
+		// lugares
+		CategoriaDAOSingleton.getInstance().
+		incluirCategoria(categoria = new Categoria(10, "lugares", dao_ais.getAISById(38), dao_ais.getAISListbyIdInterval(149, 160)));
+		categorias.add(categoria);		
+		
+		// pessoas
+		CategoriaDAOSingleton.getInstance().
+		incluirCategoria(categoria = new Categoria(11, "pessoas", dao_ais.getAISById(39), dao_ais.getAISListbyIdInterval(161, 172)));
+		categorias.add(categoria);
+		
+		// sensacoes
+		CategoriaDAOSingleton.getInstance().
+		incluirCategoria(categoria = new Categoria(12, "sensacoes", dao_ais.getAISById(40), dao_ais.getAISListbyIdInterval(173, 184)));
+		categorias.add(categoria);
+
+		// transporte
+		CategoriaDAOSingleton.getInstance().
+		incluirCategoria(categoria = new Categoria(13, "transporte", dao_ais.getAISById(41), dao_ais.getAISListbyIdInterval(185, 196)));
+		categorias.add(categoria);		
+		
+		// verbos
+		CategoriaDAOSingleton.getInstance().
+		incluirCategoria(categoria = new Categoria(14, "verbos", dao_ais.getAISById(42), dao_ais.getAISListbyIdInterval(197, 208)));
+		categorias.add(categoria);
+		
+//		categoria = CategoriaDAOSingleton.getInstance().getCategoriaById(2);
+//		categoria.setImagens(dao_ais.getAISListbyIdInterval(161, 172));
+//		categorias.add(categoria);
+		
+		PerfilDAOSingleton.getInstance().getPerfilById(1).setCategorias(categorias);
+		
+		dao_ais.close();
+		
 	}
 	
 	// carregar primeiros dados no banco de dados
@@ -419,71 +441,5 @@ public class Utils
 		
 		dao_ais.create("comando voltar", "cmd11", "cmd11", "jpg", 'n', 2);
 	}	
-	/**
-	 * Retrieve all IDs of the Resource-Classes (like
-	 * <code>R.drawable.class</code>) you pass to this function.
-	 * 
-	 * @param aClass
-	 *            : Class from R.XXX, like: <br>
-	 *            <ul>
-	 *            <li><code>R.drawable.class</code></li>
-	 *            <li><code>R.string.class</code></li>
-	 *            <li><code>R.array.class</code></li>
-	 *            <li>and the rest...</li>
-	 *            </ul>
-	 * @return array of all IDs of the R.xyz.class passed to this function.
-	 * @throws IllegalArgumentException
-	 *             on bad class passed. <br>
-	 * <br>
-	 *             <b>Example-Call:</b><br>
-	 *             <code>int[] allDrawableIDs = getAllResourceIDs(R.drawable.class);</code>
-	 * <br>
-	 *             or<br>
-	 *             <code>int[] allStringIDs = getAllResourceIDs(R.string.class);</code>
-	 */
-	public static int[] getAllResourceIDs(Class<?> aClass)
-			throws IllegalArgumentException {
-		/* Get all Fields from the class passed. */
-		Field[] IDFields = aClass.getFields();
-		int length = IDFields.length;
-		/* int-Array capable of storing all ids. */
-		int[] IDs = new int[length];
 
-		try {
-			/* Loop through all Fields and store id to array. */
-			for (int i = 0; i < length; i++) {
-				/*
-				 * All fields within the subclasses of R are Integers, so we
-				 * need no type-check here.
-				 */
-
-				// pass 'null' because class is static
-				IDs[i] = IDFields[i].getInt(null);
-			}
-		} catch (Exception e) {
-			/* Exception will only occur on bad class submitted. */
-			throw new IllegalArgumentException();
-		}
-		return IDs;
-	}
-
-	public static String[] getAllResourceNames(Class<?> aClass)
-			throws IllegalArgumentException {
-		/* Get all Fields from the class passed. */
-		Field[] IDFields = aClass.getFields();
-		int length = IDFields.length;
-		/* String-Array capable of storing all Names. */
-		String[] Names = new String[length];
-
-		try {
-			/* Loop through all Fields and store name to array. */
-			for (int i = 0; i < length; i++)
-				Names[i] = IDFields[i].getName();
-		} catch (Exception e) {
-			/* Exception will only occur on bad class submitted. */
-			throw new IllegalArgumentException();
-		}
-
-		return Names;
-	}
 }

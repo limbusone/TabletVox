@@ -12,7 +12,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.tabletvox03f.dal.FilesIO;
 import com.example.tabletvox03f.management.assocImagemSom.ListaImagensActivity;
 import com.example.tabletvox03f.management.categoria.ListaCategoriasActivity;
 import com.example.tabletvox03f.management.perfil.SelecionarPerfilActivity;
@@ -41,22 +40,23 @@ public class MainMenuActivity extends Activity
 			public void onClick(View v)
 			{
 				Intent intent;
-				FilesIO fio = new FilesIO(MainMenuActivity.this);
+				//FilesIO fio = new FilesIO(MainMenuActivity.this);
 				
 				// verifica-se a existencia do arquivo nomedoperfil_categorias.xml
 				// se existir significa que o perfil é categorizado
 				//if (Utils.perfil_categorizado_xml(MainMenuActivity.this))
-				if (fio.perfil_categorizado_xml_exists())
-				{
-					//Utils.TELAS_NOME_ARQUIVO_XML_ATIVO = Utils.PERFIL_ATIVO + "_categorias";
-					intent = new Intent(MainMenuActivity.this, ModoTouchCategoriasActivity.class);
-				} 
-				else // perfil nao categorizado
-				{
-					Utils.TELAS_NOME_ARQUIVO_XML_ATIVO = Utils.PERFIL_ATIVO.getNome();
-					intent = new Intent(MainMenuActivity.this, ModoTouchActivity.class);
-				}
+//				if (fio.perfil_categorizado_xml_exists())
+//				{
+//					//Utils.TELAS_NOME_ARQUIVO_XML_ATIVO = Utils.PERFIL_ATIVO + "_categorias";
+//					intent = new Intent(MainMenuActivity.this, ModoTouchCategoriasActivity.class);
+//				} 
+//				else // perfil nao categorizado
+//				{
+//					Utils.TELAS_NOME_ARQUIVO_XML_ATIVO = Utils.PERFIL_ATIVO.getNome();
+//					intent = new Intent(MainMenuActivity.this, ModoTouchActivity.class);
+//				}
 				
+				intent = new Intent(MainMenuActivity.this, ModoTouchCategoriasActivity.class);
 				
 				startActivity(intent);
 			}
@@ -71,21 +71,23 @@ public class MainMenuActivity extends Activity
 			{
 				
 				Intent intent;
-				FilesIO fio = new FilesIO(MainMenuActivity.this);
+				//FilesIO fio = new FilesIO(MainMenuActivity.this);
 				
 				// verifica-se a existencia do arquivo nomedoperfil_categorias.xml
 				// se existir significa que o perfil é categorizado
 				//if (Utils.perfil_categorizado_xml(MainMenuActivity.this))
-				if (fio.perfil_categorizado_xml_exists())
-				{
-					//Utils.TELAS_NOME_ARQUIVO_XML_ATIVO = Utils.PERFIL_ATIVO + "_categorias";
-					intent = new Intent(MainMenuActivity.this, ModoVarreduraCategoriasActivity.class);
-				} 
-				else // perfil nao categorizado
-				{
-					Utils.TELAS_NOME_ARQUIVO_XML_ATIVO = Utils.PERFIL_ATIVO.getNome();
-					intent = new Intent(MainMenuActivity.this, ModoVarreduraActivity.class);
-				}				
+//				if (fio.perfil_categorizado_xml_exists())
+//				{
+//					//Utils.TELAS_NOME_ARQUIVO_XML_ATIVO = Utils.PERFIL_ATIVO + "_categorias";
+//					intent = new Intent(MainMenuActivity.this, ModoVarreduraCategoriasActivity.class);
+//				} 
+//				else // perfil nao categorizado
+//				{
+//					Utils.TELAS_NOME_ARQUIVO_XML_ATIVO = Utils.PERFIL_ATIVO.getNome();
+//					intent = new Intent(MainMenuActivity.this, ModoVarreduraActivity.class);
+//				}				
+				
+				intent = new Intent(MainMenuActivity.this, ModoVarreduraCategoriasActivity.class);
 				
 				startActivity(intent);
 			}

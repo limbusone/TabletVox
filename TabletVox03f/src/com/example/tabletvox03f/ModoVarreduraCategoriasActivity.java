@@ -12,7 +12,6 @@ import android.widget.ProgressBar;
 import com.example.tabletvox03f.dal.AssocImagemSom;
 import com.example.tabletvox03f.dal.CarregarImagensComandos;
 import com.example.tabletvox03f.dal.CarregarImagensTelas;
-import com.example.tabletvox03f.dal.XmlUtilsTelas;
 import com.example.tabletvox03f.management.Opcoes;
 
 public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
@@ -83,7 +82,7 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 			
 				};
 				
-				cixml.execute(current_page);					
+				cixml.execute(current_page, 1);					
 			}
 			alternarEventoBtnShowHideCommands();
 			alternarEventoAoSelecionarImagemDeGridViewPrincipal();				
@@ -105,7 +104,7 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 				}
 		
 			};
-			vaiParaProximaPagina(cixml);
+			vaiParaProximaPagina(cixml, 1);
 		}
 		else if (estadoAtual == 6) // carregar categoria / acionar comando
 		{
@@ -146,7 +145,8 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 		
 		// inicializa paginação
 		current_page = init_page = 1;
-		final_page = (new XmlUtilsTelas(this, Utils.TELAS_NOME_ARQUIVO_XML_ATIVO, "root")).getLastPage();
+		//final_page = (new XmlUtilsTelas(this, Utils.TELAS_NOME_ARQUIVO_XML_ATIVO, "root")).getLastPage();
+		final_page = 1;
 		
 		delayVarredura = Opcoes.getIntervalo_tempo_varredura();
 		
@@ -222,7 +222,7 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 
 			}			
 		};
-		cixml.execute(init_page);
+		cixml.execute(init_page, 1);
 		
 		// aqui carregam-se as imagens-comandos que sao atalhos
 		CarregarImagensComandos cixmlc = new CarregarImagensComandos()

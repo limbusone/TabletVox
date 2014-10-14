@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 import com.example.tabletvox03f.dal.CarregarImagensComandos;
 import com.example.tabletvox03f.dal.CarregarImagensTelas;
 import com.example.tabletvox03f.dal.XmlUtilsTelas;
+import com.example.tabletvox03f.management.Opcoes;
 
 public class ModoTouchCategoriasActivity extends ModoTouchActivity
 {
@@ -29,6 +30,30 @@ public class ModoTouchCategoriasActivity extends ModoTouchActivity
 			carregarCategoriaModoTouch((ImgItem) v);
 		}
 	};
+	
+	// vai para a proxima pagina
+	protected OnClickListener proximaPaginaEvento = new OnClickListener()
+	{
+		public void onClick(View v)
+		{
+			CarregarImagensTelas cit = new CarregarImagensTelas()
+			{
+				// metodo que roda na UI Thread antes da atividade em background
+				@Override
+				protected void onPreExecute()
+				{
+					super.onPreExecute();
+					activeContext = ModoTouchCategoriasActivity.this;
+					gridview 	= (GridView) ModoTouchCategoriasActivity.this.findViewById(R.id.gridview);
+					pgrbar		= (ProgressBar) ModoTouchCategoriasActivity.this.findViewById(R.id.progressBar1);
+					
+					pgrbar.setVisibility(View.VISIBLE);
+				}
+				
+			};
+			vaiParaProximaPagina(cit, 1);
+		}
+	};	
 	
 	// mostra comandos
 	private OnClickListener mostraComandosEvento = new OnClickListener()
@@ -97,7 +122,7 @@ public class ModoTouchCategoriasActivity extends ModoTouchActivity
 				}
 				
 			};
-			cixml.execute(current_page);
+			cixml.execute(current_page, 1);
 		}
 	};	
 
@@ -114,7 +139,8 @@ public class ModoTouchCategoriasActivity extends ModoTouchActivity
 		
 		// inicializa paginação
 		current_page = init_page = 1;
-		final_page = (new XmlUtilsTelas(this, Utils.TELAS_NOME_ARQUIVO_XML_ATIVO, "root")).getLastPage();
+		//final_page = (new XmlUtilsTelas(this, Utils.TELAS_NOME_ARQUIVO_XML_ATIVO, "root")).getLastPage();
+		final_page = 1;
 		
 		GridView gridview = (GridView) findViewById(R.id.gridview);
 		GridView gridview_frase = (GridView) findViewById(R.id.gridview_frase);
@@ -143,7 +169,7 @@ public class ModoTouchCategoriasActivity extends ModoTouchActivity
 				pgrbar.setVisibility(View.VISIBLE);
 			}			
 		};
-		cit.execute(init_page);
+		cit.execute(init_page, 1);
 		
 		// aqui carregam-se as imagens-comandos que sao atalhos
 		CarregarImagensComandos cixmlc = new CarregarImagensComandos()

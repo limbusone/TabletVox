@@ -151,6 +151,7 @@ public class AssocImagemSomDAO
 		
 		return new AssocImagemSom
 		(
+			cursor.getInt(0),
 			cursor.getString(1), 
 			cursor.getString(2),
 			cursor.getString(3),
@@ -246,7 +247,38 @@ public class AssocImagemSomDAO
 		cursor.close();
 		
 		return ais_list;
-	}	
+	}
+	
+	public ArrayList<AssocImagemSom> getAISListbyIdInterval(int inicio, int fim)
+	{
+		ArrayList<AssocImagemSom> ais_list = new ArrayList<AssocImagemSom>();
+		Cursor cursor = database.query(
+				TabletVoxSQLiteOpenHelper.TABLE_AIS, columns, 
+				TabletVoxSQLiteOpenHelper.AIS_COLUMN_ID + " BETWEEN " + 
+				Integer.toString(inicio) + " AND " + Integer.toString(fim), 
+				null, null, null, null);
+		
+		cursor.moveToFirst();
+		while (!(cursor.isAfterLast()))
+		{
+			AssocImagemSom ais = new AssocImagemSom
+			(
+				cursor.getInt(0),
+				cursor.getString(1), 
+				cursor.getString(2),
+				cursor.getString(3),
+				cursor.getString(4), 
+				cursor.getString(5).charAt(0), 
+				cursor.getInt(6),
+				(cursor.getInt(7) == 1) ? true : false
+			 );
+			ais_list.add(ais);
+			cursor.moveToNext();
+		}
+		cursor.close();		
+		
+		return ais_list;
+	}
 	
 	// verifica se existem registros na tabela
 	public boolean regs_exist()

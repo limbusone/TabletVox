@@ -5,6 +5,8 @@ import android.os.Parcelable;
 
 public class AssocImagemSom implements Parcelable
 {
+	
+	// atributos de negócio
 	private int id;
 	private String desc;
 	private String titulo_imagem;
@@ -13,6 +15,9 @@ public class AssocImagemSom implements Parcelable
 	private char tipo; // 'v' de verbo ou 'n' de substantivo ou 'c' de categoria
 	private int cmd; // se é algum comando ou não (do tipo falar, apagar frase e etc...)
 	private boolean atalho;
+	
+	// atributos auxiliares (de sistema)
+	private int categoriaId;
 
 	public AssocImagemSom()
 	{}
@@ -37,6 +42,18 @@ public class AssocImagemSom implements Parcelable
 		this.ext 			= ext;
 		this.tipo			= tipo;
 		this.cmd 			= cmd;
+	}
+
+	public AssocImagemSom(int id, String desc, String titulo_imagem, String titulo_som, String ext, char tipo, int cmd, boolean atalho)
+	{
+		this.id				= id;
+		this.desc			= desc;
+		this.titulo_imagem 	= titulo_imagem;
+		this.titulo_som 	= titulo_som;
+		this.ext 			= ext;
+		this.tipo			= tipo;
+		this.cmd 			= cmd;
+		this.atalho			= atalho;
 	}
 
 	public AssocImagemSom(String desc, String titulo_imagem, String titulo_som, String ext, char tipo, int cmd, boolean atalho)
@@ -142,6 +159,18 @@ public class AssocImagemSom implements Parcelable
 	{
 		this.atalho = atalho;
 	}
+
+	public int getCategoriaId()
+	{
+		return categoriaId;
+	}
+
+
+	public void setCategoriaId(int categoriaId)
+	{
+		this.categoriaId = categoriaId;
+	}
+
 
 	/*** METODOS E ATRIBUTOS PARCELABLE ***/
 	

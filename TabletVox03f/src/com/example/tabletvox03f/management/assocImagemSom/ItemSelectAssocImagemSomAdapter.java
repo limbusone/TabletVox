@@ -49,23 +49,6 @@ public class ItemSelectAssocImagemSomAdapter extends ItemAssocImagemSomAdapter
 			viewHolder.imgv				= (ImageView) 	view.findViewById(R.id.imgItem);
 			viewHolder.lblDesc 			= (TextView) 	view.findViewById(R.id.lblDesc);
 			
-			// adicionando ou excluindo da lista de selecionados conforme estado do checkbox
-			viewHolder.checkbox.setOnClickListener(new OnClickListener()
-			{
-				
-				@Override
-				public void onClick(View v)
-				{
-					CheckBox chk = (CheckBox) v;
-					AssocImagemSom ais = (AssocImagemSom) chk.getTag();
-					
-					if (chk.isChecked())
-						selecionados.add(ais);
-					else
-						selecionados.remove(ais);
-				}
-			});
-			
 			viewHolder.checkbox.setFocusable(false);
 			view.setTag(viewHolder);
 		}
@@ -81,7 +64,30 @@ public class ItemSelectAssocImagemSomAdapter extends ItemAssocImagemSomAdapter
 		// recuperar imagem
 		holder.imgv.setImageDrawable(fIO.getImgItemDrawableFromInternalStorageOrAssets(ais));
 		//holder.imgv.setAssocImagemSom(ais);
+		
+		// adicionando ou excluindo da lista de selecionados conforme estado do checkbox
+		holder.checkbox.setOnClickListener(new OnClickListener()
+		{
+			
+			@Override
+			public void onClick(View v)
+			{
+				CheckBox chk = (CheckBox) v;
+				AssocImagemSom ais = (AssocImagemSom) chk.getTag();
+				
+				if (chk.isChecked())
+					selecionados.add(ais);
+				else
+					selecionados.remove(ais);
+			}
+		});
+		
 		holder.checkbox.setTag(ais);
+		
+		if (selecionados.contains(ais))
+			holder.checkbox.setChecked(true);
+		else
+			holder.checkbox.setChecked(false);		
 		
 		return view;
 	}

@@ -50,23 +50,6 @@ public class ItemSelectCategoriaAdapter extends ItemCategoriaAdapter
 			viewHolder.imgv				= (ImageView) 	view.findViewById(R.id.imgItem);
 			viewHolder.lblNomeCategoria = (TextView) 	view.findViewById(R.id.lblNomeCategoria);
 			
-			// adicionando ou excluindo da lista de selecionados conforme estado do checkbox
-			viewHolder.checkbox.setOnClickListener(new OnClickListener()
-			{
-				
-				@Override
-				public void onClick(View v)
-				{
-					CheckBox chk = (CheckBox) v;
-					Categoria categoria = (Categoria) chk.getTag();
-					
-					if (chk.isChecked())
-						selecionados.add(categoria);
-					else
-						selecionados.remove(categoria);
-				}
-			});
-			
 			viewHolder.checkbox.setFocusable(false);
 			view.setTag(viewHolder);
 		}
@@ -83,7 +66,30 @@ public class ItemSelectCategoriaAdapter extends ItemCategoriaAdapter
 		// recuperar imagem
 		holder.imgv.setImageDrawable(fIO.getImgItemDrawableFromInternalStorageOrAssets(ais));
 		//holder.imgv.setAssocImagemSom(ais);
+		
+		// adicionando ou excluindo da lista de selecionados conforme estado do checkbox
+		holder.checkbox.setOnClickListener(new OnClickListener()
+		{
+			
+			@Override
+			public void onClick(View v)
+			{
+				CheckBox chk = (CheckBox) v;
+				Categoria categoria = (Categoria) chk.getTag();
+				
+				if (chk.isChecked())
+					selecionados.add(categoria);
+				else
+					selecionados.remove(categoria);
+			}
+		});
+		
 		holder.checkbox.setTag(categoria);
+		
+		if (selecionados.contains(categoria))
+			holder.checkbox.setChecked(true);
+		else
+			holder.checkbox.setChecked(false);
 		
 		return view;
 	}

@@ -2,6 +2,8 @@ package com.example.tabletvox03f.dal;
 
 import java.util.ArrayList;
 
+import android.content.Context;
+
 public class AssocImagemSomDAOSingleton
 {
 	private static AssocImagemSomDAOSingleton AssocImagemSomDAOSingleton;
@@ -101,9 +103,21 @@ public class AssocImagemSomDAOSingleton
 		listaAssocImagemSom.remove(ais);
 	}
 	
-	public void excluirAssocImagemSom(int id)
+	public boolean excluirAssocImagemSom(int id, Context c)
 	{
-		listaAssocImagemSom.remove(getAssocImagemSomById(id));
+		boolean retorno = true;
+		
+		FilesIO fio = new FilesIO(c);
+		
+		AssocImagemSom ais = getAssocImagemSomById(id);
+		
+		if (fio.deletarArquivosDeImagemESom(ais.getTituloImagem(), ais.getTituloSom()))
+			listaAssocImagemSom.remove(ais);
+		else
+			retorno = false;
+		
+		return retorno;
+		
 	}
 	
 	@SuppressWarnings("unchecked")

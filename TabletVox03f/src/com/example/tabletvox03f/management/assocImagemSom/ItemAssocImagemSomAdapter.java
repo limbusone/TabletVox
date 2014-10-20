@@ -16,11 +16,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tabletvox03f.Erro;
 import com.example.tabletvox03f.R;
+import com.example.tabletvox03f.Utils;
 import com.example.tabletvox03f.dal.AssocImagemSom;
 import com.example.tabletvox03f.dal.AssocImagemSomDAOSingleton;
 import com.example.tabletvox03f.dal.FilesIO;
-import com.example.tabletvox03f.management.categoria.ListaImagensCategoriaActivity;
 
 
 public class ItemAssocImagemSomAdapter extends BaseAdapter
@@ -123,8 +124,13 @@ public class ItemAssocImagemSomAdapter extends BaseAdapter
 						
 						removeItem(ais);
 						
-						AssocImagemSomDAOSingleton.getInstance().excluirAssocImagemSom(ais.getId());
-						
+						if (!(AssocImagemSomDAOSingleton.getInstance().excluirAssocImagemSom(ais.getId(), ItemAssocImagemSomAdapter.this.mContext)))
+						{
+							Utils.erros.add(new Erro("Erro ao excluir o arquivo de imagem ou de som. Exclusão cancelada!"));
+							Utils.exibirErros(ItemAssocImagemSomAdapter.this.mContext);
+							return;
+						}
+
 						// refresh na lista
 						ItemAssocImagemSomAdapter.this.refresh();
 						

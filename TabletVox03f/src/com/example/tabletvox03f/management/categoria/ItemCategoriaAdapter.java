@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.dal.AssocImagemSom;
 import com.example.tabletvox03f.dal.Categoria;
+import com.example.tabletvox03f.dal.CategoriaDAO;
 import com.example.tabletvox03f.dal.CategoriaDAOSingleton;
 import com.example.tabletvox03f.dal.FilesIO;
 import com.example.tabletvox03f.management.perfil.FormularioPerfilActivity;
@@ -132,6 +133,11 @@ public class ItemCategoriaAdapter extends BaseAdapter
 			{
 				Toast.makeText(ItemCategoriaAdapter.this.mContext, "Você clicou no botão Editar!", Toast.LENGTH_SHORT).show();
 				Intent intent = new Intent(ItemCategoriaAdapter.this.mContext, FormularioCategoriaActivity.class);
+				
+				// popular imagens na categoria
+				CategoriaDAO dao_cat = new CategoriaDAO(ItemCategoriaAdapter.this.mContext);
+				categoria.setImagens(dao_cat.getImagens(categoria.getId()));
+				
 				intent.putExtra("categoria", categoria);
 				
 				// verifica se o "parent" desse adapter é a lista de categorias

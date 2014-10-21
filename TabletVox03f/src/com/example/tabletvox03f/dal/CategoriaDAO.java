@@ -47,6 +47,18 @@ public class CategoriaDAO
 		ContentValues values = new ContentValues();
 		values.put(TabletVoxSQLiteOpenHelper.AIS_COLUMN_ID,  cat.getAIS().getId());
 		values.put(TabletVoxSQLiteOpenHelper.CAT_COLUMN_NOME,  cat.getNome());
+		
+		ArrayList<AssocImagemSom> imagens = cat.getImagens();
+		// se houver itens incluir as imagens
+		if ( !( (imagens == null) || (imagens.size() == 0) ) )
+		{
+			CategoriaAssocImagemSomDAO dao_cat_ais = new CategoriaAssocImagemSomDAO(sqliteOpenHelper);
+			
+			for (int i = 0, length = imagens.size(); i < length; i++)
+				dao_cat_ais.create(cat, imagens.get(i));
+		}
+			
+		
 		database.insert(TabletVoxSQLiteOpenHelper.TABLE_CAT, null, values);		
 	}
 	
@@ -84,7 +96,7 @@ public class CategoriaDAO
 	{
 		ArrayList<Categoria> cat_list = new ArrayList<Categoria>();
 		
-		AssocImagemSomDAO ais_dao = new AssocImagemSomDAO(sqliteOpenHelper);
+		AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(sqliteOpenHelper);
 		
 		Cursor cursor = database.query(
 				TabletVoxSQLiteOpenHelper.TABLE_CAT, 
@@ -98,7 +110,7 @@ public class CategoriaDAO
 			(
 				cursor.getInt(0),
 				cursor.getString(2),
-				ais_dao.getAISById(cursor.getInt(1))
+				dao_ais.getAISById(cursor.getInt(1))
 			 );
 			cat_list.add(cat);
 			cursor.moveToNext();
@@ -108,9 +120,9 @@ public class CategoriaDAO
 	}
 
 	// busca um registro pelo ID
-	public Categoria getCatById(long id)
+	public Categoria getCategoriaById(long id)
 	{
-		AssocImagemSomDAO ais_dao = new AssocImagemSomDAO(sqliteOpenHelper);
+		AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(sqliteOpenHelper);
 		
 		Cursor cursor = database.query(
 				TabletVoxSQLiteOpenHelper.TABLE_CAT, columns, 
@@ -123,9 +135,60 @@ public class CategoriaDAO
 		(
 			cursor.getInt(0),
 			cursor.getString(2),
-			ais_dao.getAISById(cursor.getInt(1))
+			dao_ais.getAISById(cursor.getInt(1))
 		 );		
-	}	
+	}
+	
+	public ArrayList<Categoria> getCategoriasByNome(String nome)
+	{
+		ArrayList<Categoria> cat_list = new ArrayList<Categoria>();
+		
+		AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(sqliteOpenHelper);
+		
+		Cursor cursor = database.query(
+				TabletVoxSQLiteOpenHelper.TABLE_CAT, columns, 
+				TabletVoxSQLiteOpenHelper.CAT_COLUMN_NOME + " LIKE " + "'%" + nome + "%'", 
+				null, null, null, null);
+		
+		cursor.moveToFirst();
+		while (!(cursor.isAfterLast()))
+		{
+			Categoria cat = new Categoria
+			(
+				cursor.getInt(0),
+				cursor.getString(2),
+				dao_ais.getAISById(cursor.getInt(1))
+			 );
+			cat_list.add(cat);
+			cursor.moveToNext();
+		}
+		cursor.close();
+		
+		return cat_list;		
+	}
+	
+	public ArrayList<AssocImagemSom> getImagens(long categoriaId)
+	{
+		ArrayList<AssocImagemSom> ais_list = new ArrayList<AssocImagemSom>();
+		
+		Cursor cursor = database.query(
+				TabletVoxSQLiteOpenHelper.TABLE_CAT_AIS, columns, 
+				TabletVoxSQLiteOpenHelper.CAT_COLUMN_ID + " = " + categoriaId, 
+				null, null, null, null);
+		
+		AssocImagemSomDAO aisDao = new AssocImagemSomDAO(sqliteOpenHelper);
+	
+		cursor.moveToFirst();
+		while (!(cursor.isAfterLast()))
+		{
+			ais_list.add(aisDao.getAISById(cursor.getInt(2)));
+			cursor.moveToNext();
+		}
+		
+		cursor.close();
+		
+		return ais_list;		
+	}
 	
 	// verifica se existem registros na tabela
 	public boolean regs_exist()

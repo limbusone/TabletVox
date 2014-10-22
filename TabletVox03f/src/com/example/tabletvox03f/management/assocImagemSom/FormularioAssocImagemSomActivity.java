@@ -20,6 +20,7 @@ import com.example.tabletvox03f.ImgItem;
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.Utils;
 import com.example.tabletvox03f.dal.AssocImagemSom;
+import com.example.tabletvox03f.dal.AssocImagemSomDAO;
 import com.example.tabletvox03f.dal.AssocImagemSomDAOSingleton;
 import com.example.tabletvox03f.dal.FilesIO;
 import com.example.tabletvox03f.management.FormularioBaseActivity;
@@ -190,13 +191,18 @@ public class FormularioAssocImagemSomActivity extends FormularioBaseActivity
 		// *** upload ***
 			
 			// upload imagem
-			fio.copiarArquivoDeSomOuImagemParaInternalStorage(caminho_origem_img, caminho_destino_img, 0);
-			// upload som
-			fio.copiarArquivoDeSomOuImagemParaInternalStorage(caminho_origem_som, caminho_destino_som, 1);
+//			fio.copiarArquivoDeSomOuImagemParaInternalStorage(caminho_origem_img, caminho_destino_img, 0);
+//			// upload som
+//			fio.copiarArquivoDeSomOuImagemParaInternalStorage(caminho_origem_som, caminho_destino_som, 1);
 
 		// *** grava dados no banco ***
-			AssocImagemSomDAOSingleton dao_ais = AssocImagemSomDAOSingleton.getInstance();
-			dao_ais.incluirAssocImagemSomWithRandomGeneratedID(ais);
+//			AssocImagemSomDAOSingleton dao_ais = AssocImagemSomDAOSingleton.getInstance();
+//			dao_ais.incluirAssocImagemSomWithRandomGeneratedID(ais);
+			
+			AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(this);
+			
+			dao_ais.create(ais, caminho_origem_img, caminho_origem_som, caminho_destino_img, caminho_destino_som, this);
+			
 //			AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(this);
 //			dao_ais.open();
 //			dao_ais.create(ais);

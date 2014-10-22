@@ -1,5 +1,6 @@
 package com.example.tabletvox03f.dal;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import android.content.ContentValues;
@@ -22,6 +23,7 @@ public class AssocImagemSomDAO
 		TabletVoxSQLiteOpenHelper.AIS_COLUMN_CMD,
 		TabletVoxSQLiteOpenHelper.AIS_COLUMN_ATALHO
 	};
+	
 	private TabletVoxSQLiteOpenHelper sqliteOpenHelper;
 	
 	public AssocImagemSomDAO(Context c)
@@ -57,6 +59,30 @@ public class AssocImagemSomDAO
 		values.put(TabletVoxSQLiteOpenHelper.AIS_COLUMN_CMD, ais.getCmd());
 		values.put(TabletVoxSQLiteOpenHelper.AIS_COLUMN_ATALHO, ais.isAtalho());
 		database.insert(TabletVoxSQLiteOpenHelper.TABLE_AIS, null, values);
+	}
+	
+	public boolean create(AssocImagemSom ais, String caminhoOrigemImagem, String caminhoOrigemSom, String caminhoDestinoImagem, String caminhoDestinoSom, Context c) throws IOException
+	{
+		boolean retorno = true;
+		
+		FilesIO fio = new FilesIO(c);
+		
+		ContentValues values = new ContentValues();
+		
+		// upload imagem
+		fio.copiarArquivoDeSomOuImagemParaInternalStorage(caminhoOrigemImagem, 	caminhoDestinoImagem, 	 0);
+		// upload som
+		fio.copiarArquivoDeSomOuImagemParaInternalStorage(caminhoOrigemSom, 	caminhoDestinoSom, 		 1);
+		
+		values.put(TabletVoxSQLiteOpenHelper.AIS_COLUMN_DESC, ais.getDesc());
+		values.put(TabletVoxSQLiteOpenHelper.AIS_COLUMN_TITULO_IMAGEM, ais.getTituloImagem());
+		values.put(TabletVoxSQLiteOpenHelper.AIS_COLUMN_TITULO_SOM, ais.getTituloSom());
+		values.put(TabletVoxSQLiteOpenHelper.AIS_COLUMN_EXT, ais.getExt());
+		values.put(TabletVoxSQLiteOpenHelper.AIS_COLUMN_TIPO, "" + ais.getTipo());
+		values.put(TabletVoxSQLiteOpenHelper.AIS_COLUMN_CMD, ais.getCmd());
+		values.put(TabletVoxSQLiteOpenHelper.AIS_COLUMN_ATALHO, ais.isAtalho());			
+
+		return retorno;
 	}
 	
 	public void create(String dsc, String ti, String ts, String ex, char tp, int cm, boolean ata)
@@ -124,6 +150,7 @@ public class AssocImagemSomDAO
 		{
 			AssocImagemSom ais = new AssocImagemSom
 			(
+				cursor.getInt(0),
 				cursor.getString(1), 
 				cursor.getString(2),
 				cursor.getString(3),
@@ -175,6 +202,7 @@ public class AssocImagemSomDAO
 		{
 			AssocImagemSom ais = new AssocImagemSom
 			(
+				cursor.getInt(0),
 				cursor.getString(1), 
 				cursor.getString(2),
 				cursor.getString(3),
@@ -204,6 +232,7 @@ public class AssocImagemSomDAO
 		{
 			AssocImagemSom ais = new AssocImagemSom
 			(
+				cursor.getInt(0),
 				cursor.getString(1), 
 				cursor.getString(2),
 				cursor.getString(3),
@@ -233,6 +262,7 @@ public class AssocImagemSomDAO
 		{
 			AssocImagemSom ais = new AssocImagemSom
 			(
+				cursor.getInt(0),
 				cursor.getString(1), 
 				cursor.getString(2),
 				cursor.getString(3),

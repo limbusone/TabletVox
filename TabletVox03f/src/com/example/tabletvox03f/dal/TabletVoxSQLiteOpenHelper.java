@@ -87,21 +87,21 @@ public class TabletVoxSQLiteOpenHelper extends SQLiteOpenHelper
 	public TabletVoxSQLiteOpenHelper(Context context)
 	{
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
-		// TODO Auto-generated constructor stub
+		// Auto-generated constructor stub
 	}
 
 	// método acionado se o banco não existir
 	@Override
 	public void onCreate(SQLiteDatabase db)
 	{
-		// TODO Auto-generated method stub
+		// Auto-generated method stub
 		db.execSQL(DATABASE_CREATE);
 	}
 	
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
 	{
-		// TODO Auto-generated method stub
+		// Auto-generated method stub
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_AIS);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_PFL);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_CAT);

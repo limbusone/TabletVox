@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.dal.AssocImagemSom;
-import com.example.tabletvox03f.dal.AssocImagemSomDAOSingleton;
+import com.example.tabletvox03f.dal.AssocImagemSomDAO;
 import com.example.tabletvox03f.management.ListaComBuscaManageActivity;
 
 public class ListaImagensActivity extends ListaComBuscaManageActivity
@@ -28,7 +28,11 @@ public class ListaImagensActivity extends ListaComBuscaManageActivity
 	@Override
 	protected BaseAdapter carregarLista()
 	{
-		ArrayList<AssocImagemSom> lista = AssocImagemSomDAOSingleton.getInstance().getImagens();
+		AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(this);  
+		
+		dao_ais.open();
+		ArrayList<AssocImagemSom> lista = dao_ais.getAll();
+		dao_ais.close();
 		
 		return (new ItemAssocImagemSomAdapter(this, (ArrayList<AssocImagemSom>) lista.clone()));
 	}
@@ -68,8 +72,12 @@ public class ListaImagensActivity extends ListaComBuscaManageActivity
 	@Override
 	protected void acaoDoEventoBuscar(Editable s)
 	{
+		AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(this); 
 		String texto_para_pesquisa = s.toString();
-		carregarLista(AssocImagemSomDAOSingleton.getInstance().getImagensByDesc(texto_para_pesquisa));
+		
+		dao_ais.open();
+		carregarLista(dao_ais.getAISListbyDesc(texto_para_pesquisa));
+		dao_ais.close();
 	}
 
 	@Override

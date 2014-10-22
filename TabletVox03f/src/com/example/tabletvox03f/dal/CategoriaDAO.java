@@ -62,7 +62,7 @@ public class CategoriaDAO
 		database.insert(TabletVoxSQLiteOpenHelper.TABLE_CAT, null, values);		
 	}
 	
-	public void create(long ais_id, String nome, String autor)
+	public void create(long ais_id, String nome)
 	{
 		ContentValues values = new ContentValues();
 		values.put(TabletVoxSQLiteOpenHelper.AIS_COLUMN_ID,  ais_id);

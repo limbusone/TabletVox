@@ -30,6 +30,7 @@ public class TabletVoxSQLiteOpenHelper extends SQLiteOpenHelper
 	// atributos de Categoria
 	public static final String CAT_COLUMN_ID	= "cat_id";
 	public static final String CAT_COLUMN_NOME	= "cat_nome";
+	public static final String CAT_COLUMN_SIS	= "cat_sis";
 	
 	// nome da tabela PerfilCategoria
 	public static final String TABLE_PFL_CAT = "PerfilCategoria";
@@ -68,7 +69,8 @@ public class TabletVoxSQLiteOpenHelper extends SQLiteOpenHelper
 		+ "("
 		+ CAT_COLUMN_ID 	+ " INTEGER PRIMARY KEY AUTOINCREMENT, "
 		+ AIS_COLUMN_ID		+ " INTEGER, "
-		+ CAT_COLUMN_NOME 	+ " VARCHAR(40)"
+		+ CAT_COLUMN_NOME 	+ " VARCHAR(40),"
+		+ CAT_COLUMN_SIS	+ " BOOLEAN"
 		+");"
 		+ "CREATE TABLE " + TABLE_PFL_CAT
 		+ "("

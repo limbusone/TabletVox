@@ -118,29 +118,30 @@ public class ItemAssocImagemSomAdapter extends BaseAdapter
 					public void onClick(DialogInterface dialog, int which)
 					{
 						
-						Toast.makeText(ItemAssocImagemSomAdapter.this.mContext, 
-						"Excluido com sucesso! ID: " + Integer.toString(ais.getId()), 
-						Toast.LENGTH_SHORT).show();
-						
-						removeItem(ais);
-						
-						if (!(AssocImagemSomDAOSingleton.getInstance().excluirAssocImagemSom(ais.getId(), ItemAssocImagemSomAdapter.this.mContext)))
-						{
-							Utils.erros.add(new Erro("Erro ao excluir o arquivo de imagem ou de som. Exclusão cancelada!"));
-							Utils.exibirErros(ItemAssocImagemSomAdapter.this.mContext);
-							return;
-						}
-
-						// refresh na lista
-						ItemAssocImagemSomAdapter.this.refresh();
-						
 						// verifica se o "parent" desse adapter é a lista de imagens
 						if (ItemAssocImagemSomAdapter.this.mContext instanceof ListaImagensActivity)
 						{
+							
+							if (!(AssocImagemSomDAOSingleton.getInstance().excluirAssocImagemSom(ais.getId(), ItemAssocImagemSomAdapter.this.mContext)))
+							{
+								Utils.erros.add(new Erro("Erro ao excluir o arquivo de imagem ou de som. Exclusão cancelada!"));
+								Utils.exibirErros(ItemAssocImagemSomAdapter.this.mContext);
+								return;
+							}							
+							
 							// atualiza o label dos registros encontrados
 							ListaImagensActivity lia = (ListaImagensActivity) ItemAssocImagemSomAdapter.this.mContext;
 							lia.atualizarLblNumEncontrados(ItemAssocImagemSomAdapter.this.getCount());
 						}
+						
+						removeItem(ais);
+						
+						Toast.makeText(ItemAssocImagemSomAdapter.this.mContext, 
+						"Excluido com sucesso! ID: " + Integer.toString(ais.getId()), 
+						Toast.LENGTH_SHORT).show();						
+
+						// refresh na lista
+						ItemAssocImagemSomAdapter.this.refresh();						
 					}
 				});
 				

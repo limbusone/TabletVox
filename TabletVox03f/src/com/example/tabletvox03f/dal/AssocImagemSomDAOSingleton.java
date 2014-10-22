@@ -111,7 +111,7 @@ public class AssocImagemSomDAOSingleton
 		
 		AssocImagemSom ais = getAssocImagemSomById(id);
 		
-		if (fio.deletarArquivosDeImagemESom(ais.getTituloImagem(), ais.getTituloSom()))
+		if (fio.deletarArquivosDeImagemESom(ais))
 			listaAssocImagemSom.remove(ais);
 		else
 			retorno = false;

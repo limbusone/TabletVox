@@ -99,11 +99,19 @@ public class FilesIO
 	
 	public boolean deletarArquivosDeImagemESom(String arquivo_imagem, String arquivo_som)
 	{
-		File fi = new File(activeContext.getDir("imagens", Context.MODE_PRIVATE).getPath() + arquivo_imagem);
-		File fs = new File(activeContext.getDir("sons", Context.MODE_PRIVATE).getPath() + arquivo_som);
+		File fi = new File(activeContext.getDir("imagens", Context.MODE_PRIVATE).getPath() + "/" + arquivo_imagem);
+		File fs = new File(activeContext.getDir("sons", Context.MODE_PRIVATE).getPath() + "/" + arquivo_som);
 		
 		return (fi.exists() && fs.exists()) ? fi.delete() && fs.delete() : false;
 	}
+	
+	public boolean deletarArquivosDeImagemESom(AssocImagemSom ais)
+	{
+		File fi = new File(activeContext.getDir("imagens", Context.MODE_PRIVATE).getPath() + "/" + ais.getTituloImagem() + "." + ais.getExt());
+		File fs = new File(activeContext.getDir("sons", Context.MODE_PRIVATE).getPath() + "/" + ais.getTituloSom() + "." + Utils.EXTENSAO_ARQUIVO_SOM);
+		
+		return (fi.exists() && fs.exists()) ? fi.delete() && fs.delete() : false;
+	}	
 	
 	public boolean verificarExtensaoImagem(String path)
 	{

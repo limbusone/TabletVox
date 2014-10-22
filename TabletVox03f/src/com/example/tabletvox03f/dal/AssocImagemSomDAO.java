@@ -26,6 +26,11 @@ public class AssocImagemSomDAO
 	
 	private TabletVoxSQLiteOpenHelper sqliteOpenHelper;
 	
+	public TabletVoxSQLiteOpenHelper getSqliteOpenHelper()
+	{
+		return sqliteOpenHelper;
+	}
+
 	public AssocImagemSomDAO(Context c)
 	{
 		sqliteOpenHelper = new TabletVoxSQLiteOpenHelper(c);

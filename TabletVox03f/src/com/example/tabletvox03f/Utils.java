@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.tabletvox03f.dal.AssocImagemSomDAO;
 import com.example.tabletvox03f.dal.Categoria;
+import com.example.tabletvox03f.dal.CategoriaDAO;
 import com.example.tabletvox03f.dal.CategoriaDAOSingleton;
 import com.example.tabletvox03f.dal.FilesIO;
 import com.example.tabletvox03f.dal.Perfil;
@@ -224,6 +225,8 @@ public class Utils
 		
 		// registros da versao categorizada
 		
+		CategoriaDAO dao_cat = new CategoriaDAO(dao_ais.getSqliteOpenHelper());
+		
 		// categorias
 		dao_ais.create("alimentos", 	"ALIMENT", 		"ALIMENT", 		"jpg", 'c', 0);
 		dao_ais.create("animais", 		"ANIMAIS", 		"ANIMAIS", 		"jpg", 'c', 0);
@@ -239,6 +242,21 @@ public class Utils
 		dao_ais.create("sensacoes", 	"SENSAC", 		"SENSAC", 		"jpg", 'c', 0);
 		dao_ais.create("transporte", 	"TRANSPOR", 	"TRANSPOR", 	"jpg", 'c', 0);
 		dao_ais.create("verbos", 		"verbos", 		"verbos", 		"jpg", 'c', 0);
+		
+		dao_cat.create(29, "alimentos");
+		dao_cat.create(30, "animais");
+		dao_cat.create(31, "aparelhos");
+		dao_cat.create(32, "banheiro");
+		dao_cat.create(33, "bebidas");
+		dao_cat.create(34, "corpo");
+		dao_cat.create(35, "familia 1");
+		dao_cat.create(36, "familia 2");
+		dao_cat.create(37, "frutas");
+		dao_cat.create(38, "lugares");
+		dao_cat.create(39, "pessoas");
+		dao_cat.create(40, "sensacoes");
+		dao_cat.create(41, "transporte");
+		dao_cat.create(42, "verbos");
 		
 		// itens das categorias
 		

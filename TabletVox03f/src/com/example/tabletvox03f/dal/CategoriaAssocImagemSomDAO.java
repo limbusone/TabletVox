@@ -98,7 +98,7 @@ public class CategoriaAssocImagemSomDAO
 			CategoriaAssocImagemSom cat_ais = new CategoriaAssocImagemSom
 			(
 				cursor.getInt(0),
-				catDao.getCatById(cursor.getInt(1)),
+				catDao.getCategoriaById(cursor.getInt(1)),
 				aisDao.getAISById(cursor.getInt(2))
 			);
 			
@@ -128,7 +128,7 @@ public class CategoriaAssocImagemSomDAO
 			CategoriaAssocImagemSom cat_ais = new CategoriaAssocImagemSom
 			(
 				cursor.getInt(0),
-				catDao.getCatById(cursor.getInt(1)),
+				catDao.getCategoriaById(cursor.getInt(1)),
 				aisDao.getAISById(cursor.getInt(2))
 			);
 			
@@ -205,7 +205,7 @@ public class CategoriaAssocImagemSomDAO
 		return new CategoriaAssocImagemSom
 		(
 				cursor.getInt(0),
-				catDao.getCatById(cursor.getInt(1)),
+				catDao.getCategoriaById(cursor.getInt(1)),
 				aisDao.getAISById(cursor.getInt(2))
 		);		
 	}	

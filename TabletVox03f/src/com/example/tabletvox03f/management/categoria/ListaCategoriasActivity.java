@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.dal.Categoria;
+import com.example.tabletvox03f.dal.CategoriaDAO;
 import com.example.tabletvox03f.dal.CategoriaDAOSingleton;
 import com.example.tabletvox03f.management.ListaComBuscaManageActivity;
 
@@ -34,7 +35,11 @@ public class ListaCategoriasActivity extends ListaComBuscaManageActivity
 	@Override
 	protected BaseAdapter carregarLista()
 	{
-		ArrayList<Categoria> lista = CategoriaDAOSingleton.getInstance().getCategorias();
+		CategoriaDAO dao_cat = new CategoriaDAO(this);
+		
+		dao_cat.open();
+		ArrayList<Categoria> lista = dao_cat.getAll();
+		dao_cat.close();
 		
 		return (new ItemCategoriaAdapter(this, (ArrayList<Categoria>) lista.clone()));
 
@@ -67,8 +72,13 @@ public class ListaCategoriasActivity extends ListaComBuscaManageActivity
 	@Override
 	protected void acaoDoEventoBuscar(Editable s)
 	{
+		CategoriaDAO dao_cat = new CategoriaDAO(this);
+				
 		String texto_para_pesquisa = s.toString();
-		carregarLista(CategoriaDAOSingleton.getInstance().getCategoriasByNome(texto_para_pesquisa));
+		
+		dao_cat.open();
+		carregarLista(dao_cat.getCategoriasByNome(texto_para_pesquisa));
+		dao_cat.close();
 	}
 
 	@Override

@@ -99,7 +99,7 @@ public class PerfilCategoriaDAO
 			(
 				cursor.getInt(0),
 				pflDao.getPFLById(cursor.getInt(1)),
-				catDao.getCatById(cursor.getInt(2))
+				catDao.getCategoriaById(cursor.getInt(2))
 			);
 			
 			pfl_cat_list.add(pfl_cat);
@@ -129,7 +129,7 @@ public class PerfilCategoriaDAO
 			(
 				cursor.getInt(0),
 				pflDao.getPFLById(cursor.getInt(1)),
-				catDao.getCatById(cursor.getInt(2))
+				catDao.getCategoriaById(cursor.getInt(2))
 			);
 			
 			pfl_cat_list.add(pfl_cat);
@@ -154,7 +154,7 @@ public class PerfilCategoriaDAO
 		cursor.moveToFirst();
 		while (!(cursor.isAfterLast()))
 		{
-			cat_list.add(catDao.getCatById(cursor.getInt(2)));
+			cat_list.add(catDao.getCategoriaById(cursor.getInt(2)));
 			cursor.moveToNext();
 		}
 		cursor.close();
@@ -178,7 +178,7 @@ public class PerfilCategoriaDAO
 		(
 			cursor.getInt(0),
 			pflDao.getPFLById(cursor.getInt(1)),
-			catDao.getCatById(cursor.getInt(2))
+			catDao.getCategoriaById(cursor.getInt(2))
 		);		
 	}
 	

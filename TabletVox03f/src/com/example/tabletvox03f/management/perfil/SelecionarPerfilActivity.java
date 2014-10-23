@@ -12,8 +12,8 @@ import android.widget.Toast;
 
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.Utils;
-import com.example.tabletvox03f.dal.Perfil;
-import com.example.tabletvox03f.dal.PerfilDAOSingleton;
+import com.example.tabletvox03f.dal.perfil.Perfil;
+import com.example.tabletvox03f.dal.perfil.PerfilDAOSingleton;
 import com.example.tabletvox03f.management.ListaComBuscaManageActivity;
 
 public class SelecionarPerfilActivity extends ListaComBuscaManageActivity

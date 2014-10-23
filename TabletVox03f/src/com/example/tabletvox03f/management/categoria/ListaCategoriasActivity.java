@@ -11,9 +11,9 @@ import android.widget.BaseAdapter;
 import android.widget.Toast;
 
 import com.example.tabletvox03f.R;
-import com.example.tabletvox03f.dal.Categoria;
-import com.example.tabletvox03f.dal.CategoriaDAO;
-import com.example.tabletvox03f.dal.CategoriaDAOSingleton;
+import com.example.tabletvox03f.dal.categoria.Categoria;
+import com.example.tabletvox03f.dal.categoria.CategoriaDAO;
+import com.example.tabletvox03f.dal.categoria.CategoriaDAOSingleton;
 import com.example.tabletvox03f.management.ListaComBuscaManageActivity;
 
 public class ListaCategoriasActivity extends ListaComBuscaManageActivity

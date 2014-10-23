@@ -9,8 +9,8 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 
 import com.example.tabletvox03f.R;
-import com.example.tabletvox03f.dal.AssocImagemSom;
-import com.example.tabletvox03f.dal.AssocImagemSomDAOSingleton;
+import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
+import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSomDAOSingleton;
 
 public class SelecionarImagemActivity extends ListaImagensActivity
 {

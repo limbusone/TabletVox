@@ -1,6 +1,8 @@
-package com.example.tabletvox03f.dal;
+package com.example.tabletvox03f.dal.assocImagemSom;
 
 import java.util.ArrayList;
+
+import com.example.tabletvox03f.dal.FilesIO;
 
 import android.content.Context;
 

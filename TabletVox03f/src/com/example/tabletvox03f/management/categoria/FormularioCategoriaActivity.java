@@ -17,10 +17,10 @@ import com.example.tabletvox03f.Erro;
 import com.example.tabletvox03f.ImgItem;
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.Utils;
-import com.example.tabletvox03f.dal.AssocImagemSom;
-import com.example.tabletvox03f.dal.Categoria;
-import com.example.tabletvox03f.dal.CategoriaDAOSingleton;
 import com.example.tabletvox03f.dal.FilesIO;
+import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
+import com.example.tabletvox03f.dal.categoria.Categoria;
+import com.example.tabletvox03f.dal.categoria.CategoriaDAOSingleton;
 import com.example.tabletvox03f.management.FormularioNaoPersistenteBaseActivity;
 import com.example.tabletvox03f.management.assocImagemSom.SelecionarImagemActivity;
 

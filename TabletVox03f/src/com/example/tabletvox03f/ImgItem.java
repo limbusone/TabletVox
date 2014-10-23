@@ -4,7 +4,7 @@ package com.example.tabletvox03f;
 import java.io.File;
 import java.io.IOException;
 
-import com.example.tabletvox03f.dal.AssocImagemSom;
+import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
 
 import android.content.Context;
 import android.content.Intent;

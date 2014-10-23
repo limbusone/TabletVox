@@ -18,6 +18,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 
 import com.example.tabletvox03f.Utils;
+import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
 
 public class FilesIO
 {

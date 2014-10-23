@@ -10,8 +10,8 @@ import android.widget.BaseAdapter;
 import android.widget.Toast;
 
 import com.example.tabletvox03f.R;
-import com.example.tabletvox03f.dal.AssocImagemSom;
-import com.example.tabletvox03f.dal.Categoria;
+import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
+import com.example.tabletvox03f.dal.categoria.Categoria;
 import com.example.tabletvox03f.management.ListaSimplesManageActivity;
 import com.example.tabletvox03f.management.assocImagemSom.ItemDeleteAssocImagemSomAdapter;
 import com.example.tabletvox03f.management.assocImagemSom.SelecionarImagensActivity;

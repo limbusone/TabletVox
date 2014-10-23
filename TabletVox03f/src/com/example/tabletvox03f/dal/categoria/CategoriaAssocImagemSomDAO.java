@@ -1,6 +1,10 @@
-package com.example.tabletvox03f.dal;
+package com.example.tabletvox03f.dal.categoria;
 
 import java.util.ArrayList;
+
+import com.example.tabletvox03f.dal.TabletVoxSQLiteOpenHelper;
+import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
+import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSomDAO;
 
 import android.content.ContentValues;
 import android.content.Context;

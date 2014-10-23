@@ -11,8 +11,8 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 
 import com.example.tabletvox03f.R;
-import com.example.tabletvox03f.dal.AssocImagemSom;
-import com.example.tabletvox03f.dal.AssocImagemSomDAOSingleton;
+import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
+import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSomDAOSingleton;
 import com.example.tabletvox03f.management.ListaComBuscaManageActivity;
 
 public class SelecionarImagensActivity extends ListaComBuscaManageActivity

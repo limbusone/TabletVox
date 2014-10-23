@@ -1,4 +1,4 @@
-package com.example.tabletvox03f.dal;
+package com.example.tabletvox03f.dal.assocImagemSom;
 
 import android.os.Parcel;
 import android.os.Parcelable;

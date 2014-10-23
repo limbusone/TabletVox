@@ -9,8 +9,8 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
-import com.example.tabletvox03f.dal.AssocImagemSom;
 import com.example.tabletvox03f.dal.FilesIO;
+import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
 
 public class ImageAdapter extends BaseAdapter 
 {

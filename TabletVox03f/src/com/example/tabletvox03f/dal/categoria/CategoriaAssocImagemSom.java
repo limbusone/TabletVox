@@ -1,4 +1,6 @@
-package com.example.tabletvox03f.dal;
+package com.example.tabletvox03f.dal.categoria;
+
+import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
 
 public class CategoriaAssocImagemSom
 {

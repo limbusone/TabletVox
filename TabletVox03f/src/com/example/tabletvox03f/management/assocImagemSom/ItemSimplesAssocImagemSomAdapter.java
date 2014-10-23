@@ -9,8 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tabletvox03f.R;
-import com.example.tabletvox03f.dal.AssocImagemSom;
 import com.example.tabletvox03f.dal.FilesIO;
+import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
 
 public class ItemSimplesAssocImagemSomAdapter extends ItemAssocImagemSomAdapter
 {

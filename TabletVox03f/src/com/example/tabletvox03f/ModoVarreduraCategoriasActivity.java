@@ -9,9 +9,9 @@ import android.view.View;
 import android.widget.GridView;
 import android.widget.ProgressBar;
 
-import com.example.tabletvox03f.dal.AssocImagemSom;
 import com.example.tabletvox03f.dal.CarregarImagensComandos;
 import com.example.tabletvox03f.dal.CarregarImagensTelas;
+import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
 import com.example.tabletvox03f.management.Opcoes;
 
 public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity

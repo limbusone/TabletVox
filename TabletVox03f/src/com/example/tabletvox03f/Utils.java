@@ -8,13 +8,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tabletvox03f.dal.AssocImagemSomDAO;
-import com.example.tabletvox03f.dal.Categoria;
-import com.example.tabletvox03f.dal.CategoriaDAO;
-import com.example.tabletvox03f.dal.CategoriaDAOSingleton;
 import com.example.tabletvox03f.dal.FilesIO;
-import com.example.tabletvox03f.dal.Perfil;
-import com.example.tabletvox03f.dal.PerfilDAOSingleton;
+import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSomDAO;
+import com.example.tabletvox03f.dal.categoria.Categoria;
+import com.example.tabletvox03f.dal.categoria.CategoriaDAO;
+import com.example.tabletvox03f.dal.categoria.CategoriaDAOSingleton;
+import com.example.tabletvox03f.dal.perfil.Perfil;
+import com.example.tabletvox03f.dal.perfil.PerfilDAOSingleton;
 
 public class Utils 
 {

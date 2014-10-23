@@ -1,6 +1,8 @@
-package com.example.tabletvox03f.dal;
+package com.example.tabletvox03f.dal.perfil;
 
 import java.util.ArrayList;
+
+import com.example.tabletvox03f.dal.categoria.Categoria;
 
 import android.os.Parcel;
 import android.os.Parcelable;

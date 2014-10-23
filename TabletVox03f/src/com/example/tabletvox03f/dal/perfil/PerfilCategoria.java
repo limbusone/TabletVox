@@ -1,4 +1,6 @@
-package com.example.tabletvox03f.dal;
+package com.example.tabletvox03f.dal.perfil;
+
+import com.example.tabletvox03f.dal.categoria.Categoria;
 
 public class PerfilCategoria
 {

@@ -10,6 +10,10 @@ import android.widget.ProgressBar;
 
 import com.example.tabletvox03f.ImageAdapter;
 import com.example.tabletvox03f.Utils;
+import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
+import com.example.tabletvox03f.dal.categoria.Categoria;
+import com.example.tabletvox03f.dal.categoria.CategoriaDAOSingleton;
+import com.example.tabletvox03f.dal.perfil.Perfil;
 
 // classe de carregamento das imagens do xml telas.xml em assincronia com a UI
 public class CarregarImagensTelas extends AsyncTask<Integer, Void, ArrayList<AssocImagemSom>>

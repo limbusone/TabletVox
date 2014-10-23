@@ -1,4 +1,4 @@
-package com.example.tabletvox03f.dal;
+package com.example.tabletvox03f.dal.perfil;
 
 import java.util.ArrayList;
 

@@ -17,8 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tabletvox03f.R;
-import com.example.tabletvox03f.dal.Perfil;
-import com.example.tabletvox03f.dal.PerfilDAOSingleton;
+import com.example.tabletvox03f.dal.perfil.Perfil;
+import com.example.tabletvox03f.dal.perfil.PerfilDAOSingleton;
 
 public class ItemPerfilAdapter extends BaseAdapter
 {

@@ -19,10 +19,10 @@ import com.example.tabletvox03f.Erro;
 import com.example.tabletvox03f.ImgItem;
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.Utils;
-import com.example.tabletvox03f.dal.AssocImagemSom;
-import com.example.tabletvox03f.dal.AssocImagemSomDAO;
-import com.example.tabletvox03f.dal.AssocImagemSomDAOSingleton;
 import com.example.tabletvox03f.dal.FilesIO;
+import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
+import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSomDAO;
+import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSomDAOSingleton;
 import com.example.tabletvox03f.management.FormularioBaseActivity;
 
 public class FormularioAssocImagemSomActivity extends FormularioBaseActivity

@@ -3,6 +3,8 @@ package com.example.tabletvox03f.dal;
 import java.util.ArrayList;
 
 import com.example.tabletvox03f.ImageAdapter;
+import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
+import com.example.tabletvox03f.dal.xml.XmlUtilsComandos;
 
 import android.content.Context;
 import android.os.AsyncTask;

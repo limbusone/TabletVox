@@ -112,72 +112,72 @@ public class Utils
 		
 		// alimentos
 		CategoriaDAOSingleton.getInstance().
-		incluirCategoria(categoria = new Categoria(1, "alimentos", dao_ais.getAISById(29), dao_ais.getAISListbyIdInterval(43, 54)));
+		incluirCategoria(categoria = new Categoria(1, "alimentos", dao_ais.getImagemById(29), dao_ais.getImagensByIdInterval(43, 54)));
 		categorias.add(categoria);
 		
 		// animais
 		CategoriaDAOSingleton.getInstance().
-		incluirCategoria(categoria = new Categoria(2, "animais", dao_ais.getAISById(30), dao_ais.getAISListbyIdInterval(55, 66)));
+		incluirCategoria(categoria = new Categoria(2, "animais", dao_ais.getImagemById(30), dao_ais.getImagensByIdInterval(55, 66)));
 		categorias.add(categoria);
 		
 		// aparelhos
 		CategoriaDAOSingleton.getInstance().
-		incluirCategoria(categoria = new Categoria(3, "aparelhos", dao_ais.getAISById(31), dao_ais.getAISListbyIdInterval(67, 75)));
+		incluirCategoria(categoria = new Categoria(3, "aparelhos", dao_ais.getImagemById(31), dao_ais.getImagensByIdInterval(67, 75)));
 		categorias.add(categoria);
 		
 		// banheiro
 		CategoriaDAOSingleton.getInstance().
-		incluirCategoria(categoria = new Categoria(4, "banheiro", dao_ais.getAISById(32), dao_ais.getAISListbyIdInterval(76, 87)));
+		incluirCategoria(categoria = new Categoria(4, "banheiro", dao_ais.getImagemById(32), dao_ais.getImagensByIdInterval(76, 87)));
 		categorias.add(categoria);
 		
 		// bebidas
 		CategoriaDAOSingleton.getInstance().
-		incluirCategoria(categoria = new Categoria(5, "bebidas", dao_ais.getAISById(33), dao_ais.getAISListbyIdInterval(88, 94)));
+		incluirCategoria(categoria = new Categoria(5, "bebidas", dao_ais.getImagemById(33), dao_ais.getImagensByIdInterval(88, 94)));
 		categorias.add(categoria);
 		
 		// corpo
 		CategoriaDAOSingleton.getInstance().
-		incluirCategoria(categoria = new Categoria(6, "corpo", dao_ais.getAISById(34), dao_ais.getAISListbyIdInterval(95, 106)));
+		incluirCategoria(categoria = new Categoria(6, "corpo", dao_ais.getImagemById(34), dao_ais.getImagensByIdInterval(95, 106)));
 		categorias.add(categoria);
 		
 		// familia 1
 		CategoriaDAOSingleton.getInstance().
-		incluirCategoria(categoria = new Categoria(7, "familia 1", dao_ais.getAISById(35), dao_ais.getAISListbyIdInterval(107, 122)));
+		incluirCategoria(categoria = new Categoria(7, "familia 1", dao_ais.getImagemById(35), dao_ais.getImagensByIdInterval(107, 122)));
 		categorias.add(categoria);
 		
 		// familia 2
 		CategoriaDAOSingleton.getInstance().
-		incluirCategoria(categoria = new Categoria(8, "familia 2", dao_ais.getAISById(36), dao_ais.getAISListbyIdInterval(123, 136)));
+		incluirCategoria(categoria = new Categoria(8, "familia 2", dao_ais.getImagemById(36), dao_ais.getImagensByIdInterval(123, 136)));
 		categorias.add(categoria);		
 		
 		// frutas
 		CategoriaDAOSingleton.getInstance().
-		incluirCategoria(categoria = new Categoria(9, "frutas", dao_ais.getAISById(37), dao_ais.getAISListbyIdInterval(137, 148)));
+		incluirCategoria(categoria = new Categoria(9, "frutas", dao_ais.getImagemById(37), dao_ais.getImagensByIdInterval(137, 148)));
 		categorias.add(categoria);		
 		
 		// lugares
 		CategoriaDAOSingleton.getInstance().
-		incluirCategoria(categoria = new Categoria(10, "lugares", dao_ais.getAISById(38), dao_ais.getAISListbyIdInterval(149, 160)));
+		incluirCategoria(categoria = new Categoria(10, "lugares", dao_ais.getImagemById(38), dao_ais.getImagensByIdInterval(149, 160)));
 		categorias.add(categoria);		
 		
 		// pessoas
 		CategoriaDAOSingleton.getInstance().
-		incluirCategoria(categoria = new Categoria(11, "pessoas", dao_ais.getAISById(39), dao_ais.getAISListbyIdInterval(161, 172)));
+		incluirCategoria(categoria = new Categoria(11, "pessoas", dao_ais.getImagemById(39), dao_ais.getImagensByIdInterval(161, 172)));
 		categorias.add(categoria);
 		
 		// sensacoes
 		CategoriaDAOSingleton.getInstance().
-		incluirCategoria(categoria = new Categoria(12, "sensacoes", dao_ais.getAISById(40), dao_ais.getAISListbyIdInterval(173, 184)));
+		incluirCategoria(categoria = new Categoria(12, "sensacoes", dao_ais.getImagemById(40), dao_ais.getImagensByIdInterval(173, 184)));
 		categorias.add(categoria);
 
 		// transporte
 		CategoriaDAOSingleton.getInstance().
-		incluirCategoria(categoria = new Categoria(13, "transporte", dao_ais.getAISById(41), dao_ais.getAISListbyIdInterval(185, 196)));
+		incluirCategoria(categoria = new Categoria(13, "transporte", dao_ais.getImagemById(41), dao_ais.getImagensByIdInterval(185, 196)));
 		categorias.add(categoria);		
 		
 		// verbos
 		CategoriaDAOSingleton.getInstance().
-		incluirCategoria(categoria = new Categoria(14, "verbos", dao_ais.getAISById(42), dao_ais.getAISListbyIdInterval(197, 208)));
+		incluirCategoria(categoria = new Categoria(14, "verbos", dao_ais.getImagemById(42), dao_ais.getImagensByIdInterval(197, 208)));
 		categorias.add(categoria);
 		
 //		categoria = CategoriaDAOSingleton.getInstance().getCategoriaById(2);

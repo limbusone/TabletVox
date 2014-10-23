@@ -174,8 +174,40 @@ public class AssocImagemSomDAO
 		return ais_list;
 	}
 	
+	// retorna todas as imagens exceto as imagens-comandos
+	public ArrayList<AssocImagemSom> getImagens()
+	{
+		ArrayList<AssocImagemSom> ais_list = new ArrayList<AssocImagemSom>();
+		
+		Cursor cursor = database.query(
+				TabletVoxSQLiteOpenHelper.TABLE_AIS, columns, 
+				TabletVoxSQLiteOpenHelper.AIS_COLUMN_CMD + " = 0", 
+				null, null, null, null);
+		
+		cursor.moveToFirst();
+		while (!(cursor.isAfterLast()))
+		{
+			AssocImagemSom ais = new AssocImagemSom
+			(
+				cursor.getInt(0),
+				cursor.getString(1), 
+				cursor.getString(2),
+				cursor.getString(3),
+				cursor.getString(4), 
+				cursor.getString(5).charAt(0), 
+				cursor.getInt(6),
+				(cursor.getInt(7) == 1) ? true : false
+			 );
+			ais_list.add(ais);
+			cursor.moveToNext();
+		}
+		cursor.close();
+		
+		return ais_list;		
+	}
+	
 	// busca um registro pelo ID
-	public AssocImagemSom getAISById(long id)
+	public AssocImagemSom getImagemById(long id)
 	{
 		Cursor cursor = database.query(
 				TabletVoxSQLiteOpenHelper.TABLE_AIS, columns, 
@@ -197,7 +229,7 @@ public class AssocImagemSomDAO
 		 );		
 	}
 	
-	public ArrayList<AssocImagemSom> getAISListbyDesc(String desc)
+	public ArrayList<AssocImagemSom> getImagensbyDesc(String desc)
 	{
 		ArrayList<AssocImagemSom> ais_list = new ArrayList<AssocImagemSom>();
 		Cursor cursor = database.query(
@@ -227,7 +259,7 @@ public class AssocImagemSomDAO
 		return ais_list;
 	}
 	
-	public ArrayList<AssocImagemSom> getAISListbyTituloImagem(String ti)
+	public ArrayList<AssocImagemSom> getImagensByTituloImagem(String ti)
 	{
 		ArrayList<AssocImagemSom> ais_list = new ArrayList<AssocImagemSom>();
 		Cursor cursor = database.query(
@@ -257,7 +289,7 @@ public class AssocImagemSomDAO
 		return ais_list;
 	}
 	
-	public ArrayList<AssocImagemSom> getAISListbyTituloSom(String ts)
+	public ArrayList<AssocImagemSom> getImagensByTituloSom(String ts)
 	{
 		ArrayList<AssocImagemSom> ais_list = new ArrayList<AssocImagemSom>();
 		Cursor cursor = database.query(
@@ -287,7 +319,7 @@ public class AssocImagemSomDAO
 		return ais_list;
 	}
 	
-	public ArrayList<AssocImagemSom> getAISListbyIdInterval(int inicio, int fim)
+	public ArrayList<AssocImagemSom> getImagensByIdInterval(int inicio, int fim)
 	{
 		ArrayList<AssocImagemSom> ais_list = new ArrayList<AssocImagemSom>();
 		Cursor cursor = database.query(

@@ -31,7 +31,7 @@ public class ListaImagensActivity extends ListaComBuscaManageActivity
 		AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(this);  
 		
 		dao_ais.open();
-		ArrayList<AssocImagemSom> lista = dao_ais.getAll();
+		ArrayList<AssocImagemSom> lista = dao_ais.getImagens();
 		dao_ais.close();
 		
 		return (new ItemAssocImagemSomAdapter(this, (ArrayList<AssocImagemSom>) lista.clone()));
@@ -76,7 +76,7 @@ public class ListaImagensActivity extends ListaComBuscaManageActivity
 		String texto_para_pesquisa = s.toString();
 		
 		dao_ais.open();
-		carregarLista(dao_ais.getAISListbyDesc(texto_para_pesquisa));
+		carregarLista(dao_ais.getImagensbyDesc(texto_para_pesquisa));
 		dao_ais.close();
 	}
 

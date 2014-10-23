@@ -53,7 +53,7 @@ public class XmlUtilsComandos extends XmlUtils
 					// dentro da tag <entrada>
 					id = Integer.parseInt(read_atributo_tag_fechada(p, tag, "id"));
 					//ais_list.add(xml_ais.getARegAssocImagemSomById(id));
-					ais_list.add(dao_ais.getAISById(id));
+					ais_list.add(dao_ais.getImagemById(id));
 				}
 				else
 					// pula a tag
@@ -121,7 +121,7 @@ public class XmlUtilsComandos extends XmlUtils
 					isAtalho = Boolean.parseBoolean(read_atributo_tag_fechada(p, tag, "atalho"));
 					if (isAtalho)
 						//ais_list.add(xml_ais.getARegAssocImagemSomById(id));
-						ais_list.add(dao_ais.getAISById(id));
+						ais_list.add(dao_ais.getImagemById(id));
 				}
 				else
 					// pula a tag

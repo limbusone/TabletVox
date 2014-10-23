@@ -105,7 +105,7 @@ public class XmlUtilsTelas extends XmlUtils
 			{
 				id = Integer.parseInt(read_atributo_tag_fechada(parser, "entrada", "id"));
 				//ais_list.add(xml_ais.getARegAssocImagemSomById(id));
-				ais_list.add(dao_ais.getAISById(id));
+				ais_list.add(dao_ais.getImagemById(id));
 			}
 			else
 				skip(parser);

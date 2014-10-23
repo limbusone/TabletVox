@@ -114,7 +114,7 @@ public class CategoriaDAO
 			(
 				cursor.getInt(0),
 				cursor.getString(2),
-				dao_ais.getAISById(cursor.getInt(1))
+				dao_ais.getImagemById(cursor.getInt(1))
 			 );
 			cat_list.add(cat);
 			cursor.moveToNext();
@@ -139,7 +139,7 @@ public class CategoriaDAO
 		(
 			cursor.getInt(0),
 			cursor.getString(2),
-			dao_ais.getAISById(cursor.getInt(1))
+			dao_ais.getImagemById(cursor.getInt(1))
 		 );		
 	}
 	
@@ -161,7 +161,7 @@ public class CategoriaDAO
 			(
 				cursor.getInt(0),
 				cursor.getString(2),
-				dao_ais.getAISById(cursor.getInt(1))
+				dao_ais.getImagemById(cursor.getInt(1))
 			 );
 			cat_list.add(cat);
 			cursor.moveToNext();
@@ -185,7 +185,7 @@ public class CategoriaDAO
 		cursor.moveToFirst();
 		while (!(cursor.isAfterLast()))
 		{
-			ais_list.add(aisDao.getAISById(cursor.getInt(2)));
+			ais_list.add(aisDao.getImagemById(cursor.getInt(2)));
 			cursor.moveToNext();
 		}
 		

@@ -103,7 +103,7 @@ public class CategoriaAssocImagemSomDAO
 			(
 				cursor.getInt(0),
 				catDao.getCategoriaById(cursor.getInt(1)),
-				aisDao.getAISById(cursor.getInt(2))
+				aisDao.getImagemById(cursor.getInt(2))
 			);
 			
 			cat_ais_list.add(cat_ais);
@@ -133,7 +133,7 @@ public class CategoriaAssocImagemSomDAO
 			(
 				cursor.getInt(0),
 				catDao.getCategoriaById(cursor.getInt(1)),
-				aisDao.getAISById(cursor.getInt(2))
+				aisDao.getImagemById(cursor.getInt(2))
 			);
 			
 			cat_ais_list.add(cat_ais);
@@ -158,7 +158,7 @@ public class CategoriaAssocImagemSomDAO
 		cursor.moveToFirst();
 		while (!(cursor.isAfterLast()))
 		{
-			ais_list.add(aisDao.getAISById(cursor.getInt(2)));
+			ais_list.add(aisDao.getImagemById(cursor.getInt(2)));
 			cursor.moveToNext();
 		}
 		cursor.close();
@@ -182,7 +182,7 @@ public class CategoriaAssocImagemSomDAO
 		cursor.moveToFirst();
 		while (!(cursor.isAfterLast()))
 		{
-			AssocImagemSom ais = aisDao.getAISById(cursor.getInt(2));
+			AssocImagemSom ais = aisDao.getImagemById(cursor.getInt(2));
 			if (soAtalho && ais.isAtalho())
 				ais_list.add(ais);
 			else if (!(soAtalho))
@@ -210,7 +210,7 @@ public class CategoriaAssocImagemSomDAO
 		(
 				cursor.getInt(0),
 				catDao.getCategoriaById(cursor.getInt(1)),
-				aisDao.getAISById(cursor.getInt(2))
+				aisDao.getImagemById(cursor.getInt(2))
 		);		
 	}	
 	

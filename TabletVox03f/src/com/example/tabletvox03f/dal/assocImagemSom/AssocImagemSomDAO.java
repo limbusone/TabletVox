@@ -88,7 +88,9 @@ public class AssocImagemSomDAO
 		values.put(TabletVoxSQLiteOpenHelper.AIS_COLUMN_EXT, ais.getExt());
 		values.put(TabletVoxSQLiteOpenHelper.AIS_COLUMN_TIPO, "" + ais.getTipo());
 		values.put(TabletVoxSQLiteOpenHelper.AIS_COLUMN_CMD, ais.getCmd());
-		values.put(TabletVoxSQLiteOpenHelper.AIS_COLUMN_ATALHO, ais.isAtalho());			
+		values.put(TabletVoxSQLiteOpenHelper.AIS_COLUMN_ATALHO, ais.isAtalho());
+		
+		database.insert(TabletVoxSQLiteOpenHelper.TABLE_AIS, null, values);
 
 		return retorno;
 	}
@@ -134,6 +136,7 @@ public class AssocImagemSomDAO
 	public void update(AssocImagemSom ais, long id)
 	{
 		ContentValues values = new ContentValues();
+		values.put(TabletVoxSQLiteOpenHelper.AIS_COLUMN_DESC, ais.getDesc());
 		values.put(TabletVoxSQLiteOpenHelper.AIS_COLUMN_TITULO_IMAGEM, ais.getTituloImagem());
 		values.put(TabletVoxSQLiteOpenHelper.AIS_COLUMN_TITULO_SOM, ais.getTituloSom());
 		values.put(TabletVoxSQLiteOpenHelper.AIS_COLUMN_EXT, ais.getExt());
@@ -234,7 +237,7 @@ public class AssocImagemSomDAO
 		ArrayList<AssocImagemSom> ais_list = new ArrayList<AssocImagemSom>();
 		Cursor cursor = database.query(
 				TabletVoxSQLiteOpenHelper.TABLE_AIS, columns, 
-				TabletVoxSQLiteOpenHelper.AIS_COLUMN_DESC + " LIKE " + "'%" + desc + "%'", 
+				TabletVoxSQLiteOpenHelper.AIS_COLUMN_DESC + " LIKE " + "'%" + desc + "%' AND " + TabletVoxSQLiteOpenHelper.AIS_COLUMN_CMD + " = 0", 
 				null, null, null, null);
 		
 		cursor.moveToFirst();

@@ -243,6 +243,7 @@ public class Utils
 		dao_ais.create("transporte", 	"TRANSPOR", 	"TRANSPOR", 	"jpg", 'c', 0);
 		dao_ais.create("verbos", 		"verbos", 		"verbos", 		"jpg", 'c', 0);
 		
+		dao_cat.open();
 		dao_cat.create(29, "alimentos");
 		dao_cat.create(30, "animais");
 		dao_cat.create(31, "aparelhos");
@@ -458,6 +459,7 @@ public class Utils
 		dao_ais.create("ser", 			"", 		"", 		"jpg", 'v', 0);
 		
 		dao_ais.create("comando voltar", "cmd11", "cmd11", "jpg", 'n', 2);
+		
 	}	
 
 }

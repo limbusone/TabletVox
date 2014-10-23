@@ -19,7 +19,8 @@ public class CategoriaDAO
 	{ 
 		TabletVoxSQLiteOpenHelper.CAT_COLUMN_ID,
 		TabletVoxSQLiteOpenHelper.AIS_COLUMN_ID,
-		TabletVoxSQLiteOpenHelper.CAT_COLUMN_NOME
+		TabletVoxSQLiteOpenHelper.CAT_COLUMN_NOME,
+		TabletVoxSQLiteOpenHelper.CAT_COLUMN_SIS
 	};
 	
 	private TabletVoxSQLiteOpenHelper sqliteOpenHelper;
@@ -69,7 +70,7 @@ public class CategoriaDAO
 	public void create(long ais_id, String nome)
 	{
 		ContentValues values = new ContentValues();
-		values.put(TabletVoxSQLiteOpenHelper.AIS_COLUMN_ID,  ais_id);
+		values.put(TabletVoxSQLiteOpenHelper.AIS_COLUMN_ID,  (int) ais_id);
 		values.put(TabletVoxSQLiteOpenHelper.CAT_COLUMN_NOME,  nome);
 		database.insert(TabletVoxSQLiteOpenHelper.TABLE_CAT, null, values);		
 	}

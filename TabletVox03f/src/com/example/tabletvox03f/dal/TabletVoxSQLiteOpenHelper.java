@@ -61,7 +61,7 @@ public class TabletVoxSQLiteOpenHelper extends SQLiteOpenHelper
 		+ ");"
 		+ "CREATE TABLE " + TABLE_PFL
 		+ "("
-		+ PFL_COLUMN_ID 	+ " INTEGER P RIMARY KEY AUTOINCREMENT, "
+		+ PFL_COLUMN_ID 	+ " INTEGER PRIMARY KEY AUTOINCREMENT, "
 		+ PFL_COLUMN_NOME	+ " VARCHAR(40), "
 		+ PFL_COLUMN_AUTOR	+ " VARCHAR(40)"
 		+ ");"
@@ -69,7 +69,7 @@ public class TabletVoxSQLiteOpenHelper extends SQLiteOpenHelper
 		+ "("
 		+ CAT_COLUMN_ID 	+ " INTEGER PRIMARY KEY AUTOINCREMENT, "
 		+ AIS_COLUMN_ID		+ " INTEGER, "
-		+ CAT_COLUMN_NOME 	+ " VARCHAR(40),"
+		+ CAT_COLUMN_NOME 	+ " VARCHAR(40), "
 		+ CAT_COLUMN_SIS	+ " BOOLEAN"
 		+");"
 		+ "CREATE TABLE " + TABLE_PFL_CAT

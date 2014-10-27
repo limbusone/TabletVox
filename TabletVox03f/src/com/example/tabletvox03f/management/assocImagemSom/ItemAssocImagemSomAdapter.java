@@ -21,7 +21,7 @@ import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.Utils;
 import com.example.tabletvox03f.dal.FilesIO;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
-import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSomDAOSingleton;
+import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSomDAO;
 
 
 public class ItemAssocImagemSomAdapter extends BaseAdapter
@@ -121,13 +121,20 @@ public class ItemAssocImagemSomAdapter extends BaseAdapter
 						// verifica se o "parent" desse adapter é a lista de imagens
 						if (ItemAssocImagemSomAdapter.this.mContext instanceof ListaImagensActivity)
 						{
-							
-							if (!(AssocImagemSomDAOSingleton.getInstance().excluirAssocImagemSom(ais.getId(), ItemAssocImagemSomAdapter.this.mContext)))
+							FilesIO fio = new FilesIO(ItemAssocImagemSomAdapter.this.mContext);
+							if (!(fio.deletarArquivosDeImagemESom(ais)))
 							{
 								Utils.erros.add(new Erro("Erro ao excluir o arquivo de imagem ou de som. Exclusão cancelada!"));
 								Utils.exibirErros(ItemAssocImagemSomAdapter.this.mContext);
 								return;
 							}							
+							
+							//AssocImagemSomDAOSingleton.getInstance().excluirAssocImagemSom(ais.getId());
+							
+							AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(ItemAssocImagemSomAdapter.this.mContext);
+							dao_ais.open();
+							dao_ais.delete(ais.getId());
+							dao_ais.close();
 							
 							// atualiza o label dos registros encontrados
 							ListaImagensActivity lia = (ListaImagensActivity) ItemAssocImagemSomAdapter.this.mContext;

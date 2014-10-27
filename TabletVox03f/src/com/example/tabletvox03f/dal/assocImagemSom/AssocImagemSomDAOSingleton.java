@@ -122,6 +122,11 @@ public class AssocImagemSomDAOSingleton
 		
 	}
 	
+	public void excluirAssocImagemSom(int id)
+	{
+		listaAssocImagemSom.remove(getAssocImagemSomById(id));
+	}
+	
 	@SuppressWarnings("unchecked")
 	public ArrayList<AssocImagemSom> getAll()
 	{

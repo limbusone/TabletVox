@@ -23,7 +23,6 @@ import com.example.tabletvox03f.dal.FilesIO;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
 import com.example.tabletvox03f.dal.categoria.Categoria;
 import com.example.tabletvox03f.dal.categoria.CategoriaDAO;
-import com.example.tabletvox03f.dal.categoria.CategoriaDAOSingleton;
 import com.example.tabletvox03f.management.perfil.FormularioPerfilActivity;
 
 public class ItemCategoriaAdapter extends BaseAdapter
@@ -180,21 +179,14 @@ public class ItemCategoriaAdapter extends BaseAdapter
 					public void onClick(DialogInterface dialog, int which)
 					{
 						
-						Toast.makeText(ItemCategoriaAdapter.this.mContext, 
-						"Excluido com sucesso! ID: " + Integer.toString(categoria.getId()), 
-						Toast.LENGTH_SHORT).show();
-						
-						removeItem(categoria);
-						
-						
-						// refresh na lista
-						ItemCategoriaAdapter.this.refresh();
-						
 						// verifica se o "parent" desse adapter é a lista de categorias
 						if (ItemCategoriaAdapter.this.mContext instanceof ListaCategoriasActivity)
 						{
-							// exclui efetivamente a categoria
-							CategoriaDAOSingleton.getInstance().excluirCategoria(categoria.getId());
+							CategoriaDAO dao_cat = new CategoriaDAO(ItemCategoriaAdapter.this.mContext);
+							
+							//exclui efetivamente a categoria
+							dao_cat.delete(categoria.getId());
+							//CategoriaDAOSingleton.getInstance().excluirCategoria(categoria.getId());
 							
 							// atualiza o label dos registros encontrados
 							ListaCategoriasActivity lca = (ListaCategoriasActivity) ItemCategoriaAdapter.this.mContext;
@@ -206,6 +198,15 @@ public class ItemCategoriaAdapter extends BaseAdapter
 							((FormularioPerfilActivity) ItemCategoriaAdapter.this.mContext).excluirCategoriaDasNovasCategorias(categoria);
 							((FormularioPerfilActivity) ItemCategoriaAdapter.this.mContext).excluirCategoriaDasAntigasCategorias(categoria);
 						}
+						
+						Toast.makeText(ItemCategoriaAdapter.this.mContext, 
+						"Excluido com sucesso! ID: " + Integer.toString(categoria.getId()), 
+						Toast.LENGTH_SHORT).show();
+						
+						removeItem(categoria);
+						
+						// refresh na lista
+						ItemCategoriaAdapter.this.refresh();						
 					}
 				});
 				

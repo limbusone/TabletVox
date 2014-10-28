@@ -101,12 +101,12 @@ public class CategoriaDAO
 	{
 		ArrayList<Categoria> cat_list = new ArrayList<Categoria>();
 		
-		AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(sqliteOpenHelper);
-		
 		Cursor cursor = database.query(
 				TabletVoxSQLiteOpenHelper.TABLE_CAT, 
 				columns, 
 				null, null, null, null, null);
+		
+		AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(sqliteOpenHelper);
 		
 		cursor.moveToFirst();
 		while (!(cursor.isAfterLast()))
@@ -127,12 +127,13 @@ public class CategoriaDAO
 	// busca um registro pelo ID
 	public Categoria getCategoriaById(long id)
 	{
-		AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(sqliteOpenHelper);
 		
 		Cursor cursor = database.query(
 				TabletVoxSQLiteOpenHelper.TABLE_CAT, columns, 
 				TabletVoxSQLiteOpenHelper.CAT_COLUMN_ID + " = " + id, 
 				null, null, null, null);
+
+		AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(sqliteOpenHelper);
 		
 		cursor.moveToFirst();
 		
@@ -148,12 +149,12 @@ public class CategoriaDAO
 	{
 		ArrayList<Categoria> cat_list = new ArrayList<Categoria>();
 		
-		AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(sqliteOpenHelper);
-		
 		Cursor cursor = database.query(
 				TabletVoxSQLiteOpenHelper.TABLE_CAT, columns, 
 				TabletVoxSQLiteOpenHelper.CAT_COLUMN_NOME + " LIKE " + "'%" + nome + "%'", 
 				null, null, null, null);
+
+		AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(sqliteOpenHelper);		
 		
 		cursor.moveToFirst();
 		while (!(cursor.isAfterLast()))
@@ -181,12 +182,12 @@ public class CategoriaDAO
 				TabletVoxSQLiteOpenHelper.CAT_COLUMN_ID + " = " + categoriaId, 
 				null, null, null, null);
 		
-		AssocImagemSomDAO aisDao = new AssocImagemSomDAO(sqliteOpenHelper);
+		AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(sqliteOpenHelper);
 	
 		cursor.moveToFirst();
 		while (!(cursor.isAfterLast()))
 		{
-			ais_list.add(aisDao.getImagemById(cursor.getInt(2)));
+			ais_list.add(dao_ais.getImagemById(cursor.getInt(2)));
 			cursor.moveToNext();
 		}
 		

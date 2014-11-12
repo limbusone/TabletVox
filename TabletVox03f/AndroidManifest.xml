@@ -65,11 +65,13 @@
         </activity>
         <activity
             android:name="com.example.tabletvox03f.management.perfil.SelecionarPerfilActivity"
-            android:label="@string/title_activity_selecionar_perfil" >
+            android:label="@string/title_activity_selecionar_perfil"
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name="com.example.tabletvox03f.management.perfil.FormularioPerfilActivity"
-            android:label="@string/title_activity_criar_perfil" >
+            android:label="@string/title_activity_criar_perfil"
+            android:windowSoftInputMode="stateAlwaysHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.tabletvox03f.SelecionarPerfilActivity" >
@@ -82,27 +84,32 @@
         
         <activity 
             android:name="com.example.tabletvox03f.management.categoria.FormularioCategoriaActivity"
-            android:label="@string/title_activity_criar_categoria">
+            android:label="@string/title_activity_criar_categoria"
+            android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
 
         <activity
             android:name="com.example.tabletvox03f.management.categoria.ListaCategoriasActivity"
-            android:label="@string/title_activity_lista_categorias">
+            android:label="@string/title_activity_lista_categorias"
+            android:windowSoftInputMode="stateAlwaysHidden">
         </activity>        
         
         <activity
             android:name="com.example.tabletvox03f.management.categoria.SelecionarCategoriasActivity"
-            android:label="@string/title_activity_selecionar_categorias">
+            android:label="@string/title_activity_selecionar_categorias"
+            android:windowSoftInputMode="stateAlwaysHidden">
         </activity>        
         
         <activity 
             android:name="com.example.tabletvox03f.management.assocImagemSom.FormularioAssocImagemSomActivity"
-            android:label="@string/title_activity_incluir_ais">
+            android:label="@string/title_activity_incluir_ais"
+            android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
         
         <activity
             android:name="com.example.tabletvox03f.management.assocImagemSom.ListaImagensActivity"
-            android:label="@string/title_activity_lista_imagens">
+            android:label="@string/title_activity_lista_imagens"
+            android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
         
         <activity
@@ -112,12 +119,14 @@
         
         <activity
             android:name="com.example.tabletvox03f.management.assocImagemSom.SelecionarImagensActivity"
-            android:label="@string/title_activity_selecionar_imagem">
+            android:label="@string/title_activity_selecionar_imagem"
+            android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
         
         <activity
             android:name="com.example.tabletvox03f.management.categoria.ListaImagensCategoriaActivity"
-            android:label="@string/title_activity_lista_imagens_categoria">
+            android:label="@string/title_activity_lista_imagens_categoria"
+            android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
 
     </application>

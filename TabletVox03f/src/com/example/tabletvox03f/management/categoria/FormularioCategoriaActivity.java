@@ -20,7 +20,7 @@ import com.example.tabletvox03f.Utils;
 import com.example.tabletvox03f.dal.FilesIO;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
 import com.example.tabletvox03f.dal.categoria.Categoria;
-import com.example.tabletvox03f.dal.categoria.CategoriaDAOSingleton;
+import com.example.tabletvox03f.dal.categoria.CategoriaDAO;
 import com.example.tabletvox03f.management.FormularioNaoPersistenteBaseActivity;
 import com.example.tabletvox03f.management.assocImagemSom.SelecionarImagemActivity;
 
@@ -137,8 +137,11 @@ public class FormularioCategoriaActivity extends FormularioNaoPersistenteBaseAct
 			return;
 		}
 		
+		CategoriaDAO dao_cat = new CategoriaDAO(this);
 		
-		CategoriaDAOSingleton.getInstance().incluirCategoriaWithRandomGeneratedID(cat);
+		dao_cat.open();
+		dao_cat.create(cat);
+		dao_cat.close();
 		
 		this.setResult(1);
 		finish();
@@ -158,7 +161,12 @@ public class FormularioCategoriaActivity extends FormularioNaoPersistenteBaseAct
 			return;
 		}
 		
-		CategoriaDAOSingleton.getInstance().editarCategoria(cat, cat.getId());
+		
+		CategoriaDAO dao_cat = new CategoriaDAO(this);
+		
+		dao_cat.open();
+		dao_cat.update(cat, cat.getId());
+		dao_cat.close();
 		
 		this.setResult(2);
 		finish();

@@ -76,11 +76,7 @@ public class Utils
 	public static void carregarDadosIniciais(Context context)
 	{
 		// inicializar o banco
-		AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(context);
-		
-		dao_ais.open();
-		Utils.inicializarBD(dao_ais);
-		dao_ais.close();
+		Utils.inicializarBD(context);
 		
 		(new FilesIO(context)).copiarArquivosXmlDeAssetsParaInternalStorage();
 		
@@ -191,8 +187,12 @@ public class Utils
 	}
 	
 	// carregar primeiros dados no banco de dados
-	public static void inicializarBD(AssocImagemSomDAO dao_ais)
+	public static void inicializarBD(Context context)
 	{
+		AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(context);
+		
+		dao_ais.open();
+		
 		dao_ais.create("letraa", "letraa", 	"s01002", 	"png", 'n', 0);
 		dao_ais.create("letrab", "letrab", 	"s02012", 	"png", 'n', 0);
 		dao_ais.create("letrac", "letrac", 	"s05012", 	"png", 'n', 0);
@@ -225,8 +225,6 @@ public class Utils
 		
 		// registros da versao categorizada
 		
-		CategoriaDAO dao_cat = new CategoriaDAO(dao_ais.getSqliteOpenHelper());
-		
 		// categorias
 		dao_ais.create("alimentos", 	"ALIMENT", 		"ALIMENT", 		"jpg", 'c', 0);
 		dao_ais.create("animais", 		"ANIMAIS", 		"ANIMAIS", 		"jpg", 'c', 0);
@@ -242,22 +240,6 @@ public class Utils
 		dao_ais.create("sensacoes", 	"SENSAC", 		"SENSAC", 		"jpg", 'c', 0);
 		dao_ais.create("transporte", 	"TRANSPOR", 	"TRANSPOR", 	"jpg", 'c', 0);
 		dao_ais.create("verbos", 		"verbos", 		"verbos", 		"jpg", 'c', 0);
-		
-		dao_cat.open();
-		dao_cat.create(29, "alimentos");
-		dao_cat.create(30, "animais");
-		dao_cat.create(31, "aparelhos");
-		dao_cat.create(32, "banheiro");
-		dao_cat.create(33, "bebidas");
-		dao_cat.create(34, "corpo");
-		dao_cat.create(35, "familia 1");
-		dao_cat.create(36, "familia 2");
-		dao_cat.create(37, "frutas");
-		dao_cat.create(38, "lugares");
-		dao_cat.create(39, "pessoas");
-		dao_cat.create(40, "sensacoes");
-		dao_cat.create(41, "transporte");
-		dao_cat.create(42, "verbos");
 		
 		// itens das categorias
 		
@@ -459,6 +441,29 @@ public class Utils
 		dao_ais.create("ser", 			"", 		"", 		"jpg", 'v', 0);
 		
 		dao_ais.create("comando voltar", "cmd11", "cmd11", "jpg", 'n', 2);
+		dao_ais.close();
+		
+		// incluindo as categorias de fato
+		CategoriaDAO dao_cat = new CategoriaDAO(context);
+		
+		dao_cat.open();
+		
+		dao_cat.create(29, "alimentos");
+		dao_cat.create(30, "animais");
+		dao_cat.create(31, "aparelhos");
+		dao_cat.create(32, "banheiro");
+		dao_cat.create(33, "bebidas");
+		dao_cat.create(34, "corpo");
+		dao_cat.create(35, "familia 1");
+		dao_cat.create(36, "familia 2");
+		dao_cat.create(37, "frutas");
+		dao_cat.create(38, "lugares");
+		dao_cat.create(39, "pessoas");
+		dao_cat.create(40, "sensacoes");
+		dao_cat.create(41, "transporte");
+		dao_cat.create(42, "verbos");
+		
+		dao_cat.close();
 		
 	}	
 

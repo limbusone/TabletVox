@@ -10,7 +10,7 @@ import android.widget.BaseAdapter;
 
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
-import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSomDAOSingleton;
+import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSomDAO;
 
 public class SelecionarImagemActivity extends ListaImagensActivity
 {
@@ -31,7 +31,11 @@ public class SelecionarImagemActivity extends ListaImagensActivity
 	@Override
 	protected BaseAdapter carregarLista()
 	{
-		ArrayList<AssocImagemSom> lista = AssocImagemSomDAOSingleton.getInstance().getImagens();
+		AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(this);  
+		
+		dao_ais.open();
+		ArrayList<AssocImagemSom> lista = dao_ais.getImagens();
+		dao_ais.close();
 		
 		return (new ItemSimplesAssocImagemSomAdapter(this, (ArrayList<AssocImagemSom>) lista.clone()));
 	}

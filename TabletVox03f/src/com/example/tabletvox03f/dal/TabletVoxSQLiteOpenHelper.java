@@ -42,12 +42,13 @@ public class TabletVoxSQLiteOpenHelper extends SQLiteOpenHelper
 	// atributos de CategoriaAssocImagemSom
 	public static final String CAT_AIS_COLUMN_ID 	= "cat_ais_id";
 	public static final String CAT_AIS_COLUMN_PAGE 	= "cat_ais_page";
+	public static final String CAT_AIS_COLUMN_ORDEM = "cat_ais_ordem";
 	
 	private static final String DATABASE_NAME = "tabletvox.db"; 	// nome do arquivo do banco
 	private static final int	DATABASE_VERSION = 1;
 	
 	// comando para criar tabela
-	private static final String DATABASE_CREATE = 
+	private static final String TABLE_AIS_CREATE = 
 		"CREATE TABLE " + TABLE_AIS 
 		+ "("
 		+ AIS_COLUMN_ID 			+ " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -58,32 +59,37 @@ public class TabletVoxSQLiteOpenHelper extends SQLiteOpenHelper
 		+ AIS_COLUMN_TIPO 			+ " CHAR(1), "
 		+ AIS_COLUMN_CMD 			+ " INTEGER, "
 		+ AIS_COLUMN_ATALHO			+ " BOOLEAN"
-		+ ");"
-		+ "CREATE TABLE " + TABLE_PFL
+		+ ");";
+	private static final String TABLE_PFL_CREATE =  
+		"CREATE TABLE " + TABLE_PFL
 		+ "("
 		+ PFL_COLUMN_ID 	+ " INTEGER PRIMARY KEY AUTOINCREMENT, "
 		+ PFL_COLUMN_NOME	+ " VARCHAR(40), "
 		+ PFL_COLUMN_AUTOR	+ " VARCHAR(40)"
-		+ ");"
-		+ "CREATE TABLE " + TABLE_CAT
+		+ ");";
+	private static final String TABLE_CAT_CREATE =
+		"CREATE TABLE " + TABLE_CAT
 		+ "("
 		+ CAT_COLUMN_ID 	+ " INTEGER PRIMARY KEY AUTOINCREMENT, "
 		+ AIS_COLUMN_ID		+ " INTEGER, "
 		+ CAT_COLUMN_NOME 	+ " VARCHAR(40), "
 		+ CAT_COLUMN_SIS	+ " BOOLEAN"
-		+");"
-		+ "CREATE TABLE " + TABLE_PFL_CAT
+		+");";
+	private static final String TABLE_PFL_CAT_CREATE =
+		"CREATE TABLE " + TABLE_PFL_CAT
 		+ "("
 		+ PFL_CAT_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
 		+ PFL_COLUMN_ID 	+ " INTEGER, "
 		+ CAT_COLUMN_ID 	+ " INTEGER"
-		+ ");"
-		+ "CREATE TABLE " + TABLE_CAT_AIS
+		+ ");";
+	private static final String TABLE_CAT_AIS_CREATE =
+		"CREATE TABLE " + TABLE_CAT_AIS
 		+ "("
 		+ CAT_AIS_COLUMN_ID 	+ " INTEGER PRIMARY KEY AUTOINCREMENT, "		
 		+ CAT_COLUMN_ID 		+ " INTEGER, "
 		+ AIS_COLUMN_ID 		+ " INTEGER, "
-		+ CAT_AIS_COLUMN_PAGE 	+ " INTEGER"
+		+ CAT_AIS_COLUMN_PAGE 	+ " INTEGER, "
+		+ CAT_AIS_COLUMN_ORDEM  + " INTEGER"
 		+ ");";
 
 	public TabletVoxSQLiteOpenHelper(Context context)
@@ -97,7 +103,12 @@ public class TabletVoxSQLiteOpenHelper extends SQLiteOpenHelper
 	public void onCreate(SQLiteDatabase db)
 	{
 		// Auto-generated method stub
-		db.execSQL(DATABASE_CREATE);
+		db.execSQL(TABLE_AIS_CREATE);
+		db.execSQL(TABLE_CAT_CREATE);
+		db.execSQL(TABLE_PFL_CREATE);
+		db.execSQL(TABLE_CAT_AIS_CREATE);
+		db.execSQL(TABLE_PFL_CAT_CREATE);
+		
 	}
 	
 	@Override

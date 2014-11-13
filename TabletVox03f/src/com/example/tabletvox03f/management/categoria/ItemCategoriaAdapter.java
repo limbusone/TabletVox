@@ -135,7 +135,10 @@ public class ItemCategoriaAdapter extends BaseAdapter
 				
 				// popular imagens na categoria
 				CategoriaDAO dao_cat = new CategoriaDAO(ItemCategoriaAdapter.this.mContext);
+				
+				dao_cat.open();
 				categoria.setImagens(dao_cat.getImagens(categoria.getId()));
+				dao_cat.close();
 				
 				intent.putExtra("categoria", categoria);
 				

@@ -15,11 +15,13 @@ import android.database.sqlite.SQLiteDatabase;
 public class CategoriaAssocImagemSomDAO
 {
 	private SQLiteDatabase database;
-	private String[] columns = 
+	public static String[] columns = 
 	{ 
 		TabletVoxSQLiteOpenHelper.CAT_AIS_COLUMN_ID,
 		TabletVoxSQLiteOpenHelper.CAT_COLUMN_ID,
-		TabletVoxSQLiteOpenHelper.AIS_COLUMN_ID
+		TabletVoxSQLiteOpenHelper.AIS_COLUMN_ID,
+		TabletVoxSQLiteOpenHelper.CAT_AIS_COLUMN_PAGE,
+		TabletVoxSQLiteOpenHelper.CAT_AIS_COLUMN_ORDEM
 	};
 	
 	private TabletVoxSQLiteOpenHelper sqliteOpenHelper;

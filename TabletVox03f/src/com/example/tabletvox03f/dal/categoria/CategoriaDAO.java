@@ -58,6 +58,7 @@ public class CategoriaDAO
 		if ( !( (imagens == null) || (imagens.size() == 0) ) )
 		{
 			CategoriaAssocImagemSomDAO dao_cat_ais = new CategoriaAssocImagemSomDAO(sqliteOpenHelper);
+			dao_cat_ais.open();
 			
 			for (int i = 0, length = imagens.size(); i < length; i++)
 				dao_cat_ais.create(cat, imagens.get(i));
@@ -107,6 +108,7 @@ public class CategoriaDAO
 				null, null, null, null, null);
 		
 		AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(sqliteOpenHelper);
+		dao_ais.open();
 		
 		cursor.moveToFirst();
 		while (!(cursor.isAfterLast()))
@@ -134,6 +136,7 @@ public class CategoriaDAO
 				null, null, null, null);
 
 		AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(sqliteOpenHelper);
+		dao_ais.open();
 		
 		cursor.moveToFirst();
 		
@@ -154,7 +157,8 @@ public class CategoriaDAO
 				TabletVoxSQLiteOpenHelper.CAT_COLUMN_NOME + " LIKE " + "'%" + nome + "%'", 
 				null, null, null, null);
 
-		AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(sqliteOpenHelper);		
+		AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(sqliteOpenHelper);
+		dao_ais.open();
 		
 		cursor.moveToFirst();
 		while (!(cursor.isAfterLast()))
@@ -178,11 +182,12 @@ public class CategoriaDAO
 		ArrayList<AssocImagemSom> ais_list = new ArrayList<AssocImagemSom>();
 		
 		Cursor cursor = database.query(
-				TabletVoxSQLiteOpenHelper.TABLE_CAT_AIS, columns, 
+				TabletVoxSQLiteOpenHelper.TABLE_CAT_AIS, CategoriaAssocImagemSomDAO.columns, 
 				TabletVoxSQLiteOpenHelper.CAT_COLUMN_ID + " = " + categoriaId, 
 				null, null, null, null);
 		
 		AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(sqliteOpenHelper);
+		dao_ais.open();
 	
 		cursor.moveToFirst();
 		while (!(cursor.isAfterLast()))

@@ -186,9 +186,10 @@ public class ItemCategoriaAdapter extends BaseAdapter
 						if (ItemCategoriaAdapter.this.mContext instanceof ListaCategoriasActivity)
 						{
 							CategoriaDAO dao_cat = new CategoriaDAO(ItemCategoriaAdapter.this.mContext);
-							
+							dao_cat.open();
 							//exclui efetivamente a categoria
 							dao_cat.delete(categoria.getId());
+							dao_cat.close();
 							//CategoriaDAOSingleton.getInstance().excluirCategoria(categoria.getId());
 							
 							// atualiza o label dos registros encontrados

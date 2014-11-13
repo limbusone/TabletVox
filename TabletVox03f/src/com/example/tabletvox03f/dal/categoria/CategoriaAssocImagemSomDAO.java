@@ -75,7 +75,15 @@ public class CategoriaAssocImagemSomDAO
 		
 		for (; i < length; i++)
 			database.delete(TabletVoxSQLiteOpenHelper.TABLE_CAT_AIS, TabletVoxSQLiteOpenHelper.CAT_AIS_COLUMN_ID + " = " + id_list[i], null);
-	}	
+	}
+	
+	public void delete(int cat_id, int ais_id)
+	{
+		database.delete(TabletVoxSQLiteOpenHelper.TABLE_CAT_AIS, 
+		TabletVoxSQLiteOpenHelper.CAT_COLUMN_ID 	+ 	" = " 	+ cat_id + " AND " 
+		+ TabletVoxSQLiteOpenHelper.AIS_COLUMN_ID 	+ 	" = " 	+ ais_id, null);
+		
+	}
 	
 	public void update(Categoria cat, AssocImagemSom ais, long id)
 	{

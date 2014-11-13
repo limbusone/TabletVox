@@ -53,6 +53,8 @@ public class CategoriaDAO
 		values.put(TabletVoxSQLiteOpenHelper.AIS_COLUMN_ID,  cat.getAIS().getId());
 		values.put(TabletVoxSQLiteOpenHelper.CAT_COLUMN_NOME,  cat.getNome());
 		
+		
+		cat.setId((int) database.insert(TabletVoxSQLiteOpenHelper.TABLE_CAT, null, values));
 		ArrayList<AssocImagemSom> imagens = cat.getImagens();
 		// se houver itens incluir as imagens
 		if ( !( (imagens == null) || (imagens.size() == 0) ) )
@@ -62,10 +64,7 @@ public class CategoriaDAO
 			
 			for (int i = 0, length = imagens.size(); i < length; i++)
 				dao_cat_ais.create(cat, imagens.get(i));
-		}
-			
-		
-		database.insert(TabletVoxSQLiteOpenHelper.TABLE_CAT, null, values);		
+		}		
 	}
 	
 	public void create(long ais_id, String nome)
@@ -94,6 +93,37 @@ public class CategoriaDAO
 		ContentValues values = new ContentValues();
 		values.put(TabletVoxSQLiteOpenHelper.AIS_COLUMN_ID,  cat.getAIS().getId());		
 		values.put(TabletVoxSQLiteOpenHelper.CAT_COLUMN_NOME,  cat.getNome());
+		
+		CategoriaAssocImagemSomDAO dao_cat_ais = new CategoriaAssocImagemSomDAO(sqliteOpenHelper);
+		dao_cat_ais.open();
+		// verifica se há algum item modificado
+		ArrayList<AssocImagemSom> imagens_antigas 	= getImagens(id);
+		ArrayList<AssocImagemSom> imagens_novas 	= cat.getImagens();
+		boolean listaAlterada = false;
+		if (imagens_antigas.size() == imagens_novas.size())
+		{
+			for (int i = 0, length = imagens_antigas.size(); i < length; i++)
+			{
+				if (!(imagens_antigas.get(i).getId() == imagens_novas.get(i).getId()))
+				{
+					listaAlterada = true;
+					break;
+				}
+			}
+		}
+		else
+			listaAlterada = true;
+		
+		if (listaAlterada)
+		{
+			// deletar todas as imagens da categoria
+			for (int i = 0, length = imagens_antigas.size(); i < length; i++)
+				dao_cat_ais.delete(cat.getId(), imagens_antigas.get(i).getId());
+			// incluir novas imagens da categoria
+			for (int i = 0, length = imagens_novas.size(); i < length; i++)
+				dao_cat_ais.create(cat, imagens_novas.get(i));
+		}
+		
 		database.update(TabletVoxSQLiteOpenHelper.TABLE_CAT, values, TabletVoxSQLiteOpenHelper.CAT_COLUMN_ID + " = " + id, null);
 	}
 	

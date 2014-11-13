@@ -12,6 +12,7 @@ import android.widget.CheckBox;
 
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
+import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSomDAO;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSomDAOSingleton;
 import com.example.tabletvox03f.management.ListaComBuscaManageActivity;
 
@@ -35,7 +36,11 @@ public class SelecionarImagensActivity extends ListaComBuscaManageActivity
 	@Override
 	protected BaseAdapter carregarLista()
 	{
-		ArrayList<AssocImagemSom> lista = AssocImagemSomDAOSingleton.getInstance().getImagens();
+		AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(this);  
+		
+		dao_ais.open();
+		ArrayList<AssocImagemSom> lista = dao_ais.getImagens();
+		dao_ais.close();
 		
 		return (new ItemSelectAssocImagemSomAdapter(this, (ArrayList<AssocImagemSom>) lista.clone()));
 	}
@@ -79,7 +84,11 @@ public class SelecionarImagensActivity extends ListaComBuscaManageActivity
 	protected void acaoDoEventoBuscar(Editable s)
 	{
 		String texto_para_pesquisa = s.toString();
-		carregarLista(AssocImagemSomDAOSingleton.getInstance().getImagensByDesc(texto_para_pesquisa));
+		AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(this);  
+		
+		dao_ais.open();
+		carregarLista(dao_ais.getImagensByDesc(texto_para_pesquisa));
+		dao_ais.close();
 	}
 
 	@Override

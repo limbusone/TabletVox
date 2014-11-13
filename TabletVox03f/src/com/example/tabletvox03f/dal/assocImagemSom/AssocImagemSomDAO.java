@@ -232,7 +232,7 @@ public class AssocImagemSomDAO
 		 );		
 	}
 	
-	public ArrayList<AssocImagemSom> getImagensbyDesc(String desc)
+	public ArrayList<AssocImagemSom> getImagensByDesc(String desc)
 	{
 		ArrayList<AssocImagemSom> ais_list = new ArrayList<AssocImagemSom>();
 		Cursor cursor = database.query(

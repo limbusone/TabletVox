@@ -8,6 +8,7 @@ public class CategoriaAssocImagemSom
 	private Categoria categoria;
 	private AssocImagemSom ais;
 	private int page;
+	private int ordem;
 	
 	public CategoriaAssocImagemSom(int id, Categoria cat, AssocImagemSom ais)
 	{
@@ -58,6 +59,16 @@ public class CategoriaAssocImagemSom
 	public void setPage(int page)
 	{
 		this.page = page;
+	}
+
+	public int getOrdem()
+	{
+		return ordem;
+	}
+
+	public void setOrdem(int ordem)
+	{
+		this.ordem = ordem;
 	}
 
 	

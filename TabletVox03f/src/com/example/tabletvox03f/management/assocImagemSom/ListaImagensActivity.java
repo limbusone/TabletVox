@@ -76,7 +76,7 @@ public class ListaImagensActivity extends ListaComBuscaManageActivity
 		String texto_para_pesquisa = s.toString();
 		
 		dao_ais.open();
-		carregarLista(dao_ais.getImagensbyDesc(texto_para_pesquisa));
+		carregarLista(dao_ais.getImagensByDesc(texto_para_pesquisa));
 		dao_ais.close();
 	}
 

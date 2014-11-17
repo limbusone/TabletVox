@@ -17,8 +17,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tabletvox03f.R;
+import com.example.tabletvox03f.Utils;
 import com.example.tabletvox03f.dal.perfil.Perfil;
-import com.example.tabletvox03f.dal.perfil.PerfilDAOSingleton;
+import com.example.tabletvox03f.dal.perfil.PerfilDAO;
 
 public class ItemPerfilAdapter extends BaseAdapter
 {
@@ -111,9 +112,17 @@ public class ItemPerfilAdapter extends BaseAdapter
 			public void onClick(View v)
 			{
 				//Toast.makeText(ItemPerfilAdapter.this.mContext, "Você clicou no botão Editar!", Toast.LENGTH_SHORT).show();
+
+				// popular categorias no perfil
+				PerfilDAO dao_pfl = new PerfilDAO(ItemPerfilAdapter.this.mContext);
+				
+				dao_pfl.open();
+				perfil.setCategorias(dao_pfl.getCategorias(perfil.getId()));
+				dao_pfl.close();
+				
 				// chamar form editar
 				Intent intent = new Intent(ItemPerfilAdapter.this.mContext, FormularioPerfilActivity.class);
-				intent.putExtra("tipo_form", 1); // 1 para 'editar perfil'
+				intent.putExtra("tipo_form", Utils.FORM_ALTERAR); // 1 para 'editar perfil'
 				
 				intent.putExtra("perfil", perfil);
 //				intent.putExtra("pfl_id", perfil.getId());
@@ -144,7 +153,20 @@ public class ItemPerfilAdapter extends BaseAdapter
 					@Override
 					public void onClick(DialogInterface dialog, int which)
 					{
-						PerfilDAOSingleton.getInstance().excluirPerfil(perfil.getId());
+						// verifica se o "parent" desse adapter é a tela de selecionarPerfilActivity
+						if (ItemPerfilAdapter.this.mContext instanceof SelecionarPerfilActivity)
+						{
+							PerfilDAO dao_pfl = new PerfilDAO(ItemPerfilAdapter.this.mContext);
+							
+							dao_pfl.open();
+							// exclui efetivamente o perfil
+							dao_pfl.delete(perfil.getId());
+							dao_pfl.close();							
+							
+							// atualiza o label dos registros encontrados
+							SelecionarPerfilActivity spa = (SelecionarPerfilActivity) ItemPerfilAdapter.this.mContext;
+							spa.atualizarLblNumEncontrados(ItemPerfilAdapter.this.getCount());
+						}
 						
 						Toast.makeText(ItemPerfilAdapter.this.mContext, 
 						"Excluido com sucesso! ID: " + Integer.toString(perfil.getId()), 
@@ -152,15 +174,7 @@ public class ItemPerfilAdapter extends BaseAdapter
 						
 						removeItem(perfil);
 						// refresh na lista
-						ItemPerfilAdapter.this.refresh();
-						
-						// verifica se o "parent" desse adapter é a tela de selecionarPerfilActivity
-						if (ItemPerfilAdapter.this.mContext instanceof SelecionarPerfilActivity)
-						{
-							// atualiza o label dos registros encontrados
-							SelecionarPerfilActivity spa = (SelecionarPerfilActivity) ItemPerfilAdapter.this.mContext;
-							spa.atualizarLblNumEncontrados(ItemPerfilAdapter.this.getCount());
-						}
+						ItemPerfilAdapter.this.refresh();						
 					}
 				});
 				

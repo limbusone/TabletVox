@@ -14,6 +14,7 @@ import com.example.tabletvox03f.dal.categoria.Categoria;
 import com.example.tabletvox03f.dal.categoria.CategoriaDAO;
 import com.example.tabletvox03f.dal.categoria.CategoriaDAOSingleton;
 import com.example.tabletvox03f.dal.perfil.Perfil;
+import com.example.tabletvox03f.dal.perfil.PerfilDAO;
 import com.example.tabletvox03f.dal.perfil.PerfilDAOSingleton;
 
 public class Utils 
@@ -470,6 +471,15 @@ public class Utils
 		dao_cat.create(42, "verbos");
 		
 		dao_cat.close();
+		
+		PerfilDAO dao_pfl = new PerfilDAO(context);
+		
+		dao_pfl.open();
+		
+		dao_pfl.create("Perfil 01", "Autor 01");
+		
+		dao_pfl.close();
+		
 		
 	}	
 

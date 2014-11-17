@@ -74,6 +74,19 @@ public class CategoriaDAO
 		values.put(TabletVoxSQLiteOpenHelper.CAT_COLUMN_NOME,  nome);
 		database.insert(TabletVoxSQLiteOpenHelper.TABLE_CAT, null, values);		
 	}
+	
+	public ArrayList<Categoria> create(ArrayList<Categoria> categorias)
+	{
+		ArrayList<Categoria> retorno = new ArrayList<Categoria>();
+		
+		for (int i = 0, length = categorias.size(); i < length; i++)
+		{
+			Categoria cat = categorias.get(i);
+			create(cat);
+			retorno.add(cat);
+		}
+		return retorno;
+	}
 
 	public void delete(long id)
 	{
@@ -85,7 +98,7 @@ public class CategoriaDAO
 		int i = 0, length = id_list.length;
 		
 		for (; i < length; i++)
-			database.delete(TabletVoxSQLiteOpenHelper.TABLE_CAT, TabletVoxSQLiteOpenHelper.CAT_COLUMN_ID + " = " + id_list[i], null);
+			delete(id_list[i]);
 	}	
 	
 	public void update(Categoria cat, long id)
@@ -126,6 +139,13 @@ public class CategoriaDAO
 		
 		database.update(TabletVoxSQLiteOpenHelper.TABLE_CAT, values, TabletVoxSQLiteOpenHelper.CAT_COLUMN_ID + " = " + id, null);
 	}
+	
+	public void update(ArrayList<Categoria> categorias)
+	{
+		for (int i = 0, length = categorias.size(); i < length; i++)
+			update(categorias.get(i), categorias.get(i).getId());
+	}
+	
 	
 	// retorna um arraylist com todos os registros
 	public ArrayList<Categoria> getAll()

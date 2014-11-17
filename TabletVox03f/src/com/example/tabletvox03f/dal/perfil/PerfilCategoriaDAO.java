@@ -15,7 +15,7 @@ import android.database.sqlite.SQLiteDatabase;
 public class PerfilCategoriaDAO
 {
 	private SQLiteDatabase database;
-	private String[] columns = 
+	public static String[] columns = 
 	{
 		TabletVoxSQLiteOpenHelper.PFL_CAT_COLUMN_ID,
 		TabletVoxSQLiteOpenHelper.PFL_COLUMN_ID,
@@ -73,6 +73,14 @@ public class PerfilCategoriaDAO
 		
 		for (; i < length; i++)
 			database.delete(TabletVoxSQLiteOpenHelper.TABLE_PFL, TabletVoxSQLiteOpenHelper.PFL_CAT_COLUMN_ID + " = " + id_list[i], null);
+	}
+	
+	public void delete(int pfl_id, int cat_id)
+	{
+		database.delete(TabletVoxSQLiteOpenHelper.TABLE_PFL_CAT, 
+		TabletVoxSQLiteOpenHelper.PFL_COLUMN_ID 	+ 	" = " 	+ pfl_id + " AND " 
+		+ TabletVoxSQLiteOpenHelper.CAT_COLUMN_ID 	+ 	" = " 	+ cat_id, null);
+		
 	}	
 	
 	public void update(Perfil pfl, Categoria cat, long id)
@@ -102,7 +110,7 @@ public class PerfilCategoriaDAO
 			PerfilCategoria pfl_cat = new PerfilCategoria
 			(
 				cursor.getInt(0),
-				pflDao.getPFLById(cursor.getInt(1)),
+				pflDao.getPerfilById(cursor.getInt(1)),
 				catDao.getCategoriaById(cursor.getInt(2))
 			);
 			
@@ -132,7 +140,7 @@ public class PerfilCategoriaDAO
 			PerfilCategoria pfl_cat = new PerfilCategoria
 			(
 				cursor.getInt(0),
-				pflDao.getPFLById(cursor.getInt(1)),
+				pflDao.getPerfilById(cursor.getInt(1)),
 				catDao.getCategoriaById(cursor.getInt(2))
 			);
 			
@@ -181,7 +189,7 @@ public class PerfilCategoriaDAO
 		return new PerfilCategoria
 		(
 			cursor.getInt(0),
-			pflDao.getPFLById(cursor.getInt(1)),
+			pflDao.getPerfilById(cursor.getInt(1)),
 			catDao.getCategoriaById(cursor.getInt(2))
 		);		
 	}

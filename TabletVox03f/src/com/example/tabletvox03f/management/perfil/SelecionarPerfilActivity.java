@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.Utils;
 import com.example.tabletvox03f.dal.perfil.Perfil;
-import com.example.tabletvox03f.dal.perfil.PerfilDAOSingleton;
+import com.example.tabletvox03f.dal.perfil.PerfilDAO;
 import com.example.tabletvox03f.management.ListaComBuscaManageActivity;
 
 public class SelecionarPerfilActivity extends ListaComBuscaManageActivity
@@ -47,7 +47,11 @@ public class SelecionarPerfilActivity extends ListaComBuscaManageActivity
 	@Override
 	protected BaseAdapter carregarLista()
 	{
-		ArrayList<Perfil> lista = PerfilDAOSingleton.getInstance().getPerfis();
+		PerfilDAO dao_pfl = new PerfilDAO(this);  
+		
+		dao_pfl.open();
+		ArrayList<Perfil> lista = dao_pfl.getAll();
+		dao_pfl.close();
 		
 		return (new ItemPerfilAdapter(this, (ArrayList<Perfil>) lista.clone()));
 	}
@@ -104,8 +108,12 @@ public class SelecionarPerfilActivity extends ListaComBuscaManageActivity
 	@Override
 	protected void acaoDoEventoBuscar(Editable s)
 	{
+		PerfilDAO dao_pfl = new PerfilDAO(this);
 		String texto_para_pesquisa = s.toString();
-		carregarLista(PerfilDAOSingleton.getInstance().getPerfisByNomeOrAutor(texto_para_pesquisa, texto_para_pesquisa));
+		
+		dao_pfl.open();
+		carregarLista(dao_pfl.getPerfisByNomeOrAutor(texto_para_pesquisa, texto_para_pesquisa));
+		dao_pfl.close();
 	}
 
 }

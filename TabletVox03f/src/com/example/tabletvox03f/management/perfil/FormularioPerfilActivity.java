@@ -16,8 +16,10 @@ import com.example.tabletvox03f.Erro;
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.Utils;
 import com.example.tabletvox03f.dal.categoria.Categoria;
+import com.example.tabletvox03f.dal.categoria.CategoriaDAO;
 import com.example.tabletvox03f.dal.categoria.CategoriaDAOSingleton;
 import com.example.tabletvox03f.dal.perfil.Perfil;
+import com.example.tabletvox03f.dal.perfil.PerfilDAO;
 import com.example.tabletvox03f.dal.perfil.PerfilDAOSingleton;
 import com.example.tabletvox03f.management.FormularioBaseActivity;
 import com.example.tabletvox03f.management.categoria.ItemCategoriaAdapter;
@@ -130,16 +132,26 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 			return;
 		}
 
+		PerfilDAO dao_pfl = new PerfilDAO(this);
+		CategoriaDAO dao_cat = new CategoriaDAO(this);
 		//assumindo que todas as categorias são novas (e são! pois estamos incluindo um novo perfil)
 		
 		ArrayList<Categoria> categoriasDoAdapter = (ArrayList<Categoria>)((ItemCategoriaAdapter)lv.getAdapter()).getCategorias().clone();
 		
 		concatenarAutorComNomeDaCategoria(categoriasDoAdapter);
 		
-		// seta items
-		pfl.setCategorias(CategoriaDAOSingleton.getInstance().incluirCategoriasWithRandomGeneratedID(categoriasDoAdapter));
+		dao_cat.open();
 		
-		PerfilDAOSingleton.getInstance().incluirPerfilWithRandomGeneratedID(pfl);
+		// seta items
+		pfl.setCategorias(dao_cat.create(categoriasDoAdapter));
+		
+		dao_cat.close();
+		
+		dao_pfl.open();
+		
+		dao_pfl.create(pfl);
+		
+		dao_pfl.close();
 		
 		this.setResult(1);
 		finish();
@@ -166,13 +178,20 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 			return;
 		}
 		
+		PerfilDAO dao_pfl 		= new PerfilDAO(this);
+		CategoriaDAO dao_cat 	= new CategoriaDAO(this);
+		
 		concatenarAutorComNomeDaCategoria(novasCategorias);
 
+		dao_cat.open();
+		
 		// edita as categorias numa eventual mudança destas
-		CategoriaDAOSingleton.getInstance().editarCategorias(antigasCategorias);
+		dao_cat.update(antigasCategorias);
 		
 		// adicionar eventuais novos itens
-		novasCategorias = CategoriaDAOSingleton.getInstance().incluirCategoriasWithRandomGeneratedID(novasCategorias);
+		novasCategorias = dao_cat.create(novasCategorias);
+		
+		dao_cat.close();
 		
 		// adicionar itens das novas categorias na lista das antigas
 		antigasCategorias.addAll(novasCategorias);
@@ -180,7 +199,9 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 		// seta items
 		pfl.setCategorias((ArrayList<Categoria>) antigasCategorias.clone());
 		
-		PerfilDAOSingleton.getInstance().editarPerfilComCategorias(pfl, pfl.getId());
+		dao_pfl.open();
+		dao_pfl.update(pfl, pfl.getId());
+		dao_pfl.close();
 		
 		this.setResult(2);
 		finish();

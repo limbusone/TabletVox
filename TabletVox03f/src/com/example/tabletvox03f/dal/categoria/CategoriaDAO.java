@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.example.tabletvox03f.dal.TabletVoxSQLiteOpenHelper;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSomDAO;
+import com.example.tabletvox03f.dal.perfil.PerfilCategoriaDAO;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -95,6 +96,10 @@ public class CategoriaDAO
 		CategoriaAssocImagemSomDAO cat_ais_dao = new CategoriaAssocImagemSomDAO(sqliteOpenHelper);
 		cat_ais_dao.open();
 		cat_ais_dao.delete(getImagens(id), id);
+		// e se esta categoria for vinculada a um ou mais perfis, deleta as associações
+		PerfilCategoriaDAO pfl_cat_dao = new PerfilCategoriaDAO(sqliteOpenHelper);
+		pfl_cat_dao.open();
+		pfl_cat_dao.delete_categoria(id);
 		
 	}
 	

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.example.tabletvox03f.dal.FilesIO;
 import com.example.tabletvox03f.dal.TabletVoxSQLiteOpenHelper;
+import com.example.tabletvox03f.dal.categoria.CategoriaAssocImagemSomDAO;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -123,6 +124,10 @@ public class AssocImagemSomDAO
 	public void delete(long id)
 	{
 		database.delete(TabletVoxSQLiteOpenHelper.TABLE_AIS, TabletVoxSQLiteOpenHelper.AIS_COLUMN_ID + " = " + id, null);
+		// se esta imagem for vinculada a uma ou mais categorias, deleta as associações
+		CategoriaAssocImagemSomDAO cat_ais_dao = new CategoriaAssocImagemSomDAO(sqliteOpenHelper);
+		cat_ais_dao.open();
+		cat_ais_dao.delete_imagem(id);
 	}
 	
 	public void delete(long[] id_list)

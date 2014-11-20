@@ -88,6 +88,11 @@ public class PerfilCategoriaDAO
 		for (int i = 0, length = categorias.size(); i < length; i++)
 			delete((int) id, categorias.get(i).getId());
 	}	
+
+	public void delete_categoria(long cat_id)
+	{
+		database.delete(TabletVoxSQLiteOpenHelper.TABLE_PFL_CAT, TabletVoxSQLiteOpenHelper.CAT_COLUMN_ID + " = " + cat_id, null);
+	}
 	
 	public void update(Perfil pfl, Categoria cat, long id)
 	{

@@ -11,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.Toast;
 
 import com.example.tabletvox03f.R;
+import com.example.tabletvox03f.Utils;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSomDAO;
 import com.example.tabletvox03f.management.ListaComBuscaManageActivity;
@@ -64,7 +65,7 @@ public class ListaImagensActivity extends ListaComBuscaManageActivity
 		{
 			// chamar activity criar perfil
 			Intent intent = new Intent(this, FormularioAssocImagemSomActivity.class);
-			intent.putExtra("tipo_form", 0); // 0, para form do tipo 'criar' e 1 para form do tipo 'editar'
+			intent.putExtra("tipo_form", Utils.FORM_INCLUIR); // 0, para form do tipo 'criar' e 1 para form do tipo 'editar'
 			startActivityForResult(intent, 1);
 		}
 	}

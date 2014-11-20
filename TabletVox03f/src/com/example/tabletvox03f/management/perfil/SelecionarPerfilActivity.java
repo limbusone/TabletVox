@@ -87,7 +87,7 @@ public class SelecionarPerfilActivity extends ListaComBuscaManageActivity
 		{
 			// chamar activity criar perfil
 			Intent intent = new Intent(this, FormularioPerfilActivity.class);
-			intent.putExtra("tipo_form", 0); // 0, para form do tipo 'criar' e 1 para form do tipo 'editar'
+			intent.putExtra("tipo_form", Utils.FORM_INCLUIR); // 0, para form do tipo 'criar' e 1 para form do tipo 'editar'
 			startActivityForResult(intent, 1);
 		}
 	}

@@ -2,15 +2,15 @@ package com.example.tabletvox03f.dal.perfil;
 
 import java.util.ArrayList;
 
-import com.example.tabletvox03f.dal.TabletVoxSQLiteOpenHelper;
-import com.example.tabletvox03f.dal.categoria.Categoria;
-import com.example.tabletvox03f.dal.categoria.CategoriaDAO;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.example.tabletvox03f.dal.TabletVoxSQLiteOpenHelper;
+import com.example.tabletvox03f.dal.categoria.Categoria;
+import com.example.tabletvox03f.dal.categoria.CategoriaDAO;
 
 public class PerfilCategoriaDAO
 {
@@ -81,6 +81,12 @@ public class PerfilCategoriaDAO
 		TabletVoxSQLiteOpenHelper.PFL_COLUMN_ID 	+ 	" = " 	+ pfl_id + " AND " 
 		+ TabletVoxSQLiteOpenHelper.CAT_COLUMN_ID 	+ 	" = " 	+ cat_id, null);
 		
+	}
+	
+	public void delete(ArrayList<Categoria> categorias, long id)
+	{
+		for (int i = 0, length = categorias.size(); i < length; i++)
+			delete((int) id, categorias.get(i).getId());
 	}	
 	
 	public void update(Perfil pfl, Categoria cat, long id)

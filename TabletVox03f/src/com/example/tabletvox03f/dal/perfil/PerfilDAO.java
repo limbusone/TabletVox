@@ -76,6 +76,10 @@ public class PerfilDAO
 	public void delete(long id)
 	{
 		database.delete(TabletVoxSQLiteOpenHelper.TABLE_PFL, TabletVoxSQLiteOpenHelper.PFL_COLUMN_ID + " = " + id, null);
+		// se houver categorias vinculadas a esse perfil, deletar as associações
+		PerfilCategoriaDAO pfl_cat_dao = new PerfilCategoriaDAO(sqliteOpenHelper);
+		pfl_cat_dao.open();
+		pfl_cat_dao.delete(getCategorias(id), id);		
 	}
 	
 	public void delete(long[] id_list)
@@ -176,7 +180,7 @@ public class PerfilDAO
 
 		Cursor cursor = database.query(
 				TabletVoxSQLiteOpenHelper.TABLE_PFL, columns, 
-				TabletVoxSQLiteOpenHelper.PFL_COLUMN_NOME + " LIKE " + "'%" + nome + "%'"
+				TabletVoxSQLiteOpenHelper.PFL_COLUMN_NOME + " LIKE " + "'%" + nome + "%' OR "
 				+ TabletVoxSQLiteOpenHelper.PFL_COLUMN_AUTOR + " LIKE " + "'%" + autor + "%'", 
 				null, null, null, null);
 		

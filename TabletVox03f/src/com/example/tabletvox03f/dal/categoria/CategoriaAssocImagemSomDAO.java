@@ -85,6 +85,12 @@ public class CategoriaAssocImagemSomDAO
 		
 	}
 	
+	public void delete(ArrayList<AssocImagemSom> imagens, long id)
+	{
+		for (int i = 0, length = imagens.size(); i < length; i++)
+			delete((int) id, imagens.get(i).getId());
+	}
+	
 	public void update(Categoria cat, AssocImagemSom ais, long id)
 	{
 		ContentValues values = new ContentValues();

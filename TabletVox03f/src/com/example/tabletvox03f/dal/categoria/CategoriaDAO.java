@@ -91,6 +91,11 @@ public class CategoriaDAO
 	public void delete(long id)
 	{
 		database.delete(TabletVoxSQLiteOpenHelper.TABLE_CAT, TabletVoxSQLiteOpenHelper.CAT_COLUMN_ID + " = " + id, null);
+		// se houver imagens vinculadas a essa categoria, deletar as associações
+		CategoriaAssocImagemSomDAO cat_ais_dao = new CategoriaAssocImagemSomDAO(sqliteOpenHelper);
+		cat_ais_dao.open();
+		cat_ais_dao.delete(getImagens(id), id);
+		
 	}
 	
 	public void delete(long[] id_list)

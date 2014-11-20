@@ -183,6 +183,15 @@ public class ItemCategoriaAdapter extends BaseAdapter
 					public void onClick(DialogInterface dialog, int which)
 					{
 						
+						Toast.makeText(ItemCategoriaAdapter.this.mContext, 
+						"Excluido com sucesso! ID: " + Integer.toString(categoria.getId()), 
+						Toast.LENGTH_SHORT).show();
+						
+						removeItem(categoria);
+						
+						// refresh na lista
+						ItemCategoriaAdapter.this.refresh();						
+						
 						// verifica se o "parent" desse adapter é a lista de categorias
 						if (ItemCategoriaAdapter.this.mContext instanceof ListaCategoriasActivity)
 						{
@@ -204,14 +213,6 @@ public class ItemCategoriaAdapter extends BaseAdapter
 							((FormularioPerfilActivity) ItemCategoriaAdapter.this.mContext).excluirCategoriaDasAntigasCategorias(categoria);
 						}
 						
-						Toast.makeText(ItemCategoriaAdapter.this.mContext, 
-						"Excluido com sucesso! ID: " + Integer.toString(categoria.getId()), 
-						Toast.LENGTH_SHORT).show();
-						
-						removeItem(categoria);
-						
-						// refresh na lista
-						ItemCategoriaAdapter.this.refresh();						
 					}
 				});
 				

@@ -117,6 +117,14 @@ public class ItemAssocImagemSomAdapter extends BaseAdapter
 					@Override
 					public void onClick(DialogInterface dialog, int which)
 					{
+						removeItem(ais);
+						
+						Toast.makeText(ItemAssocImagemSomAdapter.this.mContext, 
+						"Excluido com sucesso! ID: " + Integer.toString(ais.getId()), 
+						Toast.LENGTH_SHORT).show();						
+
+						// refresh na lista
+						ItemAssocImagemSomAdapter.this.refresh();							
 						
 						// verifica se o "parent" desse adapter é a lista de imagens
 						if (ItemAssocImagemSomAdapter.this.mContext instanceof ListaImagensActivity)
@@ -141,14 +149,6 @@ public class ItemAssocImagemSomAdapter extends BaseAdapter
 							lia.atualizarLblNumEncontrados(ItemAssocImagemSomAdapter.this.getCount());
 						}
 						
-						removeItem(ais);
-						
-						Toast.makeText(ItemAssocImagemSomAdapter.this.mContext, 
-						"Excluido com sucesso! ID: " + Integer.toString(ais.getId()), 
-						Toast.LENGTH_SHORT).show();						
-
-						// refresh na lista
-						ItemAssocImagemSomAdapter.this.refresh();						
 					}
 				});
 				

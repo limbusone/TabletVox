@@ -153,6 +153,15 @@ public class ItemPerfilAdapter extends BaseAdapter
 					@Override
 					public void onClick(DialogInterface dialog, int which)
 					{
+						
+						Toast.makeText(ItemPerfilAdapter.this.mContext, 
+						"Excluido com sucesso! ID: " + Integer.toString(perfil.getId()), 
+						Toast.LENGTH_SHORT).show();
+						
+						removeItem(perfil);
+						// refresh na lista
+						ItemPerfilAdapter.this.refresh();
+						
 						// verifica se o "parent" desse adapter é a tela de selecionarPerfilActivity
 						if (ItemPerfilAdapter.this.mContext instanceof SelecionarPerfilActivity)
 						{
@@ -168,13 +177,6 @@ public class ItemPerfilAdapter extends BaseAdapter
 							spa.atualizarLblNumEncontrados(ItemPerfilAdapter.this.getCount());
 						}
 						
-						Toast.makeText(ItemPerfilAdapter.this.mContext, 
-						"Excluido com sucesso! ID: " + Integer.toString(perfil.getId()), 
-						Toast.LENGTH_SHORT).show();
-						
-						removeItem(perfil);
-						// refresh na lista
-						ItemPerfilAdapter.this.refresh();						
 					}
 				});
 				

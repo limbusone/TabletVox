@@ -26,7 +26,7 @@ public class Utils
 	//public static String PERFIL_ATIVO_STR = "perfil01"; // default : perfil01
 	
 	//public static Perfil PERFIL_ATIVO = new Perfil(1, "perfil01", "default_author"); // perfil default
-	public static Perfil PERFIL_ATIVO = PerfilDAOSingleton.getInstance().getPerfilById(1); // perfil default
+	public static Perfil PERFIL_ATIVO; 
 	
 	public static String EXTENSAO_ARQUIVO_SOM = "wav";
 	
@@ -84,7 +84,7 @@ public class Utils
 	{
 		// inicializar o banco
 		Utils.inicializarBD(context);
-		
+
 		(new FilesIO(context)).copiarArquivosXmlDeAssetsParaInternalStorage();
 		
 	}
@@ -448,35 +448,37 @@ public class Utils
 		dao_ais.create("ser", 			"", 		"", 		"jpg", 'v', 0);
 		
 		dao_ais.create("comando voltar", "cmd11", "cmd11", "jpg", 'n', 2);
-		dao_ais.close();
+		
 		
 		// incluindo as categorias de fato
 		CategoriaDAO dao_cat = new CategoriaDAO(context);
 		
 		dao_cat.open();
 		
-		dao_cat.create(29, "alimentos");
-		dao_cat.create(30, "animais");
-		dao_cat.create(31, "aparelhos");
-		dao_cat.create(32, "banheiro");
-		dao_cat.create(33, "bebidas");
-		dao_cat.create(34, "corpo");
-		dao_cat.create(35, "familia 1");
-		dao_cat.create(36, "familia 2");
-		dao_cat.create(37, "frutas");
-		dao_cat.create(38, "lugares");
-		dao_cat.create(39, "pessoas");
-		dao_cat.create(40, "sensacoes");
-		dao_cat.create(41, "transporte");
-		dao_cat.create(42, "verbos");
+		dao_cat.create(29, "alimentos", 	dao_ais.getImagensByIdInterval(43, 54));
+		dao_cat.create(30, "animais", 		dao_ais.getImagensByIdInterval(55, 66));
+		dao_cat.create(31, "aparelhos", 	dao_ais.getImagensByIdInterval(67, 75));
+		dao_cat.create(32, "banheiro",  	dao_ais.getImagensByIdInterval(76, 87));
+		dao_cat.create(33, "bebidas", 		dao_ais.getImagensByIdInterval(88, 94));
+		dao_cat.create(34, "corpo", 		dao_ais.getImagensByIdInterval(95, 106));
+		dao_cat.create(35, "familia 1", 	dao_ais.getImagensByIdInterval(107, 122));
+		dao_cat.create(36, "familia 2", 	dao_ais.getImagensByIdInterval(123, 136));
+		dao_cat.create(37, "frutas", 		dao_ais.getImagensByIdInterval(137, 148));
+		dao_cat.create(38, "lugares", 		dao_ais.getImagensByIdInterval(149, 160));
+		dao_cat.create(39, "pessoas", 		dao_ais.getImagensByIdInterval(161, 172));
+		dao_cat.create(40, "sensacoes", 	dao_ais.getImagensByIdInterval(173, 184));
+		dao_cat.create(41, "transporte", 	dao_ais.getImagensByIdInterval(185, 196));
+		dao_cat.create(42, "verbos", 		dao_ais.getImagensByIdInterval(197, 208));
 		
-		dao_cat.close();
+		dao_ais.close();
 		
 		PerfilDAO dao_pfl = new PerfilDAO(context);
 		
 		dao_pfl.open();
 		
-		dao_pfl.create("Perfil 01", "Autor 01");
+		dao_pfl.create("Perfil 01", "Autor 01", dao_cat.getCategoriasByIdInterval(1, 14));
+
+		dao_cat.close();
 		
 		dao_pfl.close();
 		

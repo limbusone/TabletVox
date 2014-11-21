@@ -1,4 +1,6 @@
 package com.example.tabletvox03f;
+import com.example.tabletvox03f.dal.perfil.PerfilDAO;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -78,6 +80,12 @@ public class SplashScreenActivity extends Activity
 	
 	private void abrirMainMenu()
 	{
+		// inicializar perfil default		
+		PerfilDAO pfl_dao = new PerfilDAO(this);
+		pfl_dao.open();
+		Utils.PERFIL_ATIVO = pfl_dao.getPerfilById(1);
+		pfl_dao.close();
+		
 		Intent intent = new Intent(this, MainMenuActivity.class);
 		startActivity(intent);
 		

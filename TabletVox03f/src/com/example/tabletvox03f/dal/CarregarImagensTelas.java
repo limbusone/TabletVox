@@ -12,6 +12,7 @@ import com.example.tabletvox03f.ImageAdapter;
 import com.example.tabletvox03f.Utils;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
 import com.example.tabletvox03f.dal.categoria.Categoria;
+import com.example.tabletvox03f.dal.categoria.CategoriaDAO;
 import com.example.tabletvox03f.dal.categoria.CategoriaDAOSingleton;
 import com.example.tabletvox03f.dal.perfil.Perfil;
 
@@ -57,9 +58,10 @@ public class CarregarImagensTelas extends AsyncTask<Integer, Void, ArrayList<Ass
 				// carregar imagens comuns
 			case 0:
 			default:
-				list = 	(ArrayList<AssocImagemSom>)
-						CategoriaDAOSingleton.getInstance().
-						getCategoriaById(params[2]).getImagens().clone();
+				CategoriaDAO cat_dao = new CategoriaDAO(activeContext);
+				cat_dao.open();
+				list = cat_dao.getImagens(params[2]);
+				cat_dao.close();
 				
 				break;
 		}

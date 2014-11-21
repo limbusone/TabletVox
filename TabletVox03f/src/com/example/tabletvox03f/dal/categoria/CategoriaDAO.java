@@ -76,6 +76,25 @@ public class CategoriaDAO
 		database.insert(TabletVoxSQLiteOpenHelper.TABLE_CAT, null, values);		
 	}
 	
+	public void create(long ais_id, String nome, ArrayList<AssocImagemSom> imagens)
+	{
+		ContentValues values = new ContentValues();
+		values.put(TabletVoxSQLiteOpenHelper.AIS_COLUMN_ID,  (int) ais_id);
+		values.put(TabletVoxSQLiteOpenHelper.CAT_COLUMN_NOME,  nome);
+		database.insert(TabletVoxSQLiteOpenHelper.TABLE_CAT, null, values);
+		
+		int cat_id = (int) database.insert(TabletVoxSQLiteOpenHelper.TABLE_CAT, null, values);
+		// se houver itens incluir as imagens
+		if ( !( (imagens == null) || (imagens.size() == 0) ) )
+		{
+			CategoriaAssocImagemSomDAO dao_cat_ais = new CategoriaAssocImagemSomDAO(sqliteOpenHelper);
+			dao_cat_ais.open();
+			
+			for (int i = 0, length = imagens.size(); i < length; i++)
+				dao_cat_ais.create(cat_id, imagens.get(i).getId());
+		}		
+	}
+	
 	public ArrayList<Categoria> create(ArrayList<Categoria> categorias)
 	{
 		ArrayList<Categoria> retorno = new ArrayList<Categoria>();
@@ -234,7 +253,37 @@ public class CategoriaDAO
 		}
 		cursor.close();
 		
-		return cat_list;		
+		return cat_list;
+	}
+	
+	public ArrayList<Categoria> getCategoriasByIdInterval(int inicio, int fim)
+	{
+		ArrayList<Categoria> cat_list = new ArrayList<Categoria>();
+		
+		Cursor cursor = database.query(
+				TabletVoxSQLiteOpenHelper.TABLE_CAT, columns, 
+				TabletVoxSQLiteOpenHelper.CAT_COLUMN_ID + " BETWEEN " + 
+				Integer.toString(inicio) + " AND " + Integer.toString(fim), 
+				null, null, null, null);
+
+		AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(sqliteOpenHelper);
+		dao_ais.open();
+		
+		cursor.moveToFirst();
+		while (!(cursor.isAfterLast()))
+		{
+			Categoria cat = new Categoria
+			(
+				cursor.getInt(0),
+				cursor.getString(2),
+				dao_ais.getImagemById(cursor.getInt(1))
+			 );
+			cat_list.add(cat);
+			cursor.moveToNext();
+		}
+		cursor.close();
+		
+		return cat_list;
 	}
 	
 	public ArrayList<AssocImagemSom> getImagens(long categoriaId)

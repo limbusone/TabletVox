@@ -72,7 +72,26 @@ public class PerfilDAO
 		values.put(TabletVoxSQLiteOpenHelper.PFL_COLUMN_AUTOR, autor);
 		database.insert(TabletVoxSQLiteOpenHelper.TABLE_PFL, null, values);		
 	}
-
+	
+	public void create(String nome, String autor, ArrayList<Categoria> categorias)
+	{
+		ContentValues values = new ContentValues();
+		values.put(TabletVoxSQLiteOpenHelper.PFL_COLUMN_NOME,  nome);
+		values.put(TabletVoxSQLiteOpenHelper.PFL_COLUMN_AUTOR, autor);
+		database.insert(TabletVoxSQLiteOpenHelper.TABLE_PFL, null, values);	
+		
+		int pfl_id = (int) database.insert(TabletVoxSQLiteOpenHelper.TABLE_PFL, null, values);
+		// se houver itens incluir as categorias
+		if ( !( (categorias == null) || (categorias.size() == 0) ) )
+		{
+			PerfilCategoriaDAO dao_pfl_cat = new PerfilCategoriaDAO(sqliteOpenHelper);
+			dao_pfl_cat.open();
+			
+			for (int i = 0, length = categorias.size(); i < length; i++)
+				dao_pfl_cat.create(pfl_id, categorias.get(i).getId());
+		}		
+	}
+	
 	public void delete(long id)
 	{
 		database.delete(TabletVoxSQLiteOpenHelper.TABLE_PFL, TabletVoxSQLiteOpenHelper.PFL_COLUMN_ID + " = " + id, null);

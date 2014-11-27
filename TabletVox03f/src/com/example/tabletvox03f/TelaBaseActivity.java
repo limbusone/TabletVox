@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-import com.example.tabletvox03f.management.Opcoes;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import com.example.tabletvox03f.management.Opcoes;
 
 public class TelaBaseActivity extends Activity
 {
@@ -20,6 +22,7 @@ public class TelaBaseActivity extends Activity
 	protected int init_page;
 	protected int final_page;
 	private Executor ex;
+	private String currentTitle;
 	
 	protected int current_categoriaId;
 
@@ -27,6 +30,24 @@ public class TelaBaseActivity extends Activity
 	{
 		// utilizado para executar a thread tocarSomFrase uma de cada vez
 		ex = Executors.newSingleThreadExecutor();
+	}
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.telas_interface);
+		
+		// altera layout params dos gridviews de acordo com as opções do usuário
+		GridView gridview 			= (GridView) findViewById(R.id.gridview);
+		GridView gridview_atalhos 	= (GridView) findViewById(R.id.gridview_atalhos);
+		GridView gridview_frase 	= (GridView) findViewById(R.id.gridview_frase);
+		
+		gridview.setColumnWidth(Opcoes.getImageWidth());
+		gridview_atalhos.setColumnWidth(Opcoes.getImageWidth());
+		gridview_frase.setColumnWidth(Opcoes.getImageWidth());
+		
+		gridview_atalhos.setLayoutParams(new LinearLayout.LayoutParams(Opcoes.getImageWidth(), LinearLayout.LayoutParams.WRAP_CONTENT));		
 	}
 	
 	public int getCurrent_page()
@@ -61,6 +82,17 @@ public class TelaBaseActivity extends Activity
 		this.final_page = final_page;
 	}
 	
+	public String getCurrentTitle()
+	{
+		return currentTitle;
+	}
+
+	public void setCurrentTitle(String currentTitle)
+	{
+		this.currentTitle = currentTitle;
+		setTitle(currentTitle);
+	}
+
 	public ArrayList<ImgItem> getListaImagensFrase()
 	{
 		return lista_imagens_frase;

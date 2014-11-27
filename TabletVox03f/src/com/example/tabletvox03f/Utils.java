@@ -102,6 +102,15 @@ public class Utils
 		return retorno;
 	}
 	
+	public static void inicializarPerfilDefault(Context context)
+	{
+		// inicializar perfil default		
+		PerfilDAO pfl_dao = new PerfilDAO(context);
+		pfl_dao.open();
+		Utils.PERFIL_ATIVO = pfl_dao.getPerfilById(1);
+		pfl_dao.close();
+	}
+	
 	
 	public static void inicializarMock(Context context)
 	{

@@ -150,7 +150,6 @@ public class ModoTouchActivity extends TelaBaseActivity
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.telas_interface);
 
 		current_categoriaId = (int) getIntent().getLongExtra("categoriaId", 0);
 		
@@ -158,6 +157,10 @@ public class ModoTouchActivity extends TelaBaseActivity
 		current_page = init_page = 1;
 		//final_page = (new XmlUtilsTelas(this, Utils.TELAS_NOME_ARQUIVO_XML_ATIVO, "root")).getLastPage();
 		final_page = 1;
+		
+		// muda titulo conforme categoria
+		setCurrentTitle(Utils.PERFIL_ATIVO.getNome() + " - Categoria " + 
+		Utils.PERFIL_ATIVO.getCategoriaById(current_categoriaId).getNome());		
 		
 		GridView gridview = (GridView) findViewById(R.id.gridview);
 		GridView gridview_frase = (GridView) findViewById(R.id.gridview_frase);

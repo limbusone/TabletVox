@@ -13,7 +13,6 @@ import android.widget.Toast;
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.Utils;
 import com.example.tabletvox03f.dal.perfil.Perfil;
-import com.example.tabletvox03f.dal.perfil.PerfilCategoriaDAO;
 import com.example.tabletvox03f.dal.perfil.PerfilDAO;
 import com.example.tabletvox03f.management.ListaComBuscaManageActivity;
 
@@ -66,10 +65,10 @@ public class SelecionarPerfilActivity extends ListaComBuscaManageActivity
 	{
 		Utils.PERFIL_ATIVO = perfil;
 		// carregar categorias no objeto do perfil
-		PerfilDAO pfl_dao = new PerfilDAO(this);
-		pfl_dao.open();
-		perfil.setCategorias(pfl_dao.getCategorias(perfil.getId()));
-		
+//		PerfilDAO pfl_dao = new PerfilDAO(this);
+//		pfl_dao.open();
+//		perfil.setCategorias(pfl_dao.getCategorias(perfil.getId()));
+//		pfl_dao.close();
 		setResult(1);
 		finish();
 	}

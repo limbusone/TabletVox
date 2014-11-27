@@ -181,8 +181,6 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		//setContentView(R.layout.activity_modo_varredura);
-		setContentView(R.layout.telas_interface);
 		
 		Utils.MODO_ATIVO = "modo_varredura";
 		
@@ -194,6 +192,10 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 		final_page = 1;
 		
 		delayVarredura = Opcoes.getIntervalo_tempo_varredura();
+		
+		// muda titulo conforme categoria
+		setCurrentTitle(Utils.PERFIL_ATIVO.getNome() + " - Categoria " + 
+		Utils.PERFIL_ATIVO.getCategoriaById(current_categoriaId).getNome());		
 		
 		// inicializando variaveis booleanas com valores default
 		alternarVarredura();

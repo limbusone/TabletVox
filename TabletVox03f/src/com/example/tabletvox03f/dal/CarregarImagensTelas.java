@@ -13,8 +13,8 @@ import com.example.tabletvox03f.Utils;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
 import com.example.tabletvox03f.dal.categoria.Categoria;
 import com.example.tabletvox03f.dal.categoria.CategoriaDAO;
-import com.example.tabletvox03f.dal.categoria.CategoriaDAOSingleton;
 import com.example.tabletvox03f.dal.perfil.Perfil;
+import com.example.tabletvox03f.dal.perfil.PerfilDAO;
 
 // classe de carregamento das imagens do xml telas.xml em assincronia com a UI
 public class CarregarImagensTelas extends AsyncTask<Integer, Void, ArrayList<AssocImagemSom>>
@@ -42,6 +42,12 @@ public class CarregarImagensTelas extends AsyncTask<Integer, Void, ArrayList<Ass
 		switch (params[1])
 		{
 			case 1: // carregar categorias
+				PerfilDAO pfl_dao = new PerfilDAO(activeContext);
+				
+				pfl_dao.open();
+				perfil.setCategorias(pfl_dao.getCategorias(perfil.getId()));
+				pfl_dao.close();
+				
 				ArrayList<Categoria> categorias = perfil.getCategorias();
 				
 				for (int i = 0, length = categorias.size(); i < length; i++)

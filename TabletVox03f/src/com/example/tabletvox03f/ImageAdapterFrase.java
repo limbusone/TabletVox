@@ -2,6 +2,8 @@ package com.example.tabletvox03f;
 
 import java.util.ArrayList;
 
+import com.example.tabletvox03f.management.Opcoes;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -48,7 +50,7 @@ public class ImageAdapterFrase extends BaseAdapter
 		{
 			
 			imagemItem = imgi_list.get(position);
-			imagemItem.setLayoutParams(new GridView.LayoutParams(85, 85));
+			imagemItem.setLayoutParams(new GridView.LayoutParams(Opcoes.getImageWidth(), Opcoes.getImageHeight()));
 			imagemItem.setScaleType(ImageView.ScaleType.CENTER_CROP);
 			imagemItem.setPadding(2, 2, 2, 2);
 			

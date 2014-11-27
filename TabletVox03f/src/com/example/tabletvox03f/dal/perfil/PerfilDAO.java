@@ -78,7 +78,7 @@ public class PerfilDAO
 		ContentValues values = new ContentValues();
 		values.put(TabletVoxSQLiteOpenHelper.PFL_COLUMN_NOME,  nome);
 		values.put(TabletVoxSQLiteOpenHelper.PFL_COLUMN_AUTOR, autor);
-		database.insert(TabletVoxSQLiteOpenHelper.TABLE_PFL, null, values);	
+
 		
 		int pfl_id = (int) database.insert(TabletVoxSQLiteOpenHelper.TABLE_PFL, null, values);
 		// se houver itens incluir as categorias

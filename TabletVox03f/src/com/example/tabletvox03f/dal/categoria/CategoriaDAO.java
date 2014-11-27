@@ -81,7 +81,6 @@ public class CategoriaDAO
 		ContentValues values = new ContentValues();
 		values.put(TabletVoxSQLiteOpenHelper.AIS_COLUMN_ID,  (int) ais_id);
 		values.put(TabletVoxSQLiteOpenHelper.CAT_COLUMN_NOME,  nome);
-		database.insert(TabletVoxSQLiteOpenHelper.TABLE_CAT, null, values);
 		
 		int cat_id = (int) database.insert(TabletVoxSQLiteOpenHelper.TABLE_CAT, null, values);
 		// se houver itens incluir as imagens

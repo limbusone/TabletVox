@@ -2,15 +2,15 @@ package com.example.tabletvox03f.dal;
 
 import java.util.ArrayList;
 
-import com.example.tabletvox03f.ImageAdapter;
-import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
-import com.example.tabletvox03f.dal.xml.XmlUtilsComandos;
-
 import android.content.Context;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ProgressBar;
+
+import com.example.tabletvox03f.ImageAdapter;
+import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
+import com.example.tabletvox03f.dal.xml.XmlUtilsComandos;
 
 public class CarregarImagensComandos extends AsyncTask<Boolean, Void, ArrayList<AssocImagemSom>>
 {
@@ -46,6 +46,7 @@ public class CarregarImagensComandos extends AsyncTask<Boolean, Void, ArrayList<
 	{
 		if (ais_list != null)
 			gridview.setAdapter(new ImageAdapter(activeContext, ais_list));
+			
 //		if (wview != null)
 //			wview.setVisibility(View.INVISIBLE);
 		if (pgrbar != null)

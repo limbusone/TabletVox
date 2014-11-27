@@ -114,6 +114,24 @@ public class Categoria implements Parcelable
 	{
 		this.catImagens = catImagens;
 	}
+	
+	public AssocImagemSom getImagemById(int id)
+	{
+		AssocImagemSom imagem = null;
+		AssocImagemSom imagem_temp;
+		for (int i = 0, length = imagens.size(); i < length; i++)
+		{
+			imagem_temp = imagens.get(i);
+			if (imagem_temp.getId() == id)
+			{
+				imagem = imagem_temp;
+				break;
+			}
+
+		}
+		
+		return imagem;
+	}		
 
 	/* METODOS E ATRIBUTOS PARCELABLE */
 	

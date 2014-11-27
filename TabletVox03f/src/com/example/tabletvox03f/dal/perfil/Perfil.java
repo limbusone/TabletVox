@@ -77,6 +77,23 @@ public class Perfil implements Parcelable
 		this.categorias = categorias;
 	}
 
+	public Categoria getCategoriaById(int id)
+	{
+		Categoria categoria = null;
+		Categoria categoria_temp;
+		for (int i = 0, length = categorias.size(); i < length; i++)
+		{
+			categoria_temp = categorias.get(i);
+			if (categoria_temp.getId() == id)
+			{
+				categoria = categoria_temp;
+				break;
+			}
+
+		}
+		
+		return categoria;
+	}	
 	
 	/*** METODOS E ATRIBUTOS PARCELABLE ***/
 	

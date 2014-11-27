@@ -129,7 +129,6 @@ public class ModoTouchCategoriasActivity extends ModoTouchActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		onCreateSuper(savedInstanceState);
-		setContentView(R.layout.telas_interface);
 		
 		// caso o usuário girar a tela, ocorre a recriação desse activity, então é preciso
 		// inicializar a variavel global TELAS_NOME_ARQUIVO_XML_ATIVO aqui e não em MainMenuActivity
@@ -139,6 +138,9 @@ public class ModoTouchCategoriasActivity extends ModoTouchActivity
 		current_page = init_page = 1;
 		//final_page = (new XmlUtilsTelas(this, Utils.TELAS_NOME_ARQUIVO_XML_ATIVO, "root")).getLastPage();
 		final_page = 1;
+		
+		// muda titulo conforme perfil
+		setCurrentTitle("Categorias de " + Utils.PERFIL_ATIVO.getNome());
 		
 		GridView gridview = (GridView) findViewById(R.id.gridview);
 		GridView gridview_frase = (GridView) findViewById(R.id.gridview_frase);

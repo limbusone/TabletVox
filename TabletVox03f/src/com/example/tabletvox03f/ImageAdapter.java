@@ -11,6 +11,7 @@ import android.widget.ImageView;
 
 import com.example.tabletvox03f.dal.FilesIO;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
+import com.example.tabletvox03f.management.Opcoes;
 
 public class ImageAdapter extends BaseAdapter 
 {
@@ -58,8 +59,9 @@ public class ImageAdapter extends BaseAdapter
 		{ // if it's not recycled, initialize some
 									// attributes
 			imagemItem = new ImgItem(mContext);
-			imagemItem.setLayoutParams(new GridView.LayoutParams(85, 85));
+			imagemItem.setLayoutParams(new GridView.LayoutParams(Opcoes.getImageWidth(), Opcoes.getImageHeight()));
 			imagemItem.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
 			imagemItem.setPadding(2, 2, 2, 2);
 			//imagemItem.setBackgroundResource(R.drawable.borda);
 		} 

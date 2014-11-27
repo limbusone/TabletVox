@@ -137,7 +137,6 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		onCreateSuper(savedInstanceState);
-		setContentView(R.layout.telas_interface);
 
 		// caso o usuário girar a tela, ocorre a recriação desse activity, então é preciso
 		// inicializar a variavel global TELAS_NOME_ARQUIVO_XML_ATIVO aqui e não em MainMenuActivity
@@ -149,6 +148,9 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 		final_page = 1;
 		
 		delayVarredura = Opcoes.getIntervalo_tempo_varredura();
+		
+		// muda titulo conforme perfil
+		setCurrentTitle("Categorias de " + Utils.PERFIL_ATIVO.getNome());		
 		
 		// inicializando variaveis booleanas com valores default
 		alternarVarredura();

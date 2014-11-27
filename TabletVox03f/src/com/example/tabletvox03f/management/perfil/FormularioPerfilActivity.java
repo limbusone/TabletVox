@@ -17,10 +17,8 @@ import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.Utils;
 import com.example.tabletvox03f.dal.categoria.Categoria;
 import com.example.tabletvox03f.dal.categoria.CategoriaDAO;
-import com.example.tabletvox03f.dal.categoria.CategoriaDAOSingleton;
 import com.example.tabletvox03f.dal.perfil.Perfil;
 import com.example.tabletvox03f.dal.perfil.PerfilDAO;
-import com.example.tabletvox03f.dal.perfil.PerfilDAOSingleton;
 import com.example.tabletvox03f.management.FormularioBaseActivity;
 import com.example.tabletvox03f.management.categoria.ItemCategoriaAdapter;
 import com.example.tabletvox03f.management.categoria.SelecionarCategoriasActivity;
@@ -134,6 +132,7 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 
 		PerfilDAO dao_pfl = new PerfilDAO(this);
 		CategoriaDAO dao_cat = new CategoriaDAO(this);
+		
 		//assumindo que todas as categorias são novas (e são! pois estamos incluindo um novo perfil)
 		
 		ArrayList<Categoria> categoriasDoAdapter = (ArrayList<Categoria>)((ItemCategoriaAdapter)lv.getAdapter()).getCategorias().clone();
@@ -260,6 +259,8 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 		
 		antigasCategorias = (ArrayList<Categoria>) lista.clone();
 		
+		carregarCategoriasComImagens(antigasCategorias);
+		
 		lv.setAdapter(new ItemCategoriaAdapter(this, (ArrayList<Categoria>) antigasCategorias.clone()));
 	}
 	
@@ -279,6 +280,7 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 			Categoria categoria = categorias.get(i);
 			
 			ica.addItem(categoria);
+			carregarCategoriaComImagens(categoria);
 			novasCategorias.add(categoria);
 		}
 
@@ -296,7 +298,7 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 		{
 			case 3: // adicionar categoria com sucesso
 				ArrayList<Categoria> categorias = data.getParcelableArrayListExtra("selecionados"); 
-				addNovasCategorias(categorias);			
+				addNovasCategorias(categorias);
 				break;
 			case 4:	// adicionar categoria cancelado 
 				Toast.makeText(this, "Cancelado!", Toast.LENGTH_SHORT).show();
@@ -337,6 +339,27 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 	public void excluirCategoriaDasAntigasCategorias(Categoria categoria)
 	{
 		antigasCategorias.remove(categoria);
+	}
+	
+	private void carregarCategoriasComImagens(ArrayList<Categoria> categorias)
+	{
+		Categoria categoria;
+		CategoriaDAO cat_dao = new CategoriaDAO(this);
+		cat_dao.open();
+		for (int i = 0, length = categorias.size(); i < length; i++)
+		{
+			categoria = categorias.get(i);
+			categoria.setImagens(cat_dao.getImagens(categoria.getId()));
+		}
+		cat_dao.close();
+	}
+	
+	private void carregarCategoriaComImagens(Categoria categoria)
+	{
+		CategoriaDAO cat_dao = new CategoriaDAO(this);
+		cat_dao.open();
+		categoria.setImagens(cat_dao.getImagens(categoria.getId()));
+		cat_dao.close();
 	}
 	
 }

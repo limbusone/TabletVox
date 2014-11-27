@@ -1,5 +1,7 @@
 package com.example.tabletvox03f.management;
 
+import com.example.tabletvox03f.Utils;
+
 public class Opcoes
 {
 	private static int intervalo_tempo_tocar_frase = 2500; // em milisegundos
@@ -7,6 +9,7 @@ public class Opcoes
 	private static boolean tocar_som_ao_selecionar_imagem = true;
 	private static int imageWidth = 96;
 	private static int imageHeight = 96;
+	private static int corBorda = Utils.BORDA_VERMELHA;
 	
 
 	public static int getIntervalo_tempo_tocar_frase()
@@ -58,6 +61,16 @@ public class Opcoes
 	public static void setImageHeight(int imageHeight)
 	{
 		Opcoes.imageHeight = imageHeight;
+	}
+
+	public static int getCorBorda()
+	{
+		return corBorda;
+	}
+
+	public static void setCorBorda(int corBorda)
+	{
+		Opcoes.corBorda = corBorda;
 	}
 	
 	

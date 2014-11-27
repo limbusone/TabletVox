@@ -517,7 +517,17 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 	
 	private void setBorda(View v, boolean s)
 	{
-		v.setBackgroundResource((s) ? R.drawable.borda : 0);
+		switch (Opcoes.getCorBorda())
+		{
+			case Utils.BORDA_PRETA:
+				v.setBackgroundResource((s) ? R.drawable.borda_preta : 0);
+				break;
+		
+			case Utils.BORDA_VERMELHA:
+			default:
+				v.setBackgroundResource((s) ? R.drawable.borda : 0);
+				
+		}
 	}
 	
 	protected void resetIndices()

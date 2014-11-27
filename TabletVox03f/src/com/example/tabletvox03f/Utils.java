@@ -41,6 +41,10 @@ public class Utils
 	
 	public static final int FORM_ALTERAR_NP = 2; // NP : Não Persistente (em memória)
 	
+	public static final int BORDA_VERMELHA = 0;
+	
+	public static final int BORDA_PRETA = 1;
+	
     public static void limpaErros()
     {
     	erros.clear();

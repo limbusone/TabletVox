@@ -6,8 +6,10 @@ import java.util.concurrent.Executors;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -144,7 +146,9 @@ public class TelaBaseActivity extends Activity
 	
 	public void carregarCategoriaModoTouch(ImgItem imgi)
 	{
-		if (Opcoes.isTocar_som_ao_selecionar_imagem())
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+		
+		if (sp.getBoolean("tocar_som_ao_selecionar_imagem", true))
 			imgi.tocarSom(this);
 
 		//carregarCategoriaModoTouch(imgi.getAssocImagemSom().getDesc());
@@ -171,7 +175,9 @@ public class TelaBaseActivity extends Activity
 	
 	public void carregarCategoriaModoVarredura(ImgItem imgi)
 	{
-		if (Opcoes.isTocar_som_ao_selecionar_imagem())
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+		
+		if (sp.getBoolean("tocar_som_ao_selecionar_imagem", true))
 			imgi.tocarSom(this);
 		
 		//carregarCategoriaModoVarredura(imgi.getAssocImagemSom().getDesc());

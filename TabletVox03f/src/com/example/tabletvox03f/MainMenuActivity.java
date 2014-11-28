@@ -12,6 +12,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.tabletvox03f.management.OpcoesActivity;
 import com.example.tabletvox03f.management.assocImagemSom.ListaImagensActivity;
 import com.example.tabletvox03f.management.categoria.ListaCategoriasActivity;
 import com.example.tabletvox03f.management.perfil.SelecionarPerfilActivity;
@@ -96,6 +97,10 @@ public class MainMenuActivity extends Activity
 				break;
 			case R.id.action_gerenciar_categorias:
 				intent = new Intent(this, ListaCategoriasActivity.class);
+				startActivity(intent);
+				break;
+			case R.id.action_opcoes:
+				intent = new Intent(this, OpcoesActivity.class);
 				startActivity(intent);
 				break;
 		}

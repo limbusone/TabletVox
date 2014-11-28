@@ -63,6 +63,8 @@
     <string name="autor">Autor</string>
     <string name="categorias_uppercase">CATEGORIAS</string>
     <string name="add_categoria">Adicionar Categoria</string>
-    
+    <string name="opcoes">Opções</string>
+    <string name="tocar_som_ao_selecionar_imagem">Tocar som ao selecionar imagem</string>
+    <string name="intervalo_tempo_tocar_frase">Intervalo de tempo ao tocar a frase</string>
 
 </resources>

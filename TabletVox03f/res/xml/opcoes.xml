@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">>
+    
+    <CheckBoxPreference 
+        android:key="tocar_som_ao_selecionar_imagem"
+        android:title="@string/tocar_som_ao_selecionar_imagem"
+        android:defaultValue="true" />
+    
+    <EditTextPreference 
+        android:key="intervalo_tempo_tocar_frase"
+        android:title="@string/intervalo_tempo_tocar_frase"
+        android:defaultValue="2500"/>
+    
+</PreferenceScreen>

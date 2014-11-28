@@ -129,6 +129,11 @@
             android:label="@string/title_activity_lista_imagens_categoria"
             android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
+        
+        <activity
+        	android:name="com.example.tabletvox03f.management.OpcoesActivity"
+        	android:label="@string/opcoes">
+		</activity>
 
     </application>
 

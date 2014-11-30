@@ -5,7 +5,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.GridView;
@@ -517,7 +519,11 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 	
 	private void setBorda(View v, boolean s)
 	{
-		switch (Opcoes.getCorBorda())
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+		
+		int cor = Integer.parseInt(sp.getString("cor_borda", "" + Utils.BORDA_VERMELHA));
+		
+		switch (cor)
 		{
 			case Utils.BORDA_PRETA:
 				v.setBackgroundResource((s) ? R.drawable.borda_preta : 0);

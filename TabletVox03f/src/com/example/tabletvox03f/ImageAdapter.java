@@ -3,6 +3,8 @@ package com.example.tabletvox03f;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -11,7 +13,6 @@ import android.widget.ImageView;
 
 import com.example.tabletvox03f.dal.FilesIO;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
-import com.example.tabletvox03f.management.Opcoes;
 
 public class ImageAdapter extends BaseAdapter 
 {
@@ -58,8 +59,11 @@ public class ImageAdapter extends BaseAdapter
 		if (convertView == null) 
 		{ // if it's not recycled, initialize some
 									// attributes
+			SharedPreferences sp 	= PreferenceManager.getDefaultSharedPreferences(mContext);
+			int tamanhoImagem 		= Integer.parseInt(sp.getString("tamanho_imagem", "" + Utils.TAMANHO_IMAGEM_DEFAULT));
+			
 			imagemItem = new ImgItem(mContext);
-			imagemItem.setLayoutParams(new GridView.LayoutParams(Opcoes.getImageWidth(), Opcoes.getImageHeight()));
+			imagemItem.setLayoutParams(new GridView.LayoutParams(tamanhoImagem, tamanhoImagem));
 			imagemItem.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
 			imagemItem.setPadding(2, 2, 2, 2);

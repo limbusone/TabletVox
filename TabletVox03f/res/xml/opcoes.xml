@@ -1,14 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">>
     
+    <EditTextPreference 
+        android:key="intervalo_tempo_tocar_frase"
+        android:title="@string/intervalo_tempo_tocar_frase"
+        android:defaultValue="2000"/>
+    
+    <EditTextPreference 
+        android:key="intervalo_tempo_varredura"
+        android:title="@string/intervalo_tempo_varredura"
+        android:defaultValue="2500"/>    
+    
     <CheckBoxPreference 
         android:key="tocar_som_ao_selecionar_imagem"
         android:title="@string/tocar_som_ao_selecionar_imagem"
         android:defaultValue="true" />
     
-    <EditTextPreference 
-        android:key="intervalo_tempo_tocar_frase"
-        android:title="@string/intervalo_tempo_tocar_frase"
-        android:defaultValue="2500"/>
+    <ListPreference 
+        android:key="tamanho_imagem"
+        android:title="@string/tamanho_imagem"
+        android:entries="@array/opcoes_tamanho_imagem_titulos"
+        android:entryValues="@array/opcoes_tamanho_imagem"
+        android:dialogTitle="@string/dialog_title_opcoes_tamanho_imagem"
+		android:defaultValue="@string/tamanho_imagem_medio_value"/>
+    
+    <ListPreference 
+        android:key="cor_borda"
+        android:title="@string/cor_borda"
+        android:entries="@array/opcoes_borda_titulos"
+        android:entryValues="@array/opcoes_borda"
+        android:dialogTitle="@string/dialog_title_opcoes_borda"
+		android:defaultValue="@string/borda_vermelha_value"/>
+    
+    
+    
     
 </PreferenceScreen>

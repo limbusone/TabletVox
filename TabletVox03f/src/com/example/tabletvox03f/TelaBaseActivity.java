@@ -45,11 +45,14 @@ public class TelaBaseActivity extends Activity
 		GridView gridview_atalhos 	= (GridView) findViewById(R.id.gridview_atalhos);
 		GridView gridview_frase 	= (GridView) findViewById(R.id.gridview_frase);
 		
-		gridview.setColumnWidth(Opcoes.getImageWidth());
-		gridview_atalhos.setColumnWidth(Opcoes.getImageWidth());
-		gridview_frase.setColumnWidth(Opcoes.getImageWidth());
+		SharedPreferences sp 	= PreferenceManager.getDefaultSharedPreferences(this);
+		int tamanhoImagem 		= Integer.parseInt(sp.getString("tamanho_imagem", "" + Utils.TAMANHO_IMAGEM_DEFAULT));
 		
-		gridview_atalhos.setLayoutParams(new LinearLayout.LayoutParams(Opcoes.getImageWidth(), LinearLayout.LayoutParams.WRAP_CONTENT));		
+		gridview.setColumnWidth(tamanhoImagem);
+		gridview_atalhos.setColumnWidth(tamanhoImagem);
+		gridview_frase.setColumnWidth(tamanhoImagem);
+		
+		gridview_atalhos.setLayoutParams(new LinearLayout.LayoutParams(tamanhoImagem, LinearLayout.LayoutParams.WRAP_CONTENT));		
 	}
 	
 	public int getCurrent_page()
@@ -231,12 +234,19 @@ public class TelaBaseActivity extends Activity
 	public void addImagemFrase(ImgItem imgi)
 	{
 		lista_imagens_frase.add(new ImgItem(imgi));
+		
 		Utils.lista_imagens_frase_global.add(new ImgItem(imgi));
+		
 		((GridView) findViewById(R.id.gridview_frase))
 		.setAdapter(new ImageAdapterFrase(lista_imagens_frase));
-		sservice_intent.putExtra("titulo_som", imgi.getAssocImagemSom().getTituloSom());
-		imgi.tocarSom(sservice_intent);
-		sservice_intent.removeExtra("titulo_som");		
+		
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+		if (sp.getBoolean("tocar_som_ao_selecionar_imagem", true))
+		{	
+			sservice_intent.putExtra("titulo_som", imgi.getAssocImagemSom().getTituloSom());
+			imgi.tocarSom(sservice_intent);
+			sservice_intent.removeExtra("titulo_som");
+		}
 	}
 	
 	// remover imagem da frase

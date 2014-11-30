@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <array name="opcoes_borda_titulos">
+        <item>@string/borda_vermelha</item>
+        <item>@string/borda_preta</item>
+    </array>
+    <array name="opcoes_borda">
+        <item>@string/borda_vermelha_value</item>
+        <item>@string/borda_preta_value</item>
+    </array>
+    <array name="opcoes_tamanho_imagem_titulos">
+        <item>@string/tamanho_imagem_pequeno</item>
+        <item>@string/tamanho_imagem_medio</item>
+        <item>@string/tamanho_imagem_grande</item>
+    </array>
+    <array name="opcoes_tamanho_imagem">
+        <item>@string/tamanho_imagem_pequeno_value</item>
+        <item>@string/tamanho_imagem_medio_value</item>
+        <item>@string/tamanho_imagem_grande_value</item>
+    </array>    
+    
+</resources>

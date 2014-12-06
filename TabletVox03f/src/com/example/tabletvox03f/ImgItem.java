@@ -4,13 +4,14 @@ package com.example.tabletvox03f;
 import java.io.File;
 import java.io.IOException;
 
-import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.widget.ImageView;
+
+import com.example.tabletvox03f.dal.FilesIO;
+import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
 
 // essa classe representa as imagens que aparecem no software
 public class ImgItem extends ImageView 
@@ -54,14 +55,14 @@ public class ImgItem extends ImageView
 			// o som está sendo recuperado de internal storage
 			// ou da pasta assets/sons
 			
-			File f_from_internal_storage = new File(c.getDir("sons", Context.MODE_PRIVATE).getPath() + "/" +  ais.getTituloSom() + "." + Utils.EXTENSAO_ARQUIVO_SOM );
+			File f_from_internal_storage = new File(c.getDir("sons", Context.MODE_PRIVATE).getPath() + "/" +  ais.getTituloSom() + "." + FilesIO.EXTENSAO_ARQUIVO_SOM );
 			
 			if (f_from_internal_storage.exists())
 				mp.setDataSource(f_from_internal_storage.getAbsolutePath());
 			else
 			{
 
-				AssetFileDescriptor afd = c.getAssets().openFd("sons/" + ais.getTituloSom() + "." + Utils.EXTENSAO_ARQUIVO_SOM);
+				AssetFileDescriptor afd = c.getAssets().openFd("sons/" + ais.getTituloSom() + "." + FilesIO.EXTENSAO_ARQUIVO_SOM);
 				mp.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
 			}
 			mp.prepare();

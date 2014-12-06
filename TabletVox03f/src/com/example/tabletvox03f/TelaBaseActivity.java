@@ -46,7 +46,7 @@ public class TelaBaseActivity extends Activity
 		GridView gridview_frase 	= (GridView) findViewById(R.id.gridview_frase);
 		
 		SharedPreferences sp 	= PreferenceManager.getDefaultSharedPreferences(this);
-		int tamanhoImagem 		= Integer.parseInt(sp.getString("tamanho_imagem", "" + Utils.TAMANHO_IMAGEM_DEFAULT));
+		int tamanhoImagem 		= Integer.parseInt(sp.getString("tamanho_imagem", "" + Opcoes.TAMANHO_IMAGEM_DEFAULT));
 		
 		gridview.setColumnWidth(tamanhoImagem);
 		gridview_atalhos.setColumnWidth(tamanhoImagem);
@@ -318,7 +318,10 @@ public class TelaBaseActivity extends Activity
 					
 					try
 					{
-						Thread.sleep(Opcoes.getIntervalo_tempo_tocar_frase());
+						SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(TelaBaseActivity.this);
+						int intervalo = Integer.parseInt(sp.getString("intervalo_tempo_tocar_frase", "" + Opcoes.INTERVALO_TEMPO_TOCAR_FRASE_DEFAULT));
+						
+						Thread.sleep(intervalo);
 					} 
 					catch (InterruptedException e)
 					{

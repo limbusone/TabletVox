@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ProgressBar;
@@ -147,7 +149,8 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 		//final_page = (new XmlUtilsTelas(this, Utils.TELAS_NOME_ARQUIVO_XML_ATIVO, "root")).getLastPage();
 		final_page = 1;
 		
-		delayVarredura = Opcoes.getIntervalo_tempo_varredura();
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+		delayVarredura = Integer.parseInt(sp.getString("intervalo_tempo_varredura", "" + Opcoes.INTERVALO_TEMPO_VARREDURA_DEFAULT));;
 		
 		// muda titulo conforme perfil
 		setCurrentTitle("Categorias de " + Utils.PERFIL_ATIVO.getNome());		

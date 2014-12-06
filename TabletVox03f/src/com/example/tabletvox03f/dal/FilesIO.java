@@ -22,6 +22,9 @@ import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
 
 public class FilesIO
 {
+	
+	public static final String EXTENSAO_ARQUIVO_SOM = "wav";
+	
 	private Context activeContext;
 	
 	public FilesIO(Context c)
@@ -109,7 +112,7 @@ public class FilesIO
 	public boolean deletarArquivosDeImagemESom(AssocImagemSom ais)
 	{
 		File fi = new File(activeContext.getDir("imagens", Context.MODE_PRIVATE).getPath() + "/" + ais.getTituloImagem() + "." + ais.getExt());
-		File fs = new File(activeContext.getDir("sons", Context.MODE_PRIVATE).getPath() + "/" + ais.getTituloSom() + "." + Utils.EXTENSAO_ARQUIVO_SOM);
+		File fs = new File(activeContext.getDir("sons", Context.MODE_PRIVATE).getPath() + "/" + ais.getTituloSom() + "." + FilesIO.EXTENSAO_ARQUIVO_SOM);
 		
 		return (fi.exists() && fs.exists()) ? fi.delete() && fs.delete() : false;
 	}	

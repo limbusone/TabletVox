@@ -10,6 +10,8 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import com.example.tabletvox03f.management.Opcoes;
+
 public class ImageAdapterFrase extends BaseAdapter 
 {
 	
@@ -49,7 +51,7 @@ public class ImageAdapterFrase extends BaseAdapter
 		if (convertView == null)
 		{
 			SharedPreferences sp 	= PreferenceManager.getDefaultSharedPreferences(parent.getContext());
-			int tamanhoImagem 		= Integer.parseInt(sp.getString("tamanho_imagem", "" + Utils.TAMANHO_IMAGEM_DEFAULT));			
+			int tamanhoImagem 		= Integer.parseInt(sp.getString("tamanho_imagem", "" + Opcoes.TAMANHO_IMAGEM_DEFAULT));			
 			
 			imagemItem = imgi_list.get(position);
 			imagemItem.setLayoutParams(new GridView.LayoutParams(tamanhoImagem, tamanhoImagem));

@@ -56,7 +56,7 @@ public class FormularioAssocImagemSomActivity extends FormularioBaseActivity
 			FormularioAssocImagemSomActivity thisContext = FormularioAssocImagemSomActivity.this;
 			ImgItem imgItem = new ImgItem(thisContext);
 			
-			if (tipo_form == 1) 
+			if (tipo_form == Utils.FORM_ALTERAR) 
 			{
 				// se o form for tipo editar
 				
@@ -144,7 +144,7 @@ public class FormularioAssocImagemSomActivity extends FormularioBaseActivity
 		
 		txtDesc.setText(ais.getDesc());
 		caminho_destino_img = ais.getTituloImagem() + "." + ais.getExt();
-		caminho_destino_som = ais.getTituloSom() + "." + Utils.EXTENSAO_ARQUIVO_SOM;
+		caminho_destino_som = ais.getTituloSom() + "." + FilesIO.EXTENSAO_ARQUIVO_SOM;
 		
 		btnUploadImg.setImageDrawable(fio.getImgItemDrawableFromInternalStorageOrAssets(ais));
 		lblSomSel.setText(caminho_destino_som);

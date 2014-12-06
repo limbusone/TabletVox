@@ -28,8 +28,6 @@ public class Utils
 	//public static Perfil PERFIL_ATIVO = new Perfil(1, "perfil01", "default_author"); // perfil default
 	public static Perfil PERFIL_ATIVO; 
 	
-	public static String EXTENSAO_ARQUIVO_SOM = "wav";
-	
 	public static ArrayList<Erro> erros = new ArrayList<Erro>();
 	
 	// frase global utilizada principalmente no perfil categorizado
@@ -40,12 +38,6 @@ public class Utils
 	public static final int FORM_ALTERAR = 1;
 	
 	public static final int FORM_ALTERAR_NP = 2; // NP : Não Persistente (em memória)
-	
-	public static final int BORDA_VERMELHA = 0;
-	
-	public static final int BORDA_PRETA = 1;
-	
-	public static final int TAMANHO_IMAGEM_DEFAULT = 96;
 	
     public static void limpaErros()
     {

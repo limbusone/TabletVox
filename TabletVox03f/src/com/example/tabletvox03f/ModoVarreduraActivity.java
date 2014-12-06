@@ -193,7 +193,8 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 		//final_page = (new XmlUtilsTelas(this, Utils.TELAS_NOME_ARQUIVO_XML_ATIVO, "root")).getLastPage();
 		final_page = 1;
 		
-		delayVarredura = Opcoes.getIntervalo_tempo_varredura();
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+		delayVarredura = Integer.parseInt(sp.getString("intervalo_tempo_varredura", "" + Opcoes.INTERVALO_TEMPO_VARREDURA_DEFAULT));;
 		
 		// muda titulo conforme categoria
 		setCurrentTitle(Utils.PERFIL_ATIVO.getNome() + " - Categoria " + 
@@ -521,15 +522,15 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 	{
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
 		
-		int cor = Integer.parseInt(sp.getString("cor_borda", "" + Utils.BORDA_VERMELHA));
+		int cor = Integer.parseInt(sp.getString("cor_borda", "" + Opcoes.BORDA_VERMELHA));
 		
 		switch (cor)
 		{
-			case Utils.BORDA_PRETA:
+			case Opcoes.BORDA_PRETA:
 				v.setBackgroundResource((s) ? R.drawable.borda_preta : 0);
 				break;
 		
-			case Utils.BORDA_VERMELHA:
+			case Opcoes.BORDA_VERMELHA:
 			default:
 				v.setBackgroundResource((s) ? R.drawable.borda : 0);
 				

@@ -25,6 +25,7 @@ import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
 import com.example.tabletvox03f.dal.categoria.Categoria;
 import com.example.tabletvox03f.dal.categoria.CategoriaDAO;
 import com.example.tabletvox03f.management.perfil.FormularioPerfilActivity;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class ItemCategoriaAdapter extends BaseAdapter
 {
@@ -110,7 +111,7 @@ public class ItemCategoriaAdapter extends BaseAdapter
 		FilesIO fIO = new FilesIO(mContext);
 		holder.lblNomeCategoria.setText(categoria.getNome());
 		// recuperar imagem
-		holder.imgv.setImageDrawable(fIO.getImgItemDrawableFromInternalStorageOrAssets(ais));
+		ImageLoader.getInstance().displayImage(fIO.getImgItemUriFromInternalStorageOrAssets(ais), holder.imgv);
 		//holder.imgv.setAssocImagemSom(ais);
 		
 		// eventos click dos botoes

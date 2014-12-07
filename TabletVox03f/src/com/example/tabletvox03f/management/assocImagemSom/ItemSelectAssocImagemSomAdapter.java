@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.dal.FilesIO;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class ItemSelectAssocImagemSomAdapter extends ItemAssocImagemSomAdapter
 {
@@ -62,7 +63,8 @@ public class ItemSelectAssocImagemSomAdapter extends ItemAssocImagemSomAdapter
 		FilesIO fIO = new FilesIO(mContext);
 		holder.lblDesc.setText(ais.getDesc());
 		// recuperar imagem
-		holder.imgv.setImageDrawable(fIO.getImgItemDrawableFromInternalStorageOrAssets(ais));
+		ImageLoader.getInstance().displayImage(fIO.getImgItemUriFromInternalStorageOrAssets(ais), holder.imgv);
+		//holder.imgv.setImageDrawable(fIO.getImgItemDrawableFromInternalStorageOrAssets(ais));
 		//holder.imgv.setAssocImagemSom(ais);
 		
 		// adicionando ou excluindo da lista de selecionados conforme estado do checkbox

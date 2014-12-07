@@ -22,6 +22,7 @@ import com.example.tabletvox03f.Utils;
 import com.example.tabletvox03f.dal.FilesIO;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSomDAO;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 
 public class ItemAssocImagemSomAdapter extends BaseAdapter
@@ -77,7 +78,7 @@ public class ItemAssocImagemSomAdapter extends BaseAdapter
 		FilesIO fIO = new FilesIO(mContext);
 		holder.lblDesc.setText(ais.getDesc());
 		// recuperar imagem
-		holder.imgv.setImageDrawable(fIO.getImgItemDrawableFromInternalStorageOrAssets(ais));
+		ImageLoader.getInstance().displayImage(fIO.getImgItemUriFromInternalStorageOrAssets(ais), holder.imgv);
 		//holder.imgv.setAssocImagemSom(ais);
 		
 		// eventos click dos botoes

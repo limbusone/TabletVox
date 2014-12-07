@@ -59,7 +59,6 @@ public class FilesIO
 			
 		} catch (IOException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -184,7 +183,6 @@ public class FilesIO
 		} 
 		catch (IOException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		finally
@@ -196,7 +194,6 @@ public class FilesIO
 			} 
 			catch (IOException e)
 			{
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -242,9 +239,25 @@ public class FilesIO
 		}
 		catch (IOException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return drawable;		
+	}
+	
+	public String getImgItemUriFromInternalStorageOrAssets(AssocImagemSom ais)
+	{
+		String imageUri = "";
+		File f_from_internal_storage = new File
+		(
+			activeContext.getDir("imagens", Context.MODE_PRIVATE).getPath() + 
+			"/" +  ais.getTituloImagem() + "." + ais.getExt()
+		);
+		
+		imageUri = (f_from_internal_storage.exists()) 
+					? "file://" + f_from_internal_storage.getAbsolutePath() 
+					: "assets://imagens/" +  ais.getTituloImagem() + "." + ais.getExt(); 
+		
+		
+		return imageUri;
 	}
 }

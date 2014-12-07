@@ -15,6 +15,7 @@ import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.dal.FilesIO;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
 import com.example.tabletvox03f.dal.categoria.Categoria;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class ItemSelectCategoriaAdapter extends ItemCategoriaAdapter
 {
@@ -64,7 +65,7 @@ public class ItemSelectCategoriaAdapter extends ItemCategoriaAdapter
 		FilesIO fIO = new FilesIO(mContext);
 		holder.lblNomeCategoria.setText(categoria.getNome());
 		// recuperar imagem
-		holder.imgv.setImageDrawable(fIO.getImgItemDrawableFromInternalStorageOrAssets(ais));
+		ImageLoader.getInstance().displayImage(fIO.getImgItemUriFromInternalStorageOrAssets(ais), holder.imgv);
 		//holder.imgv.setAssocImagemSom(ais);
 		
 		// adicionando ou excluindo da lista de selecionados conforme estado do checkbox

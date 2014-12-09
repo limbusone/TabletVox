@@ -3,6 +3,7 @@ package com.example.tabletvox03f.management.perfil;
 import java.util.ArrayList;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.text.Editable;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.example.tabletvox03f.Utils;
 import com.example.tabletvox03f.dal.perfil.Perfil;
 import com.example.tabletvox03f.dal.perfil.PerfilDAO;
 import com.example.tabletvox03f.management.ListaComBuscaManageActivity;
+import com.example.tabletvox03f.management.Opcoes;
 
 public class SelecionarPerfilActivity extends ListaComBuscaManageActivity
 {
@@ -64,11 +66,8 @@ public class SelecionarPerfilActivity extends ListaComBuscaManageActivity
 	private void selecionarPerfil(Perfil perfil)
 	{
 		Utils.PERFIL_ATIVO = perfil;
-		// carregar categorias no objeto do perfil
-//		PerfilDAO pfl_dao = new PerfilDAO(this);
-//		pfl_dao.open();
-//		perfil.setCategorias(pfl_dao.getCategorias(perfil.getId()));
-//		pfl_dao.close();
+		SharedPreferences settings = getSharedPreferences(Opcoes.SETTINGS_NAME, 0);
+		settings.edit().putInt(Opcoes.PERFIL_DEFAULT_KEY, perfil.getId()).commit();
 		setResult(1);
 		finish();
 	}

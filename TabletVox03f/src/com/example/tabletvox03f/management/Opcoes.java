@@ -15,5 +15,12 @@ public class Opcoes
 
 	public static final int BORDA_VERMELHA = 0;
 	
-	public static final int BORDA_PRETA = 1;	
+	public static final int BORDA_PRETA = 1;
+	
+	public static final String SETTINGS_NAME = "settings";
+	
+	public static final String PERFIL_DEFAULT_KEY = "perfil_default";
+	
+	public static final int PERFIL_DEFAULT_DEFAULT = 1;
+	
 }

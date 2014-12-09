@@ -3,6 +3,7 @@ package com.example.tabletvox03f;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import com.example.tabletvox03f.dal.categoria.CategoriaDAOSingleton;
 import com.example.tabletvox03f.dal.perfil.Perfil;
 import com.example.tabletvox03f.dal.perfil.PerfilDAO;
 import com.example.tabletvox03f.dal.perfil.PerfilDAOSingleton;
+import com.example.tabletvox03f.management.Opcoes;
 
 public class Utils 
 {
@@ -102,10 +104,10 @@ public class Utils
 	
 	public static void inicializarPerfilDefault(Context context)
 	{
-		// inicializar perfil default		
+		SharedPreferences settings = context.getSharedPreferences(Opcoes.SETTINGS_NAME, 0);
 		PerfilDAO pfl_dao = new PerfilDAO(context);
 		pfl_dao.open();
-		Utils.PERFIL_ATIVO = pfl_dao.getPerfilById(1);
+		Utils.PERFIL_ATIVO = pfl_dao.getPerfilById(settings.getInt(Opcoes.PERFIL_DEFAULT_KEY, Opcoes.PERFIL_DEFAULT_DEFAULT));
 		pfl_dao.close();
 	}
 	

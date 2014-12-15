@@ -3,6 +3,7 @@ package com.example.tabletvox03f.management.categoria;
 import java.util.ArrayList;
 
 import android.content.Intent;
+import android.support.v4.app.NavUtils;
 import android.text.Editable;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,7 +23,8 @@ public class ListaCategoriasActivity extends ListaComBuscaManageActivity
 	@Override
 	protected void onCreateFilho()
 	{
-
+		// habilita up back
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
 	// recarregar/carregar a lista ao voltar para esse activity
@@ -60,12 +62,18 @@ public class ListaCategoriasActivity extends ListaComBuscaManageActivity
 	@Override
 	protected void acaoDosEventosDoMenu(MenuItem item)
 	{
-		if (item.getItemId() == R.id.action_criar)
+		switch (item.getItemId())
 		{
-			// chamar activity criar categoria
-			Intent intent = new Intent(this, FormularioCategoriaActivity.class);
-			intent.putExtra("tipo_form", Utils.FORM_INCLUIR); // 0, para form do tipo 'criar' e 1 para form do tipo 'editar'
-			startActivityForResult(intent, 1);
+			case R.id.action_criar:
+				// chamar activity criar categoria
+				Intent intent = new Intent(this, FormularioCategoriaActivity.class);
+				intent.putExtra("tipo_form", Utils.FORM_INCLUIR); // 0, para form do tipo 'criar' e 1 para form do tipo 'editar'
+				startActivityForResult(intent, 1);
+				break;
+		    // Respond to the action bar's Up/Home button
+		    case android.R.id.home:
+		        NavUtils.navigateUpFromSameTask(this);
+		        break;
 		}
 	}
 

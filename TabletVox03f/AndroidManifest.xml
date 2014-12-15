@@ -63,25 +63,37 @@
         </activity>
         <activity
             android:name="com.example.tabletvox03f.ModoTouchCategoriasActivity"
-            android:label="@string/title_activity_modo_touch_categorias" >
+            android:label="@string/title_activity_modo_touch_categorias"
+            android:parentActivityName="com.example.tabletvox03f.MainMenuActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.tabletvox03f.MainMenuActivity" />
         </activity>
         <activity
             android:name="com.example.tabletvox03f.ModoVarreduraCategoriasActivity"
-            android:label="@string/title_activity_modo_varredura_categorias" >
+            android:label="@string/title_activity_modo_varredura_categorias"
+            android:parentActivityName="com.example.tabletvox03f.MainMenuActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.tabletvox03f.MainMenuActivity" />
         </activity>
         <activity
             android:name="com.example.tabletvox03f.management.perfil.SelecionarPerfilActivity"
             android:label="@string/title_activity_selecionar_perfil"
-            android:windowSoftInputMode="stateAlwaysHidden" >
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:parentActivityName="com.example.tabletvox03f.MainMenuActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.tabletvox03f.MainMenuActivity" />
         </activity>
         <activity
             android:name="com.example.tabletvox03f.management.perfil.FormularioPerfilActivity"
             android:label="@string/title_activity_criar_perfil"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:parentActivityName="com.example.tabletvox03f.management.perfil.SelecionarPerfilActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.tabletvox03f.SelecionarPerfilActivity" >
-            </meta-data>
+                android:value="com.example.tabletvox03f.management.perfil.SelecionarPerfilActivity" />
         </activity>
         <activity
             android:name="com.example.tabletvox03f.management.ListaCategoriasDoPerfilActivity"
@@ -97,7 +109,12 @@
         <activity
             android:name="com.example.tabletvox03f.management.categoria.ListaCategoriasActivity"
             android:label="@string/title_activity_lista_categorias"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:parentActivityName="com.example.tabletvox03f.MainMenuActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.tabletvox03f.MainMenuActivity" />
+         
         </activity>        
         
         <activity
@@ -115,7 +132,11 @@
         <activity
             android:name="com.example.tabletvox03f.management.assocImagemSom.ListaImagensActivity"
             android:label="@string/title_activity_lista_imagens"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:parentActivityName="com.example.tabletvox03f.MainMenuActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.tabletvox03f.MainMenuActivity" />
         </activity>
         
         <activity

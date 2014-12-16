@@ -25,8 +25,8 @@
 	    android:text="@string/selecione_uma_imagem_btn" />
 	<ImageView
 	    android:id="@+id/imgImagem"
-	    android:layout_width="96dp"
-	    android:layout_height="96dp"
+	    android:layout_width="120dp"
+	    android:layout_height="120dp"
 	    android:layout_gravity="center_horizontal"
 	    android:contentDescription="@string/blabla"
 	    android:visibility="gone"

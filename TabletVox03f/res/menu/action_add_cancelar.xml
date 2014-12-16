@@ -2,19 +2,12 @@
     <item 
         android:id="@+id/action_cancelar"
         android:icon="@android:drawable/ic_menu_close_clear_cancel"
-        android:showAsAction="always"
-        android:title=""
-        />
+        android:showAsAction="ifRoom|withText"
+        android:title="" />
     <item 
         android:id="@+id/action_add"
         android:icon="@android:drawable/ic_menu_add"
         android:showAsAction="ifRoom"
         android:title="@string/add"
-        />    
-    <item
-        android:id="@+id/action_concluir"
-        android:icon="@drawable/ic_action_accept"
-        android:showAsAction="always"
-        android:title=""
-        />
+        />      
 </menu>

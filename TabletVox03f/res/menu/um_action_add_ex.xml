@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item 
+        android:id="@+id/action_criar"
+        android:icon="@android:drawable/ic_menu_add"
+        android:showAsAction="always|withText"
+        android:title=""
+        />
+    <item 
+        android:id="@+id/action_gerenciar_categorias"
+        android:showAsAction="never"
+        android:title="@string/categorias_text"
+        android:icon="@android:drawable/ic_menu_manage"/>    
+</menu>

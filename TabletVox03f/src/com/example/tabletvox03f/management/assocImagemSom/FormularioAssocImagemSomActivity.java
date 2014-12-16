@@ -205,7 +205,9 @@ public class FormularioAssocImagemSomActivity extends FormularioBaseActivity
 			
 			//Toast.makeText(this, "Inclusão bem sucedida!", Toast.LENGTH_SHORT).show();
 			
-			this.setResult(1);
+			Intent data = new Intent();
+			data.putExtra("ais", ais);			
+			this.setResult(1, data);
 			finish();
 		}
 		catch (IOException e)

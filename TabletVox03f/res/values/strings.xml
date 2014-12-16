@@ -81,5 +81,13 @@
     <string name="tamanho_imagem_pequeno_value">85</string>
     <string name="tamanho_imagem_medio_value">96</string>
     <string name="tamanho_imagem_grande_value">120</string>
+    <string name="add">Adicionar</string>
+    <string name="tem_certeza">Tem certeza?</string>
+    <string name="confirmar_exclusao">Confirmar Exclusão</string>
+    <string name="add_img_recem_criada">Deseja adicionar imagem recém criada?</string>
+    <string name="add_imagem">Adicionar Imagem</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
+    <string name="img_incluida_com_sucesso">Imagem incluida com sucesso!</string>
 
 </resources>

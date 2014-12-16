@@ -39,6 +39,14 @@ public class FormularioCategoriaActivity extends FormularioNaoPersistenteBaseAct
 	
 	private AssocImagemSom ais_selecionado;
 	
+	public static final int RC_SELECIONAR_IMG_SUCESSO 	= 1;
+	
+	public static final int RC_SELECIONAR_IMG_CANCELADO = 2;
+	
+	public static final int RC_DEFINIR_IMGS_SUCESSO 	= 3;
+	
+	public static final int RC_DEFINIR_IMGS_CANCELADO 	= 4;
+	
 	private OnClickListener escolherImagemEvento = new OnClickListener()
 	{
 		@Override
@@ -217,7 +225,7 @@ public class FormularioCategoriaActivity extends FormularioNaoPersistenteBaseAct
 		super.onActivityResult(requestCode, resultCode, data);
 		
 		// selecionar uma imagem com sucesso
-		if (resultCode == 1)
+		if (resultCode == RC_SELECIONAR_IMG_SUCESSO)
 		{
 			ais_selecionado = data.getParcelableExtra("ais");
 			cat.setAIS(ais_selecionado);
@@ -226,18 +234,18 @@ public class FormularioCategoriaActivity extends FormularioNaoPersistenteBaseAct
 		}
 
 		// selecionar uma imagem cancelado
-		if (resultCode == 2)
+		if (resultCode == RC_SELECIONAR_IMG_CANCELADO)
 			Toast.makeText(this, "Cancelado!", Toast.LENGTH_SHORT).show();
 		
 		// definir imagens com sucesso
-		if (resultCode == 3)
+		if (resultCode == RC_DEFINIR_IMGS_SUCESSO)
 		{
 			ArrayList<AssocImagemSom> imagens = data.getParcelableArrayListExtra("imagens");
 			cat.setImagens(imagens);
 		}
 		
 		// definir imagens cancelado
-		if (resultCode == 4);
+		if (resultCode == RC_SELECIONAR_IMG_CANCELADO);
 	}
 	
 	private void atribuirDadosAISAosControles(AssocImagemSom ais)

@@ -19,11 +19,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tabletvox03f.R;
-import com.example.tabletvox03f.Utils;
 import com.example.tabletvox03f.dal.FilesIO;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
 import com.example.tabletvox03f.dal.categoria.Categoria;
 import com.example.tabletvox03f.dal.categoria.CategoriaDAO;
+import com.example.tabletvox03f.management.FormularioBaseActivity;
 import com.example.tabletvox03f.management.perfil.FormularioPerfilActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -147,13 +147,13 @@ public class ItemCategoriaAdapter extends BaseAdapter
 				// verifica se o "parent" desse adapter é a lista de categorias
 				if (ItemCategoriaAdapter.this.mContext instanceof ListaCategoriasActivity)
 				{
-					intent.putExtra("tipo_form", Utils.FORM_ALTERAR);
+					intent.putExtra("tipo_form", FormularioBaseActivity.FORM_ALTERAR);
 					((Activity) ItemCategoriaAdapter.this.mContext).startActivityForResult(intent, 2);
 				}
 				// verifica se o "parent" desse adapter é o formulario do perfil
 				else if (ItemCategoriaAdapter.this.mContext instanceof FormularioPerfilActivity)
 				{
-					intent.putExtra("tipo_form", Utils.FORM_ALTERAR_NP);
+					intent.putExtra("tipo_form", FormularioBaseActivity.FORM_ALTERAR_NP);
 					((Activity) ItemCategoriaAdapter.this.mContext).startActivityForResult(intent, 3);
 				}
 					

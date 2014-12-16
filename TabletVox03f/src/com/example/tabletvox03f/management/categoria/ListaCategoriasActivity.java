@@ -12,9 +12,9 @@ import android.widget.BaseAdapter;
 import android.widget.Toast;
 
 import com.example.tabletvox03f.R;
-import com.example.tabletvox03f.Utils;
 import com.example.tabletvox03f.dal.categoria.Categoria;
 import com.example.tabletvox03f.dal.categoria.CategoriaDAO;
+import com.example.tabletvox03f.management.FormularioBaseActivity;
 import com.example.tabletvox03f.management.ListaComBuscaManageActivity;
 
 public class ListaCategoriasActivity extends ListaComBuscaManageActivity
@@ -67,7 +67,7 @@ public class ListaCategoriasActivity extends ListaComBuscaManageActivity
 			case R.id.action_criar:
 				// chamar activity criar categoria
 				Intent intent = new Intent(this, FormularioCategoriaActivity.class);
-				intent.putExtra("tipo_form", Utils.FORM_INCLUIR); // 0, para form do tipo 'criar' e 1 para form do tipo 'editar'
+				intent.putExtra("tipo_form", FormularioBaseActivity.FORM_INCLUIR); // 0, para form do tipo 'criar' e 1 para form do tipo 'editar'
 				startActivityForResult(intent, 1);
 				break;
 		    // Respond to the action bar's Up/Home button
@@ -107,9 +107,9 @@ public class ListaCategoriasActivity extends ListaComBuscaManageActivity
 	{
 		super.onActivityResult(requestCode, resultCode, data);
 		
-		if (resultCode == 1)
+		if (resultCode == FormularioCategoriaActivity.RC_CAT_INCLUIDA_SUCESSO)
 			Toast.makeText(this, "Categoria incluida com sucesso!", Toast.LENGTH_SHORT).show();
-		else if (resultCode == 2)
+		else if (resultCode == FormularioCategoriaActivity.RC_CAT_EDITADA_SUCESSO)
 			Toast.makeText(this, "Categoria editada com sucesso", Toast.LENGTH_SHORT).show();
 	}	
 

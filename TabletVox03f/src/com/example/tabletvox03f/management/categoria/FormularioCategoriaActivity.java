@@ -27,6 +27,10 @@ import com.example.tabletvox03f.management.assocImagemSom.SelecionarImagemActivi
 public class FormularioCategoriaActivity extends FormularioNaoPersistenteBaseActivity
 {
 	
+	public static final int RC_CAT_INCLUIDA_SUCESSO 	= 1;
+	public static final int RC_CAT_EDITADA_SUCESSO 		= 2;
+	public static final int RC_CAT_EDITADA_NP_SUCESSO 	= 5;
+	
 	private Categoria cat;
 	
 	private RelativeLayout laySom;
@@ -38,14 +42,6 @@ public class FormularioCategoriaActivity extends FormularioNaoPersistenteBaseAct
 	private EditText txtNome;
 	
 	private AssocImagemSom ais_selecionado;
-	
-	public static final int RC_SELECIONAR_IMG_SUCESSO 	= 1;
-	
-	public static final int RC_SELECIONAR_IMG_CANCELADO = 2;
-	
-	public static final int RC_DEFINIR_IMGS_SUCESSO 	= 3;
-	
-	public static final int RC_DEFINIR_IMGS_CANCELADO 	= 4;
 	
 	private OnClickListener escolherImagemEvento = new OnClickListener()
 	{
@@ -151,7 +147,7 @@ public class FormularioCategoriaActivity extends FormularioNaoPersistenteBaseAct
 		dao_cat.create(cat);
 		dao_cat.close();
 		
-		this.setResult(1);
+		this.setResult(RC_CAT_INCLUIDA_SUCESSO);
 		finish();
 	}
 
@@ -176,7 +172,7 @@ public class FormularioCategoriaActivity extends FormularioNaoPersistenteBaseAct
 		dao_cat.update(cat, cat.getId());
 		dao_cat.close();
 		
-		this.setResult(2);
+		this.setResult(RC_CAT_EDITADA_SUCESSO);
 		finish();
 	}
 	
@@ -225,7 +221,7 @@ public class FormularioCategoriaActivity extends FormularioNaoPersistenteBaseAct
 		super.onActivityResult(requestCode, resultCode, data);
 		
 		// selecionar uma imagem com sucesso
-		if (resultCode == RC_SELECIONAR_IMG_SUCESSO)
+		if (resultCode == SelecionarImagemActivity.RC_SELECIONAR_IMG_SUCESSO)
 		{
 			ais_selecionado = data.getParcelableExtra("ais");
 			cat.setAIS(ais_selecionado);
@@ -234,18 +230,18 @@ public class FormularioCategoriaActivity extends FormularioNaoPersistenteBaseAct
 		}
 
 		// selecionar uma imagem cancelado
-		if (resultCode == RC_SELECIONAR_IMG_CANCELADO)
+		if (resultCode == SelecionarImagemActivity.RC_SELECIONAR_IMG_CANCELADO)
 			Toast.makeText(this, "Cancelado!", Toast.LENGTH_SHORT).show();
 		
 		// definir imagens com sucesso
-		if (resultCode == RC_DEFINIR_IMGS_SUCESSO)
+		if (resultCode == ListaImagensCategoriaActivity.RC_DEFINIR_IMGS_SUCESSO)
 		{
 			ArrayList<AssocImagemSom> imagens = data.getParcelableArrayListExtra("imagens");
 			cat.setImagens(imagens);
 		}
 		
 		// definir imagens cancelado
-		if (resultCode == RC_SELECIONAR_IMG_CANCELADO);
+		if (resultCode == ListaImagensCategoriaActivity.RC_DEFINIR_IMGS_CANCELADO);
 	}
 	
 	private void atribuirDadosAISAosControles(AssocImagemSom ais)
@@ -300,7 +296,7 @@ public class FormularioCategoriaActivity extends FormularioNaoPersistenteBaseAct
 		
 		Intent data = new Intent();
 		data.putExtra("categoria", cat);
-		this.setResult(5, data);
+		this.setResult(RC_CAT_EDITADA_NP_SUCESSO, data);
 		finish();
 		
 	}	

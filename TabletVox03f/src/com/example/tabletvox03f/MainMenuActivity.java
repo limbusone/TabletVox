@@ -117,7 +117,7 @@ public class MainMenuActivity extends Activity
 
 		switch (resultCode)
 		{
-			case 1: // selecionado com sucesso
+			case SelecionarPerfilActivity.RC_PFL_SELECIONADO_SUCESSO: // selecionado com sucesso
 				Toast.makeText(MainMenuActivity.this, "Perfil selecionado!", Toast.LENGTH_SHORT).show();
 				mudaTituloConformePerfilSelecionado();
 				break;

@@ -35,12 +35,6 @@ public class Utils
 	// frase global utilizada principalmente no perfil categorizado
 	public static ArrayList<ImgItem> lista_imagens_frase_global;
 	
-	public static final int FORM_INCLUIR = 0;
-	
-	public static final int FORM_ALTERAR = 1;
-	
-	public static final int FORM_ALTERAR_NP = 2; // NP : Não Persistente (em memória)
-	
     public static void limpaErros()
     {
     	erros.clear();

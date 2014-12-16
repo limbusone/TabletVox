@@ -18,6 +18,9 @@ import com.example.tabletvox03f.management.ListaComBuscaManageActivity;
 public class SelecionarImagensActivity extends ListaComBuscaManageActivity
 {
 
+	public static final int RC_ADD_IMG_SUCESSO 		= 1;
+	public static final int RC_ADD_IMG_CANCELADO 	= 2;
+	
 	@Override
 	protected void onCreateFilho()
 	{
@@ -67,14 +70,14 @@ public class SelecionarImagensActivity extends ListaComBuscaManageActivity
 			ArrayList<AssocImagemSom> selecionados = ((ItemSelectAssocImagemSomAdapter)lv.getAdapter()).getSelecionados();
 			Intent intent = new Intent();
 			intent.putParcelableArrayListExtra("selecionados", (ArrayList<AssocImagemSom>) selecionados.clone());
-			this.setResult(1, intent);
+			this.setResult(RC_ADD_IMG_SUCESSO, intent);
 			finish();
 			
 		}
 		// cancela a ação e volta para tela de lista de imagens da categoria
 		else if (item.getItemId() == R.id.action_cancelar)
 		{
-			this.setResult(2);
+			this.setResult(RC_ADD_IMG_CANCELADO);
 			finish();
 		}
 	}

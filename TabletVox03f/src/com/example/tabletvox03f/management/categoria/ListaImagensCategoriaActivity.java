@@ -18,6 +18,9 @@ import com.example.tabletvox03f.management.assocImagemSom.SelecionarImagensActiv
 
 public class ListaImagensCategoriaActivity extends ListaSimplesManageActivity
 {
+	
+	public static final int RC_DEFINIR_IMGS_SUCESSO 	= 3;
+	public static final int RC_DEFINIR_IMGS_CANCELADO 	= 4;
 
 	private Categoria categoria; 
 	
@@ -60,7 +63,7 @@ public class ListaImagensCategoriaActivity extends ListaSimplesManageActivity
 			case R.id.action_concluir:
 				ArrayList<AssocImagemSom> imagens = ((ItemDeleteAssocImagemSomAdapter)lv.getAdapter()).getItems();
 				intent.putParcelableArrayListExtra("imagens", (ArrayList<AssocImagemSom>) imagens.clone());			
-				this.setResult(3, intent);
+				this.setResult(RC_DEFINIR_IMGS_SUCESSO, intent);
 				finish();
 				break;
 			case R.id.action_add:
@@ -68,7 +71,7 @@ public class ListaImagensCategoriaActivity extends ListaSimplesManageActivity
 				startActivityForResult(intent, 1);
 				break;
 			case R.id.action_cancelar:
-				this.setResult(4);
+				this.setResult(RC_DEFINIR_IMGS_CANCELADO);
 				finish();
 				break;
 		}
@@ -94,14 +97,14 @@ public class ListaImagensCategoriaActivity extends ListaSimplesManageActivity
 		super.onActivityResult(requestCode, resultCode, data);
 		
 		// adicionar imagem com sucesso
-		if (resultCode == 1)
+		if (resultCode == SelecionarImagensActivity.RC_ADD_IMG_SUCESSO)
 		{
 			ArrayList<AssocImagemSom> imagens = data.getParcelableArrayListExtra("selecionados"); 
 			addNovasImagens(imagens);
 		}
 			
 		// adicionar imagem cancelado
-		if (resultCode == 2)
+		if (resultCode == SelecionarImagensActivity.RC_ADD_IMG_CANCELADO)
 			Toast.makeText(this, "Cancelado!", Toast.LENGTH_SHORT).show();
 	}
 

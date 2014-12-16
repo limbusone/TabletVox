@@ -16,12 +16,15 @@ import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.Utils;
 import com.example.tabletvox03f.dal.perfil.Perfil;
 import com.example.tabletvox03f.dal.perfil.PerfilDAO;
+import com.example.tabletvox03f.management.FormularioBaseActivity;
 import com.example.tabletvox03f.management.ListaComBuscaManageActivity;
 import com.example.tabletvox03f.management.Opcoes;
 
 public class SelecionarPerfilActivity extends ListaComBuscaManageActivity
 {
 
+	public static final int RC_PFL_SELECIONADO_SUCESSO = 1;
+	
 	@Override
 	protected void onCreateFilho()
 	{
@@ -70,7 +73,7 @@ public class SelecionarPerfilActivity extends ListaComBuscaManageActivity
 		Utils.PERFIL_ATIVO = perfil;
 		SharedPreferences settings = getSharedPreferences(Opcoes.SETTINGS_NAME, 0);
 		settings.edit().putInt(Opcoes.PERFIL_DEFAULT_KEY, perfil.getId()).commit();
-		setResult(1);
+		setResult(RC_PFL_SELECIONADO_SUCESSO);
 		finish();
 	}
 	
@@ -80,9 +83,9 @@ public class SelecionarPerfilActivity extends ListaComBuscaManageActivity
 	{
 		super.onActivityResult(requestCode, resultCode, data);
 		
-		if (resultCode == 1)
+		if (resultCode == FormularioPerfilActivity.RC_PFL_INCLUIDA_SUCESSO)
 			Toast.makeText(this, "Perfil incluido com sucesso!", Toast.LENGTH_SHORT).show();
-		else if (resultCode == 2)
+		else if (resultCode == FormularioPerfilActivity.RC_PFL_EDITADA_SUCESSO)
 			Toast.makeText(this, "Perfil editado com sucesso", Toast.LENGTH_SHORT).show();
 	}
 	
@@ -94,7 +97,7 @@ public class SelecionarPerfilActivity extends ListaComBuscaManageActivity
 			case R.id.action_criar:
 				// chamar activity criar perfil
 				Intent intent = new Intent(this, FormularioPerfilActivity.class);
-				intent.putExtra("tipo_form", Utils.FORM_INCLUIR); // 0, para form do tipo 'criar' e 1 para form do tipo 'editar'
+				intent.putExtra("tipo_form", FormularioBaseActivity.FORM_INCLUIR); // 0, para form do tipo 'criar' e 1 para form do tipo 'editar'
 				startActivityForResult(intent, 1);
 				break;
 		    // Respond to the action bar's Up/Home button

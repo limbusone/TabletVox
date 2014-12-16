@@ -17,9 +17,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tabletvox03f.R;
-import com.example.tabletvox03f.Utils;
 import com.example.tabletvox03f.dal.perfil.Perfil;
 import com.example.tabletvox03f.dal.perfil.PerfilDAO;
+import com.example.tabletvox03f.management.FormularioBaseActivity;
 
 public class ItemPerfilAdapter extends BaseAdapter
 {
@@ -122,7 +122,7 @@ public class ItemPerfilAdapter extends BaseAdapter
 				
 				// chamar form editar
 				Intent intent = new Intent(ItemPerfilAdapter.this.mContext, FormularioPerfilActivity.class);
-				intent.putExtra("tipo_form", Utils.FORM_ALTERAR); // 1 para 'editar perfil'
+				intent.putExtra("tipo_form", FormularioBaseActivity.FORM_ALTERAR); // 1 para 'editar perfil'
 				
 				intent.putExtra("perfil", perfil);
 //				intent.putExtra("pfl_id", perfil.getId());

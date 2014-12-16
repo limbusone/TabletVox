@@ -12,13 +12,16 @@ import android.widget.BaseAdapter;
 import android.widget.Toast;
 
 import com.example.tabletvox03f.R;
-import com.example.tabletvox03f.Utils;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSomDAO;
-import com.example.tabletvox03f.management.categoria.FormularioCategoriaActivity;
+import com.example.tabletvox03f.management.FormularioBaseActivity;
 
 public class SelecionarImagemActivity extends ListaImagensActivity
 {
+	
+	public static final int RC_SELECIONAR_IMG_SUCESSO 	= 1;
+	
+	public static final int RC_SELECIONAR_IMG_CANCELADO = 2;	
 	
 	// resgatar imagem e mandá-la para o formulario de categorias
 	@Override
@@ -28,7 +31,7 @@ public class SelecionarImagemActivity extends ListaImagensActivity
 		AssocImagemSom ais = (AssocImagemSom) parent.getItemAtPosition(position);
 		Intent data = new Intent();
 		data.putExtra("ais", ais);
-		this.setResult(FormularioCategoriaActivity.RC_SELECIONAR_IMG_SUCESSO, data);
+		this.setResult(RC_SELECIONAR_IMG_SUCESSO, data);
 		
 		finish();
 	}
@@ -59,12 +62,12 @@ public class SelecionarImagemActivity extends ListaImagensActivity
 		case R.id.action_add:
 			// chamar activity criar imagem
 			Intent intent = new Intent(this, FormularioAssocImagemSomActivity.class);
-			intent.putExtra("tipo_form", Utils.FORM_INCLUIR); // 0, para form do tipo 'criar' e 1 para form do tipo 'editar'
+			intent.putExtra("tipo_form", FormularioBaseActivity.FORM_INCLUIR); // 0, para form do tipo 'criar' e 1 para form do tipo 'editar'
 			startActivityForResult(intent, 1);			
 			break;		
 		// cancela a ação e volta pro formulario
 		case R.id.action_cancelar:
-			this.setResult(2);
+			this.setResult(RC_SELECIONAR_IMG_CANCELADO);
 			finish();
 			break;
 		}
@@ -88,7 +91,7 @@ public class SelecionarImagemActivity extends ListaImagensActivity
 	{
 		super.onActivityResult(requestCode, resultCode, data);
 		
-		if (resultCode == 1)
+		if (resultCode == FormularioAssocImagemSomActivity.RC_IMG_INCLUIDA_SUCESSO)
 		{
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -108,7 +111,7 @@ public class SelecionarImagemActivity extends ListaImagensActivity
 				@Override
 				public void onClick(DialogInterface dialog, int which)
 				{
-					SelecionarImagemActivity.this.setResult(FormularioCategoriaActivity.RC_SELECIONAR_IMG_SUCESSO, ais);
+					SelecionarImagemActivity.this.setResult(RC_SELECIONAR_IMG_SUCESSO, ais);
 					finish();
 				}
 			});

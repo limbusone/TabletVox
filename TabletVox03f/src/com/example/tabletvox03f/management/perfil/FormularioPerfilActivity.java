@@ -20,11 +20,15 @@ import com.example.tabletvox03f.dal.categoria.CategoriaDAO;
 import com.example.tabletvox03f.dal.perfil.Perfil;
 import com.example.tabletvox03f.dal.perfil.PerfilDAO;
 import com.example.tabletvox03f.management.FormularioBaseActivity;
+import com.example.tabletvox03f.management.categoria.FormularioCategoriaActivity;
 import com.example.tabletvox03f.management.categoria.ItemCategoriaAdapter;
 import com.example.tabletvox03f.management.categoria.SelecionarCategoriasActivity;
 
 public class FormularioPerfilActivity extends FormularioBaseActivity
 {
+	public static final int RC_PFL_INCLUIDA_SUCESSO = 1;
+	public static final int RC_PFL_EDITADA_SUCESSO 	= 2; 	
+	
 	private Perfil pfl;
 
 	private ListView lv;
@@ -152,7 +156,7 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 		
 		dao_pfl.close();
 		
-		this.setResult(1);
+		this.setResult(RC_PFL_INCLUIDA_SUCESSO);
 		finish();
 		
 	}
@@ -202,7 +206,7 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 		dao_pfl.update(pfl, pfl.getId());
 		dao_pfl.close();
 		
-		this.setResult(2);
+		this.setResult(RC_PFL_EDITADA_SUCESSO);
 		finish();
 	}
 	
@@ -296,14 +300,14 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 		
 		switch(resultCode)
 		{
-			case 3: // adicionar categoria com sucesso
+			case SelecionarCategoriasActivity.RC_ADD_CAT_SUCESSO: // adicionar categoria com sucesso
 				ArrayList<Categoria> categorias = data.getParcelableArrayListExtra("selecionados"); 
 				addNovasCategorias(categorias);
 				break;
-			case 4:	// adicionar categoria cancelado 
+			case SelecionarCategoriasActivity.RC_ADD_CAT_CANCELADO:	// adicionar categoria cancelado 
 				Toast.makeText(this, "Cancelado!", Toast.LENGTH_SHORT).show();
 				break;
-			case 5: // edição não persistente sucedida
+			case FormularioCategoriaActivity.RC_CAT_EDITADA_NP_SUCESSO: // edição não persistente sucedida
 				atualizarCategoriaEditadaNP((Categoria) data.getParcelableExtra("categoria"));
 				break;
 		}

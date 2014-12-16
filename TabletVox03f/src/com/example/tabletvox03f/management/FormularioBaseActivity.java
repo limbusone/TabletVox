@@ -10,6 +10,12 @@ import android.view.MenuItem;
 
 public abstract class FormularioBaseActivity extends Activity
 {
+	
+	public static final int FORM_INCLUIR = 0;
+	
+	public static final int FORM_ALTERAR = 1;
+	
+	public static final int FORM_ALTERAR_NP = 2; // NP : Não Persistente (em memória)
 
 	protected int tipo_form; // 0 para 'criar'; 1 para 'editar'
 	

@@ -18,6 +18,9 @@ import com.example.tabletvox03f.management.ListaComBuscaManageActivity;
 public class SelecionarCategoriasActivity extends ListaComBuscaManageActivity
 {
 
+	public static final int RC_ADD_CAT_SUCESSO 		= 3;
+	public static final int RC_ADD_CAT_CANCELADO 	= 4;
+	
 	@Override
 	protected void onCreateFilho()
 	{
@@ -67,14 +70,14 @@ public class SelecionarCategoriasActivity extends ListaComBuscaManageActivity
 			ArrayList<Categoria> selecionados = ((ItemSelectCategoriaAdapter)lv.getAdapter()).getSelecionados();
 			Intent intent = new Intent();
 			intent.putParcelableArrayListExtra("selecionados", (ArrayList<Categoria>) selecionados.clone());
-			this.setResult(3, intent);
+			this.setResult(RC_ADD_CAT_SUCESSO, intent);
 			finish();
 			
 		}
 		// cancela a ação e volta pro formulario
 		else if (item.getItemId() == R.id.action_cancelar)
 		{
-			this.setResult(4);
+			this.setResult(RC_ADD_CAT_CANCELADO);
 			finish();
 		}
 	}

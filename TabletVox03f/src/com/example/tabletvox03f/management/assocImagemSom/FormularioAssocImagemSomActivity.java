@@ -32,6 +32,9 @@ public class FormularioAssocImagemSomActivity extends FormularioBaseActivity
 	private final int REQUEST_CODE_PICK_IMG   = 1;
 	private final int REQUEST_CODE_PICK_SOUND = 2;
 	
+	public static final int RC_IMG_INCLUIDA_SUCESSO = 1;
+	public static final int RC_IMG_EDITADA_SUCESSO 	= 2; 
+	
 	// serve para saber se está requerindo um arquivo de imagem ou som
 	private int current_file_code;
 	
@@ -56,7 +59,7 @@ public class FormularioAssocImagemSomActivity extends FormularioBaseActivity
 			FormularioAssocImagemSomActivity thisContext = FormularioAssocImagemSomActivity.this;
 			ImgItem imgItem = new ImgItem(thisContext);
 			
-			if (tipo_form == Utils.FORM_ALTERAR) 
+			if (tipo_form == FORM_ALTERAR) 
 			{
 				// se o form for tipo editar
 				
@@ -207,7 +210,7 @@ public class FormularioAssocImagemSomActivity extends FormularioBaseActivity
 			
 			Intent data = new Intent();
 			data.putExtra("ais", ais);			
-			this.setResult(1, data);
+			this.setResult(RC_IMG_INCLUIDA_SUCESSO, data);
 			finish();
 		}
 		catch (IOException e)
@@ -266,7 +269,7 @@ public class FormularioAssocImagemSomActivity extends FormularioBaseActivity
 			
 			//Toast.makeText(this, "Inclusão bem sucedida!", Toast.LENGTH_SHORT).show();
 			
-			this.setResult(2);
+			this.setResult(RC_IMG_EDITADA_SUCESSO);
 			finish();
 		}
 		catch (IOException e)

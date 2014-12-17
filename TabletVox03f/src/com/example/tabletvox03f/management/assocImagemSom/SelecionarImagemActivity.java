@@ -23,6 +23,12 @@ public class SelecionarImagemActivity extends ListaImagensActivity
 	
 	public static final int RC_SELECIONAR_IMG_CANCELADO = 2;	
 	
+	@Override
+	protected void onCreateFilho()
+	{
+
+	}
+	
 	// resgatar imagem e mandá-la para o formulario de categorias
 	@Override
 	protected void acaoDoEventoItemClick(AdapterView<?> parent, View v,

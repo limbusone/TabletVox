@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
@@ -64,21 +65,26 @@ public class SelecionarImagensActivity extends ListaComBuscaManageActivity
 	@Override
 	protected void acaoDosEventosDoMenu(MenuItem item)
 	{
-		// resgata array de selecionados do adapter e manda uma cópia para a tela de lista de imagens da categoria 
-		if (item.getItemId() == R.id.action_concluir)
+		switch (item.getItemId())
 		{
+		// resgata array de selecionados do adapter e manda uma cópia para a tela de lista de imagens da categoria
+		case R.id.action_concluir:
 			ArrayList<AssocImagemSom> selecionados = ((ItemSelectAssocImagemSomAdapter)lv.getAdapter()).getSelecionados();
 			Intent intent = new Intent();
 			intent.putParcelableArrayListExtra("selecionados", (ArrayList<AssocImagemSom>) selecionados.clone());
 			this.setResult(RC_ADD_IMG_SUCESSO, intent);
-			finish();
-			
-		}
+			finish();			
+			break;
 		// cancela a ação e volta para tela de lista de imagens da categoria
-		else if (item.getItemId() == R.id.action_cancelar)
-		{
+		case R.id.action_cancelar:
 			this.setResult(RC_ADD_IMG_CANCELADO);
-			finish();
+			finish();			
+			break;
+		case R.id.action_gerenciar_imagens:
+			Intent intent_lia = new Intent(this, ListaImagensActivity.class);
+			intent_lia.putExtra("isSIA", true);
+			startActivityForResult(intent_lia, 1);
+			break;
 		}
 	}
 
@@ -102,7 +108,16 @@ public class SelecionarImagensActivity extends ListaComBuscaManageActivity
 	@Override
 	protected int getMenuID()
 	{
-		return R.menu.action_concluir_cancelar;
+		return R.menu.action_concluir_cancelar_manage;
 	}
+	
+	// callback ao voltar da tela listar imagens
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		if (resultCode == ListaImagensActivity.RC_IMGS_GERENCIADAS);
+	}		
 
 }

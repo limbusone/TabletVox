@@ -21,11 +21,19 @@ import com.example.tabletvox03f.management.ListaComBuscaManageActivity;
 public class ListaImagensActivity extends ListaComBuscaManageActivity
 {
 
+	public static final int RC_IMGS_GERENCIADAS = 1;
+	
+	// boolean que indica se o activity que chamou o activity atual é o SelecionarImagensActivity
+	private boolean isSelecionarImagensActivity = false;
+	
 	@Override
 	protected void onCreateFilho()
 	{
 		// habilita up back
 		getActionBar().setDisplayHomeAsUpEnabled(true);
+		
+		Intent intent = getIntent();
+		isSelecionarImagensActivity = intent.getBooleanExtra("isSIA", false);
 	}
 
 	@Override
@@ -73,7 +81,10 @@ public class ListaImagensActivity extends ListaComBuscaManageActivity
 				break;
 		    // Respond to the action bar's Up/Home button
 		    case android.R.id.home:
-		        NavUtils.navigateUpFromSameTask(this);
+		    	if (!isSelecionarImagensActivity)
+		    		NavUtils.navigateUpFromSameTask(this);
+		    	else
+		    		NavUtils.navigateUpTo(this, new Intent(this, SelecionarImagensActivity.class));
 		        break;
 		}
 

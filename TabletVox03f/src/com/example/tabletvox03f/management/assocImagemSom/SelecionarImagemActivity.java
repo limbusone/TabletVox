@@ -123,7 +123,7 @@ public class SelecionarImagemActivity extends ListaImagensActivity
 				@Override
 				public void onClick(DialogInterface dialog, int which)
 				{
-					carregarLista();
+					return;
 				}
 			});
 			

@@ -20,11 +20,19 @@ import com.example.tabletvox03f.management.ListaComBuscaManageActivity;
 public class ListaCategoriasActivity extends ListaComBuscaManageActivity
 {
 
+	public static final int RC_CATS_GERENCIADAS = 1;
+	
+	// boolean que indica se o activity que chamou o activity atual é o SelecionarCategoriasActivity
+	private boolean isSelecionarCategoriasActivity = false;	
+	
 	@Override
 	protected void onCreateFilho()
 	{
 		// habilita up back
 		getActionBar().setDisplayHomeAsUpEnabled(true);
+		
+		Intent intent = getIntent();
+		isSelecionarCategoriasActivity = intent.getBooleanExtra("isSCA", false);		
 	}
 
 	// recarregar/carregar a lista ao voltar para esse activity
@@ -72,7 +80,10 @@ public class ListaCategoriasActivity extends ListaComBuscaManageActivity
 				break;
 		    // Respond to the action bar's Up/Home button
 		    case android.R.id.home:
-		        NavUtils.navigateUpFromSameTask(this);
+		    	if (!isSelecionarCategoriasActivity)
+		    		NavUtils.navigateUpFromSameTask(this);
+		    	else
+		    		finish();
 		        break;
 		}
 	}

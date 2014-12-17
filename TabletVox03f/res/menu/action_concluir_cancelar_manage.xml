@@ -12,8 +12,8 @@
         android:title=""
         />
     <item 
-        android:id="@+id/action_gerenciar_imagens"
+        android:id="@+id/action_gerenciar"
         android:showAsAction="ifRoom|withText"
-        android:title="@string/action_gerenciar_imagens"
+        android:title="@string/gerenciar"
         android:icon="@android:drawable/ic_menu_manage"/>     
 </menu>

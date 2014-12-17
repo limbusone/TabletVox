@@ -89,5 +89,6 @@
     <string name="sim">Sim</string>
     <string name="nao">Não</string>
     <string name="img_incluida_com_sucesso">Imagem incluida com sucesso!</string>
+    <string name="gerenciar">Gerenciar</string>
 
 </resources>

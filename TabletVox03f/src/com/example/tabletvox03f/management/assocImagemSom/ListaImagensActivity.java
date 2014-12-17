@@ -12,7 +12,6 @@ import android.widget.BaseAdapter;
 import android.widget.Toast;
 
 import com.example.tabletvox03f.R;
-import com.example.tabletvox03f.Utils;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSomDAO;
 import com.example.tabletvox03f.management.FormularioBaseActivity;
@@ -84,7 +83,7 @@ public class ListaImagensActivity extends ListaComBuscaManageActivity
 		    	if (!isSelecionarImagensActivity)
 		    		NavUtils.navigateUpFromSameTask(this);
 		    	else
-		    		NavUtils.navigateUpTo(this, new Intent(this, SelecionarImagensActivity.class));
+		    		finish();
 		        break;
 		}
 

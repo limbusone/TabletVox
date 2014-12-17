@@ -64,21 +64,26 @@ public class SelecionarCategoriasActivity extends ListaComBuscaManageActivity
 	@Override
 	protected void acaoDosEventosDoMenu(MenuItem item)
 	{
-		// resgata array de selecionados do adapter e manda uma cópia para o formulario 
-		if (item.getItemId() == R.id.action_concluir)
+		switch (item.getItemId())
 		{
-			ArrayList<Categoria> selecionados = ((ItemSelectCategoriaAdapter)lv.getAdapter()).getSelecionados();
-			Intent intent = new Intent();
-			intent.putParcelableArrayListExtra("selecionados", (ArrayList<Categoria>) selecionados.clone());
-			this.setResult(RC_ADD_CAT_SUCESSO, intent);
-			finish();
-			
-		}
-		// cancela a ação e volta pro formulario
-		else if (item.getItemId() == R.id.action_cancelar)
-		{
-			this.setResult(RC_ADD_CAT_CANCELADO);
-			finish();
+			// resgata array de selecionados do adapter e manda uma cópia para o formulario
+			case R.id.action_concluir:
+				ArrayList<Categoria> selecionados = ((ItemSelectCategoriaAdapter)lv.getAdapter()).getSelecionados();
+				Intent intent = new Intent();
+				intent.putParcelableArrayListExtra("selecionados", (ArrayList<Categoria>) selecionados.clone());
+				this.setResult(RC_ADD_CAT_SUCESSO, intent);
+				finish();			
+				break;
+			// cancela a ação e volta pro formulario			
+			case R.id.action_cancelar:
+				this.setResult(RC_ADD_CAT_CANCELADO);
+				finish();			
+				break;
+			case R.id.action_gerenciar:
+				Intent intent_lca = new Intent(this, ListaCategoriasActivity.class);
+				intent_lca.putExtra("isSCA", true);
+				startActivityForResult(intent_lca, 1);			
+				break;
 		}
 	}
 
@@ -103,7 +108,16 @@ public class SelecionarCategoriasActivity extends ListaComBuscaManageActivity
 	@Override
 	protected int getMenuID()
 	{
-		return R.menu.action_concluir_cancelar;
+		return R.menu.action_concluir_cancelar_manage;
 	}
+	
+	// callback ao voltar da tela listar categorias
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		if (resultCode == ListaCategoriasActivity.RC_CATS_GERENCIADAS);
+	}			
 
 }

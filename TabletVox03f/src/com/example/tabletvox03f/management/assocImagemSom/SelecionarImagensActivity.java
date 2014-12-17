@@ -80,7 +80,7 @@ public class SelecionarImagensActivity extends ListaComBuscaManageActivity
 			this.setResult(RC_ADD_IMG_CANCELADO);
 			finish();			
 			break;
-		case R.id.action_gerenciar_imagens:
+		case R.id.action_gerenciar:
 			Intent intent_lia = new Intent(this, ListaImagensActivity.class);
 			intent_lia.putExtra("isSIA", true);
 			startActivityForResult(intent_lia, 1);

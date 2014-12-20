@@ -2,7 +2,7 @@
     <item 
         android:id="@+id/action_cancelar"
         android:icon="@android:drawable/ic_menu_close_clear_cancel"
-        android:showAsAction="ifRoom|withText"
+        android:showAsAction="always"
         android:title="" />
     <item 
         android:id="@+id/action_add"

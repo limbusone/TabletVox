@@ -2,7 +2,7 @@
 
     <item
         android:id="@+id/action_selecionar_perfil"
-        android:showAsAction="ifRoom"
+        android:showAsAction="always"
         android:title="@string/action_selecionar_perfil" />
     <item 
         android:id="@+id/action_gerenciar_imagens"

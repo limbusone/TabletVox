@@ -2,7 +2,7 @@
     <item 
         android:id="@+id/action_criar"
         android:icon="@android:drawable/ic_menu_add"
-        android:showAsAction="ifRoom|withText"
+        android:showAsAction="always|withText"
         android:title=""
         />
         

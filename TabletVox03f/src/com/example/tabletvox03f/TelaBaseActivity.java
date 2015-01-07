@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBarActivity;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.tabletvox03f.management.Opcoes;
 
-public class TelaBaseActivity extends Activity
+public class TelaBaseActivity extends ActionBarActivity
 {
 	protected ArrayList<ImgItem> lista_imagens_frase;
 	protected Intent sservice_intent; // servico de som

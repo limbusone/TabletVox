@@ -145,7 +145,7 @@ public class ModoTouchCategoriasActivity extends ModoTouchActivity
 		setCurrentTitle("Categorias de " + Utils.PERFIL_ATIVO.getNome());
 		
 		// habilita up back
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		GridView gridview = (GridView) findViewById(R.id.gridview);
 		GridView gridview_frase = (GridView) findViewById(R.id.gridview_frase);

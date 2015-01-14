@@ -1,20 +1,21 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tvox="http://schemas.android.com/apk/res-auto" >
     <item 
         android:id="@+id/action_cancelar"
         android:icon="@android:drawable/ic_menu_close_clear_cancel"
-        android:showAsAction="always"
+        tvox:showAsAction="always"
         android:title=""
         />
     <item 
         android:id="@+id/action_add"
         android:icon="@android:drawable/ic_menu_add"
-        android:showAsAction="ifRoom"
+        tvox:showAsAction="ifRoom"
         android:title="@string/add"
         />    
     <item
         android:id="@+id/action_concluir"
         android:icon="@drawable/ic_action_accept"
-        android:showAsAction="always"
+        tvox:showAsAction="always"
         android:title=""
         />
 </menu>

@@ -1,8 +1,9 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tvox="http://schemas.android.com/apk/res-auto">
     <item 
         android:id="@+id/action_salvar" 
         android:title="Salvar"
-        android:showAsAction="always|withText"
+        tvox:showAsAction="always|withText"
         android:icon="@android:drawable/ic_menu_save"
         />    
     

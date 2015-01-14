@@ -3,6 +3,8 @@ package com.example.tabletvox03f.management.categoria;
 import java.util.ArrayList;
 
 import android.content.Intent;
+import android.support.v4.app.NavUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -298,6 +300,18 @@ public class FormularioCategoriaActivity extends FormularioNaoPersistenteBaseAct
 		data.putExtra("categoria", cat);
 		this.setResult(RC_CAT_EDITADA_NP_SUCESSO, data);
 		finish();
+		
+	}
+
+	@Override
+	protected void acaoDosEventosDoMenu(MenuItem item)
+	{
+		switch (item.getItemId())
+		{
+			case R.id.home:
+				NavUtils.navigateUpFromSameTask(this);
+				break;
+		}
 		
 	}	
 }

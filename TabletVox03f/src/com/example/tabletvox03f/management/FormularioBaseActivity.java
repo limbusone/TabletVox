@@ -1,14 +1,14 @@
 package com.example.tabletvox03f.management;
 
-import com.example.tabletvox03f.R;
-
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public abstract class FormularioBaseActivity extends Activity
+import com.example.tabletvox03f.R;
+
+public abstract class FormularioBaseActivity extends ActionBarActivity
 {
 	
 	public static final int FORM_INCLUIR = 0;
@@ -33,6 +33,8 @@ public abstract class FormularioBaseActivity extends Activity
 	
 	protected abstract void editar();
 	
+	protected abstract void acaoDosEventosDoMenu(MenuItem item);	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -51,11 +53,11 @@ public abstract class FormularioBaseActivity extends Activity
 		// inicializar form - 'criar' ou 'editar'
 		switch (tipo_form)
 		{
-			case 0: // form do tipo 'criar'
+			case FORM_INCLUIR: // form do tipo 'criar'
 				setTitle(dados[2]);
 				initCriarForm();
 				break;
-			case 1: // form do tipo 'editar'
+			case FORM_ALTERAR: // form do tipo 'editar'
 				setTitle(dados[3]);
 				initEditarForm(intent);				
 				break;
@@ -72,15 +74,18 @@ public abstract class FormularioBaseActivity extends Activity
 		{
 			switch (tipo_form)
 			{
-				case 0: // form do tipo 'criar'
+				case FORM_INCLUIR : // form do tipo 'criar'
 					incluir(); // aciona incluir
 					break;
-				case 1: // form do tipo 'editar'
+				case FORM_ALTERAR: // form do tipo 'editar'
 					editar(); // aciona editar
 					break;
 			}			
 				
-		}
+		} 
+		else
+			acaoDosEventosDoMenu(item);
+		
 		return false;
 		
 	}

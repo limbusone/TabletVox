@@ -28,15 +28,15 @@ public abstract class FormularioNaoPersistenteBaseActivity extends FormularioBas
 		// inicializar form - 'criar' ou 'editar'
 		switch (tipo_form)
 		{
-			case 0: // form do tipo 'criar'
+			case FORM_INCLUIR: // form do tipo 'criar'
 				setTitle(dados[2]);
 				initCriarForm();
 				break;
-			case 1: // form do tipo 'editar'
+			case FORM_ALTERAR: // form do tipo 'editar'
 				setTitle(dados[3]);
 				initEditarForm(intent);				
 				break;
-			case 2: // form do tipo 'editar' não persistente
+			case FORM_ALTERAR_NP: // form do tipo 'editar' não persistente
 				setTitle(dados[3]);
 				initEditarNPForm(intent);
 				break;
@@ -59,18 +59,20 @@ public abstract class FormularioNaoPersistenteBaseActivity extends FormularioBas
 		{
 			switch (tipo_form)
 			{
-				case 0: // form do tipo 'criar'
+				case FORM_INCLUIR: // form do tipo 'criar'
 					incluir(); // aciona incluir
 					break;
-				case 1: // form do tipo 'editar'
+				case FORM_ALTERAR: // form do tipo 'editar'
 					editar(); // aciona editar
 					break;
-				case 2: // form do tipo 'editar' não persistente
+				case FORM_ALTERAR_NP: // form do tipo 'editar' não persistente
 					editarNP(); // aciona editar não persistente
 					break;
 			}			
 				
 		}
+		else
+			acaoDosEventosDoMenu(item);
 		return false;
 		
 	}

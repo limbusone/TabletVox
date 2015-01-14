@@ -3,6 +3,7 @@ package com.example.tabletvox03f.management.perfil;
 import java.util.ArrayList;
 
 import android.content.Intent;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -364,6 +365,13 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 		cat_dao.open();
 		categoria.setImagens(cat_dao.getImagens(categoria.getId()));
 		cat_dao.close();
+	}
+
+	@Override
+	protected void acaoDosEventosDoMenu(MenuItem item)
+	{
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

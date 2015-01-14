@@ -29,7 +29,7 @@ public class SelecionarPerfilActivity extends ListaComBuscaManageActivity
 	protected void onCreateFilho()
 	{
 		// habilita up back
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 	
 	@Override

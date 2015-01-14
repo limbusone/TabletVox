@@ -1,7 +1,7 @@
 package com.example.tabletvox03f.management;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.example.tabletvox03f.R;
 
-public abstract class ListaComBuscaManageActivity extends Activity
+public abstract class ListaComBuscaManageActivity extends ActionBarActivity
 {
 	protected ListView lv;
 	protected EditText txtBusca;

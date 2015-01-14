@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -414,6 +415,13 @@ public class FormularioAssocImagemSomActivity extends FormularioBaseActivity
 			
 		}
 
+	}
+
+	@Override
+	protected void acaoDosEventosDoMenu(MenuItem item)
+	{
+		// TODO Auto-generated method stub
+		
 	}
 
 

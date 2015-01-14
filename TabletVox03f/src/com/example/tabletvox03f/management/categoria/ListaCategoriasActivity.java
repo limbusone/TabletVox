@@ -29,7 +29,7 @@ public class ListaCategoriasActivity extends ListaComBuscaManageActivity
 	protected void onCreateFilho()
 	{
 		// habilita up back
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		Intent intent = getIntent();
 		isSelecionarCategoriasActivity = intent.getBooleanExtra("isSCA", false);		

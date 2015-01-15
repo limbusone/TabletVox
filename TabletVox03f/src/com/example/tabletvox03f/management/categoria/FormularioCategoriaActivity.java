@@ -33,6 +33,9 @@ public class FormularioCategoriaActivity extends FormularioNaoPersistenteBaseAct
 	public static final int RC_CAT_EDITADA_SUCESSO 		= 2;
 	public static final int RC_CAT_EDITADA_NP_SUCESSO 	= 5;
 	
+	// boolean que indica se o activity que chamou o activity atual é o FormularioPerfilActivity	
+	private boolean isFormularioPerfilActivity = false;	
+	
 	private Categoria cat;
 	
 	private RelativeLayout laySom;
@@ -107,6 +110,12 @@ public class FormularioCategoriaActivity extends FormularioNaoPersistenteBaseAct
 		
 		Button btnDefinirImagens = (Button) findViewById(R.id.btnDefinirImagens);
 		btnDefinirImagens.setOnClickListener(definirImagensEvento);
+		
+		// habilita up back
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		
+		Intent intent = getIntent();
+		isFormularioPerfilActivity = intent.getBooleanExtra("isFPA", false);		
 		
 	}
 	
@@ -309,7 +318,10 @@ public class FormularioCategoriaActivity extends FormularioNaoPersistenteBaseAct
 		switch (item.getItemId())
 		{
 			case R.id.home:
-				NavUtils.navigateUpFromSameTask(this);
+				if (!isFormularioPerfilActivity)
+					NavUtils.navigateUpFromSameTask(this);
+				else 
+					finish();
 				break;
 		}
 		

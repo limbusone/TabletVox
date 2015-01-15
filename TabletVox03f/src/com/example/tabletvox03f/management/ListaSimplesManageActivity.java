@@ -1,7 +1,7 @@
 package com.example.tabletvox03f.management;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,7 +12,7 @@ import android.widget.ListView;
 
 import com.example.tabletvox03f.R;
 
-public abstract class ListaSimplesManageActivity extends Activity
+public abstract class ListaSimplesManageActivity extends ActionBarActivity
 {
 	protected ListView lv;
 	

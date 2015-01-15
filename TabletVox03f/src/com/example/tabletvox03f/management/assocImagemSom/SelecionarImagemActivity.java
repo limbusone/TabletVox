@@ -69,6 +69,7 @@ public class SelecionarImagemActivity extends ListaImagensActivity
 			// chamar activity criar imagem
 			Intent intent = new Intent(this, FormularioAssocImagemSomActivity.class);
 			intent.putExtra("tipo_form", FormularioBaseActivity.FORM_INCLUIR); // 0, para form do tipo 'criar' e 1 para form do tipo 'editar'
+			intent.putExtra("isS1IA", true);
 			startActivityForResult(intent, 1);			
 			break;		
 		// cancela a ação e volta pro formulario

@@ -134,15 +134,25 @@
         <activity
             android:name="com.example.tabletvox03f.management.categoria.ListaImagensCategoriaActivity"
             android:label="@string/title_activity_lista_imagens_categoria"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"            
+            android:parentActivityName="com.example.tabletvox03f.management.categoria.FormularioCategoriaActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.tabletvox03f.management.categoria.FormularioCategoriaActivity" />
         </activity>        
         
         <!-- imagens -->
+        
         <activity 
             android:name="com.example.tabletvox03f.management.assocImagemSom.FormularioAssocImagemSomActivity"
             android:label="@string/title_activity_incluir_ais"
             android:windowSoftInputMode="stateAlwaysHidden"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            android:parentActivityName="com.example.tabletvox03f.management.assocImagemSom.ListaImagensActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.tabletvox03f.management.assocImagemSom.ListaImagensActivity" />            
         </activity>
         
         <activity
@@ -160,14 +170,22 @@
             android:name="com.example.tabletvox03f.management.assocImagemSom.SelecionarImagemActivity"
             android:label="@string/title_activity_selecionar_imagem"
             android:windowSoftInputMode="stateAlwaysHidden"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            android:parentActivityName="com.example.tabletvox03f.management.categoria.FormularioCategoriaActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.tabletvox03f.management.categoria.FormularioCategoriaActivity" />            
         </activity>
         
         <activity
             android:name="com.example.tabletvox03f.management.assocImagemSom.SelecionarImagensActivity"
             android:label="@string/title_activity_selecionar_imagem"
             android:windowSoftInputMode="stateAlwaysHidden"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            android:parentActivityName="com.example.tabletvox03f.management.categoria.ListaImagensCategoriaActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.tabletvox03f.management.categoria.ListaImagensCategoriaActivity" />            
         </activity>
         
         

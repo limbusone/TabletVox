@@ -370,7 +370,6 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 	@Override
 	protected void acaoDosEventosDoMenu(MenuItem item)
 	{
-		// TODO Auto-generated method stub
 		
 	}
 	

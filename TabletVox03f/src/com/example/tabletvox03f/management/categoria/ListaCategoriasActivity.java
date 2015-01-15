@@ -30,9 +30,6 @@ public class ListaCategoriasActivity extends ListaComBuscaManageActivity
 	{
 		// habilita up back
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		
-		Intent intent = getIntent();
-		isSelecionarCategoriasActivity = intent.getBooleanExtra("isSCA", false);		
 	}
 
 	// recarregar/carregar a lista ao voltar para esse activity
@@ -80,10 +77,8 @@ public class ListaCategoriasActivity extends ListaComBuscaManageActivity
 				break;
 		    // Respond to the action bar's Up/Home button
 		    case android.R.id.home:
-		    	if (!isSelecionarCategoriasActivity)
-		    		NavUtils.navigateUpFromSameTask(this);
-		    	else
-		    		finish();
+	    		this.setResult(RC_CATS_GERENCIADAS);
+	    		finish();
 		        break;
 		}
 	}

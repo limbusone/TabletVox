@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,7 +27,8 @@ public class SelecionarImagemActivity extends ListaImagensActivity
 	@Override
 	protected void onCreateFilho()
 	{
-
+		// habilita up back
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 	
 	// resgatar imagem e mandá-la para o formulario de categorias
@@ -65,18 +67,21 @@ public class SelecionarImagemActivity extends ListaImagensActivity
 	{
 		switch (item.getItemId())
 		{
-		case R.id.action_add:
-			// chamar activity criar imagem
-			Intent intent = new Intent(this, FormularioAssocImagemSomActivity.class);
-			intent.putExtra("tipo_form", FormularioBaseActivity.FORM_INCLUIR); // 0, para form do tipo 'criar' e 1 para form do tipo 'editar'
-			intent.putExtra("isS1IA", true);
-			startActivityForResult(intent, 1);			
-			break;		
-		// cancela a ação e volta pro formulario
-		case R.id.action_cancelar:
-			this.setResult(RC_SELECIONAR_IMG_CANCELADO);
-			finish();
-			break;
+			case R.id.action_add:
+				// chamar activity criar imagem
+				Intent intent = new Intent(this, FormularioAssocImagemSomActivity.class);
+				intent.putExtra("tipo_form", FormularioBaseActivity.FORM_INCLUIR); // 0, para form do tipo 'criar' e 1 para form do tipo 'editar'
+				startActivityForResult(intent, 1);			
+				break;		
+			// cancela a ação e volta pro formulario
+			case R.id.action_cancelar:
+				this.setResult(RC_SELECIONAR_IMG_CANCELADO);
+				finish();
+				break;
+		    // Respond to the action bar's Up/Home button
+		    case android.R.id.home:
+		    	finish();
+		        break;
 		}
 	}
 	

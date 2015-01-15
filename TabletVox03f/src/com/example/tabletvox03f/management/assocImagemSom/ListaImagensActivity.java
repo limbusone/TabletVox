@@ -29,10 +29,7 @@ public class ListaImagensActivity extends ListaComBuscaManageActivity
 	protected void onCreateFilho()
 	{
 		// habilita up back
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		
-		Intent intent = getIntent();
-		isSelecionarImagensActivity = intent.getBooleanExtra("isSIA", false);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
 	@Override
@@ -80,10 +77,8 @@ public class ListaImagensActivity extends ListaComBuscaManageActivity
 				break;
 		    // Respond to the action bar's Up/Home button
 		    case android.R.id.home:
-		    	if (!isSelecionarImagensActivity)
-		    		NavUtils.navigateUpFromSameTask(this);
-		    	else
-		    		finish();
+		    	this.setResult(RC_IMGS_GERENCIADAS);
+		    	finish();
 		        break;
 		}
 

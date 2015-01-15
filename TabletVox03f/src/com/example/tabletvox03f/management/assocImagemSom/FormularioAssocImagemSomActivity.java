@@ -129,9 +129,6 @@ public class FormularioAssocImagemSomActivity extends FormularioBaseActivity
 		
 		// habilita up back
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		
-		Intent intent = getIntent();
-		isSelecionarImagemActivity = intent.getBooleanExtra("isS1IA", false);		
 	}
 	
 	@Override
@@ -432,11 +429,8 @@ public class FormularioAssocImagemSomActivity extends FormularioBaseActivity
 	{
 		switch (item.getItemId())
 		{
-			case R.id.home:
-				if (!isSelecionarImagemActivity)
-					NavUtils.navigateUpFromSameTask(this);
-				else 
-					finish();
+			case android.R.id.home:
+				finish();
 				break;
 		}		
 	}

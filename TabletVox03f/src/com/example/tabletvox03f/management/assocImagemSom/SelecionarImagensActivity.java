@@ -82,7 +82,6 @@ public class SelecionarImagensActivity extends ListaComBuscaManageActivity
 			break;
 		case R.id.action_gerenciar:
 			Intent intent_lia = new Intent(this, ListaImagensActivity.class);
-			intent_lia.putExtra("isSIA", true);
 			startActivityForResult(intent_lia, 1);
 			break;
 		}

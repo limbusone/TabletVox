@@ -24,7 +24,8 @@ public class SelecionarCategoriasActivity extends ListaComBuscaManageActivity
 	@Override
 	protected void onCreateFilho()
 	{
-
+		// habilita up back
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
 	// recarregar/carregar a lista ao voltar para esse activity
@@ -77,13 +78,17 @@ public class SelecionarCategoriasActivity extends ListaComBuscaManageActivity
 			// cancela a ação e volta pro formulario			
 			case R.id.action_cancelar:
 				this.setResult(RC_ADD_CAT_CANCELADO);
-				finish();			
+				finish();
 				break;
 			case R.id.action_gerenciar:
 				Intent intent_lca = new Intent(this, ListaCategoriasActivity.class);
 				intent_lca.putExtra("isSCA", true);
 				startActivityForResult(intent_lca, 1);			
 				break;
+		    // Respond to the action bar's Up/Home button
+		    case android.R.id.home:
+		    	finish();
+		        break;				
 		}
 	}
 

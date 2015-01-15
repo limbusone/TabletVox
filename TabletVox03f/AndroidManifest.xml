@@ -101,22 +101,14 @@
             android:name="com.example.tabletvox03f.management.categoria.FormularioCategoriaActivity"
             android:label="@string/title_activity_criar_categoria"
             android:windowSoftInputMode="stateAlwaysHidden"
-            android:parentActivityName="com.example.tabletvox03f.management.categoria.ListaCategoriasActivity"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.tabletvox03f.management.categoria.ListaCategoriasActivity" />
         </activity>
 
         <activity
             android:name="com.example.tabletvox03f.management.categoria.ListaCategoriasActivity"
             android:label="@string/title_activity_lista_categorias"
             android:windowSoftInputMode="stateAlwaysHidden"
-            android:parentActivityName="com.example.tabletvox03f.MainMenuActivity"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.tabletvox03f.MainMenuActivity" />
          
         </activity>        
         
@@ -124,22 +116,14 @@
             android:name="com.example.tabletvox03f.management.categoria.SelecionarCategoriasActivity"
             android:label="@string/title_activity_selecionar_categorias"
             android:windowSoftInputMode="stateAlwaysHidden"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
-            android:parentActivityName="com.example.tabletvox03f.management.perfil.FormularioPerfilActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.tabletvox03f.management.perfil.FormularioPerfilActivity" />
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
         </activity> 
         
         <activity
             android:name="com.example.tabletvox03f.management.categoria.ListaImagensCategoriaActivity"
             android:label="@string/title_activity_lista_imagens_categoria"
             android:windowSoftInputMode="stateAlwaysHidden"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"            
-            android:parentActivityName="com.example.tabletvox03f.management.categoria.FormularioCategoriaActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.tabletvox03f.management.categoria.FormularioCategoriaActivity" />
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
         </activity>        
         
         <!-- imagens -->
@@ -148,51 +132,40 @@
             android:name="com.example.tabletvox03f.management.assocImagemSom.FormularioAssocImagemSomActivity"
             android:label="@string/title_activity_incluir_ais"
             android:windowSoftInputMode="stateAlwaysHidden"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
-            android:parentActivityName="com.example.tabletvox03f.management.assocImagemSom.ListaImagensActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.tabletvox03f.management.assocImagemSom.ListaImagensActivity" />            
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">            
         </activity>
         
         <activity
             android:name="com.example.tabletvox03f.management.assocImagemSom.ListaImagensActivity"
             android:label="@string/title_activity_lista_imagens"
             android:windowSoftInputMode="stateAlwaysHidden"
-            android:parentActivityName="com.example.tabletvox03f.MainMenuActivity"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.tabletvox03f.MainMenuActivity" />
         </activity>
         
         <activity
             android:name="com.example.tabletvox03f.management.assocImagemSom.SelecionarImagemActivity"
             android:label="@string/title_activity_selecionar_imagem"
             android:windowSoftInputMode="stateAlwaysHidden"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
-            android:parentActivityName="com.example.tabletvox03f.management.categoria.FormularioCategoriaActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.tabletvox03f.management.categoria.FormularioCategoriaActivity" />            
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">            
         </activity>
         
         <activity
             android:name="com.example.tabletvox03f.management.assocImagemSom.SelecionarImagensActivity"
             android:label="@string/title_activity_selecionar_imagem"
             android:windowSoftInputMode="stateAlwaysHidden"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
-            android:parentActivityName="com.example.tabletvox03f.management.categoria.ListaImagensCategoriaActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.tabletvox03f.management.categoria.ListaImagensCategoriaActivity" />            
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">            
         </activity>
         
         
         <!-- outros -->
         <activity
         	android:name="com.example.tabletvox03f.management.OpcoesActivity"
-        	android:label="@string/opcoes">
+        	android:label="@string/opcoes"
+        	android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            android:parentActivityName="com.example.tabletvox03f.MainMenuActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.tabletvox03f.MainMenuActivity" />
 		</activity>
 		
         <service

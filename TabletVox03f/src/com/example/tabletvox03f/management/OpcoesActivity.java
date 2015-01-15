@@ -1,11 +1,13 @@
 package com.example.tabletvox03f.management;
 
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 
-public class OpcoesActivity extends Activity
+public class OpcoesActivity extends ActionBarActivity
 {
-    @Override
+    @SuppressLint("NewApi")
+	@Override
     protected void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
@@ -14,7 +16,6 @@ public class OpcoesActivity extends Activity
         getFragmentManager().beginTransaction()
                 .replace(android.R.id.content, new OpcoesFragment())
                 .commit();
-
     }
 	
 	

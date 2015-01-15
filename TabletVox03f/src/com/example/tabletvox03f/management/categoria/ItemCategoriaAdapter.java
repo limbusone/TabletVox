@@ -154,7 +154,6 @@ public class ItemCategoriaAdapter extends BaseAdapter
 				else if (ItemCategoriaAdapter.this.mContext instanceof FormularioPerfilActivity)
 				{
 					intent.putExtra("tipo_form", FormularioBaseActivity.FORM_ALTERAR_NP);
-					intent.putExtra("isFPA", true);
 					((Activity) ItemCategoriaAdapter.this.mContext).startActivityForResult(intent, 3);
 				}
 					

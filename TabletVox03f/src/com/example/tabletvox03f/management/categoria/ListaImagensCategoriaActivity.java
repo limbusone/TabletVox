@@ -34,6 +34,9 @@ public class ListaImagensCategoriaActivity extends ListaSimplesManageActivity
 			categoria.setImagens(new ArrayList<AssocImagemSom>());
 		
 		carregarListaPai();
+		
+		// habilita up back
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 	
 	@Override
@@ -74,6 +77,10 @@ public class ListaImagensCategoriaActivity extends ListaSimplesManageActivity
 				this.setResult(RC_DEFINIR_IMGS_CANCELADO);
 				finish();
 				break;
+		    // Respond to the action bar's Up/Home button
+		    case android.R.id.home:
+		    	finish();
+		        break;					
 		}
 
 	}

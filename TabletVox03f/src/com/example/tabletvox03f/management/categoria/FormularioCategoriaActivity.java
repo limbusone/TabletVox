@@ -114,9 +114,6 @@ public class FormularioCategoriaActivity extends FormularioNaoPersistenteBaseAct
 		// habilita up back
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
-		Intent intent = getIntent();
-		isFormularioPerfilActivity = intent.getBooleanExtra("isFPA", false);		
-		
 	}
 	
 	@Override
@@ -317,11 +314,8 @@ public class FormularioCategoriaActivity extends FormularioNaoPersistenteBaseAct
 	{
 		switch (item.getItemId())
 		{
-			case R.id.home:
-				if (!isFormularioPerfilActivity)
-					NavUtils.navigateUpFromSameTask(this);
-				else 
-					finish();
+			case android.R.id.home:
+				finish();
 				break;
 		}
 		

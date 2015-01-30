@@ -60,10 +60,20 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 	protected boolean adicionarImagemFrase;
 	protected boolean acionarComando;
 	
+	protected static final int ESTADO_TODOS_DESATIVADOS 						= 0;
+	protected static final int ESTADO_GRIDVIEW_PRINCIPAL_ATIVO 					= 1;
+	protected static final int ESTADO_GRIDVIEW_FRASE_ATIVO 						= 2;
+	protected static final int ESTADO_GRIDVIEW_ATALHOS_ATIVO					= 3;
+	protected static final int ESTADO_BUTTON_MOSTRAR_ESCONDER_COMANDOS_ATIVO 	= 4;
+	protected static final int ESTADO_BUTTON_PROXIMA_TELA_ATIVO					= 5;
+	private static final int ESTADO_ITERANDO_ITENS_GRIDVIEW_PRINCIPAL			= 6;
+	private static final int ESTADO_ITERANDO_ITENS_GRIDVIEW_FRASE				= 7;
+	
 	protected void acaoDoEventoPrincipal()
 	{
-		
-		if (estadoAtual == 1 || estadoAtual == 2 /*|| estadoAtual == 3*/)
+		// obs: a comparação estadoAtual == 3 está comentada porque a ideia também era que
+		// houvesse mais de um atalho porém foi decidido somente um atalho
+		if (estadoAtual == ESTADO_GRIDVIEW_PRINCIPAL_ATIVO || estadoAtual == ESTADO_GRIDVIEW_FRASE_ATIVO /*|| estadoAtual == 3*/)
 		{
 			
 			if (iteracaoExternaAtiva)
@@ -72,7 +82,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 				sair();			
 		
 		}
-		else if (estadoAtual == 3) // atalho
+		else if (estadoAtual == ESTADO_GRIDVIEW_ATALHOS_ATIVO) // atalho
 		{
 			GridView gva = (GridView) findViewById(R.id.gridview_atalhos);
 			ImgItem imgi = (ImgItem) gva.getChildAt(0);
@@ -82,7 +92,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 			acionarComando(cmd);
 		
 		}
-		else if (estadoAtual == 4) // mostrar comandos / esconder comandos
+		else if (estadoAtual == ESTADO_BUTTON_MOSTRAR_ESCONDER_COMANDOS_ATIVO) // mostrar comandos / esconder comandos
 		{
 			if (mostrarComandos)
 			{
@@ -127,7 +137,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 			alternarEventoBtnShowHideCommands();
 			alternarEventoAoSelecionarImagemDeGridViewPrincipal();				
 		}
-		else if (estadoAtual == 5) // proxima pagina
+		else if (estadoAtual == ESTADO_BUTTON_PROXIMA_TELA_ATIVO) // proxima pagina
 		{
 			CarregarImagensTelas cixml = new CarregarImagensTelas()
 			{
@@ -146,7 +156,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 			};
 			vaiParaProximaPagina(cixml, 0, current_categoriaId);
 		}
-		else if (estadoAtual == 6) // adicionar imagem a frase / acionar comando
+		else if (estadoAtual == ESTADO_ITERANDO_ITENS_GRIDVIEW_PRINCIPAL) // adicionar imagem a frase / acionar comando
 		{
 			GridView gv = (GridView) findViewById(R.id.gridview);
 			
@@ -159,7 +169,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 			else if (acionarComando)
 				acionarComando(imgi);
 		}
-		else if (estadoAtual == 7) // remover imagem da frase
+		else if (estadoAtual == ESTADO_ITERANDO_ITENS_GRIDVIEW_FRASE) // remover imagem da frase
 		{
 			int indiceAtual = indiceItemFrase - 1;
 			indiceAtual = (indiceAtual < 0) ? 0 : indiceAtual;
@@ -205,7 +215,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 		alternarEventoBtnShowHideCommands();
 		alternarEventoAoSelecionarImagemDeGridViewPrincipal();
 		
-		setEstadoVarredura(1);
+		setEstadoVarredura(ESTADO_GRIDVIEW_PRINCIPAL_ATIVO);
 		
 		if (!(copiarFraseGlobalParaFraseLocal()))
 			lista_imagens_frase = new ArrayList<ImgItem>();
@@ -306,9 +316,9 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 	private int transicaoIteracaoExternaPartindoDe(int partida)
 	{
 		resetIndices(); // ao realizar a transicao, reseta-se os indices
-		int estado = 0;
+		int estado = ESTADO_TODOS_DESATIVADOS;
 		
-		if (partida == 1) // partindo de gridview principal
+		if (partida == ESTADO_GRIDVIEW_PRINCIPAL_ATIVO) // partindo de gridview principal
 		{	
 			/*
 			 * se o botao mostrar/esconder comandos estiver em modo mostrar comandos,
@@ -318,22 +328,22 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 			 * para atalhos
 			 * */
 			if (esconderComandos)
-				estado = ((lista_imagens_frase.isEmpty())) ? 3 : 2;
+				estado = ((lista_imagens_frase.isEmpty())) ? ESTADO_GRIDVIEW_ATALHOS_ATIVO : ESTADO_GRIDVIEW_FRASE_ATIVO;
 			else
-				estado = 5;
+				estado = ESTADO_BUTTON_PROXIMA_TELA_ATIVO;
 		}
-		else if (partida == 5) // partindo de botao proxima tela
+		else if (partida == ESTADO_BUTTON_PROXIMA_TELA_ATIVO) // partindo de botao proxima tela
 			/*
 			 * Verifica se o gridview frase está vazio, se estiver então pula deste
 			 * para atalhos
 			 * */
-			estado = ((lista_imagens_frase.isEmpty())) ? 3 : 2;
-		else if (partida == 2) // partindo de gridview frase
-			estado = 3;
-		else if (partida == 3) // partindo de gridview atalhos
-			estado = 4;
-		else if (partida == 4) // partindo de botao mostrar/esconder comandos
-			estado = 1;
+			estado = ((lista_imagens_frase.isEmpty())) ? ESTADO_GRIDVIEW_ATALHOS_ATIVO : ESTADO_GRIDVIEW_FRASE_ATIVO;
+		else if (partida == ESTADO_GRIDVIEW_FRASE_ATIVO) // partindo de gridview frase
+			estado = ESTADO_GRIDVIEW_ATALHOS_ATIVO;
+		else if (partida == ESTADO_GRIDVIEW_ATALHOS_ATIVO) // partindo de gridview atalhos
+			estado = ESTADO_BUTTON_MOSTRAR_ESCONDER_COMANDOS_ATIVO;
+		else if (partida == ESTADO_BUTTON_MOSTRAR_ESCONDER_COMANDOS_ATIVO) // partindo de botao mostrar/esconder comandos
+			estado = ESTADO_GRIDVIEW_PRINCIPAL_ATIVO;
 
 		return estado;
 		
@@ -343,17 +353,17 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 	private int transicaoIteracaoInternaPartindoDe(int partida)
 	{
 		resetIndices();
-		int estado = 0;
+		int estado = ESTADO_TODOS_DESATIVADOS;
 		
-		if (partida == 6)
-			estado = 1;
-		else if (partida == 1)
-			estado = 6;
+		if (partida == ESTADO_ITERANDO_ITENS_GRIDVIEW_PRINCIPAL)
+			estado = ESTADO_GRIDVIEW_PRINCIPAL_ATIVO;
+		else if (partida == ESTADO_GRIDVIEW_PRINCIPAL_ATIVO)
+			estado = ESTADO_ITERANDO_ITENS_GRIDVIEW_PRINCIPAL;
 		
-		if (partida == 7)
-			estado = 2;
-		else if (partida == 2)
-			estado = 7;
+		if (partida == ESTADO_ITERANDO_ITENS_GRIDVIEW_FRASE)
+			estado = ESTADO_GRIDVIEW_FRASE_ATIVO;
+		else if (partida == ESTADO_GRIDVIEW_FRASE_ATIVO)
+			estado = ESTADO_ITERANDO_ITENS_GRIDVIEW_FRASE;
 		
 		return estado;
 	}
@@ -361,12 +371,12 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 	// ir da iteracao externa para interna
 	private int transicaoEntrarPartindoDe(int partida)
 	{
-		int estado = 0;
+		int estado = ESTADO_TODOS_DESATIVADOS;
 		
-		if (partida == 1)
-			estado = 6;
-		if (partida == 2)
-			estado = 7;
+		if (partida == ESTADO_GRIDVIEW_PRINCIPAL_ATIVO)
+			estado = ESTADO_ITERANDO_ITENS_GRIDVIEW_PRINCIPAL;
+		if (partida == ESTADO_GRIDVIEW_FRASE_ATIVO)
+			estado = ESTADO_ITERANDO_ITENS_GRIDVIEW_FRASE;
 		
 		return estado;
 	}
@@ -374,16 +384,16 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 	// ir da iteracao interna para externa
 	private int transicaoSairPartindoDe(int partida)
 	{
-		int estado = 1;
+		int estado = ESTADO_GRIDVIEW_PRINCIPAL_ATIVO;
 		
-		if (partida == 6)
-			estado = 1;
-		else if (partida == 1)
+		if (partida == ESTADO_ITERANDO_ITENS_GRIDVIEW_PRINCIPAL)
+			estado = ESTADO_GRIDVIEW_PRINCIPAL_ATIVO;
+		else if (partida == ESTADO_GRIDVIEW_PRINCIPAL_ATIVO)
 			estado = partida;
 		
-		if (partida == 7)
-			estado = 2;
-		else if (partida == 2)
+		if (partida == ESTADO_ITERANDO_ITENS_GRIDVIEW_FRASE)
+			estado = ESTADO_GRIDVIEW_FRASE_ATIVO;
+		else if (partida == ESTADO_GRIDVIEW_FRASE_ATIVO)
 			estado = partida;
 		
 		return estado;
@@ -403,7 +413,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 		
 		// estados de 1 a 5 	 : varredura externa
 		// estados maiores que 5 : varredura interna
-		if (estado == 0) // todos desativados
+		if (estado == ESTADO_TODOS_DESATIVADOS) // todos desativados
 		{
 			setBorda(gridview, false);
 			setBorda(llFrase, false);
@@ -413,7 +423,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 			
 			iteracaoInternaPrincipalAtiva = iteracaoInternaFraseAtiva = false;
 		}
-		else if (estado == 1) // gridview principal ativo
+		else if (estado == ESTADO_GRIDVIEW_PRINCIPAL_ATIVO) // gridview principal ativo
 		{
 			setBorda(gridview, true);
 			setBorda(llFrase, false);
@@ -421,7 +431,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 			setBorda(llNext, false);
 			setBorda(llShowHideCommands, false);
 		}
-		else if (estado == 2) // gridview frase ativo
+		else if (estado == ESTADO_GRIDVIEW_FRASE_ATIVO) // gridview frase ativo
 		{
 			setBorda(llFrase, true);
 			setBorda(gridview, false);
@@ -429,7 +439,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 			setBorda(llNext, false);
 			setBorda(llShowHideCommands, false);
 		}
-		else if (estado == 3) // gridview atalhos ativo
+		else if (estado == ESTADO_GRIDVIEW_ATALHOS_ATIVO) // gridview atalhos ativo
 		{
 			setBorda(llAtalhos, true);
 			setBorda(gridview, false);
@@ -437,7 +447,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 			setBorda(llNext, false);
 			setBorda(llShowHideCommands, false);
 		}
-		else if (estado == 4) // botao mostrar/esconder comandos ativo
+		else if (estado == ESTADO_BUTTON_MOSTRAR_ESCONDER_COMANDOS_ATIVO) // botao mostrar/esconder comandos ativo
 		{
 			setBorda(llShowHideCommands, true);
 			setBorda(gridview, false);
@@ -445,7 +455,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 			setBorda(llAtalhos, false);
 			setBorda(llNext, false);			
 		}
-		else if (estado == 5) // botao ir para proxima tela ativo
+		else if (estado == ESTADO_BUTTON_PROXIMA_TELA_ATIVO) // botao ir para proxima tela ativo
 		{
 			setBorda(llNext, true);
 			setBorda(gridview, false);
@@ -453,14 +463,14 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 			setBorda(llAtalhos, false);
 			setBorda(llShowHideCommands, false);			
 		}
-		else if (estado == 6) // iterando em gridview Principal 
+		else if (estado == ESTADO_ITERANDO_ITENS_GRIDVIEW_PRINCIPAL) // iterando em gridview Principal 
 		{
-			setEstadoVarredura(0);
+			setEstadoVarredura(ESTADO_TODOS_DESATIVADOS);
 			iteracaoInternaPrincipalAtiva = true;
 		}
-		else if (estado == 7) // iterando em gridview Frase
+		else if (estado == ESTADO_ITERANDO_ITENS_GRIDVIEW_FRASE) // iterando em gridview Frase
 		{
-			setEstadoVarredura(0);
+			setEstadoVarredura(ESTADO_TODOS_DESATIVADOS);
 			iteracaoInternaFraseAtiva = true;
 		}
 		
@@ -611,7 +621,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 		GridView gvf = (GridView) findViewById(R.id.gridview_frase);
 		
 		// se gridview frase não contiver itens, não entra
-		if (estadoAtual == 2 && !(hasItens(gvf)))
+		if (estadoAtual == ESTADO_GRIDVIEW_FRASE_ATIVO && !(hasItens(gvf)))
 			return;
 		
 		setEstadoVarredura(transicaoEntrarPartindoDe(estadoAtual));
@@ -675,7 +685,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 			
 			// a iteracao ocorre entre o conteúdo do controle e o próprio controle
 			
-			if (estadoAtual == 1 || estadoAtual == 2 || estadoAtual == 3)
+			if (estadoAtual == ESTADO_GRIDVIEW_PRINCIPAL_ATIVO || estadoAtual == ESTADO_GRIDVIEW_FRASE_ATIVO || estadoAtual == ESTADO_GRIDVIEW_ATALHOS_ATIVO)
 				setEstadoVarredura(transicaoIteracaoInternaPartindoDe(estadoAtual));
 			
 			// Varre GridView Principal
@@ -688,7 +698,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 				
 				iteracaoTimerGridViewPrincipal();
 				if (indiceItemPrincipal == (cc + 1))
-					setEstadoVarredura(transicaoIteracaoInternaPartindoDe(6));
+					setEstadoVarredura(transicaoIteracaoInternaPartindoDe(ESTADO_ITERANDO_ITENS_GRIDVIEW_PRINCIPAL));
 			}
 
 			// Varre GridView Frase							
@@ -701,7 +711,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 				iteracaoTimerGridViewFrase();
 				// transicao para GridViewComandos
 				if (indiceItemFrase == (cc + 1))
-					setEstadoVarredura(transicaoIteracaoInternaPartindoDe(7));
+					setEstadoVarredura(transicaoIteracaoInternaPartindoDe(ESTADO_ITERANDO_ITENS_GRIDVIEW_FRASE));
 			}		
 			
 		}			

@@ -20,12 +20,15 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 {
 
 	private boolean carregarCategoria;
+	
+	private static final int ESTADO_CARREGAR_CATEGORIA_ACIONAR_COMANDO 	= 6;
+	private static final int ESTADO_REMOVER_IMAGEM_FRASE 				= 7;
 
 	@Override
 	protected void acaoDoEventoPrincipal()
 	{
 		
-		if (estadoAtual == 1 || estadoAtual == 2 /*|| estadoAtual == 3*/)
+		if (estadoAtual == ESTADO_GRIDVIEW_PRINCIPAL_ATIVO || estadoAtual == ESTADO_GRIDVIEW_FRASE_ATIVO /*|| estadoAtual == 3*/)
 		{
 			
 			if (iteracaoExternaAtiva)
@@ -34,7 +37,7 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 				sair();			
 		
 		}
-		else if (estadoAtual == 3) // atalho
+		else if (estadoAtual == ESTADO_GRIDVIEW_ATALHOS_ATIVO) // atalho
 		{
 			GridView gva = (GridView) findViewById(R.id.gridview_atalhos);
 			ImgItem imgi = (ImgItem) gva.getChildAt(0);
@@ -44,7 +47,7 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 			acionarComando(cmd);
 		
 		}
-		else if (estadoAtual == 4) // mostrar comandos / esconder comandos
+		else if (estadoAtual == ESTADO_BUTTON_MOSTRAR_ESCONDER_COMANDOS_ATIVO) // mostrar comandos / esconder comandos
 		{
 			if (mostrarComandos)
 			{
@@ -89,7 +92,7 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 			alternarEventoBtnShowHideCommands();
 			alternarEventoAoSelecionarImagemDeGridViewPrincipal();				
 		}
-		else if (estadoAtual == 5) // proxima pagina
+		else if (estadoAtual == ESTADO_BUTTON_PROXIMA_TELA_ATIVO) // proxima pagina
 		{
 			CarregarImagensTelas cixml = new CarregarImagensTelas()
 			{
@@ -108,7 +111,7 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 			};
 			vaiParaProximaPagina(cixml, 1);
 		}
-		else if (estadoAtual == 6) // carregar categoria / acionar comando
+		else if (estadoAtual == ESTADO_CARREGAR_CATEGORIA_ACIONAR_COMANDO) // carregar categoria / acionar comando
 		{
 			GridView gv = (GridView) findViewById(R.id.gridview);
 			
@@ -121,7 +124,7 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 			else if (acionarComando)
 				acionarComando(imgi);
 		}
-		else if (estadoAtual == 7) // remover imagem da frase
+		else if (estadoAtual == ESTADO_REMOVER_IMAGEM_FRASE) // remover imagem da frase
 		{
 			int indiceAtual = indiceItemFrase - 1;
 			indiceAtual = (indiceAtual < 0) ? 0 : indiceAtual;

@@ -25,7 +25,7 @@ public class SelecionarCategoriasActivity extends ListaComBuscaManageActivity
 	protected void onCreateFilho()
 	{
 		// habilita up back
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
 	// recarregar/carregar a lista ao voltar para esse activity
@@ -85,9 +85,9 @@ public class SelecionarCategoriasActivity extends ListaComBuscaManageActivity
 				startActivityForResult(intent_lca, 1);			
 				break;
 		    // Respond to the action bar's Up/Home button
-		    case android.R.id.home:
-		    	finish();
-		        break;				
+//		    case android.R.id.home:
+//		    	finish();
+//		        break;				
 		}
 	}
 

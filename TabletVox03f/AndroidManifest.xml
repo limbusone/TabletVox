@@ -151,7 +151,7 @@
         
         <activity
             android:name="com.example.tabletvox03f.management.assocImagemSom.SelecionarImagensActivity"
-            android:label="@string/title_activity_selecionar_imagem"
+            android:label="@string/title_activity_selecionar_imagens"
             android:windowSoftInputMode="stateAlwaysHidden"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar">            
         </activity>

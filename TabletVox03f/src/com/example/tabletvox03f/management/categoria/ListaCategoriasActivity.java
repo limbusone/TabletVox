@@ -22,9 +22,6 @@ public class ListaCategoriasActivity extends ListaComBuscaManageActivity
 
 	public static final int RC_CATS_GERENCIADAS = 1;
 	
-	// boolean que indica se o activity que chamou o activity atual é o SelecionarCategoriasActivity
-	private boolean isSelecionarCategoriasActivity = false;	
-	
 	@Override
 	protected void onCreateFilho()
 	{

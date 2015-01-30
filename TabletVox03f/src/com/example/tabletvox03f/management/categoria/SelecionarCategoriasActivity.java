@@ -82,7 +82,6 @@ public class SelecionarCategoriasActivity extends ListaComBuscaManageActivity
 				break;
 			case R.id.action_gerenciar:
 				Intent intent_lca = new Intent(this, ListaCategoriasActivity.class);
-				intent_lca.putExtra("isSCA", true);
 				startActivityForResult(intent_lca, 1);			
 				break;
 		    // Respond to the action bar's Up/Home button

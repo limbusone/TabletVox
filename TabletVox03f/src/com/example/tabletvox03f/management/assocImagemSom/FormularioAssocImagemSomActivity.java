@@ -6,7 +6,6 @@ import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -36,9 +35,6 @@ public class FormularioAssocImagemSomActivity extends FormularioBaseActivity
 	
 	public static final int RC_IMG_INCLUIDA_SUCESSO = 1;
 	public static final int RC_IMG_EDITADA_SUCESSO 	= 2; 
-	
-	// boolean que indica se o activity que chamou o activity atual é o SelecionarImagemActivity
-	private boolean isSelecionarImagemActivity = false;
 	
 	// serve para saber se está requerindo um arquivo de imagem ou som
 	private int current_file_code;

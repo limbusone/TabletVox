@@ -112,7 +112,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 					}
 					
 				};
-				cixmlc.execute(false); // false: mostrar todos os comandos
+				cixmlc.execute(CarregarImagensComandos.OPCAO_CARREGAR_TODOS_COMANDOS); // false: mostrar todos os comandos
 			} 
 			else if (esconderComandos)
 			{
@@ -132,7 +132,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 			
 				};
 				
-				cixml.execute(current_page, 0, current_categoriaId);					
+				cixml.execute(current_page, CarregarImagensTelas.OPCAO_CARREGAR_IMAGENS, current_categoriaId);					
 			}
 			alternarEventoBtnShowHideCommands();
 			alternarEventoAoSelecionarImagemDeGridViewPrincipal();				
@@ -154,7 +154,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 				}
 		
 			};
-			vaiParaProximaPagina(cixml, 0, current_categoriaId);
+			vaiParaProximaPagina(cixml, CarregarImagensTelas.OPCAO_CARREGAR_IMAGENS, current_categoriaId);
 		}
 		else if (estadoAtual == ESTADO_ITERANDO_ITENS_GRIDVIEW_PRINCIPAL) // adicionar imagem a frase / acionar comando
 		{
@@ -279,7 +279,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 			}			
 		};
 		
-		cixml.execute(init_page, 0, current_categoriaId);
+		cixml.execute(init_page, CarregarImagensTelas.OPCAO_CARREGAR_IMAGENS, current_categoriaId);
 		
 		// aqui carregam-se as imagens-comandos que sao atalhos
 		CarregarImagensComandos cixmlc = new CarregarImagensComandos()
@@ -296,7 +296,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 			
 		};
 		
-		cixmlc.execute(true); // true: mostrar atalhos
+		cixmlc.execute(CarregarImagensComandos.OPCAO_CARREGAR_ATALHOS); // true: mostrar atalhos
 		
 		// aqui carrega-se o service de reprodução de som
 		sservice_intent = new Intent(this, SoundService.class);

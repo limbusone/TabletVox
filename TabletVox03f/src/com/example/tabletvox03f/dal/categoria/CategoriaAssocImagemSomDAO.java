@@ -52,7 +52,19 @@ public class CategoriaAssocImagemSomDAO
 	{
 		ContentValues values = new ContentValues();
 		values.put(TabletVoxSQLiteOpenHelper.CAT_COLUMN_ID,  cat.getId());
-		values.put(TabletVoxSQLiteOpenHelper.AIS_COLUMN_ID,  ais.getId());		
+		values.put(TabletVoxSQLiteOpenHelper.AIS_COLUMN_ID,  ais.getId());
+		values.put(TabletVoxSQLiteOpenHelper.CAT_AIS_COLUMN_PAGE, ais.getPagina());
+		values.put(TabletVoxSQLiteOpenHelper.CAT_AIS_COLUMN_ORDEM, ais.getOrdem());		
+		database.insert(TabletVoxSQLiteOpenHelper.TABLE_CAT_AIS, null, values);		
+	}
+	
+	public void create(Categoria cat, AssocImagemSom ais, int pagina, int ordem)
+	{
+		ContentValues values = new ContentValues();
+		values.put(TabletVoxSQLiteOpenHelper.CAT_COLUMN_ID,  cat.getId());
+		values.put(TabletVoxSQLiteOpenHelper.AIS_COLUMN_ID,  ais.getId());
+		values.put(TabletVoxSQLiteOpenHelper.CAT_AIS_COLUMN_PAGE, pagina);
+		values.put(TabletVoxSQLiteOpenHelper.CAT_AIS_COLUMN_ORDEM, ordem);
 		database.insert(TabletVoxSQLiteOpenHelper.TABLE_CAT_AIS, null, values);		
 	}
 	
@@ -101,7 +113,19 @@ public class CategoriaAssocImagemSomDAO
 		ContentValues values = new ContentValues();
 		values.put(TabletVoxSQLiteOpenHelper.CAT_COLUMN_ID,  cat.getId());		
 		values.put(TabletVoxSQLiteOpenHelper.AIS_COLUMN_ID,  ais.getId());
+		values.put(TabletVoxSQLiteOpenHelper.CAT_AIS_COLUMN_PAGE, ais.getPagina());
+		values.put(TabletVoxSQLiteOpenHelper.CAT_AIS_COLUMN_ORDEM, ais.getOrdem());
 		database.update(TabletVoxSQLiteOpenHelper.TABLE_CAT_AIS, values, TabletVoxSQLiteOpenHelper.CAT_AIS_COLUMN_ID + " = " + id, null);
+	}
+	
+	public void update(Categoria cat, AssocImagemSom ais, long id, int pagina, int ordem)
+	{
+		ContentValues values = new ContentValues();
+		values.put(TabletVoxSQLiteOpenHelper.CAT_COLUMN_ID,  cat.getId());		
+		values.put(TabletVoxSQLiteOpenHelper.AIS_COLUMN_ID,  ais.getId());
+		values.put(TabletVoxSQLiteOpenHelper.CAT_AIS_COLUMN_PAGE, pagina);
+		values.put(TabletVoxSQLiteOpenHelper.CAT_AIS_COLUMN_ORDEM, ordem);
+		database.update(TabletVoxSQLiteOpenHelper.TABLE_CAT_AIS, values, TabletVoxSQLiteOpenHelper.CAT_AIS_COLUMN_ID + " = " + id, null);		
 	}
 	
 	// retorna um arraylist com todos os registros

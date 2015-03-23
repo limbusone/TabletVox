@@ -51,6 +51,8 @@ public class PerfilCategoriaDAO
 		ContentValues values = new ContentValues();
 		values.put(TabletVoxSQLiteOpenHelper.PFL_COLUMN_ID,  pfl.getId());
 		values.put(TabletVoxSQLiteOpenHelper.CAT_COLUMN_ID,  cat.getId());
+		values.put(TabletVoxSQLiteOpenHelper.PFL_CAT_COLUMN_PAGE, cat.getPagina());
+		values.put(TabletVoxSQLiteOpenHelper.PFL_CAT_COLUMN_ORDEM, cat.getOrdem());
 		database.insert(TabletVoxSQLiteOpenHelper.TABLE_PFL_CAT, null, values);		
 	}
 	
@@ -99,6 +101,8 @@ public class PerfilCategoriaDAO
 		ContentValues values = new ContentValues();
 		values.put(TabletVoxSQLiteOpenHelper.PFL_COLUMN_ID,  pfl.getId());
 		values.put(TabletVoxSQLiteOpenHelper.CAT_COLUMN_ID,  cat.getId());
+		values.put(TabletVoxSQLiteOpenHelper.PFL_CAT_COLUMN_PAGE, cat.getPagina());
+		values.put(TabletVoxSQLiteOpenHelper.PFL_CAT_COLUMN_ORDEM, cat.getOrdem());
 		database.update(TabletVoxSQLiteOpenHelper.TABLE_PFL, values, TabletVoxSQLiteOpenHelper.PFL_CAT_COLUMN_ID + " = " + id, null);
 	}
 	

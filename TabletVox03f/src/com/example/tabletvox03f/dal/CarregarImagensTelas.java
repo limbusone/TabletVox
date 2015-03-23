@@ -16,7 +16,7 @@ import com.example.tabletvox03f.dal.categoria.CategoriaDAO;
 import com.example.tabletvox03f.dal.perfil.Perfil;
 import com.example.tabletvox03f.dal.perfil.PerfilDAO;
 
-// classe de carregamento das imagens do xml telas.xml em assincronia com a UI
+// classe de carregamento das imagens em assincronia com a UI
 public class CarregarImagensTelas extends AsyncTask<Integer, Void, ArrayList<AssocImagemSom>>
 {
 	//private XmlUtilsTelas xml;
@@ -28,6 +28,10 @@ public class CarregarImagensTelas extends AsyncTask<Integer, Void, ArrayList<Ass
 	// atividade em background numa Thread separada
 	// params[0] : pagina, params[1] : opcao carregar categorias ou imagens comuns,
 	// params[2] : id da categoria
+	
+	public static final int OPCAO_CARREGAR_IMAGENS 		= 0;
+	public static final int OPCAO_CARREGAR_CATEGORIAS 	= 1;
+	
 	@Override
 	protected ArrayList<AssocImagemSom> doInBackground(Integer... params)
 	{
@@ -41,7 +45,7 @@ public class CarregarImagensTelas extends AsyncTask<Integer, Void, ArrayList<Ass
 		
 		switch (params[1])
 		{
-			case 1: // carregar categorias
+			case OPCAO_CARREGAR_CATEGORIAS: // carregar categorias
 				PerfilDAO pfl_dao = new PerfilDAO(activeContext);
 				
 				pfl_dao.open();
@@ -62,7 +66,7 @@ public class CarregarImagensTelas extends AsyncTask<Integer, Void, ArrayList<Ass
 			case 2:
 				break;
 				// carregar imagens comuns
-			case 0:
+			case OPCAO_CARREGAR_IMAGENS:
 			default:
 				CategoriaDAO cat_dao = new CategoriaDAO(activeContext);
 				cat_dao.open();

@@ -15,6 +15,8 @@ public class AssocImagemSom implements Parcelable
 	private char tipo; // 'v' de verbo ou 'n' de substantivo ou 'c' de categoria
 	private int cmd; // se é algum comando ou não (do tipo falar, apagar frase e etc...)
 	private boolean atalho;
+	private int pagina;
+	private int ordem;
 	
 	// atributos auxiliares (de sistema)
 	private int categoriaId;
@@ -67,6 +69,35 @@ public class AssocImagemSom implements Parcelable
 		this.atalho			= atalho;
 	}
 	
+	public AssocImagemSom(int id, String desc, String titulo_imagem, String titulo_som, String ext, char tipo, int cmd, boolean atalho, int pagina, int ordem)
+	{
+		this.id				= id;
+		this.desc			= desc;
+		this.titulo_imagem 	= titulo_imagem;
+		this.titulo_som 	= titulo_som;
+		this.ext 			= ext;
+		this.tipo			= tipo;
+		this.cmd 			= cmd;
+		this.atalho			= atalho;
+		this.pagina			= pagina;
+		this.ordem			= ordem;
+	}
+
+	public AssocImagemSom(String desc, String titulo_imagem, String titulo_som, String ext, char tipo, int cmd, boolean atalho, int pagina, int ordem)
+	{
+		this.desc			= desc;
+		this.titulo_imagem 	= titulo_imagem;
+		this.titulo_som 	= titulo_som;
+		this.ext 			= ext;
+		this.tipo			= tipo;
+		this.cmd 			= cmd;
+		this.atalho			= atalho;
+		this.pagina			= pagina;
+		this.ordem			= ordem;		
+	}	
+	
+	
+	
 	// construtor de cópia
 	public AssocImagemSom(AssocImagemSom ais)
 	{
@@ -77,6 +108,8 @@ public class AssocImagemSom implements Parcelable
 		this.tipo			= ais.getTipo();
 		this.cmd			= ais.getCmd();
 		this.atalho			= ais.isAtalho();
+		this.pagina			= ais.getPagina();
+		this.ordem			= ais.getOrdem();
 	}
 	
 	public int getId()
@@ -160,6 +193,30 @@ public class AssocImagemSom implements Parcelable
 		this.atalho = atalho;
 	}
 
+	public int getPagina()
+	{
+		return pagina;
+	}
+
+
+	public void setPagina(int pagina)
+	{
+		this.pagina = pagina;
+	}
+
+
+	public int getOrdem()
+	{
+		return ordem;
+	}
+
+
+	public void setOrdem(int ordem)
+	{
+		this.ordem = ordem;
+	}
+
+
 	public int getCategoriaId()
 	{
 		return categoriaId;
@@ -182,7 +239,7 @@ public class AssocImagemSom implements Parcelable
 	@Override
 	public int describeContents()
 	{
-		// TODO Auto-generated method stub
+		// Auto-generated method stub
 		return 0;
 	}
 
@@ -200,6 +257,8 @@ public class AssocImagemSom implements Parcelable
 		dest.writeString("" + this.tipo);
 		dest.writeInt(this.cmd);
 		dest.writeInt((this.atalho) ? 1 : 0);
+		dest.writeInt(this.pagina);
+		dest.writeInt(this.ordem);
 		
 	}
 	
@@ -217,6 +276,8 @@ public class AssocImagemSom implements Parcelable
 		this.tipo			= in.readString().charAt(0);
 		this.cmd			= in.readInt();
 		this.atalho			= (in.readInt() == 1) ? true : false;
+		this.pagina			= in.readInt();
+		this.ordem			= in.readInt();
 	}
 	
     /**

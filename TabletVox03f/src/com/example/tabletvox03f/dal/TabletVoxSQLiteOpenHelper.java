@@ -35,7 +35,9 @@ public class TabletVoxSQLiteOpenHelper extends SQLiteOpenHelper
 	// nome da tabela PerfilCategoria
 	public static final String TABLE_PFL_CAT = "PerfilCategoria";
 	// atributos de PerfilCategoria
-	public static final String PFL_CAT_COLUMN_ID = "pfl_cat_id";
+	public static final String PFL_CAT_COLUMN_ID 	= "pfl_cat_id";
+	public static final String PFL_CAT_COLUMN_PAGE 	= "pfl_cat_page";
+	public static final String PFL_CAT_COLUMN_ORDEM = "pfl_cat_ordem";
 
 	// nome da tabela CategoriaAssocImagemSom
 	public static final String TABLE_CAT_AIS = "CategoriaAssocImagemSom";
@@ -78,9 +80,11 @@ public class TabletVoxSQLiteOpenHelper extends SQLiteOpenHelper
 	private static final String TABLE_PFL_CAT_CREATE =
 		"CREATE TABLE " + TABLE_PFL_CAT
 		+ "("
-		+ PFL_CAT_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-		+ PFL_COLUMN_ID 	+ " INTEGER, "
-		+ CAT_COLUMN_ID 	+ " INTEGER"
+		+ PFL_CAT_COLUMN_ID 	+ " INTEGER PRIMARY KEY AUTOINCREMENT, "
+		+ PFL_COLUMN_ID 		+ " INTEGER, "
+		+ CAT_COLUMN_ID 		+ " INTEGER, "
+		+ PFL_CAT_COLUMN_PAGE 	+ " INTEGER, "
+		+ PFL_CAT_COLUMN_ORDEM  + " INTEGER"
 		+ ");";
 	private static final String TABLE_CAT_AIS_CREATE =
 		"CREATE TABLE " + TABLE_CAT_AIS

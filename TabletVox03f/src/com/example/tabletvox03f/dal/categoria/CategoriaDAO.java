@@ -309,6 +309,14 @@ public class CategoriaDAO
 		return ais_list;		
 	}
 	
+	public ArrayList<AssocImagemSom> getImagens(long categoriaId, int pagina)
+	{
+		CategoriaAssocImagemSomDAO dao_cat_ais = new CategoriaAssocImagemSomDAO(sqliteOpenHelper);
+		dao_cat_ais.open();
+		
+		return dao_cat_ais.getAISByCatIdAndPage(categoriaId, pagina);
+	}
+	
 	// verifica se existem registros na tabela
 	public boolean regs_exist()
 	{

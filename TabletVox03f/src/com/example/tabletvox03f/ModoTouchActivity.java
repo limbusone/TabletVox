@@ -65,7 +65,7 @@ public class ModoTouchActivity extends TelaBaseActivity
 				}
 				
 			};
-			vaiParaProximaPagina(cit, 0, current_categoriaId);
+			vaiParaProximaPagina(cit, CarregarImagensTelas.OPCAO_CARREGAR_IMAGENS, current_categoriaId);
 		}
 	};
 	
@@ -101,7 +101,7 @@ public class ModoTouchActivity extends TelaBaseActivity
 					pgrbar.setVisibility(View.VISIBLE);
 				}
 			};
-			cic.execute(false); // false: mostrar todos os comandos
+			cic.execute(CarregarImagensComandos.OPCAO_CARREGAR_TODOS_COMANDOS); // false: mostrar todos os comandos
 		}
 	};
 	
@@ -136,7 +136,7 @@ public class ModoTouchActivity extends TelaBaseActivity
 				}
 				
 			};
-			cixml.execute(current_page, 0, current_categoriaId);
+			cixml.execute(current_page, CarregarImagensTelas.OPCAO_CARREGAR_IMAGENS, current_categoriaId);
 		}
 	};	
 	
@@ -195,7 +195,7 @@ public class ModoTouchActivity extends TelaBaseActivity
 			}
 	
 		};
-		cixml.execute(init_page, 0, current_categoriaId);
+		cixml.execute(init_page, CarregarImagensTelas.OPCAO_CARREGAR_IMAGENS, current_categoriaId);
 		
 		// aqui carregam-se as imagens-comandos que sao atalhos
 		CarregarImagensComandos cixmlc = new CarregarImagensComandos()
@@ -211,7 +211,7 @@ public class ModoTouchActivity extends TelaBaseActivity
 			}
 			
 		};
-		cixmlc.execute(true); // true: mostrar atalhos
+		cixmlc.execute(CarregarImagensComandos.OPCAO_CARREGAR_ATALHOS); // true: mostrar atalhos
 		
 		// aqui carrega-se o service de reprodução de som
 		sservice_intent = new Intent(this, SoundService.class);

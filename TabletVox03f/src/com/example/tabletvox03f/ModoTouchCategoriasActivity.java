@@ -51,7 +51,7 @@ public class ModoTouchCategoriasActivity extends ModoTouchActivity
 				}
 				
 			};
-			vaiParaProximaPagina(cit, 1);
+			vaiParaProximaPagina(cit, CarregarImagensTelas.OPCAO_CARREGAR_CATEGORIAS);
 		}
 	};	
 	
@@ -87,7 +87,7 @@ public class ModoTouchCategoriasActivity extends ModoTouchActivity
 					pgrbar.setVisibility(View.VISIBLE);
 				}
 			};
-			cic.execute(false); // false: mostrar todos os comandos
+			cic.execute(CarregarImagensComandos.OPCAO_CARREGAR_TODOS_COMANDOS); // false: mostrar todos os comandos
 		}
 	};	
 	
@@ -122,7 +122,7 @@ public class ModoTouchCategoriasActivity extends ModoTouchActivity
 				}
 				
 			};
-			cixml.execute(current_page, 1);
+			cixml.execute(current_page, CarregarImagensTelas.OPCAO_CARREGAR_CATEGORIAS);
 		}
 	};	
 
@@ -174,7 +174,7 @@ public class ModoTouchCategoriasActivity extends ModoTouchActivity
 				pgrbar.setVisibility(View.VISIBLE);
 			}			
 		};
-		cit.execute(init_page, 1);
+		cit.execute(init_page, CarregarImagensTelas.OPCAO_CARREGAR_CATEGORIAS);
 		
 		// aqui carregam-se as imagens-comandos que sao atalhos
 		CarregarImagensComandos cixmlc = new CarregarImagensComandos()
@@ -190,7 +190,7 @@ public class ModoTouchCategoriasActivity extends ModoTouchActivity
 			}
 			
 		};
-		cixmlc.execute(true); // true: mostrar atalhos
+		cixmlc.execute(CarregarImagensComandos.OPCAO_CARREGAR_ATALHOS); // true: mostrar atalhos
 		
 		//GridView gridview = (GridView) findViewById(R.id.gridview);
 		

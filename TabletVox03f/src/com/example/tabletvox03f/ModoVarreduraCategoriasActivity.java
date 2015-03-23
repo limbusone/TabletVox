@@ -67,7 +67,7 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 					}
 					
 				};
-				cixmlc.execute(false); // false: mostrar todos os comandos
+				cixmlc.execute(CarregarImagensComandos.OPCAO_CARREGAR_TODOS_COMANDOS); // false: mostrar todos os comandos
 			} 
 			else if (esconderComandos)
 			{
@@ -87,7 +87,7 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 			
 				};
 				
-				cixml.execute(current_page, 1);					
+				cixml.execute(current_page, CarregarImagensTelas.OPCAO_CARREGAR_CATEGORIAS);					
 			}
 			alternarEventoBtnShowHideCommands();
 			alternarEventoAoSelecionarImagemDeGridViewPrincipal();				
@@ -109,7 +109,7 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 				}
 		
 			};
-			vaiParaProximaPagina(cixml, 1);
+			vaiParaProximaPagina(cixml, CarregarImagensTelas.OPCAO_CARREGAR_CATEGORIAS);
 		}
 		else if (estadoAtual == ESTADO_CARREGAR_CATEGORIA_ACIONAR_COMANDO) // carregar categoria / acionar comando
 		{
@@ -230,7 +230,7 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 
 			}			
 		};
-		cixml.execute(init_page, 1);
+		cixml.execute(init_page, CarregarImagensTelas.OPCAO_CARREGAR_CATEGORIAS);
 		
 		// aqui carregam-se as imagens-comandos que sao atalhos
 		CarregarImagensComandos cixmlc = new CarregarImagensComandos()
@@ -246,7 +246,7 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 			}
 			
 		};
-		cixmlc.execute(true); // true: mostrar atalhos		
+		cixmlc.execute(CarregarImagensComandos.OPCAO_CARREGAR_ATALHOS); // true: mostrar atalhos		
 	}
 	
 	@Override

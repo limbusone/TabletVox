@@ -20,6 +20,9 @@ public class CarregarImagensComandos extends AsyncTask<Boolean, Void, ArrayList<
 	protected Context activeContext;
 	protected ProgressBar pgrbar; 
 	
+	public static final boolean OPCAO_CARREGAR_ATALHOS 			= true;
+	public static final boolean OPCAO_CARREGAR_TODOS_COMANDOS 	= false;
+	
 	// atividade em background numa Thread separada
 	@Override
 	protected ArrayList<AssocImagemSom> doInBackground(Boolean... params)

@@ -14,6 +14,8 @@ public class Categoria implements Parcelable
 	private AssocImagemSom ais;
 	private ArrayList<AssocImagemSom> imagens;
 	private ArrayList<CategoriaAssocImagemSom> catImagens;
+	private int pagina;
+	private int ordem;
 	
 	public Categoria()
 	{}
@@ -38,6 +40,15 @@ public class Categoria implements Parcelable
 		this.ais 		= ais;
 		this.imagens 	= imagens;
 	}
+	public Categoria(int id, String nome, AssocImagemSom ais, ArrayList<AssocImagemSom> imagens, int pagina, int ordem)
+	{
+		this.id 		= id;
+		this.nome 		= nome;
+		this.ais 		= ais;
+		this.imagens 	= imagens;
+		this.pagina		= pagina;
+		this.ordem 		= ordem;
+	}	
 	
 	public Categoria(String nome)
 	{
@@ -65,6 +76,8 @@ public class Categoria implements Parcelable
 		this.nome 		= categoria.getNome();
 		this.imagens 	= categoria.getImagens();
 		this.catImagens = categoria.getCatImagens();
+		this.pagina		= categoria.getPagina();
+		this.ordem		= categoria.getOrdem();
 	}
 	
 	public int getId()
@@ -115,6 +128,29 @@ public class Categoria implements Parcelable
 		this.catImagens = catImagens;
 	}
 	
+	public int getPagina()
+	{
+		return pagina;
+	}
+
+
+	public void setPagina(int pagina)
+	{
+		this.pagina = pagina;
+	}
+
+
+	public int getOrdem()
+	{
+		return ordem;
+	}
+
+
+	public void setOrdem(int ordem)
+	{
+		this.ordem = ordem;
+	}	
+	
 	public AssocImagemSom getImagemById(int id)
 	{
 		AssocImagemSom imagem = null;
@@ -145,7 +181,7 @@ public class Categoria implements Parcelable
 	@Override
 	public int describeContents()
 	{
-		// TODO Auto-generated method stub
+		// Auto-generated method stub
 		return 0;
 	}
 
@@ -159,6 +195,8 @@ public class Categoria implements Parcelable
 		dest.writeParcelable(this.ais, flags);
 		dest.writeString(this.nome);
 		dest.writeTypedList(this.imagens);
+		dest.writeInt(this.pagina);
+		dest.writeInt(this.ordem);
 		
 	}
 	
@@ -172,6 +210,8 @@ public class Categoria implements Parcelable
 		this.ais		= in.readParcelable(AssocImagemSom.class.getClassLoader());
 		this.nome 		= in.readString();
 		in.readTypedList(this.imagens, AssocImagemSom.CREATOR);
+		this.pagina		= in.readInt();
+		this.ordem		= in.readInt();
 	}
 	
     /**

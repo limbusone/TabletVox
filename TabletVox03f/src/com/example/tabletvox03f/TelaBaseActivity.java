@@ -27,6 +27,9 @@ public class TelaBaseActivity extends ActionBarActivity
 	private String currentTitle;
 	
 	protected int current_categoriaId;
+	
+	private static final int TOCAR_SOM_FRASE_COD_CMD 	= 1;
+	private static final int VOLTAR_TELA_COD_CMD 		= 2;
 
 	public TelaBaseActivity()
 	{
@@ -203,31 +206,33 @@ public class TelaBaseActivity extends ActionBarActivity
 	
 	protected void acionarComando(int cod_cmd)
 	{
-		if (cod_cmd == 1) // tocar som frase
+		switch (cod_cmd)
 		{
-			//Comandos.tocarSomFrase(ModoTouchActivity.this);
-			//Comandos.tocarSomFrase();
-			tocarSomFrase();
-		}
-		else if (cod_cmd == 2) // voltar para tela anterior
-		{
-			finish();
+			// tocar som frase
+			case TOCAR_SOM_FRASE_COD_CMD:
+				tocarSomFrase();
+				break;
+			// voltar para tela anterior
+			case VOLTAR_TELA_COD_CMD:
+				finish();
+				break;
 		}
 	}
 	
 	public void acionarComando(ImgItem imgi)
 	{
 		int cod_cmd = imgi.getAssocImagemSom().getCmd();
-		if (cod_cmd == 1) // tocar som frase
+		switch (cod_cmd)
 		{
-			//Comandos.tocarSomFrase(ModoTouchActivity.this);
-			//Comandos.tocarSomFrase();
-			tocarSomFrase();
-		}
-		else if (cod_cmd == 2) // voltar para tela anterior
-		{
-			finish();
-		}		
+			// tocar som frase
+			case TOCAR_SOM_FRASE_COD_CMD:
+				tocarSomFrase();
+				break;
+			// voltar para tela anterior
+			case VOLTAR_TELA_COD_CMD:
+				finish();
+				break;
+		}	
 	}
 	
 	// adicionar imagem para a frase

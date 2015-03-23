@@ -241,7 +241,31 @@ public class PerfilDAO
 		cursor.close();
 		
 		return categorias;		
-	}	
+	}
+	
+	public ArrayList<Categoria> getCategorias(long perfilId, int pagina)
+	{
+		ArrayList<Categoria> categorias = new ArrayList<Categoria>();
+		
+		Cursor cursor = database.query(
+				TabletVoxSQLiteOpenHelper.TABLE_PFL_CAT, PerfilCategoriaDAO.columns, 
+				TabletVoxSQLiteOpenHelper.PFL_COLUMN_ID + " = " + perfilId + " AND " + "cat_ais_page = " + pagina, 
+				null, null, null, null);
+		
+		CategoriaDAO dao_cat = new CategoriaDAO(sqliteOpenHelper);
+		dao_cat.open();
+	
+		cursor.moveToFirst();
+		while (!(cursor.isAfterLast()))
+		{
+			categorias.add(dao_cat.getCategoriaById(cursor.getInt(2)));
+			cursor.moveToNext();
+		}
+		
+		cursor.close();
+		
+		return categorias;			
+	}
 	
 	// verifica se existem registros na tabela
 	public boolean regs_exist()

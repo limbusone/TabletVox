@@ -41,20 +41,23 @@
         <activity
             android:name="com.example.tabletvox03f.ModoTouchActivity"
             android:label="@string/title_activity_modo_touch" 
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            android:screenOrientation="landscape">
         </activity>
 
         <activity
             android:name="com.example.tabletvox03f.ModoVarreduraActivity"
             android:label="@string/title_activity_modo_varredura"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" 
+            android:screenOrientation="landscape">
         </activity>
 
         <activity
             android:name="com.example.tabletvox03f.ModoTouchCategoriasActivity"
             android:label="@string/title_activity_modo_touch_categorias"
             android:parentActivityName="com.example.tabletvox03f.MainMenuActivity"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" 
+            android:screenOrientation="landscape">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.tabletvox03f.MainMenuActivity" />
@@ -64,7 +67,8 @@
             android:name="com.example.tabletvox03f.ModoVarreduraCategoriasActivity"
             android:label="@string/title_activity_modo_varredura_categorias"
             android:parentActivityName="com.example.tabletvox03f.MainMenuActivity" 
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            android:screenOrientation="landscape">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.tabletvox03f.MainMenuActivity" />

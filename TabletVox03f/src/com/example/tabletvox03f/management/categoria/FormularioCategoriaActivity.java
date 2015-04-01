@@ -3,7 +3,6 @@ package com.example.tabletvox03f.management.categoria;
 import java.util.ArrayList;
 
 import android.content.Intent;
-import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,7 +33,7 @@ public class FormularioCategoriaActivity extends FormularioNaoPersistenteBaseAct
 	public static final int RC_CAT_EDITADA_NP_SUCESSO 	= 5;
 	
 	// boolean que indica se o activity que chamou o activity atual é o FormularioPerfilActivity	
-	private boolean isFormularioPerfilActivity = false;	
+//	private boolean isFormularioPerfilActivity = false;	
 	
 	private Categoria cat;
 	

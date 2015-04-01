@@ -317,6 +317,24 @@ public class CategoriaDAO
 		return dao_cat_ais.getAISByCatIdAndPage(categoriaId, pagina);
 	}
 	
+	public int getNumeroDePaginas(int categoriaId)
+	{
+		String sql = "SELECT " +
+		"max(" + TabletVoxSQLiteOpenHelper.CAT_AIS_COLUMN_PAGE + ") " 	+
+		"FROM " 														+ 
+		TabletVoxSQLiteOpenHelper.TABLE_CAT_AIS 						+ 
+		"WHERE " 														+ 
+		TabletVoxSQLiteOpenHelper.CAT_COLUMN_ID + "=" + Integer.toString(categoriaId); 
+		
+		Cursor cursor = database.rawQuery(sql, null);
+		if (cursor.getCount() > 0)
+		{
+			cursor.moveToFirst();
+			return cursor.getInt(0);
+		}
+		return 0;
+	}	
+	
 	// verifica se existem registros na tabela
 	public boolean regs_exist()
 	{
@@ -326,5 +344,4 @@ public class CategoriaDAO
 				null, null, null, null, null, "1");
 		return (cursor.getCount() > 0);
 	}	
-
 }

@@ -90,5 +90,8 @@
     <string name="nao">Não</string>
     <string name="img_incluida_com_sucesso">Imagem incluida com sucesso!</string>
     <string name="gerenciar">Gerenciar</string>
+    <string name="pagina">Página</string>
+    <string name="imagem">Imagem</string>
+    
 
 </resources>

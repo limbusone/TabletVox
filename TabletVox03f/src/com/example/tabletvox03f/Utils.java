@@ -458,20 +458,20 @@ public class Utils
 		
 		dao_cat.open();
 		
-		dao_cat.create(29, "alimentos", 	dao_ais.getImagensByIdInterval(43, 54));
-		dao_cat.create(30, "animais", 		dao_ais.getImagensByIdInterval(55, 66));
-		dao_cat.create(31, "aparelhos", 	dao_ais.getImagensByIdInterval(67, 75));
-		dao_cat.create(32, "banheiro",  	dao_ais.getImagensByIdInterval(76, 87));
-		dao_cat.create(33, "bebidas", 		dao_ais.getImagensByIdInterval(88, 94));
-		dao_cat.create(34, "corpo", 		dao_ais.getImagensByIdInterval(95, 106));
-		dao_cat.create(35, "familia 1", 	dao_ais.getImagensByIdInterval(107, 122));
-		dao_cat.create(36, "familia 2", 	dao_ais.getImagensByIdInterval(123, 136));
-		dao_cat.create(37, "frutas", 		dao_ais.getImagensByIdInterval(137, 148));
-		dao_cat.create(38, "lugares", 		dao_ais.getImagensByIdInterval(149, 160));
-		dao_cat.create(39, "pessoas", 		dao_ais.getImagensByIdInterval(161, 172));
-		dao_cat.create(40, "sensacoes", 	dao_ais.getImagensByIdInterval(173, 184));
-		dao_cat.create(41, "transporte", 	dao_ais.getImagensByIdInterval(185, 196));
-		dao_cat.create(42, "verbos", 		dao_ais.getImagensByIdInterval(197, 208));
+		dao_cat.create(29, "alimentos", 	dao_ais.getImagensByIdInterval(43, 54), 1);
+		dao_cat.create(30, "animais", 		dao_ais.getImagensByIdInterval(55, 66), 1);
+		dao_cat.create(31, "aparelhos", 	dao_ais.getImagensByIdInterval(67, 75), 1);
+		dao_cat.create(32, "banheiro",  	dao_ais.getImagensByIdInterval(76, 87), 1);
+		dao_cat.create(33, "bebidas", 		dao_ais.getImagensByIdInterval(88, 94), 1);
+		dao_cat.create(34, "corpo", 		dao_ais.getImagensByIdInterval(95, 106), 1);
+		dao_cat.create(35, "familia 1", 	dao_ais.getImagensByIdInterval(107, 122), 1);
+		dao_cat.create(36, "familia 2", 	dao_ais.getImagensByIdInterval(123, 136), 1);
+		dao_cat.create(37, "frutas", 		dao_ais.getImagensByIdInterval(137, 148), 1);
+		dao_cat.create(38, "lugares", 		dao_ais.getImagensByIdInterval(149, 160), 1);
+		dao_cat.create(39, "pessoas", 		dao_ais.getImagensByIdInterval(161, 172), 1);
+		dao_cat.create(40, "sensacoes", 	dao_ais.getImagensByIdInterval(173, 184), 1);
+		dao_cat.create(41, "transporte", 	dao_ais.getImagensByIdInterval(185, 196), 1);
+		dao_cat.create(42, "verbos", 		dao_ais.getImagensByIdInterval(197, 208), 1);
 		
 		dao_ais.close();
 		

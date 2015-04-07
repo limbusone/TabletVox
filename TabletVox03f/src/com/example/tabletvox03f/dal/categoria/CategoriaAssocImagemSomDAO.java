@@ -75,6 +75,16 @@ public class CategoriaAssocImagemSomDAO
 		values.put(TabletVoxSQLiteOpenHelper.AIS_COLUMN_ID,  ais_id);		
 		database.insert(TabletVoxSQLiteOpenHelper.TABLE_CAT_AIS, null, values);		
 	}
+	
+	public void create(long cat_id, long ais_id, int pagina, int ordem)
+	{
+		ContentValues values = new ContentValues();
+		values.put(TabletVoxSQLiteOpenHelper.CAT_COLUMN_ID,  cat_id);
+		values.put(TabletVoxSQLiteOpenHelper.AIS_COLUMN_ID,  ais_id);
+		values.put(TabletVoxSQLiteOpenHelper.CAT_AIS_COLUMN_PAGE, pagina);
+		values.put(TabletVoxSQLiteOpenHelper.CAT_AIS_COLUMN_ORDEM, ordem);
+		database.insert(TabletVoxSQLiteOpenHelper.TABLE_CAT_AIS, null, values);
+	}
 
 	public void delete(long id)
 	{
@@ -195,15 +205,19 @@ public class CategoriaAssocImagemSomDAO
 		
 		Cursor cursor = database.query(
 				TabletVoxSQLiteOpenHelper.TABLE_CAT_AIS, columns, 
-				TabletVoxSQLiteOpenHelper.CAT_COLUMN_ID + " = " + id + " AND " + "cat_ais_page = " + page, 
+				TabletVoxSQLiteOpenHelper.CAT_COLUMN_ID + " = " + id + " AND " + 
+				TabletVoxSQLiteOpenHelper.CAT_AIS_COLUMN_PAGE + " = " + page, 
 				null, null, null, null);
 		
 		AssocImagemSomDAO aisDao = new AssocImagemSomDAO(sqliteOpenHelper);
+		aisDao.open();
 	
 		cursor.moveToFirst();
 		while (!(cursor.isAfterLast()))
 		{
-			ais_list.add(aisDao.getImagemById(cursor.getInt(2)));
+			AssocImagemSom imagem = aisDao.getImagemById(cursor.getInt(2));
+			imagem.setPagina(page);
+			ais_list.add(imagem);
 			cursor.moveToNext();
 		}
 		cursor.close();

@@ -70,7 +70,7 @@ public class CarregarImagensTelas extends AsyncTask<Integer, Void, ArrayList<Ass
 			default:
 				CategoriaDAO cat_dao = new CategoriaDAO(activeContext);
 				cat_dao.open();
-				list = cat_dao.getImagens(params[2]);
+				list = cat_dao.getImagens(params[2], params[0]);
 				cat_dao.close();
 				
 				break;

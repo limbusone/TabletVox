@@ -94,6 +94,24 @@ public class CategoriaDAO
 		}		
 	}
 	
+	public void create(long ais_id, String nome, ArrayList<AssocImagemSom> imagens, int pagina)
+	{
+		ContentValues values = new ContentValues();
+		values.put(TabletVoxSQLiteOpenHelper.AIS_COLUMN_ID,  (int) ais_id);
+		values.put(TabletVoxSQLiteOpenHelper.CAT_COLUMN_NOME,  nome);
+		
+		int cat_id = (int) database.insert(TabletVoxSQLiteOpenHelper.TABLE_CAT, null, values);
+		// se houver itens incluir as imagens
+		if ( !( (imagens == null) || (imagens.size() == 0) ) )
+		{
+			CategoriaAssocImagemSomDAO dao_cat_ais = new CategoriaAssocImagemSomDAO(sqliteOpenHelper);
+			dao_cat_ais.open();
+			
+			for (int i = 0, length = imagens.size(); i < length; i++)
+				dao_cat_ais.create(cat_id, imagens.get(i).getId(), pagina, 0);
+		}		
+	}
+	
 	public ArrayList<Categoria> create(ArrayList<Categoria> categorias)
 	{
 		ArrayList<Categoria> retorno = new ArrayList<Categoria>();
@@ -300,7 +318,9 @@ public class CategoriaDAO
 		cursor.moveToFirst();
 		while (!(cursor.isAfterLast()))
 		{
-			ais_list.add(dao_ais.getImagemById(cursor.getInt(2)));
+			AssocImagemSom imagem = dao_ais.getImagemById(cursor.getInt(2));
+			imagem.setPagina(cursor.getInt(3));
+			ais_list.add(imagem);
 			cursor.moveToNext();
 		}
 		
@@ -323,7 +343,7 @@ public class CategoriaDAO
 		"max(" + TabletVoxSQLiteOpenHelper.CAT_AIS_COLUMN_PAGE + ") " 	+
 		"FROM " 														+ 
 		TabletVoxSQLiteOpenHelper.TABLE_CAT_AIS 						+ 
-		"WHERE " 														+ 
+		" WHERE " 														+ 
 		TabletVoxSQLiteOpenHelper.CAT_COLUMN_ID + "=" + Integer.toString(categoriaId); 
 		
 		Cursor cursor = database.rawQuery(sql, null);

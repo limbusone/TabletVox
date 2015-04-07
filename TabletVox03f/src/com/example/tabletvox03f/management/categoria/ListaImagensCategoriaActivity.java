@@ -47,7 +47,7 @@ public class ListaImagensCategoriaActivity extends ActionBarActivity implements 
 			
 		// criar adapter que conterá os fragments
 		mPaginacaoAdapter = new PaginacaoAdapter(getSupportFragmentManager(), imagens);
-		mPaginacaoAdapter.setPageCount(getNumeroDePaginas(categoria.getId()));
+		mPaginacaoAdapter.setPageCount(getNumeroDePaginas());
 		
         // Set up the action bar.
         final ActionBar actionBar = getSupportActionBar();
@@ -234,6 +234,24 @@ public class ListaImagensCategoriaActivity extends ActionBarActivity implements 
 			num = 1;
 		
 		return num;
+	}
+	
+	private int getNumeroDePaginas()
+	{
+		if (imagens.isEmpty())
+			return 1;
+		else
+		{
+			int maxPage = imagens.get(0).getPagina();
+			for (int i = 1, length = imagens.size(); i < length; i++)
+			{
+				AssocImagemSom imagem = imagens.get(i);
+				if (imagem.getPagina() > maxPage)
+					maxPage = imagem.getPagina();
+			}
+			
+			return maxPage;
+		}
 	}
 
 }

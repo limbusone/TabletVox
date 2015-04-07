@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 
 import com.example.tabletvox03f.dal.CarregarImagensComandos;
 import com.example.tabletvox03f.dal.CarregarImagensTelas;
+import com.example.tabletvox03f.dal.categoria.CategoriaDAO;
 
 public class ModoTouchActivity extends TelaBaseActivity 
 {
@@ -156,7 +157,11 @@ public class ModoTouchActivity extends TelaBaseActivity
 		// inicializa paginação
 		current_page = init_page = 1;
 		//final_page = (new XmlUtilsTelas(this, Utils.TELAS_NOME_ARQUIVO_XML_ATIVO, "root")).getLastPage();
-		final_page = 1;
+		CategoriaDAO dao_cat = new CategoriaDAO(this);
+		dao_cat.open();
+		int final_page = dao_cat.getNumeroDePaginas(current_categoriaId);
+		this.final_page = (final_page > 0) ? final_page : 1;
+		dao_cat.close();
 		
 		// muda titulo conforme categoria
 		setCurrentTitle(Utils.PERFIL_ATIVO.getNome() + " - Categoria " + 

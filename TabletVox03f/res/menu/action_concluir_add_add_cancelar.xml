@@ -10,13 +10,13 @@
     <item 
         android:id="@+id/action_add"
         android:icon="@android:drawable/ic_menu_add"
-        tvox:showAsAction="ifRoom"
+        tvox:showAsAction="ifRoom|withText"
         android:title="@string/add"
         />
 	<item 
         android:id="@+id/action_add_2"
         android:icon="@android:drawable/ic_menu_add"
-        tvox:showAsAction="ifRoom"
+        tvox:showAsAction="ifRoom|withText"
         android:title="@string/add"
         />      
     <item

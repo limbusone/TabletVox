@@ -8,13 +8,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
-import com.example.tabletvox03f.dal.categoria.Categoria;
 import com.example.tabletvox03f.dal.perfil.Perfil;
 import com.example.tabletvox03f.management.categoria.ListaImagensCategoriaFragment;
 
 public class PaginacaoAdapter extends FragmentStatePagerAdapter
 {
-	private Categoria categoria;
+	//private Categoria categoria;
 	private Perfil perfil;
 	private ArrayList<AssocImagemSom> imagens;
 	
@@ -36,11 +35,11 @@ public class PaginacaoAdapter extends FragmentStatePagerAdapter
 		super(fm);
 	}
 	
-	public PaginacaoAdapter(FragmentManager fm, Categoria categoria)
-	{
-		super(fm);
-		this.categoria = categoria;
-	}
+//	public PaginacaoAdapter(FragmentManager fm, Categoria categoria)
+//	{
+//		super(fm);
+//		this.categoria = categoria;
+//	}
 	
 	public PaginacaoAdapter(FragmentManager fm, Perfil perfil)
 	{
@@ -98,7 +97,8 @@ public class PaginacaoAdapter extends FragmentStatePagerAdapter
 	}
 	
     @Override
-    public CharSequence getPageTitle(int position) {
+    public CharSequence getPageTitle(int position) 
+    {
         return "Página " + (position + 1);
     }
 	

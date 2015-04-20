@@ -309,7 +309,7 @@ public class FormularioCategoriaActivity extends FormularioNaoPersistenteBaseAct
 	}
 
 	@Override
-	protected void acaoDosEventosDoMenu(MenuItem item)
+	protected boolean acaoDosEventosDoMenu(MenuItem item)
 	{
 		switch (item.getItemId())
 		{
@@ -318,5 +318,6 @@ public class FormularioCategoriaActivity extends FormularioNaoPersistenteBaseAct
 				break;
 		}
 		
+		return true;
 	}	
 }

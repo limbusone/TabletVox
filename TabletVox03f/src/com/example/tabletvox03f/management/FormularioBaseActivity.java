@@ -33,7 +33,7 @@ public abstract class FormularioBaseActivity extends ActionBarActivity
 	
 	protected abstract void editar();
 	
-	protected abstract void acaoDosEventosDoMenu(MenuItem item);	
+	protected abstract boolean acaoDosEventosDoMenu(MenuItem item);	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -84,7 +84,7 @@ public abstract class FormularioBaseActivity extends ActionBarActivity
 				
 		} 
 		else
-			acaoDosEventosDoMenu(item);
+			return acaoDosEventosDoMenu(item);
 		
 		return false;
 		

@@ -368,9 +368,15 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 	}
 
 	@Override
-	protected void acaoDosEventosDoMenu(MenuItem item)
+	protected boolean acaoDosEventosDoMenu(MenuItem item)
 	{
-		
+		switch (item.getItemId())
+		{
+		case android.R.id.home:
+			finish();
+			break;
+		}
+		return true;
 	}
 	
 }

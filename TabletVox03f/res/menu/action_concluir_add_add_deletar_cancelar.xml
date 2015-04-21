@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tvox="http://schemas.android.com/apk/res-auto" >
+    <item 
+        android:id="@+id/action_cancelar"
+        android:icon="@android:drawable/ic_menu_close_clear_cancel"
+        tvox:showAsAction="always"
+        android:title=""
+        />
+    <item 
+        android:id="@+id/action_add"
+        android:icon="@android:drawable/ic_menu_add"
+        tvox:showAsAction="ifRoom|withText"
+        android:title="@string/add"
+        />
+	<item 
+        android:id="@+id/action_add_2"
+        android:icon="@android:drawable/ic_menu_add"
+        tvox:showAsAction="ifRoom|withText"
+        android:title="@string/add"
+        />
+	<item 
+        android:id="@+id/action_del"
+        android:icon="@android:drawable/ic_menu_delete"
+        tvox:showAsAction="ifRoom|withText"
+        android:title="@string/deletar"
+        />      
+    <item
+        android:id="@+id/action_concluir"
+        android:icon="@drawable/ic_action_accept"
+        tvox:showAsAction="always"
+        android:title=""
+        />
+</menu>

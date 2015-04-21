@@ -92,6 +92,7 @@
     <string name="gerenciar">Gerenciar</string>
     <string name="pagina">Página</string>
     <string name="imagem">Imagem</string>
+    <string name="deletar">Deletar</string>
     
 
 </resources>

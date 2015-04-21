@@ -101,6 +101,7 @@ public class AssocImagemSom implements Parcelable
 	// construtor de cópia
 	public AssocImagemSom(AssocImagemSom ais)
 	{
+		this.id				= ais.getId();
 		this.desc 			= ais.getDesc();
 		this.titulo_imagem 	= ais.getTituloImagem();
 		this.titulo_som		= ais.getTituloSom();

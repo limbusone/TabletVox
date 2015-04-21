@@ -30,6 +30,17 @@ public class PaginacaoAdapter extends FragmentStatePagerAdapter
 		refresh();
 	}
 	
+	public void subPageCount()
+	{
+		pageCount--;
+		refresh();
+	}
+	
+	public void setItems(ArrayList<AssocImagemSom> imagens)
+	{
+		this.imagens = imagens;
+	}
+	
 	public PaginacaoAdapter(FragmentManager fm)
 	{
 		super(fm);

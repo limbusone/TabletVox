@@ -92,25 +92,28 @@ public class ListaImagensCategoriaActivity extends ActionBarActivity implements 
 	{
 		Intent intent = new Intent();
 		
+		final ActionBar actionBar = getSupportActionBar();
 		switch(item.getItemId())
 		{
-			case R.id.action_concluir:
+			case R.id.action_concluir: // concluir definicao de imagens
 //				ArrayList<AssocImagemSom> imagens = ((ItemDeleteAssocImagemSomAdapter)lv.getAdapter()).getItems();
 				intent.putParcelableArrayListExtra("imagens", (ArrayList<AssocImagemSom>) imagens.clone());			
 				this.setResult(RC_DEFINIR_IMGS_SUCESSO, intent);
 				finish();
 				break;
-			case R.id.action_add:
+			case R.id.action_add: // adicionar imagens a pagina atual
 				intent = new Intent(this, SelecionarImagensActivity.class);
 				startActivityForResult(intent, 1);
 				break;
-			case R.id.action_add_2:
+			case R.id.action_add_2: // adicionar pagina
             	mPaginacaoAdapter.addPageCount();
-                final ActionBar actionBar = getSupportActionBar();
                 actionBar.addTab(
                         actionBar.newTab()
                                 .setText(mPaginacaoAdapter.getPageTitle(mPaginacaoAdapter.getCount() - 1))
                                 .setTabListener(this)); 
+				break;
+			case R.id.action_del: // deletar pagina atual
+				deletarPaginaAtual();
 				break;
 			case R.id.action_cancelar:
 				this.setResult(RC_DEFINIR_IMGS_CANCELADO);
@@ -129,9 +132,10 @@ public class ListaImagensCategoriaActivity extends ActionBarActivity implements 
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
 		// Inflate the menu; this adds items to the action bar if it is present.		
-		getMenuInflater().inflate(R.menu.action_concluir_add_add_cancelar, menu);
+		getMenuInflater().inflate(R.menu.action_concluir_add_add_deletar_cancelar, menu);
 		menu.findItem(R.id.action_add).setTitle(R.string.imagem);
 		menu.findItem(R.id.action_add_2).setTitle(R.string.pagina);
+		menu.findItem(R.id.action_del).setTitle(R.string.pagina);
 		return true;
 	}
 	
@@ -252,6 +256,84 @@ public class ListaImagensCategoriaActivity extends ActionBarActivity implements 
 			
 			return maxPage;
 		}
+	}
+	
+	private void deletarImagens(int pagina)
+	{
+		ArrayList<AssocImagemSom> imagensARemover = new ArrayList<AssocImagemSom>();
+		int i, length;
+		for (i = 0, length = imagens.size(); i < length; i++)
+		{
+			AssocImagemSom imagem = imagens.get(i);
+			if (pagina == imagem.getPagina())
+				imagensARemover.add(imagem);
+		}
+		
+		if (imagensARemover.size() > 0)
+			for (i = 0, length = imagensARemover.size(); i < length; i++)
+				imagens.remove(imagensARemover.get(i));
+
+
+	}
+	
+	private void deletarPaginaAtual()
+	{
+		if (!(imagens.isEmpty()))
+		{
+			ActionBar actionBar = getSupportActionBar();
+			Tab paginaAtual = actionBar.getSelectedTab();
+			
+			deletarImagens(paginaAtual.getPosition() + 1);
+			
+			redefinirNumeracaoPaginacaoParaImagens(paginaAtual.getPosition() + 1, mPaginacaoAdapter.getCount());			
+			actionBar.removeTab(paginaAtual);
+			// resetar os items do adapter porque a referencia antiga não vale mais
+			mPaginacaoAdapter.setItems(imagens);
+			mPaginacaoAdapter.subPageCount();
+			redefinirTitulosDasPaginas();
+		}
+	}
+	
+	private void redefinirTitulosDasPaginas()
+	{
+		ActionBar actionBar = getSupportActionBar();
+        for (int i = 0, length = mPaginacaoAdapter.getCount(); i < length; i++) 
+        {
+    		Tab tab = actionBar.getTabAt(i);
+    		tab.setText(mPaginacaoAdapter.getPageTitle(i));
+        }
+	}
+	
+	private void redefinirNumeracaoPaginacaoParaImagens(int paginaRemovida, int numeroDePaginas)
+	{
+		ArrayList<AssocImagemSom> imagens_repaginadas = new ArrayList<AssocImagemSom>();
+		
+		// adicionar as imagens anteriores à pagina removida
+		for (int i = 0, length = imagens.size(); i < length; i++)
+		{
+			AssocImagemSom imagem = imagens.get(i);
+			if (imagem.getPagina() < paginaRemovida)
+				imagens_repaginadas.add(imagem);
+		}
+
+		
+		// alterar a pagina das imagens a partir da pagina removida
+		// subtraindo 1
+		for (int nPagina = paginaRemovida + 1; nPagina <= numeroDePaginas; nPagina++ )
+		{
+			for (int j = 0, length = imagens.size(); j < length; j++)
+			{
+				AssocImagemSom imagem = imagens.get(j);
+				if (nPagina == imagem.getPagina())
+				{
+					AssocImagemSom imagemCopia = new AssocImagemSom(imagem);
+					imagemCopia.setPagina(imagem.getPagina() - 1);
+					imagens_repaginadas.add(imagemCopia);
+				}
+			}
+		}
+		
+		this.imagens = imagens_repaginadas;
 	}
 
 }

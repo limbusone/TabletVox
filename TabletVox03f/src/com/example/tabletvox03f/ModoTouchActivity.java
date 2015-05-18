@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -165,7 +166,10 @@ public class ModoTouchActivity extends TelaBaseActivity
 		
 		// muda titulo conforme categoria
 		setCurrentTitle(Utils.PERFIL_ATIVO.getNome() + " - Categoria " + 
-		Utils.PERFIL_ATIVO.getCategoriaById(current_categoriaId).getNome());		
+		Utils.PERFIL_ATIVO.getCategoriaById(current_categoriaId).getNome());
+		
+		// habilita up back
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		GridView gridview = (GridView) findViewById(R.id.gridview);
 		GridView gridview_frase = (GridView) findViewById(R.id.gridview_frase);
@@ -236,6 +240,19 @@ public class ModoTouchActivity extends TelaBaseActivity
 		// carregando evento acionar imagem-comando
 		gridview_atalhos.setOnItemClickListener(startImagemComando);
 
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) 
+	{
+	    switch (item.getItemId()) 
+	    {
+		    // Respond to the action bar's Up/Home button
+		    case android.R.id.home:
+		        finish();
+		        return true;
+	    }
+	    return super.onOptionsItemSelected(item);
 	}
 
 	@Override

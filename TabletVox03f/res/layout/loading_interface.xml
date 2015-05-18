@@ -1,25 +1,25 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
 	
+    <ImageView
+        android:id="@+id/splashimage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:contentDescription="@string/blabla"
+        android:src="@raw/ic_launcher" />
+    
 	<ProgressBar
 	    android:id="@+id/progressBarInicializar"
-	    style="?android:attr/progressBarStyleLarge"
+	    style="?android:attr/progressBarStyle"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:indeterminate="true"
-	    android:layout_centerInParent="true"
+	    android:layout_centerHorizontal="true"
+	    android:layout_below="@id/splashimage"
 	    />
-
-	<TextView
-	    android:id="@+id/lblCarregando"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:text="@string/texto_carregando"
-	    android:layout_centerInParent="true"
-	    android:layout_below="@id/progressBarInicializar"
-	    android:textAppearance="?android:attr/textAppearanceLarge"
-	 />    
     
 </RelativeLayout>

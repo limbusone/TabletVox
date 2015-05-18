@@ -4,17 +4,31 @@
     android:layout_height="match_parent"
     android:padding="10dp"
     tools:context=".MainMenuActivity" 
-    android:orientation="vertical">
+    android:orientation="horizontal">
 
-    <Button 
+    <ImageButton
         android:id="@+id/cmdLaunchModoTouch"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/cmdLaunchModoTouchText"/>
-    <Button 
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:contentDescription="@string/cmdLaunchModoTouchText"
+        android:scaleType="fitCenter"
+        android:src="@raw/touch_screen512"
+        style="@style/borderless" />
+
+    <View
+        android:layout_width="3dp"
+        android:layout_height="fill_parent"
+        android:background="@android:drawable/divider_horizontal_bright"></View>
+    
+    <ImageButton 
         android:id="@+id/cmdLaunchModoVarredura"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/cmdLaunchModoVarreduraText"/>
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="fill_parent"
+        android:src="@raw/sweep"
+        android:scaleType="fitCenter"
+        android:contentDescription="@string/cmdLaunchModoVarreduraText"
+        style="@style/borderless"/>
 	
 </LinearLayout>

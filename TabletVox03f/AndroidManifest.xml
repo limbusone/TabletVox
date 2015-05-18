@@ -9,8 +9,6 @@
         android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <!-- Include following permission if you load images from Internet -->
-    <uses-permission android:name="android.permission.INTERNET" />
     <!-- Include following permission if you want to cache images on SD card -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />    
     
@@ -34,7 +32,7 @@
         <!-- telas principais -->
         <activity
             android:name="com.example.tabletvox03f.MainMenuActivity"
-            android:label="@string/title_activity_main_menu" >
+            android:label="@string/title_activity_main_menu">
 
         </activity>        
         
@@ -66,12 +64,8 @@
         <activity
             android:name="com.example.tabletvox03f.ModoVarreduraCategoriasActivity"
             android:label="@string/title_activity_modo_varredura_categorias"
-            android:parentActivityName="com.example.tabletvox03f.MainMenuActivity" 
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
             android:screenOrientation="landscape">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.tabletvox03f.MainMenuActivity" />
         </activity>
         
         <!-- telas de gerenciamento -->

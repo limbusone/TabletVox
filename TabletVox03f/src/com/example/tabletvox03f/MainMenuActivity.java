@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.tabletvox03f.management.OpcoesActivity;
@@ -31,8 +32,8 @@ public class MainMenuActivity extends Activity
 		// inicializa frase global
 		Utils.lista_imagens_frase_global = new ArrayList<ImgItem>();
 		
-		Button cmd_modo_touch 		= (Button) findViewById(R.id.cmdLaunchModoTouch);
-		Button cmd_modo_varredura 	= (Button) findViewById(R.id.cmdLaunchModoVarredura);
+		ImageButton cmd_modo_touch 		= (ImageButton) findViewById(R.id.cmdLaunchModoTouch);
+		ImageButton cmd_modo_varredura 	= (ImageButton) findViewById(R.id.cmdLaunchModoVarredura);
 		
 		// evento que starta modo touch
 		cmd_modo_touch.setOnClickListener(new OnClickListener() {

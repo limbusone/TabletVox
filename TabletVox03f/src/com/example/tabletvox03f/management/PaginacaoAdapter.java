@@ -8,14 +8,17 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
+import com.example.tabletvox03f.dal.categoria.Categoria;
 import com.example.tabletvox03f.dal.perfil.Perfil;
 import com.example.tabletvox03f.management.categoria.ListaImagensCategoriaFragment;
+import com.example.tabletvox03f.management.perfil.ListaCategoriasPerfilFragment;
 
 public class PaginacaoAdapter extends FragmentStatePagerAdapter
 {
 	//private Categoria categoria;
 	private Perfil perfil;
 	private ArrayList<AssocImagemSom> imagens;
+	private ArrayList<Categoria> categorias;
 	
 	private int pageCount;
 	
@@ -36,9 +39,14 @@ public class PaginacaoAdapter extends FragmentStatePagerAdapter
 		refresh();
 	}
 	
-	public void setItems(ArrayList<AssocImagemSom> imagens)
+	public void setImagens(ArrayList<AssocImagemSom> imagens)
 	{
 		this.imagens = imagens;
+	}
+	
+	public void setCategorias(ArrayList<Categoria> categorias)
+	{
+		this.categorias = categorias;
 	}
 	
 	public PaginacaoAdapter(FragmentManager fm)
@@ -58,18 +66,30 @@ public class PaginacaoAdapter extends FragmentStatePagerAdapter
 		this.perfil = perfil;
 	}
 	
-	public PaginacaoAdapter(FragmentManager fm, ArrayList<AssocImagemSom> imagens)
+	public PaginacaoAdapter(FragmentManager fm, ArrayList<?> lista)
 	{
 		super(fm);
-		this.imagens = imagens;
+		if (!(lista.isEmpty()))
+		{
+			if (lista.get(0) instanceof AssocImagemSom)
+				this.imagens = (ArrayList<AssocImagemSom>) lista;
+			else if (lista.get(0) instanceof Categoria)
+				this.categorias = (ArrayList<Categoria>) lista;
+		}
+		else
+		{
+			this.imagens = null;
+			this.categorias = null;
+		}
 	}
-
+	
 	@Override
 	public Fragment getItem(int position)
 	{
 		Fragment fragment = null;
 		if (!(imagens == null))
 		{
+			// chamar fragment relativo as imagens da categoria
 	        fragment = new ListaImagensCategoriaFragment();
 	        Bundle args = new Bundle();
 	        args.putParcelableArrayList
@@ -80,10 +100,16 @@ public class PaginacaoAdapter extends FragmentStatePagerAdapter
 	        
 	        fragment.setArguments(args);
 		} 
-		else if (perfil != null)
+		else if (categorias != null)
 		{
 			// chamar fragment relativo as categorias do perfil
-			fragment = new Fragment();
+			fragment = new ListaCategoriasPerfilFragment();
+			Bundle args = new Bundle();
+			args.putParcelableArrayList
+			(
+					ListaCategoriasPerfilFragment.KEY_CATEGORIAS, 
+					(categorias.isEmpty()) ? new ArrayList<Categoria>() : getCategoriasPorPagina(position + 1)
+			);
 		}
 		else
 			fragment = new Fragment();
@@ -101,6 +127,16 @@ public class PaginacaoAdapter extends FragmentStatePagerAdapter
 		return lista;
 	}
 
+	private ArrayList<Categoria> getCategoriasPorPagina(int pagina)
+	{
+		ArrayList<Categoria> lista = new ArrayList<Categoria>();
+		for (Categoria categoria : categorias)
+			if (pagina == categoria.getPagina())
+				lista.add(categoria);
+		
+		return lista;
+	}
+	
 	@Override
 	public int getCount()
 	{

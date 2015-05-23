@@ -149,7 +149,18 @@ public class Categoria implements Parcelable
 	public void setOrdem(int ordem)
 	{
 		this.ordem = ordem;
-	}	
+	}
+	
+	public void setAll(Categoria categoria)
+	{
+		this.id 		= categoria.getId();
+		this.ais 		= categoria.getAIS();
+		this.nome 		= categoria.getNome();
+		this.imagens 	= categoria.getImagens();
+		this.catImagens = categoria.getCatImagens();
+		this.pagina		= categoria.getPagina();
+		this.ordem		= categoria.getOrdem();		
+	}
 	
 	public AssocImagemSom getImagemById(int id)
 	{

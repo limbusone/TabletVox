@@ -53,14 +53,9 @@
 	    android:layout_height="0.1dp"
 	    android:background="#0099CC" />
 
-	<Button
-	    android:id="@+id/btnAddCategoria"
-	    android:layout_width="match_parent"
+	<Button 
+	    android:id="@+id/btnDefinirCategorias"
+	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
-	    android:text="@string/add_categoria" />
-	
-    <ListView
-        android:id="@+id/listViewCat"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+	    android:text="@string/definir_categorias" />
 </LinearLayout>

@@ -221,7 +221,7 @@ public class FormularioCategoriaActivity extends FormularioNaoPersistenteBaseAct
 		return retorno;
 	}
 
-	// callback ao voltar da tela selecionar uma imagem
+	// callback ao voltar da tela selecionar uma imagem ou de definicao de imagens
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
@@ -259,7 +259,7 @@ public class FormularioCategoriaActivity extends FormularioNaoPersistenteBaseAct
 
 			imgImagem.setImageDrawable(fio.getImgItemDrawableFromInternalStorageOrAssets(ais));
 
-			lblSomSel.setText(ais.getTituloSom() + ".wav");
+			lblSomSel.setText(ais.getTituloSom() + "." + FilesIO.EXTENSAO_ARQUIVO_SOM);
 			
 			imgImagem.setVisibility(View.VISIBLE);
 

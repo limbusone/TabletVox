@@ -16,7 +16,6 @@ import android.widget.Toast;
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
 import com.example.tabletvox03f.dal.categoria.Categoria;
-import com.example.tabletvox03f.dal.categoria.CategoriaDAO;
 import com.example.tabletvox03f.management.OnImagemSelectedListener;
 import com.example.tabletvox03f.management.PaginacaoAdapter;
 import com.example.tabletvox03f.management.assocImagemSom.SelecionarImagensActivity;
@@ -219,27 +218,6 @@ public class ListaImagensCategoriaActivity extends ActionBarActivity implements 
 		
 	}
 	
-	private int getNumeroDePaginas(int categoriaId)
-	{
-		int num;
-		
-		if (categoriaId != 0)
-		{
-			CategoriaDAO dao_cat = new CategoriaDAO(this);
-			
-			dao_cat.open();
-			num = dao_cat.getNumeroDePaginas(categoriaId);
-			dao_cat.close();
-		}
-		else
-			return 1;
-		
-		if (num == 0)
-			num = 1;
-		
-		return num;
-	}
-	
 	private int getNumeroDePaginas()
 	{
 		if (imagens.isEmpty())
@@ -288,7 +266,7 @@ public class ListaImagensCategoriaActivity extends ActionBarActivity implements 
 			redefinirNumeracaoPaginacaoParaImagens(paginaAtual.getPosition() + 1, mPaginacaoAdapter.getCount());			
 			actionBar.removeTab(paginaAtual);
 			// resetar os items do adapter porque a referencia antiga não vale mais
-			mPaginacaoAdapter.setItems(imagens);
+			mPaginacaoAdapter.setImagens(imagens);
 			mPaginacaoAdapter.subPageCount();
 			redefinirTitulosDasPaginas();
 		}

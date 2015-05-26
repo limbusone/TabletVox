@@ -1,9 +1,8 @@
 package com.example.tabletvox03f.management.perfil;
 
-import java.util.ArrayList;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -46,12 +45,12 @@ public class ListaCategoriasPerfilActivity extends ActionBarActivity implements 
 		
 		// receber perfil por intent
 		Intent intent = getIntent();
-		Perfil perfil = (Perfil) intent.getParcelableExtra("perfil");
-		ArrayList<Categoria> antigasCategorias = intent.getParcelableArrayListExtra("antigasCategorias");
+		Perfil perfil = intent.getParcelableExtra("perfil");
+		ListaCategoria antigasCategorias = intent.getParcelableExtra("antigasCategorias");
 		
-		categorias = (perfil.getCategorias() == null) ? new ListaCategoria() : (ListaCategoria) perfil.getCategorias();
+		categorias = (perfil.getCategorias() == null) ? new ListaCategoria() : perfil.getCategorias();
 		
-		this.antigasCategorias = (ListaCategoria) antigasCategorias;
+		this.antigasCategorias = (antigasCategorias == null) ? new ListaCategoria() : antigasCategorias;
 		
 		// criar adapter que conterá os fragments
 		mPaginacaoAdapter = new PaginacaoAdapter(getSupportFragmentManager(), categorias);
@@ -105,9 +104,9 @@ public class ListaCategoriasPerfilActivity extends ActionBarActivity implements 
 		{
 			// concluir definicao de categorias
 			case R.id.action_concluir: 
-				intent.putParcelableArrayListExtra("categorias", (ListaCategoria) categorias.clone());
-				intent.putParcelableArrayListExtra("novasCategorias", novasCategorias);
-				intent.putParcelableArrayListExtra("antigasCategorias", antigasCategorias);
+				intent.putExtra("categorias", (Parcelable) categorias.clone());
+				intent.putExtra("novasCategorias", (Parcelable) novasCategorias);
+				intent.putExtra("antigasCategorias", (Parcelable) antigasCategorias);
 				this.setResult(RC_DEFINIR_CATS_SUCESSO, intent);
 				finish();
 				break;
@@ -161,7 +160,7 @@ public class ListaCategoriasPerfilActivity extends ActionBarActivity implements 
 		{
 			// adicionar categoria com sucesso
 			case SelecionarCategoriasActivity.RC_ADD_CAT_SUCESSO: 
-				ArrayList<Categoria> categorias = data.getParcelableArrayListExtra("selecionados"); 
+				ListaCategoria categorias = data.getParcelableExtra("selecionados"); 
 				addNovasCategorias(categorias);
 				break;
 			// adicionar categoria cancelado
@@ -175,7 +174,7 @@ public class ListaCategoriasPerfilActivity extends ActionBarActivity implements 
 		}
 	}	
 	
-	private void addNovasCategorias(ArrayList<Categoria> categorias)
+	private void addNovasCategorias(ListaCategoria categorias)
 	{
 		int paginaAtual = getSupportActionBar().getSelectedTab().getPosition() + 1;
 		
@@ -217,7 +216,7 @@ public class ListaCategoriasPerfilActivity extends ActionBarActivity implements 
 	
 	private void deletarCategorias(int pagina)
 	{
-		ArrayList<Categoria> categoriasARemover = new ArrayList<Categoria>();
+		ListaCategoria categoriasARemover = new ListaCategoria();
 		int i, length;
 		for (i = 0, length = categorias.size(); i < length; i++)
 		{

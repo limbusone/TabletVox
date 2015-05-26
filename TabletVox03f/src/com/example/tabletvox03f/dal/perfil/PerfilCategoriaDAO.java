@@ -11,6 +11,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.tabletvox03f.dal.TabletVoxSQLiteOpenHelper;
 import com.example.tabletvox03f.dal.categoria.Categoria;
 import com.example.tabletvox03f.dal.categoria.CategoriaDAO;
+import com.example.tabletvox03f.dal.categoria.ListaCategoria;
 
 public class PerfilCategoriaDAO
 {
@@ -19,7 +20,9 @@ public class PerfilCategoriaDAO
 	{
 		TabletVoxSQLiteOpenHelper.PFL_CAT_COLUMN_ID,
 		TabletVoxSQLiteOpenHelper.PFL_COLUMN_ID,
-		TabletVoxSQLiteOpenHelper.CAT_COLUMN_ID
+		TabletVoxSQLiteOpenHelper.CAT_COLUMN_ID,
+		TabletVoxSQLiteOpenHelper.PFL_CAT_COLUMN_PAGE,
+		TabletVoxSQLiteOpenHelper.PFL_CAT_COLUMN_ORDEM
 	};
 	
 	private TabletVoxSQLiteOpenHelper sqliteOpenHelper;
@@ -63,6 +66,16 @@ public class PerfilCategoriaDAO
 		values.put(TabletVoxSQLiteOpenHelper.CAT_COLUMN_ID,  cat_id);
 		database.insert(TabletVoxSQLiteOpenHelper.TABLE_PFL_CAT, null, values);		
 	}
+	
+	public void create(long pfl_id, long cat_id, int pagina, int ordem)
+	{
+		ContentValues values = new ContentValues();
+		values.put(TabletVoxSQLiteOpenHelper.PFL_COLUMN_ID,  pfl_id);
+		values.put(TabletVoxSQLiteOpenHelper.CAT_COLUMN_ID,  cat_id);
+		values.put(TabletVoxSQLiteOpenHelper.PFL_CAT_COLUMN_PAGE, pagina);
+		values.put(TabletVoxSQLiteOpenHelper.PFL_CAT_COLUMN_ORDEM, ordem);
+		database.insert(TabletVoxSQLiteOpenHelper.TABLE_PFL_CAT, null, values);		
+	}	
 
 	public void delete(long id)
 	{
@@ -85,7 +98,7 @@ public class PerfilCategoriaDAO
 		
 	}
 	
-	public void delete(ArrayList<Categoria> categorias, long id)
+	public void delete(ListaCategoria categorias, long id)
 	{
 		for (int i = 0, length = categorias.size(); i < length; i++)
 			delete((int) id, categorias.get(i).getId());
@@ -167,9 +180,9 @@ public class PerfilCategoriaDAO
 	}
 	
 	// retorna um arraylist de Categorias pelo id do perfil
-	public ArrayList<Categoria> getCategoriasByPerfilId(long id)
+	public ListaCategoria getCategoriasByPerfilId(long id)
 	{
-		ArrayList<Categoria> cat_list = new ArrayList<Categoria>();
+		ListaCategoria cat_list = new ListaCategoria();
 		
 		Cursor cursor = database.query(
 				TabletVoxSQLiteOpenHelper.TABLE_PFL_CAT, columns, 

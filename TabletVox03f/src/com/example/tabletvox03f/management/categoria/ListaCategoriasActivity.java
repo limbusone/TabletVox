@@ -1,9 +1,6 @@
 package com.example.tabletvox03f.management.categoria;
 
-import java.util.ArrayList;
-
 import android.content.Intent;
-import android.support.v4.app.NavUtils;
 import android.text.Editable;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,10 +11,12 @@ import android.widget.Toast;
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.dal.categoria.Categoria;
 import com.example.tabletvox03f.dal.categoria.CategoriaDAO;
+import com.example.tabletvox03f.dal.categoria.ListaCategoria;
 import com.example.tabletvox03f.management.FormularioBaseActivity;
 import com.example.tabletvox03f.management.ListaComBuscaManageActivity;
+import com.example.tabletvox03f.management.OnCategoriaSelectedListener;
 
-public class ListaCategoriasActivity extends ListaComBuscaManageActivity
+public class ListaCategoriasActivity extends ListaComBuscaManageActivity implements OnCategoriaSelectedListener
 {
 
 	public static final int RC_CATS_GERENCIADAS = 1;
@@ -42,16 +41,16 @@ public class ListaCategoriasActivity extends ListaComBuscaManageActivity
 		CategoriaDAO dao_cat = new CategoriaDAO(this);
 		
 		dao_cat.open();
-		ArrayList<Categoria> lista = dao_cat.getAll();
+		ListaCategoria lista = dao_cat.getAll();
 		dao_cat.close();
 		
-		return (new ItemCategoriaAdapter(this, (ArrayList<Categoria>) lista.clone()));
+		return (new ItemCategoriaAdapter(this, (ListaCategoria) lista.clone()));
 
 	}
 	
-	private void carregarLista(ArrayList<Categoria> categorias)
+	private void carregarLista(ListaCategoria categorias)
 	{
-		lv.setAdapter(new ItemCategoriaAdapter(this, (ArrayList<Categoria>) categorias.clone()));
+		lv.setAdapter(new ItemCategoriaAdapter(this, (ListaCategoria) categorias.clone()));
 	}
 
 	@Override
@@ -114,6 +113,20 @@ public class ListaCategoriasActivity extends ListaComBuscaManageActivity
 			Toast.makeText(this, "Categoria incluida com sucesso!", Toast.LENGTH_SHORT).show();
 		else if (resultCode == FormularioCategoriaActivity.RC_CAT_EDITADA_SUCESSO)
 			Toast.makeText(this, "Categoria editada com sucesso", Toast.LENGTH_SHORT).show();
+	}
+
+	@Override
+	public void onDeleteItem(int id)
+	{
+		// Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDeleteItem(Categoria categoria)
+	{
+		// Auto-generated method stub
+		
 	}	
 
 }

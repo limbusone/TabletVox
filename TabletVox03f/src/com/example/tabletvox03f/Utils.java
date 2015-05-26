@@ -14,6 +14,7 @@ import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSomDAO;
 import com.example.tabletvox03f.dal.categoria.Categoria;
 import com.example.tabletvox03f.dal.categoria.CategoriaDAO;
 import com.example.tabletvox03f.dal.categoria.CategoriaDAOSingleton;
+import com.example.tabletvox03f.dal.categoria.ListaCategoria;
 import com.example.tabletvox03f.dal.perfil.Perfil;
 import com.example.tabletvox03f.dal.perfil.PerfilDAO;
 import com.example.tabletvox03f.dal.perfil.PerfilDAOSingleton;
@@ -112,7 +113,7 @@ public class Utils
 		
 		dao_ais.open();
 		
-		ArrayList<Categoria> categorias = new ArrayList<Categoria>();
+		ListaCategoria categorias = new ListaCategoria();
 		
 		Categoria categoria = null;
 		
@@ -479,7 +480,7 @@ public class Utils
 		
 		dao_pfl.open();
 		
-		dao_pfl.create("Perfil 01", "Autor 01", dao_cat.getCategoriasByIdInterval(1, 14));
+		dao_pfl.create("Perfil 01", "Autor 01", dao_cat.getCategoriasByIdInterval(1, 14), 1);
 
 		dao_cat.close();
 		

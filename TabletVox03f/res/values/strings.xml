@@ -94,6 +94,9 @@
     <string name="imagem">Imagem</string>
     <string name="deletar">Deletar</string>
     <string name="definir_categorias">Definir Categorias</string>
+    <string name="perfil_incluido_sucesso">Perfil incluído com sucesso!</string>
+    <string name="perfil_editado_sucesso">Perfil editado com sucesso!</string>
+    <string name="perfil">Perfil</string>
     
 
 </resources>

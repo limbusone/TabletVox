@@ -1,7 +1,5 @@
 package com.example.tabletvox03f.management.categoria;
 
-import java.util.ArrayList;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -23,6 +21,7 @@ import com.example.tabletvox03f.dal.FilesIO;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
 import com.example.tabletvox03f.dal.categoria.Categoria;
 import com.example.tabletvox03f.dal.categoria.CategoriaDAO;
+import com.example.tabletvox03f.dal.categoria.ListaCategoria;
 import com.example.tabletvox03f.management.FormularioBaseActivity;
 import com.example.tabletvox03f.management.OnCategoriaSelectedListener;
 import com.example.tabletvox03f.management.perfil.FormularioPerfilActivity;
@@ -33,12 +32,12 @@ public class ItemCategoriaAdapter extends BaseAdapter
 {
 
 	protected Context mContext;
-	protected ArrayList<Categoria> categorias;
+	protected ListaCategoria categorias;
 	protected LayoutInflater inflator;
 	private OnCategoriaSelectedListener mListener;
 
 	
-	public ArrayList<Categoria> getCategorias()
+	public ListaCategoria getCategorias()
 	{
 		return this.categorias;
 	}
@@ -60,7 +59,7 @@ public class ItemCategoriaAdapter extends BaseAdapter
 		return 0;
 	}
 	
-	public ItemCategoriaAdapter(Context context, ArrayList<Categoria> lista)
+	public ItemCategoriaAdapter(Context context, ListaCategoria lista)
 	{
 		this.mContext = context;
 		this.categorias = lista;

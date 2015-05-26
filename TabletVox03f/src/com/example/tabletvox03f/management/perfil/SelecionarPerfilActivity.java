@@ -84,9 +84,9 @@ public class SelecionarPerfilActivity extends ListaComBuscaManageActivity
 		super.onActivityResult(requestCode, resultCode, data);
 		
 		if (resultCode == FormularioPerfilActivity.RC_PFL_INCLUIDA_SUCESSO)
-			Toast.makeText(this, "Perfil incluido com sucesso!", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, R.string.perfil_incluido_sucesso, Toast.LENGTH_SHORT).show();
 		else if (resultCode == FormularioPerfilActivity.RC_PFL_EDITADA_SUCESSO)
-			Toast.makeText(this, "Perfil editado com sucesso", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, R.string.perfil_editado_sucesso, Toast.LENGTH_SHORT).show();
 	}
 	
 	@Override
@@ -110,7 +110,7 @@ public class SelecionarPerfilActivity extends ListaComBuscaManageActivity
 	@Override
 	protected String getOptionMenuTitle()
 	{
-		return "Perfil";
+		return getString(R.string.perfil);
 	}
 
 	@Override

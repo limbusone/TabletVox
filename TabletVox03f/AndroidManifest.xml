@@ -93,6 +93,13 @@
                 android:value="com.example.tabletvox03f.management.perfil.SelecionarPerfilActivity" />
         </activity>
         
+        <activity
+            android:name="com.example.tabletvox03f.management.perfil.ListaCategoriasPerfilActivity"
+            android:label="@string/title_activity_lista_imagens_categoria"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+        </activity>        
+        
         <!-- categoria -->
         
         <activity 

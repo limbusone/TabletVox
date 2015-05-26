@@ -1,7 +1,5 @@
 package com.example.tabletvox03f.management.categoria;
 
-import java.util.ArrayList;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.View;
@@ -15,17 +13,18 @@ import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.dal.FilesIO;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
 import com.example.tabletvox03f.dal.categoria.Categoria;
+import com.example.tabletvox03f.dal.categoria.ListaCategoria;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class ItemSelectCategoriaAdapter extends ItemCategoriaAdapter
 {
 
-	private ArrayList<Categoria> selecionados;
+	private ListaCategoria selecionados;
 	
-	public ItemSelectCategoriaAdapter(Context context, ArrayList<Categoria> lista)
+	public ItemSelectCategoriaAdapter(Context context, ListaCategoria lista)
 	{
 		super(context, lista);
-		selecionados = new ArrayList<Categoria>();
+		selecionados = new ListaCategoria();
 	}
 	
 	private class ViewHolder 
@@ -95,12 +94,12 @@ public class ItemSelectCategoriaAdapter extends ItemCategoriaAdapter
 		return view;
 	}
 
-	public ArrayList<Categoria> getSelecionados()
+	public ListaCategoria getSelecionados()
 	{
 		return selecionados;
 	}
 
-	public void setSelecionados(ArrayList<Categoria> selecionados)
+	public void setSelecionados(ListaCategoria selecionados)
 	{
 		this.selecionados = selecionados;
 	}

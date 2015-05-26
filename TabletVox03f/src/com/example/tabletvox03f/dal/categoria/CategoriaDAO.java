@@ -2,16 +2,16 @@ package com.example.tabletvox03f.dal.categoria;
 
 import java.util.ArrayList;
 
-import com.example.tabletvox03f.dal.TabletVoxSQLiteOpenHelper;
-import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
-import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSomDAO;
-import com.example.tabletvox03f.dal.perfil.PerfilCategoriaDAO;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.example.tabletvox03f.dal.TabletVoxSQLiteOpenHelper;
+import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
+import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSomDAO;
+import com.example.tabletvox03f.dal.perfil.PerfilCategoriaDAO;
 
 public class CategoriaDAO
 {
@@ -112,9 +112,9 @@ public class CategoriaDAO
 		}		
 	}
 	
-	public ArrayList<Categoria> create(ArrayList<Categoria> categorias)
+	public ListaCategoria create(ListaCategoria categorias)
 	{
-		ArrayList<Categoria> retorno = new ArrayList<Categoria>();
+		ListaCategoria retorno = new ListaCategoria();
 		
 		for (int i = 0, length = categorias.size(); i < length; i++)
 		{
@@ -186,7 +186,7 @@ public class CategoriaDAO
 		database.update(TabletVoxSQLiteOpenHelper.TABLE_CAT, values, TabletVoxSQLiteOpenHelper.CAT_COLUMN_ID + " = " + id, null);
 	}
 	
-	public void update(ArrayList<Categoria> categorias)
+	public void update(ListaCategoria categorias)
 	{
 		for (int i = 0, length = categorias.size(); i < length; i++)
 			update(categorias.get(i), categorias.get(i).getId());
@@ -194,9 +194,9 @@ public class CategoriaDAO
 	
 	
 	// retorna um arraylist com todos os registros
-	public ArrayList<Categoria> getAll()
+	public ListaCategoria getAll()
 	{
-		ArrayList<Categoria> cat_list = new ArrayList<Categoria>();
+		ListaCategoria cat_list = new ListaCategoria();
 		
 		Cursor cursor = database.query(
 				TabletVoxSQLiteOpenHelper.TABLE_CAT, 
@@ -244,9 +244,9 @@ public class CategoriaDAO
 		 );		
 	}
 	
-	public ArrayList<Categoria> getCategoriasByNome(String nome)
+	public ListaCategoria getCategoriasByNome(String nome)
 	{
-		ArrayList<Categoria> cat_list = new ArrayList<Categoria>();
+		ListaCategoria cat_list = new ListaCategoria();
 		
 		Cursor cursor = database.query(
 				TabletVoxSQLiteOpenHelper.TABLE_CAT, columns, 
@@ -273,9 +273,9 @@ public class CategoriaDAO
 		return cat_list;
 	}
 	
-	public ArrayList<Categoria> getCategoriasByIdInterval(int inicio, int fim)
+	public ListaCategoria getCategoriasByIdInterval(int inicio, int fim)
 	{
-		ArrayList<Categoria> cat_list = new ArrayList<Categoria>();
+		ListaCategoria cat_list = new ListaCategoria();
 		
 		Cursor cursor = database.query(
 				TabletVoxSQLiteOpenHelper.TABLE_CAT, columns, 

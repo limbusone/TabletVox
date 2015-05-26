@@ -13,6 +13,7 @@ import com.example.tabletvox03f.Utils;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
 import com.example.tabletvox03f.dal.categoria.Categoria;
 import com.example.tabletvox03f.dal.categoria.CategoriaDAO;
+import com.example.tabletvox03f.dal.categoria.ListaCategoria;
 import com.example.tabletvox03f.dal.perfil.Perfil;
 import com.example.tabletvox03f.dal.perfil.PerfilDAO;
 
@@ -52,7 +53,7 @@ public class CarregarImagensTelas extends AsyncTask<Integer, Void, ArrayList<Ass
 				perfil.setCategorias(pfl_dao.getCategorias(perfil.getId()));
 				pfl_dao.close();
 				
-				ArrayList<Categoria> categorias = perfil.getCategorias();
+				ListaCategoria categorias = perfil.getCategorias();
 				
 				for (int i = 0, length = categorias.size(); i < length; i++)
 				{

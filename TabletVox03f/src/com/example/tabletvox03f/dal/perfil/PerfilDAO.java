@@ -11,6 +11,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.tabletvox03f.dal.TabletVoxSQLiteOpenHelper;
 import com.example.tabletvox03f.dal.categoria.Categoria;
 import com.example.tabletvox03f.dal.categoria.CategoriaDAO;
+import com.example.tabletvox03f.dal.categoria.ListaCategoria;
 
 public class PerfilDAO
 {
@@ -53,7 +54,7 @@ public class PerfilDAO
 		values.put(TabletVoxSQLiteOpenHelper.PFL_COLUMN_AUTOR, pfl.getAutor());
 		
 		pfl.setId((int) database.insert(TabletVoxSQLiteOpenHelper.TABLE_PFL, null, values));
-		ArrayList<Categoria> categorias = pfl.getCategorias();
+		ListaCategoria categorias = pfl.getCategorias();
 		// se houver itens incluir as categorias
 		if ( !( (categorias == null) || (categorias.size() == 0) ) )
 		{
@@ -73,7 +74,7 @@ public class PerfilDAO
 		database.insert(TabletVoxSQLiteOpenHelper.TABLE_PFL, null, values);		
 	}
 	
-	public void create(String nome, String autor, ArrayList<Categoria> categorias)
+	public void create(String nome, String autor, ListaCategoria categorias)
 	{
 		ContentValues values = new ContentValues();
 		values.put(TabletVoxSQLiteOpenHelper.PFL_COLUMN_NOME,  nome);
@@ -91,6 +92,25 @@ public class PerfilDAO
 				dao_pfl_cat.create(pfl_id, categorias.get(i).getId());
 		}		
 	}
+	
+	public void create(String nome, String autor, ListaCategoria categorias, int pagina)
+	{
+		ContentValues values = new ContentValues();
+		values.put(TabletVoxSQLiteOpenHelper.PFL_COLUMN_NOME,  nome);
+		values.put(TabletVoxSQLiteOpenHelper.PFL_COLUMN_AUTOR, autor);
+
+		
+		int pfl_id = (int) database.insert(TabletVoxSQLiteOpenHelper.TABLE_PFL, null, values);
+		// se houver itens incluir as categorias
+		if ( !( (categorias == null) || (categorias.size() == 0) ) )
+		{
+			PerfilCategoriaDAO dao_pfl_cat = new PerfilCategoriaDAO(sqliteOpenHelper);
+			dao_pfl_cat.open();
+			
+			for (int i = 0, length = categorias.size(); i < length; i++)
+				dao_pfl_cat.create(pfl_id, categorias.get(i).getId(), pagina, 0);
+		}		
+	}	
 	
 	public void delete(long id)
 	{
@@ -118,8 +138,8 @@ public class PerfilDAO
 		PerfilCategoriaDAO dao_pfl_cat = new PerfilCategoriaDAO(sqliteOpenHelper);
 		dao_pfl_cat.open();
 		// verifica se há algum item modificado
-		ArrayList<Categoria> categorias_antigas 	= getCategorias(id);
-		ArrayList<Categoria> categorias_novas 		= pfl.getCategorias();
+		ListaCategoria categorias_antigas 	= getCategorias(id);
+		ListaCategoria categorias_novas 		= pfl.getCategorias();
 		boolean listaAlterada = false;
 		if (categorias_antigas.size() == categorias_novas.size())
 		{
@@ -219,9 +239,9 @@ public class PerfilDAO
 		return result;
 	}	
 	
-	public ArrayList<Categoria> getCategorias(long perfilId)
+	public ListaCategoria getCategorias(long perfilId)
 	{
-		ArrayList<Categoria> categorias = new ArrayList<Categoria>();
+		ListaCategoria categorias = new ListaCategoria();
 		
 		Cursor cursor = database.query(
 				TabletVoxSQLiteOpenHelper.TABLE_PFL_CAT, PerfilCategoriaDAO.columns, 
@@ -234,7 +254,9 @@ public class PerfilDAO
 		cursor.moveToFirst();
 		while (!(cursor.isAfterLast()))
 		{
-			categorias.add(dao_cat.getCategoriaById(cursor.getInt(2)));
+			Categoria categoria = dao_cat.getCategoriaById(cursor.getInt(2));
+			categoria.setPagina(cursor.getInt(3));
+			categorias.add(categoria);
 			cursor.moveToNext();
 		}
 		
@@ -243,9 +265,9 @@ public class PerfilDAO
 		return categorias;		
 	}
 	
-	public ArrayList<Categoria> getCategorias(long perfilId, int pagina)
+	public ListaCategoria getCategorias(long perfilId, int pagina)
 	{
-		ArrayList<Categoria> categorias = new ArrayList<Categoria>();
+		ListaCategoria categorias = new ListaCategoria();
 		
 		Cursor cursor = database.query(
 				TabletVoxSQLiteOpenHelper.TABLE_PFL_CAT, PerfilCategoriaDAO.columns, 

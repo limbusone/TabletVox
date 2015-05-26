@@ -1,18 +1,17 @@
 package com.example.tabletvox03f.dal.perfil;
 
-import java.util.ArrayList;
-
-import com.example.tabletvox03f.dal.categoria.Categoria;
-
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.example.tabletvox03f.dal.categoria.Categoria;
+import com.example.tabletvox03f.dal.categoria.ListaCategoria;
 
 public class Perfil implements Parcelable
 {
 	private int id;
 	private String nome;
 	private String autor;
-	private ArrayList<Categoria> categorias;
+	private ListaCategoria categorias;
 	
 	public Perfil()
 	{}
@@ -24,7 +23,7 @@ public class Perfil implements Parcelable
 		this.autor 	= autor;
 	}
 	
-	public Perfil(int id, String nome, String autor, ArrayList<Categoria> categorias)
+	public Perfil(int id, String nome, String autor, ListaCategoria categorias)
 	{
 		this.id 	= id;
 		this.nome 	= nome;
@@ -67,12 +66,12 @@ public class Perfil implements Parcelable
 		this.autor = autor;
 	}
 
-	public ArrayList<Categoria> getCategorias()
+	public ListaCategoria getCategorias()
 	{
 		return categorias;
 	}
 
-	public void setCategorias(ArrayList<Categoria> categorias)
+	public void setCategorias(ListaCategoria categorias)
 	{
 		this.categorias = categorias;
 	}
@@ -101,7 +100,7 @@ public class Perfil implements Parcelable
 	{
 		// inicializando arrayList para não dar nullPointerException ao chamar a linha 
 		// in.readTypedList(this.categorias, Categoria.CREATOR);
-		this.categorias = new ArrayList<Categoria>();
+		this.categorias = new ListaCategoria();
 		readFromParcel(in);
 	}
 	

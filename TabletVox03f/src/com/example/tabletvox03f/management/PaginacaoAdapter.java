@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
 import com.example.tabletvox03f.dal.categoria.Categoria;
+import com.example.tabletvox03f.dal.categoria.ListaCategoria;
 import com.example.tabletvox03f.dal.perfil.Perfil;
 import com.example.tabletvox03f.management.categoria.ListaImagensCategoriaFragment;
 import com.example.tabletvox03f.management.perfil.ListaCategoriasPerfilFragment;
@@ -18,7 +19,7 @@ public class PaginacaoAdapter extends FragmentStatePagerAdapter
 	//private Categoria categoria;
 	private Perfil perfil;
 	private ArrayList<AssocImagemSom> imagens;
-	private ArrayList<Categoria> categorias;
+	private ListaCategoria categorias;
 	
 	private int pageCount;
 	
@@ -44,7 +45,7 @@ public class PaginacaoAdapter extends FragmentStatePagerAdapter
 		this.imagens = imagens;
 	}
 	
-	public void setCategorias(ArrayList<Categoria> categorias)
+	public void setCategorias(ListaCategoria categorias)
 	{
 		this.categorias = categorias;
 	}
@@ -74,7 +75,7 @@ public class PaginacaoAdapter extends FragmentStatePagerAdapter
 			if (lista.get(0) instanceof AssocImagemSom)
 				this.imagens = (ArrayList<AssocImagemSom>) lista;
 			else if (lista.get(0) instanceof Categoria)
-				this.categorias = (ArrayList<Categoria>) lista;
+				this.categorias = (ListaCategoria) lista;
 		}
 		else
 		{
@@ -105,11 +106,13 @@ public class PaginacaoAdapter extends FragmentStatePagerAdapter
 			// chamar fragment relativo as categorias do perfil
 			fragment = new ListaCategoriasPerfilFragment();
 			Bundle args = new Bundle();
-			args.putParcelableArrayList
+			args.putParcelable
 			(
 					ListaCategoriasPerfilFragment.KEY_CATEGORIAS, 
-					(categorias.isEmpty()) ? new ArrayList<Categoria>() : getCategoriasPorPagina(position + 1)
+					((categorias.isEmpty()) ? new ListaCategoria() : getCategoriasPorPagina(position + 1))
 			);
+			
+			fragment.setArguments(args);
 		}
 		else
 			fragment = new Fragment();
@@ -127,9 +130,9 @@ public class PaginacaoAdapter extends FragmentStatePagerAdapter
 		return lista;
 	}
 
-	private ArrayList<Categoria> getCategoriasPorPagina(int pagina)
+	private ListaCategoria getCategoriasPorPagina(int pagina)
 	{
-		ArrayList<Categoria> lista = new ArrayList<Categoria>();
+		ListaCategoria lista = new ListaCategoria();
 		for (Categoria categoria : categorias)
 			if (pagina == categoria.getPagina())
 				lista.add(categoria);

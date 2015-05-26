@@ -1,8 +1,7 @@
 package com.example.tabletvox03f.management.perfil;
 
-import java.util.ArrayList;
-
 import android.content.Intent;
+import android.os.Parcelable;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -39,7 +38,7 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 			FormularioPerfilActivity thisContext = FormularioPerfilActivity.this;
 			Intent intent = new Intent(thisContext, ListaCategoriasPerfilActivity.class);
 			intent.putExtra("perfil", pfl);
-			intent.putParcelableArrayListExtra("antigasCategorias", antigasCategorias);
+			intent.putExtra("antigasCategorias", (Parcelable) antigasCategorias);
 			thisContext.startActivityForResult(intent, 1);
 		}
 	};
@@ -66,6 +65,8 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 	protected void initCriarForm()
 	{
 		pfl = new Perfil();
+		
+		pfl.setCategorias(new ListaCategoria());
 	}
 	
 	protected void initEditarForm(Intent intent)
@@ -78,7 +79,7 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 		txtNome.setText(pfl.getNome());
 		txtAutor.setText(pfl.getAutor());
 		
-		antigasCategorias = (ListaCategoria) pfl.getCategorias();
+		antigasCategorias = (ListaCategoria) pfl.getCategorias().clone();
 	}
 
 	@Override
@@ -108,7 +109,7 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 		
 		//ListaCategoria categoriasDoAdapter = (ListaCategoria)((ItemCategoriaAdapter)lv.getAdapter()).getCategorias().clone();
 		
-		concatenarAutorComNomeDaCategoria((ListaCategoria) pfl.getCategorias());
+		concatenarAutorComNomeDaCategoria(pfl.getCategorias());
 		
 		dao_cat.open();
 		
@@ -158,7 +159,7 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 		dao_cat.update(antigasCategorias);
 		
 		// adicionar eventuais novos itens
-		novasCategorias = (ListaCategoria) dao_cat.create(novasCategorias);
+		novasCategorias = dao_cat.create(novasCategorias);
 		
 		dao_cat.close();
 		
@@ -245,13 +246,13 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 		switch(resultCode)
 		{
 			case ListaCategoriasPerfilActivity.RC_DEFINIR_CATS_SUCESSO:
-				ArrayList<Categoria> categorias = data.getParcelableArrayListExtra("categorias");
-				ArrayList<Categoria> novasCategorias = data.getParcelableArrayListExtra("novasCategorias");
-				ArrayList<Categoria> antigasCategorias = data.getParcelableArrayListExtra("antigasCategorias");
+				ListaCategoria categorias = data.getParcelableExtra("categorias");
+				ListaCategoria novasCategorias = data.getParcelableExtra("novasCategorias");
+				ListaCategoria antigasCategorias = data.getParcelableExtra("antigasCategorias");
 				
 				pfl.setCategorias(categorias);
-				this.novasCategorias 	= (ListaCategoria) novasCategorias;
-				this.antigasCategorias 	= (ListaCategoria) antigasCategorias;
+				this.novasCategorias 	= novasCategorias;
+				this.antigasCategorias 	= antigasCategorias;
 				break;
 			case ListaCategoriasPerfilActivity.RC_DEFINIR_CATS_CANCELADO:
 			default:

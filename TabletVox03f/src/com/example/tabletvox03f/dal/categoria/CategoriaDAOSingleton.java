@@ -1,12 +1,11 @@
 package com.example.tabletvox03f.dal.categoria;
 
-import java.util.ArrayList;
 
 public class CategoriaDAOSingleton
 {
 	private static CategoriaDAOSingleton CategoriaDAOSingleton;
 	
-	private ArrayList<Categoria> listaCategoria = new ArrayList<Categoria>();
+	private ListaCategoria listaCategoria = new ListaCategoria();
 	
 	public CategoriaDAOSingleton()
 	{
@@ -60,7 +59,7 @@ public class CategoriaDAOSingleton
 		
 	}
 	
-	public ArrayList<Categoria> getCategorias() 
+	public ListaCategoria getCategorias() 
 	{
 		return listaCategoria;
 	}
@@ -77,9 +76,9 @@ public class CategoriaDAOSingleton
 		listaCategoria.add(categoria);
 	}
 	
-	public ArrayList<Categoria> incluirCategoriasWithRandomGeneratedID(ArrayList<Categoria> categorias)
+	public ListaCategoria incluirCategoriasWithRandomGeneratedID(ListaCategoria categorias)
 	{
-		ArrayList<Categoria> retorno = new ArrayList<Categoria>();
+		ListaCategoria retorno = new ListaCategoria();
 		
 		for (int i = 0, length = categorias.size(); i < length; i++)
 		{
@@ -122,7 +121,7 @@ public class CategoriaDAOSingleton
 		categoria.setImagens(categoriaNovo.getImagens());
 	}
 	
-	public void editarCategorias(ArrayList<Categoria> categoriasNovas)
+	public void editarCategorias(ListaCategoria categoriasNovas)
 	{
 		for (int i = 0, length = categoriasNovas.size(); i < length; i++)
 		{
@@ -144,10 +143,9 @@ public class CategoriaDAOSingleton
 		listaCategoria.remove(getCategoriaById(id));
 	}
 	
-	@SuppressWarnings("unchecked")
-	public ArrayList<Categoria> getAll()
+	public ListaCategoria getAll()
 	{
-		return (ArrayList<Categoria>) listaCategoria.clone();
+		return (ListaCategoria) listaCategoria.clone();
 	}
 	
 	public Categoria getCategoriaById(int id)
@@ -168,10 +166,10 @@ public class CategoriaDAOSingleton
 		return categoria;
 	}
 	
-	public ArrayList<Categoria> getCategoriasByNome(String nome)
+	public ListaCategoria getCategoriasByNome(String nome)
 	{
 		Categoria categoria;
-		ArrayList<Categoria> result = new ArrayList<Categoria>();
+		ListaCategoria result = new ListaCategoria();
 		for (int i = 0, length = listaCategoria.size(); i < length; i++)
 		{
 			categoria = listaCategoria.get(i);

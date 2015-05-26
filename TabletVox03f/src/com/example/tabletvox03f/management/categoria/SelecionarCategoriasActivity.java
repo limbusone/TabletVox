@@ -1,8 +1,7 @@
 package com.example.tabletvox03f.management.categoria;
 
-import java.util.ArrayList;
-
 import android.content.Intent;
+import android.os.Parcelable;
 import android.text.Editable;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,9 +12,11 @@ import android.widget.CheckBox;
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.dal.categoria.Categoria;
 import com.example.tabletvox03f.dal.categoria.CategoriaDAO;
+import com.example.tabletvox03f.dal.categoria.ListaCategoria;
 import com.example.tabletvox03f.management.ListaComBuscaManageActivity;
+import com.example.tabletvox03f.management.OnCategoriaSelectedListener;
 
-public class SelecionarCategoriasActivity extends ListaComBuscaManageActivity
+public class SelecionarCategoriasActivity extends ListaComBuscaManageActivity implements OnCategoriaSelectedListener
 {
 
 	public static final int RC_ADD_CAT_SUCESSO 		= 3;
@@ -35,20 +36,19 @@ public class SelecionarCategoriasActivity extends ListaComBuscaManageActivity
 		onResumeSuper();
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	protected BaseAdapter carregarLista()
 	{
 		CategoriaDAO dao_cat = new CategoriaDAO(this);
 		
 		dao_cat.open();
-		ArrayList<Categoria> lista = dao_cat.getAll();
+		ListaCategoria lista = dao_cat.getAll();
 		dao_cat.close();
 		
-		return (new ItemSelectCategoriaAdapter(this, (ArrayList<Categoria>) lista.clone()));
+		return (new ItemSelectCategoriaAdapter(this, (ListaCategoria) lista.clone()));
 	}
 	
-	private void carregarLista(ArrayList<Categoria> categorias)
+	private void carregarLista(ListaCategoria categorias)
 	{
 		lv.setAdapter(new ItemSelectCategoriaAdapter(this, categorias));
 	}
@@ -69,9 +69,9 @@ public class SelecionarCategoriasActivity extends ListaComBuscaManageActivity
 		{
 			// resgata array de selecionados do adapter e manda uma cópia para o formulario
 			case R.id.action_concluir:
-				ArrayList<Categoria> selecionados = ((ItemSelectCategoriaAdapter)lv.getAdapter()).getSelecionados();
+				ListaCategoria selecionados = ((ItemSelectCategoriaAdapter)lv.getAdapter()).getSelecionados();
 				Intent intent = new Intent();
-				intent.putParcelableArrayListExtra("selecionados", (ArrayList<Categoria>) selecionados.clone());
+				intent.putExtra("selecionados", (Parcelable) selecionados.clone());
 				this.setResult(RC_ADD_CAT_SUCESSO, intent);
 				finish();			
 				break;
@@ -122,6 +122,20 @@ public class SelecionarCategoriasActivity extends ListaComBuscaManageActivity
 		super.onActivityResult(requestCode, resultCode, data);
 		
 		if (resultCode == ListaCategoriasActivity.RC_CATS_GERENCIADAS);
+	}
+
+	@Override
+	public void onDeleteItem(int id)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDeleteItem(Categoria categoria)
+	{
+		// TODO Auto-generated method stub
+		
 	}			
 
 }

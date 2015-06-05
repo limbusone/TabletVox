@@ -50,6 +50,8 @@ public class ListaCategoriasPerfilActivity extends ActionBarActivity implements 
 		
 		categorias = (perfil.getCategorias() == null) ? new ListaCategoria() : perfil.getCategorias();
 		
+		novasCategorias = new ListaCategoria();
+		
 		this.antigasCategorias = (antigasCategorias == null) ? new ListaCategoria() : antigasCategorias;
 		
 		// criar adapter que conterá os fragments
@@ -201,16 +203,20 @@ public class ListaCategoriasPerfilActivity extends ActionBarActivity implements 
 		if (!(categorias.isEmpty()))
 		{
 			ActionBar actionBar = getSupportActionBar();
+			int numeroDePaginas = mPaginacaoAdapter.getCount();
 			Tab paginaAtual = actionBar.getSelectedTab();
 			
 			deletarCategorias(paginaAtual.getPosition() + 1);
 			
-			redefinirNumeracaoPaginacaoParaImagens(paginaAtual.getPosition() + 1, mPaginacaoAdapter.getCount());			
-			actionBar.removeTab(paginaAtual);
-			// resetar os items do adapter porque a referencia antiga não vale mais
-			mPaginacaoAdapter.setCategorias(categorias);
-			mPaginacaoAdapter.subPageCount();
-			redefinirTitulosDasPaginas();
+			if (numeroDePaginas > 1)
+			{
+				redefinirNumeracaoPaginacaoParaCategorias(paginaAtual.getPosition() + 1, numeroDePaginas);			
+				actionBar.removeTab(paginaAtual);
+				// resetar os items do adapter porque a referencia antiga não vale mais
+				mPaginacaoAdapter.setCategorias(categorias);
+				mPaginacaoAdapter.subPageCount();
+				redefinirTitulosDasPaginas();
+			}
 		}
 	}	
 	
@@ -238,7 +244,7 @@ public class ListaCategoriasPerfilActivity extends ActionBarActivity implements 
 
 	}
 	
-	private void redefinirNumeracaoPaginacaoParaImagens(int paginaRemovida, int numeroDePaginas)
+	private void redefinirNumeracaoPaginacaoParaCategorias(int paginaRemovida, int numeroDePaginas)
 	{
 		ListaCategoria categorias_repaginadas 			= new ListaCategoria();
 		ListaCategoria novas_categorias_repaginadas 	= new ListaCategoria();

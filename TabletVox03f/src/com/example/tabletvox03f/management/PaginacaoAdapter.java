@@ -10,14 +10,12 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
 import com.example.tabletvox03f.dal.categoria.Categoria;
 import com.example.tabletvox03f.dal.categoria.ListaCategoria;
-import com.example.tabletvox03f.dal.perfil.Perfil;
 import com.example.tabletvox03f.management.categoria.ListaImagensCategoriaFragment;
 import com.example.tabletvox03f.management.perfil.ListaCategoriasPerfilFragment;
 
 public class PaginacaoAdapter extends FragmentStatePagerAdapter
 {
 	//private Categoria categoria;
-	private Perfil perfil;
 	private ArrayList<AssocImagemSom> imagens;
 	private ListaCategoria categorias;
 	
@@ -61,28 +59,17 @@ public class PaginacaoAdapter extends FragmentStatePagerAdapter
 //		this.categoria = categoria;
 //	}
 	
-	public PaginacaoAdapter(FragmentManager fm, Perfil perfil)
+	public PaginacaoAdapter(FragmentManager fm, ListaCategoria categorias)
 	{
 		super(fm);
-		this.perfil = perfil;
+		this.categorias = categorias;
 	}
 	
-	public PaginacaoAdapter(FragmentManager fm, ArrayList<?> lista)
+	public PaginacaoAdapter(FragmentManager fm, ArrayList<AssocImagemSom> imagens)
 	{
 		super(fm);
-		if (!(lista.isEmpty()))
-		{
-			if (lista.get(0) instanceof AssocImagemSom)
-				this.imagens = (ArrayList<AssocImagemSom>) lista;
-			else if (lista.get(0) instanceof Categoria)
-				this.categorias = (ListaCategoria) lista;
-		}
-		else
-		{
-			this.imagens = null;
-			this.categorias = null;
-		}
-	}
+		this.imagens = imagens;
+	}	
 	
 	@Override
 	public Fragment getItem(int position)

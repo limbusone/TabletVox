@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">TabletVox03f</string>
-    <string name="title_activity_main_menu">TabletVox03f</string>
+    <string name="app_name">TabletVox</string>
+    <string name="title_activity_main_menu">TabletVox</string>
     <string name="title_activity_modo_touch">Modo Touch</string>
     <string name="title_activity_modo_varredura">Modo Varredura</string>
     <string name="title_activity_telas_cadastro">TelasCadastro</string>

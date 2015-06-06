@@ -9,10 +9,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.tabletvox03f.dal.categoria.ListaCategoria;
+import com.example.tabletvox03f.dal.perfil.PerfilDAO;
 import com.example.tabletvox03f.management.OpcoesActivity;
 import com.example.tabletvox03f.management.assocImagemSom.ListaImagensActivity;
 import com.example.tabletvox03f.management.categoria.ListaCategoriasActivity;
@@ -36,27 +37,46 @@ public class MainMenuActivity extends Activity
 		ImageButton cmd_modo_varredura 	= (ImageButton) findViewById(R.id.cmdLaunchModoVarredura);
 		
 		// evento que starta modo touch
-		cmd_modo_touch.setOnClickListener(new OnClickListener() {
+		cmd_modo_touch.setOnClickListener(new OnClickListener() 
+		{
 
 			@Override
 			public void onClick(View v)
 			{
 				Intent intent;
-				intent = new Intent(MainMenuActivity.this, ModoTouchCategoriasActivity.class);
-				
+				long categoriaId = existeSomenteUmaCategoriaNoPerfil();
+				if (categoriaId > 0)
+				// carrega ModoTouchActivity diretamente
+				{
+					intent = new Intent(MainMenuActivity.this, ModoTouchActivity.class);
+					intent.putExtra("categoriaId", categoriaId);
+				}
+				else
+					intent = new Intent(MainMenuActivity.this, ModoTouchCategoriasActivity.class);
+								
 				startActivity(intent);
 			}
 			
 		});
 
 		// evento que starta modo varredura
-		cmd_modo_varredura.setOnClickListener(new OnClickListener() {
+		cmd_modo_varredura.setOnClickListener(new OnClickListener() 
+		{
 
 			@Override
 			public void onClick(View v)
 			{
 				Intent intent;
-				intent = new Intent(MainMenuActivity.this, ModoVarreduraCategoriasActivity.class);
+				
+				long categoriaId = existeSomenteUmaCategoriaNoPerfil();
+				if (categoriaId > 0)
+				// carrega ModoVarreduraActivity diretamente
+				{
+					intent = new Intent(MainMenuActivity.this, ModoVarreduraActivity.class);
+					intent.putExtra("categoriaId", categoriaId);
+				}
+				else				
+					intent = new Intent(MainMenuActivity.this, ModoVarreduraCategoriasActivity.class);
 				
 				startActivity(intent);
 			}
@@ -132,6 +152,23 @@ public class MainMenuActivity extends Activity
 	public void mudaTituloConformePerfilSelecionado()
 	{
 		setTitle(Utils.PERFIL_ATIVO.getNome());
+	}
+	
+	private long existeSomenteUmaCategoriaNoPerfil()
+	{
+		PerfilDAO dao_pfl = new PerfilDAO(this);
+		
+		dao_pfl.open();
+		ListaCategoria categorias = dao_pfl.getCategorias(Utils.PERFIL_ATIVO.getId());
+		dao_pfl.close();
+		
+		if (categorias.size() > 1)
+			return 0;
+		else
+			// popular perfil ativo com a categoria
+			Utils.PERFIL_ATIVO.setCategorias(categorias);
+		
+		return categorias.get(0).getId();
 	}
 
 }

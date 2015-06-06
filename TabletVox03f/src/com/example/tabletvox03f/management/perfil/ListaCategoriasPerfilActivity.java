@@ -14,8 +14,8 @@ import android.widget.Toast;
 
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.dal.categoria.Categoria;
+import com.example.tabletvox03f.dal.categoria.CategoriaDAO;
 import com.example.tabletvox03f.dal.categoria.ListaCategoria;
-import com.example.tabletvox03f.dal.perfil.Perfil;
 import com.example.tabletvox03f.management.OnCategoriaSelectedListener;
 import com.example.tabletvox03f.management.PaginacaoAdapter;
 import com.example.tabletvox03f.management.categoria.FormularioCategoriaActivity;
@@ -43,16 +43,23 @@ public class ListaCategoriasPerfilActivity extends ActionBarActivity implements 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.pager);
 		
-		// receber perfil por intent
+		// receber categorias por intent
 		Intent intent = getIntent();
-		Perfil perfil = intent.getParcelableExtra("perfil");
-		ListaCategoria antigasCategorias = intent.getParcelableExtra("antigasCategorias");
+		ListaCategoria antigasCategorias 	= intent.getParcelableExtra("antigasCategorias");
+		ListaCategoria novasCategorias 		= intent.getParcelableExtra("novasCategorias");
 		
-		categorias = (perfil.getCategorias() == null) ? new ListaCategoria() : perfil.getCategorias();
+		this.novasCategorias 	= (novasCategorias == null) 	? new ListaCategoria() : novasCategorias;
+		this.antigasCategorias 	= (antigasCategorias == null) 	? new ListaCategoria() : antigasCategorias;
 		
-		novasCategorias = new ListaCategoria();
+		categorias = new ListaCategoria();
+
+		if (!(this.novasCategorias.isEmpty() && this.antigasCategorias.isEmpty()))
+		{
+			categorias.addAll(this.antigasCategorias);
+			categorias.addAll(this.novasCategorias);
+		}
 		
-		this.antigasCategorias = (antigasCategorias == null) ? new ListaCategoria() : antigasCategorias;
+		carregarCategoriasComImagens(categorias);
 		
 		// criar adapter que conterá os fragments
 		mPaginacaoAdapter = new PaginacaoAdapter(getSupportFragmentManager(), categorias);
@@ -106,7 +113,7 @@ public class ListaCategoriasPerfilActivity extends ActionBarActivity implements 
 		{
 			// concluir definicao de categorias
 			case R.id.action_concluir: 
-				intent.putExtra("categorias", (Parcelable) categorias.clone());
+				intent.putExtra("categorias", (Parcelable) categorias);
 				intent.putExtra("novasCategorias", (Parcelable) novasCategorias);
 				intent.putExtra("antigasCategorias", (Parcelable) antigasCategorias);
 				this.setResult(RC_DEFINIR_CATS_SUCESSO, intent);
@@ -184,6 +191,9 @@ public class ListaCategoriasPerfilActivity extends ActionBarActivity implements 
 		{
 			Categoria categoria = categorias.get(i);
 			categoria.setPagina(paginaAtual);
+			
+			carregarCategoriaComImagens(categoria);
+			
 			this.categorias.add(categoria);
 			novasCategorias.add(categoria);
 		}
@@ -195,7 +205,7 @@ public class ListaCategoriasPerfilActivity extends ActionBarActivity implements 
 	private void atualizarCategoriaEditadaNP(Categoria categoria)
 	{
 		categorias.getCategoriaById(categoria.getId()).setAll(categoria);
-		mPaginacaoAdapter.refresh();	
+		mPaginacaoAdapter.refresh();
 	}
 
 	private void deletarPaginaAtual()
@@ -217,13 +227,15 @@ public class ListaCategoriasPerfilActivity extends ActionBarActivity implements 
 				mPaginacaoAdapter.subPageCount();
 				redefinirTitulosDasPaginas();
 			}
+			else
+				mPaginacaoAdapter.refresh();
 		}
 	}	
 	
 	private void deletarCategorias(int pagina)
 	{
 		ListaCategoria categoriasARemover = new ListaCategoria();
-		int i, length;
+		int i, length, id;
 		for (i = 0, length = categorias.size(); i < length; i++)
 		{
 			Categoria categoria = categorias.get(i);
@@ -236,9 +248,10 @@ public class ListaCategoriasPerfilActivity extends ActionBarActivity implements 
 			for (i = 0, length = categoriasARemover.size(); i < length; i++)
 			{
 				Categoria categoria = categoriasARemover.get(i);
+				id = categoria.getId();
 				categorias.remove(categoria);
-				novasCategorias.remove(categoria);
-				antigasCategorias.remove(categoria);
+				novasCategorias.removeById(id);
+				antigasCategorias.removeById(id);
 			}
 		}
 
@@ -249,6 +262,8 @@ public class ListaCategoriasPerfilActivity extends ActionBarActivity implements 
 		ListaCategoria categorias_repaginadas 			= new ListaCategoria();
 		ListaCategoria novas_categorias_repaginadas 	= new ListaCategoria();
 		ListaCategoria categorias_antigas_repaginadas 	= new ListaCategoria();
+	
+		int id;
 		
 		// adicionar as categorias anteriores à pagina removida
 		for (int i = 0, length = categorias.size(); i < length; i++)
@@ -258,9 +273,10 @@ public class ListaCategoriasPerfilActivity extends ActionBarActivity implements 
 			{
 				categorias_repaginadas.add(categoria);
 				
-				if (novasCategorias.contains(categoria))
+				id = categoria.getId();
+				if (novasCategorias.getCategoriaById(id) != null)
 					novas_categorias_repaginadas.add(categoria);
-				else if (antigasCategorias.contains(categoria))
+				else if (antigasCategorias.getCategoriaById(id) != null)
 					categorias_antigas_repaginadas.add(categoria);
 			}
 		}
@@ -279,9 +295,10 @@ public class ListaCategoriasPerfilActivity extends ActionBarActivity implements 
 					categoriaCopia.setPagina(categoria.getPagina() - 1);
 					categorias_repaginadas.add(categoriaCopia);
 					
-					if (novasCategorias.contains(categoria))
+					id = categoria.getId();
+					if (novasCategorias.getCategoriaById(id) != null)
 						novas_categorias_repaginadas.add(categoriaCopia);
-					else if (antigasCategorias.contains(categoria))
+					else if (antigasCategorias.getCategoriaById(id) != null)
 						categorias_antigas_repaginadas.add(categoriaCopia);					
 				}
 			}
@@ -301,6 +318,27 @@ public class ListaCategoriasPerfilActivity extends ActionBarActivity implements 
     		tab.setText(mPaginacaoAdapter.getPageTitle(i));
         }
 	}
+	
+	private void carregarCategoriasComImagens(ListaCategoria categorias)
+	{
+		Categoria categoria;
+		CategoriaDAO cat_dao = new CategoriaDAO(this);
+		cat_dao.open();
+		for (int i = 0, length = categorias.size(); i < length; i++)
+		{
+			categoria = categorias.get(i);
+			categoria.setImagens(cat_dao.getImagens(categoria.getId()));
+		}
+		cat_dao.close();
+	}
+	
+	private void carregarCategoriaComImagens(Categoria categoria)
+	{
+		CategoriaDAO cat_dao = new CategoriaDAO(this);
+		cat_dao.open();
+		categoria.setImagens(cat_dao.getImagens(categoria.getId()));
+		cat_dao.close();
+	}	
 	
 	@Override
 	public void onDeleteItem(int id)
@@ -322,9 +360,10 @@ public class ListaCategoriasPerfilActivity extends ActionBarActivity implements 
 	public void onDeleteItem(Categoria categoria)
 	{
 		// Auto-generated method stub
+		int id = categoria.getId();
 		categorias.remove(categoria);
-		novasCategorias.remove(categoria);
-		antigasCategorias.remove(categoria);
+		novasCategorias.removeById(id);
+		antigasCategorias.removeById(id);
 	}
 
 	@Override

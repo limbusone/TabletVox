@@ -37,7 +37,7 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 		{
 			FormularioPerfilActivity thisContext = FormularioPerfilActivity.this;
 			Intent intent = new Intent(thisContext, ListaCategoriasPerfilActivity.class);
-			intent.putExtra("perfil", pfl);
+			intent.putExtra("novasCategorias", (Parcelable) novasCategorias);
 			intent.putExtra("antigasCategorias", (Parcelable) antigasCategorias);
 			thisContext.startActivityForResult(intent, 1);
 		}
@@ -79,6 +79,7 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 		txtNome.setText(pfl.getNome());
 		txtAutor.setText(pfl.getAutor());
 		
+		novasCategorias   = new ListaCategoria();
 		antigasCategorias = (ListaCategoria) pfl.getCategorias().clone();
 	}
 
@@ -246,9 +247,9 @@ public class FormularioPerfilActivity extends FormularioBaseActivity
 		switch(resultCode)
 		{
 			case ListaCategoriasPerfilActivity.RC_DEFINIR_CATS_SUCESSO:
-				ListaCategoria categorias = data.getParcelableExtra("categorias");
-				ListaCategoria novasCategorias = data.getParcelableExtra("novasCategorias");
-				ListaCategoria antigasCategorias = data.getParcelableExtra("antigasCategorias");
+				ListaCategoria categorias 			= data.getParcelableExtra("categorias");
+				ListaCategoria novasCategorias 		= data.getParcelableExtra("novasCategorias");
+				ListaCategoria antigasCategorias 	= data.getParcelableExtra("antigasCategorias");
 				
 				pfl.setCategorias(categorias);
 				this.novasCategorias 	= novasCategorias;

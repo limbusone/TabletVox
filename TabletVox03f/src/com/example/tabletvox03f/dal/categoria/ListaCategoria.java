@@ -56,6 +56,21 @@ public class ListaCategoria extends ArrayList<Categoria> implements Parcelable
 		}
 	}
 	
+	public boolean removeById(int id)
+	{
+		for (int i = 0, length = this.size(); i < length; i++)
+		{
+			Categoria categoria = this.get(i);
+			if (categoria.getId() == id)
+			{
+				this.remove(i);
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
 	/* METODOS E ATRIBUTOS PARCELABLE */
 	
     public ListaCategoria(Parcel in) 
@@ -78,13 +93,13 @@ public class ListaCategoria extends ArrayList<Categoria> implements Parcelable
     		dest.writeInt(c.getId());
     		dest.writeString(c.getNome());
     		dest.writeParcelable(c.getAIS(), flags);
-    		dest.writeTypedList(c.getImagens());
+    		dest.writeList(c.getImagens());
     		dest.writeInt(c.getPagina());
     		dest.writeInt(c.getOrdem());            
         }        
     }    
 
-    @SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")
 	private void readFromParcel(Parcel in) 
     {
         this.clear();

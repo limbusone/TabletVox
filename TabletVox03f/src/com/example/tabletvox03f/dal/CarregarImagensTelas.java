@@ -11,9 +11,7 @@ import android.widget.ProgressBar;
 import com.example.tabletvox03f.ImageAdapter;
 import com.example.tabletvox03f.Utils;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
-import com.example.tabletvox03f.dal.categoria.Categoria;
 import com.example.tabletvox03f.dal.categoria.CategoriaDAO;
-import com.example.tabletvox03f.dal.categoria.ListaCategoria;
 import com.example.tabletvox03f.dal.perfil.Perfil;
 import com.example.tabletvox03f.dal.perfil.PerfilDAO;
 
@@ -46,27 +44,17 @@ public class CarregarImagensTelas extends AsyncTask<Integer, Void, ArrayList<Ass
 		
 		switch (params[1])
 		{
-			case OPCAO_CARREGAR_CATEGORIAS: // carregar categorias
+			// carregar categorias
+			case OPCAO_CARREGAR_CATEGORIAS: 
 				PerfilDAO pfl_dao = new PerfilDAO(activeContext);
 				
 				pfl_dao.open();
 				perfil.setCategorias(pfl_dao.getCategorias(perfil.getId()));
 				pfl_dao.close();
 				
-				ListaCategoria categorias = perfil.getCategorias();
-				
-				for (int i = 0, length = categorias.size(); i < length; i++)
-				{
-					Categoria categoria = categorias.get(i);
-					AssocImagemSom ais = categoria.getAIS();
-					
-					ais.setCategoriaId(categoria.getId());
-					list.add(ais);
-				}
+				list = perfil.getCategorias().getImagensByPagina(params[0]);
 				break;
-			case 2:
-				break;
-				// carregar imagens comuns
+			// carregar imagens comuns
 			case OPCAO_CARREGAR_IMAGENS:
 			default:
 				CategoriaDAO cat_dao = new CategoriaDAO(activeContext);

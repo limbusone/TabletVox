@@ -271,7 +271,8 @@ public class PerfilDAO
 		
 		Cursor cursor = database.query(
 				TabletVoxSQLiteOpenHelper.TABLE_PFL_CAT, PerfilCategoriaDAO.columns, 
-				TabletVoxSQLiteOpenHelper.PFL_COLUMN_ID + " = " + perfilId + " AND " + "cat_ais_page = " + pagina, 
+				TabletVoxSQLiteOpenHelper.PFL_COLUMN_ID + " = " + perfilId + " AND " + 
+				TabletVoxSQLiteOpenHelper.PFL_CAT_COLUMN_PAGE + " = " + pagina, 
 				null, null, null, null);
 		
 		CategoriaDAO dao_cat = new CategoriaDAO(sqliteOpenHelper);
@@ -280,13 +281,33 @@ public class PerfilDAO
 		cursor.moveToFirst();
 		while (!(cursor.isAfterLast()))
 		{
-			categorias.add(dao_cat.getCategoriaById(cursor.getInt(2)));
+			Categoria categoria = dao_cat.getCategoriaById(cursor.getInt(2));
+			categoria.setPagina(cursor.getInt(3));
+			categorias.add(categoria);
 			cursor.moveToNext();
 		}
 		
 		cursor.close();
 		
-		return categorias;			
+		return categorias;
+	}
+	
+	public int getNumeroDePaginas(int perfilId)
+	{
+		String sql = "SELECT " +
+		"max(" + TabletVoxSQLiteOpenHelper.PFL_CAT_COLUMN_PAGE + ") " 	+
+		"FROM " 														+ 
+		TabletVoxSQLiteOpenHelper.TABLE_PFL_CAT 						+ 
+		" WHERE " 														+ 
+		TabletVoxSQLiteOpenHelper.PFL_COLUMN_ID + "=" + Integer.toString(perfilId); 
+		
+		Cursor cursor = database.rawQuery(sql, null);
+		if (cursor.getCount() > 0)
+		{
+			cursor.moveToFirst();
+			return cursor.getInt(0);
+		}
+		return 0;
 	}
 	
 	// verifica se existem registros na tabela

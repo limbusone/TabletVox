@@ -38,6 +38,36 @@ public class ListaCategoria extends ArrayList<Categoria> implements Parcelable
 		return categoria;
 	}
 	
+	public ListaCategoria getCategoriasByPagina(int pagina)
+	{
+		ListaCategoria lista = new ListaCategoria();
+		for (int i = 0, length = this.size(); i < length; i++)
+		{
+			Categoria categoria = this.get(i);
+			if (categoria.getPagina() == pagina)
+				lista.add(categoria);
+		}
+		
+		return lista;
+	}
+	
+	public ArrayList<AssocImagemSom> getImagensByPagina(int pagina)
+	{
+		ArrayList<AssocImagemSom> imagens = new ArrayList<AssocImagemSom>();
+		for (int i = 0, length = this.size(); i < length; i++)
+		{
+			Categoria categoria = this.get(i);
+			if (categoria.getPagina() == pagina)
+			{
+				AssocImagemSom ais = categoria.getAIS();
+				ais.setCategoriaId(categoria.getId());
+				imagens.add(ais);
+			}
+		}
+		
+		return imagens;
+	}
+	
 	public int getNumeroDePaginas()
 	{
 		if (this.isEmpty())

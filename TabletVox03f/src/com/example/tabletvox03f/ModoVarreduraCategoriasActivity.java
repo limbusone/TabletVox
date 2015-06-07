@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import com.example.tabletvox03f.dal.CarregarImagensComandos;
 import com.example.tabletvox03f.dal.CarregarImagensTelas;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
+import com.example.tabletvox03f.dal.perfil.PerfilDAO;
 import com.example.tabletvox03f.management.Opcoes;
 
 public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
@@ -94,7 +95,7 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 		}
 		else if (estadoAtual == ESTADO_BUTTON_PROXIMA_TELA_ATIVO) // proxima pagina
 		{
-			CarregarImagensTelas cixml = new CarregarImagensTelas()
+			CarregarImagensTelas cit = new CarregarImagensTelas()
 			{
 				// metodo que roda na UI Thread antes da atividade em background
 				@Override
@@ -109,7 +110,7 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 				}
 		
 			};
-			vaiParaProximaPagina(cixml, CarregarImagensTelas.OPCAO_CARREGAR_CATEGORIAS);
+			vaiParaProximaPagina(cit, CarregarImagensTelas.OPCAO_CARREGAR_CATEGORIAS);
 		}
 		else if (estadoAtual == ESTADO_CARREGAR_CATEGORIA_ACIONAR_COMANDO) // carregar categoria / acionar comando
 		{
@@ -149,8 +150,12 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 		
 		// inicializa paginação
 		current_page = init_page = 1;
-		//final_page = (new XmlUtilsTelas(this, Utils.TELAS_NOME_ARQUIVO_XML_ATIVO, "root")).getLastPage();
-		final_page = 1;
+		PerfilDAO pfl_dao = new PerfilDAO(this);
+		pfl_dao.open();
+		int final_page = pfl_dao.getNumeroDePaginas(Utils.PERFIL_ATIVO.getId());
+		this.final_page = (final_page > 0) ? final_page : 1;
+		pfl_dao.close();
+
 		
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
 		delayVarredura = Integer.parseInt(sp.getString("intervalo_tempo_varredura", "" + Opcoes.INTERVALO_TEMPO_VARREDURA_DEFAULT));;
@@ -166,7 +171,7 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 
 		resetIndices();
 		
-		setEstadoVarredura(6);
+		setEstadoVarredura(ESTADO_CARREGAR_CATEGORIA_ACIONAR_COMANDO);
 		
 		if (!(copiarFraseGlobalParaFraseLocal()))
 			lista_imagens_frase = new ArrayList<ImgItem>();

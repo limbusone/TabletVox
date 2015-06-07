@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 
 import com.example.tabletvox03f.dal.CarregarImagensComandos;
 import com.example.tabletvox03f.dal.CarregarImagensTelas;
+import com.example.tabletvox03f.dal.perfil.PerfilDAO;
 
 public class ModoTouchCategoriasActivity extends ModoTouchActivity
 {
@@ -138,8 +139,11 @@ public class ModoTouchCategoriasActivity extends ModoTouchActivity
 		
 		// inicializa paginação
 		current_page = init_page = 1;
-		//final_page = (new XmlUtilsTelas(this, Utils.TELAS_NOME_ARQUIVO_XML_ATIVO, "root")).getLastPage();
-		final_page = 1;
+		PerfilDAO pfl_dao = new PerfilDAO(this);
+		pfl_dao.open();
+		int final_page = pfl_dao.getNumeroDePaginas(Utils.PERFIL_ATIVO.getId());
+		this.final_page = (final_page > 0) ? final_page : 1;
+		pfl_dao.close();
 		
 		// muda titulo conforme perfil
 		setCurrentTitle("Categorias de " + Utils.PERFIL_ATIVO.getNome());
@@ -177,7 +181,7 @@ public class ModoTouchCategoriasActivity extends ModoTouchActivity
 		cit.execute(init_page, CarregarImagensTelas.OPCAO_CARREGAR_CATEGORIAS);
 		
 		// aqui carregam-se as imagens-comandos que sao atalhos
-		CarregarImagensComandos cixmlc = new CarregarImagensComandos()
+		CarregarImagensComandos cic = new CarregarImagensComandos()
 		{
 
 			// metodo que roda na UI Thread antes da atividade em background
@@ -190,7 +194,7 @@ public class ModoTouchCategoriasActivity extends ModoTouchActivity
 			}
 			
 		};
-		cixmlc.execute(CarregarImagensComandos.OPCAO_CARREGAR_ATALHOS); // true: mostrar atalhos
+		cic.execute(CarregarImagensComandos.OPCAO_CARREGAR_ATALHOS); // true: mostrar atalhos
 		
 		//GridView gridview = (GridView) findViewById(R.id.gridview);
 		

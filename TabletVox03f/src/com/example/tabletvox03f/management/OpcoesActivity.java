@@ -6,7 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 
 public class OpcoesActivity extends ActionBarActivity
 {
-    @SuppressLint("NewApi")
+	@SuppressLint("NewApi")
 	@Override
     protected void onCreate(Bundle savedInstanceState) 
     {

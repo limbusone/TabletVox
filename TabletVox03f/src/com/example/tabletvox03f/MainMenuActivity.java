@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.example.tabletvox03f.dal.categoria.ListaCategoria;
 import com.example.tabletvox03f.dal.perfil.PerfilDAO;
 import com.example.tabletvox03f.management.OpcoesActivity;
+import com.example.tabletvox03f.management.OpcoesActivityOldApi;
 import com.example.tabletvox03f.management.assocImagemSom.ListaImagensActivity;
 import com.example.tabletvox03f.management.categoria.ListaCategoriasActivity;
 import com.example.tabletvox03f.management.perfil.SelecionarPerfilActivity;
@@ -121,7 +123,11 @@ public class MainMenuActivity extends Activity
 				startActivity(intent);
 				break;
 			case R.id.action_opcoes:
-				intent = new Intent(this, OpcoesActivity.class);
+				if (Build.VERSION.SDK_INT < 11)
+					intent = new Intent(this, OpcoesActivityOldApi.class);
+				else
+					intent = new Intent(this, OpcoesActivity.class);
+				
 				startActivity(intent);
 				break;
 		}

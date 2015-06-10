@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">TabletVox</string>
-    <string name="title_activity_main_menu">TabletVox</string>
+    <string name="app_name">Tablet Vox</string>
+    <string name="title_activity_main_menu">Tablet Vox</string>
     <string name="title_activity_modo_touch">Modo Touch</string>
     <string name="title_activity_modo_varredura">Modo Varredura</string>
     <string name="title_activity_telas_cadastro">TelasCadastro</string>
@@ -65,8 +65,8 @@
     <string name="add_categoria">Adicionar Categoria</string>
     <string name="opcoes">Opções</string>
     <string name="tocar_som_ao_selecionar_imagem">Tocar som ao selecionar imagem</string>
-    <string name="intervalo_tempo_tocar_frase">Intervalo de tempo ao tocar a frase</string>
-    <string name="intervalo_tempo_varredura">Intervalo de tempo da varredura</string>
+    <string name="intervalo_tempo_tocar_frase">Intervalo de tempo ao tocar a frase (ms)</string>
+    <string name="intervalo_tempo_varredura">Intervalo de tempo da varredura (ms)</string>
     <string name="cor_borda">Cor da Borda do modo Varredura</string>
     <string name="dialog_title_opcoes_borda">Escolha a cor da borda</string>
     <string name="borda_vermelha">Borda Vermelha</string>

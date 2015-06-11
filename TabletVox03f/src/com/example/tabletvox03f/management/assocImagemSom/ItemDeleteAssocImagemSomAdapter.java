@@ -22,8 +22,6 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 public class ItemDeleteAssocImagemSomAdapter extends ItemAssocImagemSomAdapter
 {
 	
-	private OnImagemSelectedListener mListener;
-
 	public ItemDeleteAssocImagemSomAdapter(Context context,
 			ArrayList<AssocImagemSom> lista)
 	{

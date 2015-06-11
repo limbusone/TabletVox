@@ -20,6 +20,7 @@ import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.dal.perfil.Perfil;
 import com.example.tabletvox03f.dal.perfil.PerfilDAO;
 import com.example.tabletvox03f.management.FormularioBaseActivity;
+import com.example.tabletvox03f.management.OnPerfilSelectedListener;
 
 public class ItemPerfilAdapter extends BaseAdapter
 {
@@ -27,12 +28,14 @@ public class ItemPerfilAdapter extends BaseAdapter
 	private Context mContext;
 	private ArrayList<Perfil> perfis;
 	private LayoutInflater inflator;
+	private OnPerfilSelectedListener mListener;
 
 	public ItemPerfilAdapter(Context context, ArrayList<Perfil> lista)
 	{
 		this.mContext 	= context;
 		this.perfis 	= lista;
 		this.inflator 	= LayoutInflater.from(this.mContext);
+		this.mListener  = (OnPerfilSelectedListener) this.mContext;
 	}
 	
 	private class ViewHolder 
@@ -173,8 +176,7 @@ public class ItemPerfilAdapter extends BaseAdapter
 							dao_pfl.close();							
 							
 							// atualiza o label dos registros encontrados
-							SelecionarPerfilActivity spa = (SelecionarPerfilActivity) ItemPerfilAdapter.this.mContext;
-							spa.atualizarLblNumEncontrados(ItemPerfilAdapter.this.getCount());
+							mListener.onDeleteItem(perfil, ItemPerfilAdapter.this.getCount());
 						}
 						
 					}

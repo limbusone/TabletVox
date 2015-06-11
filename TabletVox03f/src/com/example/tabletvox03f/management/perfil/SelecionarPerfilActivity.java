@@ -18,9 +18,10 @@ import com.example.tabletvox03f.dal.perfil.Perfil;
 import com.example.tabletvox03f.dal.perfil.PerfilDAO;
 import com.example.tabletvox03f.management.FormularioBaseActivity;
 import com.example.tabletvox03f.management.ListaComBuscaManageActivity;
+import com.example.tabletvox03f.management.OnPerfilSelectedListener;
 import com.example.tabletvox03f.management.Opcoes;
 
-public class SelecionarPerfilActivity extends ListaComBuscaManageActivity
+public class SelecionarPerfilActivity extends ListaComBuscaManageActivity implements OnPerfilSelectedListener
 {
 
 	public static final int RC_PFL_SELECIONADO_SUCESSO = 1;
@@ -129,6 +130,26 @@ public class SelecionarPerfilActivity extends ListaComBuscaManageActivity
 		dao_pfl.open();
 		carregarLista(dao_pfl.getPerfisByNomeOrAutor(texto_para_pesquisa, texto_para_pesquisa));
 		dao_pfl.close();
+	}
+
+	@Override
+	public void onDeleteItem(int id)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDeleteItem(Perfil perfil)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onDeleteItem(Perfil perfil, int num_encontrados)
+	{
+		atualizarLblNumEncontrados(num_encontrados);
 	}
 
 }

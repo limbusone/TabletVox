@@ -22,6 +22,7 @@ import com.example.tabletvox03f.Utils;
 import com.example.tabletvox03f.dal.FilesIO;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSomDAO;
+import com.example.tabletvox03f.management.OnImagemSelectedListener;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 
@@ -31,12 +32,14 @@ public class ItemAssocImagemSomAdapter extends BaseAdapter
 	protected Context mContext;
 	protected ArrayList<AssocImagemSom> imagens;
 	protected LayoutInflater inflator;
+	protected OnImagemSelectedListener mListener;
 	
 	public ItemAssocImagemSomAdapter(Context context, ArrayList<AssocImagemSom> lista)
 	{
 		this.mContext 	= context;
 		this.imagens 	= lista;
 		this.inflator 	= LayoutInflater.from(this.mContext);
+		this.mListener  = (OnImagemSelectedListener) this.mContext;
 	}
 	
 	private class ViewHolder 
@@ -146,8 +149,7 @@ public class ItemAssocImagemSomAdapter extends BaseAdapter
 							dao_ais.close();
 							
 							// atualiza o label dos registros encontrados
-							ListaImagensActivity lia = (ListaImagensActivity) ItemAssocImagemSomAdapter.this.mContext;
-							lia.atualizarLblNumEncontrados(ItemAssocImagemSomAdapter.this.getCount());
+							mListener.onDeleteItem(ais, ItemAssocImagemSomAdapter.this.getCount());
 						}
 						
 					}

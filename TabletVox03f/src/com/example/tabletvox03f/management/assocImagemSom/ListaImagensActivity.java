@@ -3,7 +3,6 @@ package com.example.tabletvox03f.management.assocImagemSom;
 import java.util.ArrayList;
 
 import android.content.Intent;
-import android.support.v4.app.NavUtils;
 import android.text.Editable;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,14 +15,13 @@ import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSomDAO;
 import com.example.tabletvox03f.management.FormularioBaseActivity;
 import com.example.tabletvox03f.management.ListaComBuscaManageActivity;
+import com.example.tabletvox03f.management.OnImagemSelectedListener;
 
-public class ListaImagensActivity extends ListaComBuscaManageActivity
+public class ListaImagensActivity extends ListaComBuscaManageActivity implements OnImagemSelectedListener
 {
 
 	public static final int RC_IMGS_GERENCIADAS = 1;
 	
-	// boolean que indica se o activity que chamou o activity atual é o SelecionarImagensActivity
-	private boolean isSelecionarImagensActivity = false;
 	
 	@Override
 	protected void onCreateFilho()
@@ -117,5 +115,23 @@ public class ListaImagensActivity extends ListaComBuscaManageActivity
 			Toast.makeText(this, "Imagem incluida com sucesso!", Toast.LENGTH_SHORT).show();
 		else if (resultCode == FormularioAssocImagemSomActivity.RC_IMG_EDITADA_SUCESSO)
 			Toast.makeText(this, "Imagem editada com sucesso", Toast.LENGTH_SHORT).show();
+	}
+
+	@Override
+	public void onDeleteItem(int id)
+	{
+		
+	}
+
+	@Override
+	public void onDeleteItem(AssocImagemSom imagem)
+	{
+		
+	}
+
+	@Override
+	public void onDeleteItem(AssocImagemSom imagem, int num_encontrados)
+	{
+		atualizarLblNumEncontrados(num_encontrados);
 	}		
 }

@@ -314,4 +314,11 @@ public class ListaImagensCategoriaActivity extends ActionBarActivity implements 
 		this.imagens = imagens_repaginadas;
 	}
 
+	@Override
+	public void onDeleteItem(AssocImagemSom imagem, int num_encontrados)
+	{
+		// Auto-generated method stub
+		
+	}
+
 }

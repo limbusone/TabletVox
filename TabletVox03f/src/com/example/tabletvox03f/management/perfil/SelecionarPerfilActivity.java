@@ -2,7 +2,6 @@ package com.example.tabletvox03f.management.perfil;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.app.NavUtils;
@@ -13,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Toast;
 
+import com.example.tabletvox03f.Erro;
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.Utils;
 import com.example.tabletvox03f.dal.perfil.Perfil;
@@ -70,13 +70,31 @@ public class SelecionarPerfilActivity extends ListaComBuscaManageActivity implem
 		lv.setAdapter(new ItemPerfilAdapter(this, (ArrayList<Perfil>) perfis.clone()));
 	}
 	
+	// seleciona o perfil passado por parametro e volta pro menu principal
 	private void selecionarPerfil(Perfil perfil)
 	{
-		Utils.PERFIL_ATIVO = perfil;
-		SharedPreferences settings = getSharedPreferences(Opcoes.SETTINGS_NAME, 0);
-		settings.edit().putInt(Opcoes.PERFIL_DEFAULT_KEY, perfil.getId()).commit();
+		if (!(Utils.PERFIL_ATIVO.getId() == perfil.getId()))
+		{
+			Utils.PERFIL_ATIVO = perfil;
+			SharedPreferences settings = getSharedPreferences(Opcoes.SETTINGS_NAME, 0);
+			settings.edit().putInt(Opcoes.PERFIL_DEFAULT_KEY, perfil.getId()).commit();
+		}
 		setResult(RC_PFL_SELECIONADO_SUCESSO);
 		finish();
+	}
+	
+	// seleciona o perfil default
+	private void selecionarPerfil()
+	{
+		PerfilDAO dao_pfl = new PerfilDAO(this);
+		dao_pfl.open();
+		Perfil perfil = dao_pfl.getPerfilById(Opcoes.PERFIL_DEFAULT_DEFAULT);
+		dao_pfl.close();
+		
+		Utils.PERFIL_ATIVO = perfil;
+		
+		SharedPreferences settings = getSharedPreferences(Opcoes.SETTINGS_NAME, 0);
+		settings.edit().putInt(Opcoes.PERFIL_DEFAULT_KEY, perfil.getId()).commit();		
 	}
 	
 	// callback ao voltar da tela adicionar /editar perfil
@@ -151,7 +169,13 @@ public class SelecionarPerfilActivity extends ListaComBuscaManageActivity implem
 	{
 		// não é possível deletar o perfil default
 		if (perfil.getId() == Opcoes.PERFIL_DEFAULT_DEFAULT)
+		{
+			Utils.limpaErros();
+			Utils.erros.add(new Erro(getString(R.string.erro_nao_e_possivel_deletar_perfil_default)));
+			Utils.exibirErros(this);
 			return false;
+		}
+			
 		
 		Toast.makeText(this, 
 		"Excluido com sucesso! ID: " + Integer.toString(perfil.getId()), 
@@ -164,7 +188,11 @@ public class SelecionarPerfilActivity extends ListaComBuscaManageActivity implem
 		dao_pfl.delete(perfil.getId());
 		dao_pfl.close();
 		
-		atualizarLblNumEncontrados(--num_encontrados);
+		atualizarLblNumEncontrados(num_encontrados);
+		
+		// selecionar perfil default se o perfil deletado era um perfil ativo
+		if (perfil.getId() == Utils.PERFIL_ATIVO.getId())
+			selecionarPerfil();
 		
 		return true;
 	}

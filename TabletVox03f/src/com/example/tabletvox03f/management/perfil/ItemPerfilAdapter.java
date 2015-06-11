@@ -141,7 +141,7 @@ public class ItemPerfilAdapter extends BaseAdapter
 						
 						// verifica se o "parent" desse adapter é a tela de selecionarPerfilActivity
 						if (ItemPerfilAdapter.this.mContext instanceof SelecionarPerfilActivity)
-							deletou = mListener.onDeleteItem(perfil, ItemPerfilAdapter.this.getCount());
+							deletou = mListener.onDeleteItem(perfil, ItemPerfilAdapter.this.getCount() - 1);
 						
 						if (deletou)
 						{

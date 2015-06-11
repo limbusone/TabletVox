@@ -97,6 +97,7 @@
     <string name="perfil_incluido_sucesso">Perfil incluído com sucesso!</string>
     <string name="perfil_editado_sucesso">Perfil editado com sucesso!</string>
     <string name="perfil">Perfil</string>
+    <string name="erro_nao_e_possivel_deletar_perfil_default">Perfil padrão, não é possível deletá-lo!</string>
     
 
 </resources>

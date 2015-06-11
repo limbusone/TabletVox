@@ -6,5 +6,7 @@ public interface OnPerfilSelectedListener extends OnMyItemSelectedListener
 {
 	public void onDeleteItem(Perfil perfil);
 	
-	public void onDeleteItem(Perfil perfil, int num_encontrados);
+	public boolean onDeleteItem(Perfil perfil, int num_encontrados);
+	
+	public void onEditItem(Perfil perfil);
 }

@@ -132,7 +132,21 @@ public class SelecionarCategoriasActivity extends ListaComBuscaManageActivity im
 	}
 
 	@Override
-	public void onDeleteItem(Categoria categoria)
+	public boolean onDeleteItem(Categoria categoria)
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean onDeleteItem(Categoria categoria, int num_encontrados)
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void onEditItem(Categoria categoria)
 	{
 		// TODO Auto-generated method stub
 		

@@ -9,14 +9,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
-import android.widget.Toast;
 
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSomDAO;
-import com.example.tabletvox03f.management.ListaComBuscaManageActivity;
 
-public class SelecionarImagensActivity extends ListaComBuscaManageActivity
+public class SelecionarImagensActivity extends ListaImagensActivity
 {
 
 	public static final int RC_ADD_IMG_SUCESSO 		= 1;
@@ -48,9 +46,9 @@ public class SelecionarImagensActivity extends ListaComBuscaManageActivity
 		return (new ItemSelectAssocImagemSomAdapter(this, (ArrayList<AssocImagemSom>) lista.clone()));
 	}
 	
-	private void carregarLista(ArrayList<AssocImagemSom> categorias)
+	protected void carregarLista(ArrayList<AssocImagemSom> imagens)
 	{
-		lv.setAdapter(new ItemSelectAssocImagemSomAdapter(this, categorias));
+		lv.setAdapter(new ItemSelectAssocImagemSomAdapter(this, imagens));
 	}
 
 	@Override

@@ -1,11 +1,9 @@
 package com.example.tabletvox03f.management.categoria;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,11 +18,8 @@ import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.dal.FilesIO;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
 import com.example.tabletvox03f.dal.categoria.Categoria;
-import com.example.tabletvox03f.dal.categoria.CategoriaDAO;
 import com.example.tabletvox03f.dal.categoria.ListaCategoria;
-import com.example.tabletvox03f.management.FormularioBaseActivity;
 import com.example.tabletvox03f.management.OnCategoriaSelectedListener;
-import com.example.tabletvox03f.management.perfil.FormularioPerfilActivity;
 import com.example.tabletvox03f.management.perfil.ListaCategoriasPerfilActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -135,38 +130,7 @@ public class ItemCategoriaAdapter extends BaseAdapter
 			@Override
 			public void onClick(View v)
 			{
-				Context thisContext = ItemCategoriaAdapter.this.mContext;
-				
-				Toast.makeText(thisContext, "Você clicou no botão Editar!", Toast.LENGTH_SHORT).show();
-				Intent intent = new Intent(thisContext, FormularioCategoriaActivity.class);
-				
-				
-				
-				// popular imagens na categoria
-				CategoriaDAO dao_cat = new CategoriaDAO(thisContext);
-				
-				dao_cat.open();
-				categoria.setImagens(dao_cat.getImagens(categoria.getId()));
-				dao_cat.close();
-				
-				intent.putExtra("categoria", categoria);
-				
-				// verifica se o "parent" desse adapter é a lista de categorias
-				if (thisContext instanceof ListaCategoriasActivity)
-				{
-					intent.putExtra("tipo_form", FormularioBaseActivity.FORM_ALTERAR);
-					((Activity) thisContext).startActivityForResult(intent, 2);
-				}
-				// verifica se o "parent" desse adapter é o formulario do perfil ou a lista de categorias de um perfil
-				else if ((thisContext instanceof FormularioPerfilActivity) || 
-						(thisContext instanceof ListaCategoriasPerfilActivity))
-				{
-					intent.putExtra("tipo_form", FormularioBaseActivity.FORM_ALTERAR_NP);
-					((Activity) thisContext).startActivityForResult(intent, 3);
-				}
-					
-					
-					
+				mListener.onEditItem(categoria);
 			}
 		});
 		
@@ -191,36 +155,21 @@ public class ItemCategoriaAdapter extends BaseAdapter
 					@Override
 					public void onClick(DialogInterface dialog, int which)
 					{
-						
-						Toast.makeText(ItemCategoriaAdapter.this.mContext, 
-						"Excluido com sucesso! ID: " + Integer.toString(categoria.getId()), 
-						Toast.LENGTH_SHORT).show();
-						
-						removeItem(categoria);
-						
-						// refresh na lista
-						ItemCategoriaAdapter.this.refresh();						
+						boolean deletou = false;
+					
 						
 						// verifica se o "parent" desse adapter é a lista de categorias
 						if (ItemCategoriaAdapter.this.mContext instanceof ListaCategoriasActivity)
-						{
-							CategoriaDAO dao_cat = new CategoriaDAO(ItemCategoriaAdapter.this.mContext);
-							dao_cat.open();
-							//exclui efetivamente a categoria
-							dao_cat.delete(categoria.getId());
-							dao_cat.close();
-							//CategoriaDAOSingleton.getInstance().excluirCategoria(categoria.getId());
-							
-							// atualiza o label dos registros encontrados
-							ListaCategoriasActivity lca = (ListaCategoriasActivity) ItemCategoriaAdapter.this.mContext;
-							lca.atualizarLblNumEncontrados(ItemCategoriaAdapter.this.getCount());
-						}
+							deletou = mListener.onDeleteItem(categoria, ItemCategoriaAdapter.this.getCount());
 						// verifica se o "parent" desse adapter é a lista de categorias de um perfil
 						else if (ItemCategoriaAdapter.this.mContext instanceof ListaCategoriasPerfilActivity)
+							deletou = mListener.onDeleteItem(categoria);
+						
+						if (deletou)
 						{
-							mListener.onDeleteItem(categoria);
-//							((FormularioPerfilActivity) ItemCategoriaAdapter.this.mContext).excluirCategoriaDasNovasCategorias(categoria);
-//							((FormularioPerfilActivity) ItemCategoriaAdapter.this.mContext).excluirCategoriaDasAntigasCategorias(categoria);
+							removeItem(categoria);
+							// refresh na lista
+							ItemCategoriaAdapter.this.refresh();							
 						}
 						
 					}

@@ -1,5 +1,6 @@
 package com.example.tabletvox03f.management.perfil;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -16,6 +17,7 @@ import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.dal.categoria.Categoria;
 import com.example.tabletvox03f.dal.categoria.CategoriaDAO;
 import com.example.tabletvox03f.dal.categoria.ListaCategoria;
+import com.example.tabletvox03f.management.FormularioBaseActivity;
 import com.example.tabletvox03f.management.OnCategoriaSelectedListener;
 import com.example.tabletvox03f.management.PaginacaoAdapter;
 import com.example.tabletvox03f.management.categoria.FormularioCategoriaActivity;
@@ -357,13 +359,15 @@ public class ListaCategoriasPerfilActivity extends ActionBarActivity implements 
 	}
 
 	@Override
-	public void onDeleteItem(Categoria categoria)
+	public boolean onDeleteItem(Categoria categoria)
 	{
 		// Auto-generated method stub
 		int id = categoria.getId();
 		categorias.remove(categoria);
 		novasCategorias.removeById(id);
 		antigasCategorias.removeById(id);
+		
+		return true;
 	}
 
 	@Override
@@ -385,6 +389,34 @@ public class ListaCategoriasPerfilActivity extends ActionBarActivity implements 
 	{
 		// Auto-generated method stub
 		
+	}
+
+	@Override
+	public boolean onDeleteItem(Categoria categoria, int num_encontrados)
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void onEditItem(Categoria categoria)
+	{
+		Toast.makeText(this, "Você clicou no botão Editar!", Toast.LENGTH_SHORT).show();
+		Intent intent = new Intent(this, FormularioCategoriaActivity.class);
+		
+		
+		
+		// popular imagens na categoria
+		CategoriaDAO dao_cat = new CategoriaDAO(this);
+		
+		dao_cat.open();
+		categoria.setImagens(dao_cat.getImagens(categoria.getId()));
+		dao_cat.close();
+		
+		intent.putExtra("categoria", categoria);
+		
+		intent.putExtra("tipo_form", FormularioBaseActivity.FORM_ALTERAR_NP);
+		startActivityForResult(intent, 3);
 	}
 	
 }

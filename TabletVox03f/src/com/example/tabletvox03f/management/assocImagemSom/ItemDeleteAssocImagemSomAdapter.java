@@ -95,10 +95,6 @@ public class ItemDeleteAssocImagemSomAdapter extends ItemAssocImagemSomAdapter
 					public void onClick(DialogInterface dialog, int which)
 					{
 						
-						Toast.makeText(ItemDeleteAssocImagemSomAdapter.this.mContext, 
-						"Excluido com sucesso! ID: " + Integer.toString(ais.getId()), 
-						Toast.LENGTH_SHORT).show();
-						
 						removeItem(ais);
 						
 						mListener.onDeleteItem(ais);

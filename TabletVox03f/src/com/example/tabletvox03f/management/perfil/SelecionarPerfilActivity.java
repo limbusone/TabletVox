@@ -2,6 +2,7 @@ package com.example.tabletvox03f.management.perfil;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.app.NavUtils;
@@ -135,21 +136,56 @@ public class SelecionarPerfilActivity extends ListaComBuscaManageActivity implem
 	@Override
 	public void onDeleteItem(int id)
 	{
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void onDeleteItem(Perfil perfil)
 	{
-		// TODO Auto-generated method stub
 		
 	}
 
+	// deleta efetivamente o perfil e atualiza o label dos registros encontrados
 	@Override
-	public void onDeleteItem(Perfil perfil, int num_encontrados)
+	public boolean onDeleteItem(Perfil perfil, int num_encontrados)
 	{
-		atualizarLblNumEncontrados(num_encontrados);
+		// não é possível deletar o perfil default
+		if (perfil.getId() == Opcoes.PERFIL_DEFAULT_DEFAULT)
+			return false;
+		
+		Toast.makeText(this, 
+		"Excluido com sucesso! ID: " + Integer.toString(perfil.getId()), 
+		Toast.LENGTH_SHORT).show();		
+		
+		PerfilDAO dao_pfl = new PerfilDAO(this);
+		
+		dao_pfl.open();
+		// exclui efetivamente o perfil
+		dao_pfl.delete(perfil.getId());
+		dao_pfl.close();
+		
+		atualizarLblNumEncontrados(--num_encontrados);
+		
+		return true;
+	}
+
+	@Override
+	public void onEditItem(Perfil perfil)
+	{
+		// popular categorias no perfil
+		PerfilDAO dao_pfl = new PerfilDAO(this);
+		
+		dao_pfl.open();
+		perfil.setCategorias(dao_pfl.getCategorias(perfil.getId()));
+		dao_pfl.close();
+		
+		// chamar form editar
+		Intent intent = new Intent(this, FormularioPerfilActivity.class);
+		intent.putExtra("tipo_form", FormularioBaseActivity.FORM_ALTERAR); // 1 para 'editar perfil'
+		
+		intent.putExtra("perfil", perfil);
+		startActivityForResult(intent, 2);
+		
 	}
 
 }

@@ -190,10 +190,15 @@ public class ListaImagensCategoriaActivity extends ActionBarActivity implements 
 	}
 
 	@Override
-	public void onDeleteItem(AssocImagemSom imagem)
+	public boolean onDeleteItem(AssocImagemSom imagem)
 	{
-		// Auto-generated method stub
+		Toast.makeText(this, 
+		"Excluido com sucesso! ID: " + Integer.toString(imagem.getId()), 
+		Toast.LENGTH_SHORT).show();
+		
 		imagens.remove(imagem);
+		
+		return true;
 	}
 
 	@Override
@@ -315,9 +320,16 @@ public class ListaImagensCategoriaActivity extends ActionBarActivity implements 
 	}
 
 	@Override
-	public void onDeleteItem(AssocImagemSom imagem, int num_encontrados)
+	public boolean onDeleteItem(AssocImagemSom imagem, int num_encontrados)
 	{
 		// Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void onEditItem(AssocImagemSom imagem)
+	{
+		// TODO Auto-generated method stub
 		
 	}
 

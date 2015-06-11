@@ -10,7 +10,10 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Toast;
 
+import com.example.tabletvox03f.Erro;
 import com.example.tabletvox03f.R;
+import com.example.tabletvox03f.Utils;
+import com.example.tabletvox03f.dal.FilesIO;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSomDAO;
 import com.example.tabletvox03f.management.FormularioBaseActivity;
@@ -124,14 +127,45 @@ public class ListaImagensActivity extends ListaComBuscaManageActivity implements
 	}
 
 	@Override
-	public void onDeleteItem(AssocImagemSom imagem)
+	public boolean onDeleteItem(AssocImagemSom imagem)
 	{
-		
+		return false;
 	}
 
 	@Override
-	public void onDeleteItem(AssocImagemSom imagem, int num_encontrados)
+	public boolean onDeleteItem(AssocImagemSom imagem, int num_encontrados)
 	{
-		atualizarLblNumEncontrados(num_encontrados);
+		FilesIO fio = new FilesIO(this);
+		if (!(fio.deletarArquivosDeImagemESom(imagem)))
+		{
+			Utils.limpaErros();
+			Utils.erros.add(new Erro("Erro ao excluir o arquivo de imagem ou de som. Exclusão cancelada!"));
+			Utils.exibirErros(this);
+			return false;
+		}
+		
+		AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(this);
+		dao_ais.open();
+		dao_ais.delete(imagem.getId());
+		dao_ais.close();		
+		
+		atualizarLblNumEncontrados(--num_encontrados);
+		
+		Toast.makeText(this, 
+		"Excluido com sucesso! ID: " + Integer.toString(imagem.getId()), 
+		Toast.LENGTH_SHORT).show();
+		
+		return true;
+	}
+
+	@Override
+	public void onEditItem(AssocImagemSom imagem)
+	{
+		Toast.makeText(this, "Você clicou no botão Editar!", Toast.LENGTH_SHORT).show();
+		Intent intent = new Intent(this, FormularioAssocImagemSomActivity.class);
+		intent.putExtra("tipo_form", FormularioBaseActivity.FORM_ALTERAR);
+		intent.putExtra("ais", imagem);
+		startActivity(intent);
+		
 	}		
 }

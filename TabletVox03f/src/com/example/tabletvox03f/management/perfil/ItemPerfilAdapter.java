@@ -2,11 +2,9 @@ package com.example.tabletvox03f.management.perfil;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,8 +16,6 @@ import android.widget.Toast;
 
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.dal.perfil.Perfil;
-import com.example.tabletvox03f.dal.perfil.PerfilDAO;
-import com.example.tabletvox03f.management.FormularioBaseActivity;
 import com.example.tabletvox03f.management.OnPerfilSelectedListener;
 
 public class ItemPerfilAdapter extends BaseAdapter
@@ -115,23 +111,8 @@ public class ItemPerfilAdapter extends BaseAdapter
 			public void onClick(View v)
 			{
 				//Toast.makeText(ItemPerfilAdapter.this.mContext, "Você clicou no botão Editar!", Toast.LENGTH_SHORT).show();
+				mListener.onEditItem(perfil);
 
-				// popular categorias no perfil
-				PerfilDAO dao_pfl = new PerfilDAO(ItemPerfilAdapter.this.mContext);
-				
-				dao_pfl.open();
-				perfil.setCategorias(dao_pfl.getCategorias(perfil.getId()));
-				dao_pfl.close();
-				
-				// chamar form editar
-				Intent intent = new Intent(ItemPerfilAdapter.this.mContext, FormularioPerfilActivity.class);
-				intent.putExtra("tipo_form", FormularioBaseActivity.FORM_ALTERAR); // 1 para 'editar perfil'
-				
-				intent.putExtra("perfil", perfil);
-//				intent.putExtra("pfl_id", perfil.getId());
-//				intent.putExtra("pfl_nome", perfil.getNome());
-//				intent.putExtra("pfl_autor", perfil.getAutor());
-				((Activity) ItemPerfilAdapter.this.mContext).startActivityForResult(intent, 2);
 			}
 		});
 		
@@ -156,29 +137,18 @@ public class ItemPerfilAdapter extends BaseAdapter
 					@Override
 					public void onClick(DialogInterface dialog, int which)
 					{
-						
-						Toast.makeText(ItemPerfilAdapter.this.mContext, 
-						"Excluido com sucesso! ID: " + Integer.toString(perfil.getId()), 
-						Toast.LENGTH_SHORT).show();
-						
-						removeItem(perfil);
-						// refresh na lista
-						ItemPerfilAdapter.this.refresh();
+						boolean deletou = false;
 						
 						// verifica se o "parent" desse adapter é a tela de selecionarPerfilActivity
 						if (ItemPerfilAdapter.this.mContext instanceof SelecionarPerfilActivity)
-						{
-							PerfilDAO dao_pfl = new PerfilDAO(ItemPerfilAdapter.this.mContext);
-							
-							dao_pfl.open();
-							// exclui efetivamente o perfil
-							dao_pfl.delete(perfil.getId());
-							dao_pfl.close();							
-							
-							// atualiza o label dos registros encontrados
-							mListener.onDeleteItem(perfil, ItemPerfilAdapter.this.getCount());
-						}
+							deletou = mListener.onDeleteItem(perfil, ItemPerfilAdapter.this.getCount());
 						
+						if (deletou)
+						{
+							removeItem(perfil);
+							// refresh na lista
+							ItemPerfilAdapter.this.refresh();
+						}
 					}
 				});
 				

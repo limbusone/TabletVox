@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -92,11 +91,7 @@ public class ItemAssocImagemSomAdapter extends BaseAdapter
 			@Override
 			public void onClick(View v)
 			{
-				Toast.makeText(ItemAssocImagemSomAdapter.this.mContext, "Você clicou no botão Editar!", Toast.LENGTH_SHORT).show();
-				Intent intent = new Intent(ItemAssocImagemSomAdapter.this.mContext, FormularioAssocImagemSomActivity.class);
-				intent.putExtra("tipo_form", 1);
-				intent.putExtra("ais", ais);
-				ItemAssocImagemSomAdapter.this.mContext.startActivity(intent);
+				mListener.onEditItem(ais);
 			}
 		});
 		
@@ -121,35 +116,16 @@ public class ItemAssocImagemSomAdapter extends BaseAdapter
 					@Override
 					public void onClick(DialogInterface dialog, int which)
 					{
-						removeItem(ais);
+						boolean deletou = false;
 						
-						Toast.makeText(ItemAssocImagemSomAdapter.this.mContext, 
-						"Excluido com sucesso! ID: " + Integer.toString(ais.getId()), 
-						Toast.LENGTH_SHORT).show();						
-
-						// refresh na lista
-						ItemAssocImagemSomAdapter.this.refresh();							
+						// deleta efetivamente a imagem e atualiza o label dos registros encontrados
+						deletou = mListener.onDeleteItem(ais, ItemAssocImagemSomAdapter.this.getCount());
 						
-						// verifica se o "parent" desse adapter é a lista de imagens
-						if (ItemAssocImagemSomAdapter.this.mContext instanceof ListaImagensActivity)
+						if (deletou)
 						{
-							FilesIO fio = new FilesIO(ItemAssocImagemSomAdapter.this.mContext);
-							if (!(fio.deletarArquivosDeImagemESom(ais)))
-							{
-								Utils.erros.add(new Erro("Erro ao excluir o arquivo de imagem ou de som. Exclusão cancelada!"));
-								Utils.exibirErros(ItemAssocImagemSomAdapter.this.mContext);
-								return;
-							}							
-							
-							//AssocImagemSomDAOSingleton.getInstance().excluirAssocImagemSom(ais.getId());
-							
-							AssocImagemSomDAO dao_ais = new AssocImagemSomDAO(ItemAssocImagemSomAdapter.this.mContext);
-							dao_ais.open();
-							dao_ais.delete(ais.getId());
-							dao_ais.close();
-							
-							// atualiza o label dos registros encontrados
-							mListener.onDeleteItem(ais, ItemAssocImagemSomAdapter.this.getCount());
+							removeItem(ais);
+							// refresh na lista
+							ItemAssocImagemSomAdapter.this.refresh();							
 						}
 						
 					}

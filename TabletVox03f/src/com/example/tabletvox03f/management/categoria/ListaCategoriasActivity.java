@@ -1,5 +1,7 @@
 package com.example.tabletvox03f.management.categoria;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.text.Editable;
 import android.view.MenuItem;
@@ -123,9 +125,53 @@ public class ListaCategoriasActivity extends ListaComBuscaManageActivity impleme
 	}
 
 	@Override
-	public void onDeleteItem(Categoria categoria)
+	public boolean onDeleteItem(Categoria categoria)
 	{
 		// Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean onDeleteItem(Categoria categoria, int num_encontrados)
+	{
+		
+		Toast.makeText(this, 
+		"Excluido com sucesso! ID: " + Integer.toString(categoria.getId()), 
+		Toast.LENGTH_SHORT).show();
+		
+		CategoriaDAO dao_cat = new CategoriaDAO(this);
+		dao_cat.open();
+		//exclui efetivamente a categoria
+		dao_cat.delete(categoria.getId());
+		dao_cat.close();
+		//CategoriaDAOSingleton.getInstance().excluirCategoria(categoria.getId());
+		
+		// atualiza o label dos registros encontrados
+		atualizarLblNumEncontrados(--num_encontrados);
+		
+		return true;
+	}
+
+	@Override
+	public void onEditItem(Categoria categoria)
+	{
+		
+		Toast.makeText(this, "Você clicou no botão Editar!", Toast.LENGTH_SHORT).show();
+		Intent intent = new Intent(this, FormularioCategoriaActivity.class);
+		
+		
+		
+		// popular imagens na categoria
+		CategoriaDAO dao_cat = new CategoriaDAO(this);
+		
+		dao_cat.open();
+		categoria.setImagens(dao_cat.getImagens(categoria.getId()));
+		dao_cat.close();
+		
+		intent.putExtra("categoria", categoria);
+		
+		intent.putExtra("tipo_form", FormularioBaseActivity.FORM_ALTERAR);
+		startActivityForResult(intent, 2);
 		
 	}	
 

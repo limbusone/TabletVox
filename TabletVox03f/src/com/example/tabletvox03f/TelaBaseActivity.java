@@ -54,7 +54,7 @@ public class TelaBaseActivity extends ActionBarActivity
 		gridview_atalhos	= (GridView) findViewById(R.id.gridview_atalhos);
 		
 		SharedPreferences sp 	= PreferenceManager.getDefaultSharedPreferences(this);
-		int tamanhoImagem 		= Integer.parseInt(sp.getString("tamanho_imagem", "" + Opcoes.TAMANHO_IMAGEM_DEFAULT));
+		int tamanhoImagem 		= Integer.parseInt(sp.getString(Opcoes.TAMANHO_IMAGEM_KEY, "" + Opcoes.TAMANHO_IMAGEM_DEFAULT));
 		
 		gridview.setColumnWidth(tamanhoImagem);
 		gridview_atalhos.setColumnWidth(tamanhoImagem);
@@ -162,7 +162,7 @@ public class TelaBaseActivity extends ActionBarActivity
 	{
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
 		
-		if (sp.getBoolean("tocar_som_ao_selecionar_imagem", true))
+		if (sp.getBoolean(Opcoes.TOCAR_SOM_AO_SELECIONAR_IMAGEM_KEY, Opcoes.TOCAR_SOM_AO_SELECIONAR_IMAGEM_DEFAULT))
 			imgi.tocarSom(this);
 
 		//carregarCategoriaModoTouch(imgi.getAssocImagemSom().getDesc());
@@ -191,7 +191,7 @@ public class TelaBaseActivity extends ActionBarActivity
 	{
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
 		
-		if (sp.getBoolean("tocar_som_ao_selecionar_imagem", true))
+		if (sp.getBoolean(Opcoes.TOCAR_SOM_AO_SELECIONAR_IMAGEM_KEY, Opcoes.TOCAR_SOM_AO_SELECIONAR_IMAGEM_DEFAULT))
 			imgi.tocarSom(this);
 		
 		//carregarCategoriaModoVarredura(imgi.getAssocImagemSom().getDesc());
@@ -253,7 +253,7 @@ public class TelaBaseActivity extends ActionBarActivity
 		gridview_frase.setAdapter(new ImageAdapterFrase(lista_imagens_frase));
 
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-		if (sp.getBoolean("tocar_som_ao_selecionar_imagem", true))
+		if (sp.getBoolean(Opcoes.TOCAR_SOM_AO_SELECIONAR_IMAGEM_KEY, Opcoes.TOCAR_SOM_AO_SELECIONAR_IMAGEM_DEFAULT))
 		{	
 			sservice_intent.putExtra("titulo_som", imgi.getAssocImagemSom().getTituloSom());
 			imgi.tocarSom(sservice_intent);
@@ -330,7 +330,7 @@ public class TelaBaseActivity extends ActionBarActivity
 					try
 					{
 						SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(TelaBaseActivity.this);
-						int intervalo = Integer.parseInt(sp.getString("intervalo_tempo_tocar_frase", "" + Opcoes.INTERVALO_TEMPO_TOCAR_FRASE_DEFAULT));
+						int intervalo = Integer.parseInt(sp.getString(Opcoes.INTERVALO_TEMPO_TOCAR_FRASE_KEY, "" + Opcoes.INTERVALO_TEMPO_TOCAR_FRASE_DEFAULT));
 						
 						Thread.sleep(intervalo);
 					} 

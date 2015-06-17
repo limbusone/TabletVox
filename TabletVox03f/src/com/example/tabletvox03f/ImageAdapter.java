@@ -61,7 +61,7 @@ public class ImageAdapter extends BaseAdapter
 		{ // if it's not recycled, initialize some
 									// attributes
 			SharedPreferences sp 	= PreferenceManager.getDefaultSharedPreferences(mContext);
-			int tamanhoImagem 		= Integer.parseInt(sp.getString("tamanho_imagem", "" + Opcoes.TAMANHO_IMAGEM_DEFAULT));
+			int tamanhoImagem 		= Integer.parseInt(sp.getString(Opcoes.TAMANHO_IMAGEM_KEY, "" + Opcoes.TAMANHO_IMAGEM_DEFAULT));
 			
 			imagemItem = new ImgItem(mContext);
 			imagemItem.setLayoutParams(new GridView.LayoutParams(tamanhoImagem, tamanhoImagem));

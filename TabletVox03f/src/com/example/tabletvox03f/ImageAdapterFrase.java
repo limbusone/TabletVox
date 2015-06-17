@@ -51,7 +51,7 @@ public class ImageAdapterFrase extends BaseAdapter
 		if (convertView == null)
 		{
 			SharedPreferences sp 	= PreferenceManager.getDefaultSharedPreferences(parent.getContext());
-			int tamanhoImagem 		= Integer.parseInt(sp.getString("tamanho_imagem", "" + Opcoes.TAMANHO_IMAGEM_DEFAULT));			
+			int tamanhoImagem 		= Integer.parseInt(sp.getString(Opcoes.TAMANHO_IMAGEM_KEY, "" + Opcoes.TAMANHO_IMAGEM_DEFAULT));			
 			
 			imagemItem = imgi_list.get(position);
 			imagemItem.setLayoutParams(new GridView.LayoutParams(tamanhoImagem, tamanhoImagem));

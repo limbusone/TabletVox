@@ -17,6 +17,8 @@ public class OpcoesActivity extends ActionBarActivity
                 .replace(android.R.id.content, new OpcoesFragment())
                 .commit();
     }
+
+
 	
 	
 }

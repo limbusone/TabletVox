@@ -12,11 +12,13 @@
         <item>@string/tamanho_imagem_pequeno</item>
         <item>@string/tamanho_imagem_medio</item>
         <item>@string/tamanho_imagem_grande</item>
+        <item>@string/tamanho_imagem_extra_grande</item>
     </array>
     <array name="opcoes_tamanho_imagem">
         <item>@string/tamanho_imagem_pequeno_value</item>
         <item>@string/tamanho_imagem_medio_value</item>
         <item>@string/tamanho_imagem_grande_value</item>
+        <item>@string/tamanho_imagem_extra_grande_value</item>
     </array>    
     
 </resources>

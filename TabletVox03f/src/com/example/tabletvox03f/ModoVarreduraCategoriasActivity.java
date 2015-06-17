@@ -154,7 +154,7 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 
 		
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-		delayVarredura = Integer.parseInt(sp.getString("intervalo_tempo_varredura", "" + Opcoes.INTERVALO_TEMPO_VARREDURA_DEFAULT));;
+		delayVarredura = Integer.parseInt(sp.getString(Opcoes.INTERVALO_TEMPO_VARREDURA_KEY, "" + Opcoes.INTERVALO_TEMPO_VARREDURA_DEFAULT));;
 		
 		// muda titulo conforme perfil
 		setCurrentTitle("Categorias de " + Utils.PERFIL_ATIVO.getNome());		

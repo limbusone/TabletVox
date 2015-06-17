@@ -65,7 +65,7 @@
     <string name="add_categoria">Adicionar Categoria</string>
     <string name="opcoes">Opções</string>
     <string name="tocar_som_ao_selecionar_imagem">Tocar som ao selecionar imagem</string>
-    <string name="intervalo_tempo_tocar_frase">Intervalo de tempo ao tocar a frase (ms)</string>
+    <string name="intervalo_tempo_tocar_frase">Intervalo de tempo ao tocar som da frase (ms)</string>
     <string name="intervalo_tempo_varredura">Intervalo de tempo da varredura (ms)</string>
     <string name="cor_borda">Cor da Borda do modo Varredura</string>
     <string name="dialog_title_opcoes_borda">Escolha a cor da borda</string>
@@ -78,9 +78,11 @@
     <string name="tamanho_imagem_pequeno">Pequeno</string>
     <string name="tamanho_imagem_medio">Médio</string>
     <string name="tamanho_imagem_grande">Grande</string>
+    <string name="tamanho_imagem_extra_grande">Extra Grande</string>
     <string name="tamanho_imagem_pequeno_value">85</string>
     <string name="tamanho_imagem_medio_value">96</string>
     <string name="tamanho_imagem_grande_value">120</string>
+    <string name="tamanho_imagem_extra_grande_value">240</string>
     <string name="add">Adicionar</string>
     <string name="tem_certeza">Tem certeza?</string>
     <string name="confirmar_exclusao">Confirmar Exclusão</string>

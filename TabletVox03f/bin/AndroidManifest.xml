@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.tabletvox03f"
-    android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionCode="2"
+    android:versionName="03g" >
 
     <uses-sdk
-        android:minSdkVersion="4"
+        android:minSdkVersion="7"
         android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <!-- Include following permission if you load images from Internet -->
-    <uses-permission android:name="android.permission.INTERNET" />
     <!-- Include following permission if you want to cache images on SD card -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />    
     
@@ -31,115 +29,153 @@
             </intent-filter>            
         </activity>
         
+        <!-- telas principais -->
+        <activity
+            android:name="com.example.tabletvox03f.MainMenuActivity"
+            android:label="@string/title_activity_main_menu">
+
+        </activity>        
+        
         <activity
             android:name="com.example.tabletvox03f.ModoTouchActivity"
-            android:label="@string/title_activity_modo_touch" >
+            android:label="@string/title_activity_modo_touch" 
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            android:screenOrientation="landscape">
         </activity>
-
-        <service
-            android:name="com.example.tabletvox03f.SoundService"
-            android:exported="false" />
 
         <activity
             android:name="com.example.tabletvox03f.ModoVarreduraActivity"
-            android:label="@string/title_activity_modo_varredura" >
+            android:label="@string/title_activity_modo_varredura"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" 
+            android:screenOrientation="landscape">
         </activity>
-        <activity
-            android:name="com.example.tabletvox03f.MainMenuActivity"
-            android:label="@string/title_activity_main_menu" >
 
-        </activity>
-        <activity
-            android:name="com.example.tabletvox03f.TelasCadastro"
-            android:label="@string/title_activity_telas_cadastro" >
-        </activity>
-        <activity
-            android:name="com.example.tabletvox03f.management.TelasCadastroActivity"
-            android:label="@string/title_activity_telas_cadastro" >
-        </activity>
-        <activity
-            android:name="com.example.tabletvox03f.management.IncluirAISActivity"
-            android:label="@string/title_activity_incluir_ais" >
-        </activity>
         <activity
             android:name="com.example.tabletvox03f.ModoTouchCategoriasActivity"
-            android:label="@string/title_activity_modo_touch_categorias" >
+            android:label="@string/title_activity_modo_touch_categorias"
+            android:parentActivityName="com.example.tabletvox03f.MainMenuActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" 
+            android:screenOrientation="landscape">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.tabletvox03f.MainMenuActivity" />
         </activity>
+        
         <activity
             android:name="com.example.tabletvox03f.ModoVarreduraCategoriasActivity"
-            android:label="@string/title_activity_modo_varredura_categorias" >
+            android:label="@string/title_activity_modo_varredura_categorias"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            android:screenOrientation="landscape">
         </activity>
+        
+        <!-- telas de gerenciamento -->
+        
+        <!-- perfil -->
         <activity
             android:name="com.example.tabletvox03f.management.perfil.SelecionarPerfilActivity"
             android:label="@string/title_activity_selecionar_perfil"
-            android:windowSoftInputMode="stateAlwaysHidden" >
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:parentActivityName="com.example.tabletvox03f.MainMenuActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.tabletvox03f.MainMenuActivity" />
         </activity>
+        
         <activity
             android:name="com.example.tabletvox03f.management.perfil.FormularioPerfilActivity"
             android:label="@string/title_activity_criar_perfil"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:parentActivityName="com.example.tabletvox03f.management.perfil.SelecionarPerfilActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.tabletvox03f.SelecionarPerfilActivity" >
-            </meta-data>
+                android:value="com.example.tabletvox03f.management.perfil.SelecionarPerfilActivity" />
         </activity>
+        
         <activity
-            android:name="com.example.tabletvox03f.management.ListaCategoriasDoPerfilActivity"
-            android:label="@string/title_activity_perfil_manage" >
-        </activity>
+            android:name="com.example.tabletvox03f.management.perfil.ListaCategoriasPerfilActivity"
+            android:label="@string/title_activity_lista_imagens_categoria"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+        </activity>        
+        
+        <!-- categoria -->
         
         <activity 
             android:name="com.example.tabletvox03f.management.categoria.FormularioCategoriaActivity"
             android:label="@string/title_activity_criar_categoria"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
         </activity>
 
         <activity
             android:name="com.example.tabletvox03f.management.categoria.ListaCategoriasActivity"
             android:label="@string/title_activity_lista_categorias"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+         
         </activity>        
         
         <activity
             android:name="com.example.tabletvox03f.management.categoria.SelecionarCategoriasActivity"
             android:label="@string/title_activity_selecionar_categorias"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+        </activity> 
+        
+        <activity
+            android:name="com.example.tabletvox03f.management.categoria.ListaImagensCategoriaActivity"
+            android:label="@string/title_activity_lista_imagens_categoria"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
         </activity>        
+        
+        <!-- imagens -->
         
         <activity 
             android:name="com.example.tabletvox03f.management.assocImagemSom.FormularioAssocImagemSomActivity"
             android:label="@string/title_activity_incluir_ais"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">            
         </activity>
         
         <activity
             android:name="com.example.tabletvox03f.management.assocImagemSom.ListaImagensActivity"
             android:label="@string/title_activity_lista_imagens"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
         </activity>
         
         <activity
             android:name="com.example.tabletvox03f.management.assocImagemSom.SelecionarImagemActivity"
             android:label="@string/title_activity_selecionar_imagem"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">            
         </activity>
         
         <activity
             android:name="com.example.tabletvox03f.management.assocImagemSom.SelecionarImagensActivity"
-            android:label="@string/title_activity_selecionar_imagem"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:label="@string/title_activity_selecionar_imagens"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">            
         </activity>
         
-        <activity
-            android:name="com.example.tabletvox03f.management.categoria.ListaImagensCategoriaActivity"
-            android:label="@string/title_activity_lista_imagens_categoria"
-            android:windowSoftInputMode="stateAlwaysHidden">
-        </activity>
         
+        <!-- outros -->
         <activity
         	android:name="com.example.tabletvox03f.management.OpcoesActivity"
-        	android:label="@string/opcoes">
+        	android:label="@string/opcoes"
+        	android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            android:parentActivityName="com.example.tabletvox03f.MainMenuActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.tabletvox03f.MainMenuActivity" />
 		</activity>
+		
+        <service
+            android:name="com.example.tabletvox03f.SoundService"
+            android:exported="false" />        
 
     </application>
 

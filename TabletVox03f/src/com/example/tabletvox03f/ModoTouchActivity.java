@@ -10,7 +10,6 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ProgressBar;
 
 import com.example.tabletvox03f.dal.CarregarImagensComandos;
@@ -60,7 +59,7 @@ public class ModoTouchActivity extends TelaBaseActivity
 				{
 					super.onPreExecute();
 					activeContext = ModoTouchActivity.this;
-					gridview 	= (GridView) ModoTouchActivity.this.findViewById(R.id.gridview);
+					gridview 	= ModoTouchActivity.this.gridview;
 					pgrbar		= (ProgressBar) ModoTouchActivity.this.findViewById(R.id.progressBar1);
 					
 					pgrbar.setVisibility(View.VISIBLE);
@@ -78,10 +77,10 @@ public class ModoTouchActivity extends TelaBaseActivity
 		{
 			Button btnShowHideCommands 	= (Button) findViewById(R.id.btnShowHideCommands);
 			Button btnNext 				= (Button) findViewById(R.id.btnNext);
-			GridView gridview = (GridView) ModoTouchActivity.this.findViewById(R.id.gridview);
 			
-			// associa o click no grid principal a funcionalidade de acionar comando 
-			gridview.setOnItemClickListener(startImagemComando);
+			// associa o click no grid principal a funcionalidade de acionar comando
+			ModoTouchActivity.this.gridview
+			.setOnItemClickListener(startImagemComando);
 			// associa o click no botao a funcionalidade de esconder os comandos do grid principal
 			btnShowHideCommands.setOnClickListener(escondeComandosEvento);
 			// desativar evento click no botao de paginacao
@@ -97,7 +96,7 @@ public class ModoTouchActivity extends TelaBaseActivity
 				{
 					super.onPreExecute();
 					activeContext = ModoTouchActivity.this;
-					gridview 	= (GridView) ModoTouchActivity.this.findViewById(R.id.gridview);
+					gridview 	= ModoTouchActivity.this.gridview;
 					pgrbar 		= (ProgressBar) ModoTouchActivity.this.findViewById(R.id.progressBar1);
 					
 					pgrbar.setVisibility(View.VISIBLE);
@@ -114,16 +113,17 @@ public class ModoTouchActivity extends TelaBaseActivity
 		{
 			Button btnShowHideCommands 	= (Button) findViewById(R.id.btnShowHideCommands);
 			Button btnNext 				= (Button) findViewById(R.id.btnNext);
-			GridView gridview = (GridView) ModoTouchActivity.this.findViewById(R.id.gridview);
+			
 			
 			// associa o click no grid principal a funcionalidade de adicionar imagem a frase
-			gridview.setOnItemClickListener(addImagemFraseEvento);
+			ModoTouchActivity.this.gridview
+			.setOnItemClickListener(addImagemFraseEvento);
 			// associa o click no botao a funcionalidade de mostrar comandos no grid principal
 			btnShowHideCommands.setOnClickListener(mostraComandosEvento);
 			// reativar evento click no botao de paginacao
 			btnNext.setOnClickListener(proximaPaginaEvento);
 			
-			CarregarImagensTelas cixml = new CarregarImagensTelas()
+			CarregarImagensTelas cit = new CarregarImagensTelas()
 			{
 				// metodo que roda na UI Thread antes da atividade em background
 				@Override
@@ -131,14 +131,14 @@ public class ModoTouchActivity extends TelaBaseActivity
 				{
 					super.onPreExecute();
 					activeContext = ModoTouchActivity.this;
-					gridview 	= (GridView) ModoTouchActivity.this.findViewById(R.id.gridview);
+					gridview 	= ModoTouchActivity.this.gridview;
 					pgrbar		= (ProgressBar) ModoTouchActivity.this.findViewById(R.id.progressBar1);
 					
 					pgrbar.setVisibility(View.VISIBLE);					
 				}
 				
 			};
-			cixml.execute(current_page, CarregarImagensTelas.OPCAO_CARREGAR_IMAGENS, current_categoriaId);
+			cit.execute(current_page, CarregarImagensTelas.OPCAO_CARREGAR_IMAGENS, current_categoriaId);
 		}
 	};	
 	
@@ -171,10 +171,6 @@ public class ModoTouchActivity extends TelaBaseActivity
 		// habilita up back
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
-		GridView gridview = (GridView) findViewById(R.id.gridview);
-		GridView gridview_frase = (GridView) findViewById(R.id.gridview_frase);
-		GridView gridview_atalhos = (GridView) findViewById(R.id.gridview_atalhos);
-		
 		Button btnNext 				= (Button) findViewById(R.id.btnNext);
 		Button btnShowHideCommands 	= (Button) findViewById(R.id.btnShowHideCommands);
 		
@@ -184,7 +180,7 @@ public class ModoTouchActivity extends TelaBaseActivity
 			gridview_frase.setAdapter(new ImageAdapterFrase(lista_imagens_frase));			
 
 		// aqui carregam-se as imagens da primeira pagina
-		CarregarImagensTelas cixml = new CarregarImagensTelas()
+		CarregarImagensTelas cit = new CarregarImagensTelas()
 		{
 			// metodo que roda na UI Thread antes da atividade em background
 			@Override
@@ -192,7 +188,7 @@ public class ModoTouchActivity extends TelaBaseActivity
 			{
 				super.onPreExecute();
 				activeContext = ModoTouchActivity.this;
-				gridview 	= (GridView) ModoTouchActivity.this.findViewById(R.id.gridview);
+				gridview 	= ModoTouchActivity.this.gridview;
 //				wview 		= (WebView) ModoTouchActivity.this.findViewById(R.id.webview);
 				pgrbar		= (ProgressBar) ModoTouchActivity.this.findViewById(R.id.progressBar1);
 				
@@ -204,10 +200,10 @@ public class ModoTouchActivity extends TelaBaseActivity
 			}
 	
 		};
-		cixml.execute(init_page, CarregarImagensTelas.OPCAO_CARREGAR_IMAGENS, current_categoriaId);
+		cit.execute(init_page, CarregarImagensTelas.OPCAO_CARREGAR_IMAGENS, current_categoriaId);
 		
 		// aqui carregam-se as imagens-comandos que sao atalhos
-		CarregarImagensComandos cixmlc = new CarregarImagensComandos()
+		CarregarImagensComandos cic = new CarregarImagensComandos()
 		{
 
 			// metodo que roda na UI Thread antes da atividade em background
@@ -216,11 +212,11 @@ public class ModoTouchActivity extends TelaBaseActivity
 			{
 				super.onPreExecute();
 				activeContext = ModoTouchActivity.this;
-				gridview 	= (GridView) ModoTouchActivity.this.findViewById(R.id.gridview_atalhos);
+				gridview 	= ModoTouchActivity.this.gridview_atalhos;
 			}
 			
 		};
-		cixmlc.execute(CarregarImagensComandos.OPCAO_CARREGAR_ATALHOS); // true: mostrar atalhos
+		cic.execute(CarregarImagensComandos.OPCAO_CARREGAR_ATALHOS); // true: mostrar atalhos
 		
 		// aqui carrega-se o service de reprodução de som
 		sservice_intent = new Intent(this, SoundService.class);
@@ -262,9 +258,11 @@ public class ModoTouchActivity extends TelaBaseActivity
 		
 		if (!(copiarFraseGlobalParaFraseLocal()))
 			lista_imagens_frase = new ArrayList<ImgItem>();
-		else // transferindo as imagens globais para o gridview frase 
-			((GridView) findViewById(R.id.gridview_frase))
-			.setAdapter(new ImageAdapterFrase(lista_imagens_frase));
+		
+		// transferindo as imagens globais para o gridview frase 
+		gridview_frase.setAdapter(new ImageAdapterFrase(lista_imagens_frase));
+		
+		
 	}	
 	
 	@Override

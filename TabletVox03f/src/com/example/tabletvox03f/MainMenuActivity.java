@@ -33,7 +33,7 @@ public class MainMenuActivity extends Activity
 		mudaTituloConformePerfilSelecionado();
 		
 		// inicializa frase global
-		Utils.lista_imagens_frase_global = new ArrayList<ImgItem>();
+		TelaBaseActivity.lista_imagens_frase_global = new ArrayList<ImgItem>();
 		
 		ImageButton cmd_modo_touch 		= (ImageButton) findViewById(R.id.cmdLaunchModoTouch);
 		ImageButton cmd_modo_varredura 	= (ImageButton) findViewById(R.id.cmdLaunchModoVarredura);
@@ -46,17 +46,23 @@ public class MainMenuActivity extends Activity
 			public void onClick(View v)
 			{
 				Intent intent;
-				long categoriaId = existeSomenteUmaCategoriaNoPerfil();
-				if (categoriaId > 0)
-				// carrega ModoTouchActivity diretamente
+				
+				if (existemCategoriasNoPerfil())
 				{
-					intent = new Intent(MainMenuActivity.this, ModoTouchActivity.class);
-					intent.putExtra("categoriaId", categoriaId);
+					long categoriaId = existeSomenteUmaCategoriaNoPerfil();
+					if (categoriaId > 0)
+					// carrega ModoTouchActivity diretamente
+					{
+						intent = new Intent(MainMenuActivity.this, ModoTouchActivity.class);
+						intent.putExtra("categoriaId", categoriaId);
+					}
+					else
+						intent = new Intent(MainMenuActivity.this, ModoTouchCategoriasActivity.class);
+									
+					startActivity(intent);
 				}
 				else
-					intent = new Intent(MainMenuActivity.this, ModoTouchCategoriasActivity.class);
-								
-				startActivity(intent);
+					Toast.makeText(MainMenuActivity.this, R.string.erro_nao_existem_categorias_no_perfil, Toast.LENGTH_SHORT).show();
 			}
 			
 		});
@@ -70,17 +76,22 @@ public class MainMenuActivity extends Activity
 			{
 				Intent intent;
 				
-				long categoriaId = existeSomenteUmaCategoriaNoPerfil();
-				if (categoriaId > 0)
-				// carrega ModoVarreduraActivity diretamente
+				if (existemCategoriasNoPerfil())
 				{
-					intent = new Intent(MainMenuActivity.this, ModoVarreduraActivity.class);
-					intent.putExtra("categoriaId", categoriaId);
+					long categoriaId = existeSomenteUmaCategoriaNoPerfil();
+					if (categoriaId > 0)
+					// carrega ModoVarreduraActivity diretamente
+					{
+						intent = new Intent(MainMenuActivity.this, ModoVarreduraActivity.class);
+						intent.putExtra("categoriaId", categoriaId);
+					}
+					else				
+						intent = new Intent(MainMenuActivity.this, ModoVarreduraCategoriasActivity.class);
+					
+					startActivity(intent);
 				}
-				else				
-					intent = new Intent(MainMenuActivity.this, ModoVarreduraCategoriasActivity.class);
-				
-				startActivity(intent);
+				else 
+					Toast.makeText(MainMenuActivity.this, R.string.erro_nao_existem_categorias_no_perfil, Toast.LENGTH_SHORT).show();
 			}
 			
 		});		
@@ -92,7 +103,7 @@ public class MainMenuActivity extends Activity
 	protected void onResume()
 	{
 		super.onResume();
-		Utils.lista_imagens_frase_global.clear(); // limpar lista global quando o aplicativo volta para o menu
+		TelaBaseActivity.lista_imagens_frase_global.clear(); // limpar lista global quando o aplicativo volta para o menu
 	}
 	
 	@Override
@@ -177,4 +188,16 @@ public class MainMenuActivity extends Activity
 		return categorias.get(0).getId();
 	}
 
+	private boolean existemCategoriasNoPerfil()
+	{
+		
+		PerfilDAO dao_pfl = new PerfilDAO(this);
+		
+		dao_pfl.open();
+		ListaCategoria categorias = dao_pfl.getCategorias(Utils.PERFIL_ATIVO.getId());
+		dao_pfl.close();
+		
+		return (categorias.size() > 0);
+	}
+	
 }

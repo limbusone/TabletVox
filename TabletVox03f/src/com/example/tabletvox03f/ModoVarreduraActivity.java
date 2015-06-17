@@ -85,8 +85,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 		}
 		else if (estadoAtual == ESTADO_GRIDVIEW_ATALHOS_ATIVO) // atalho
 		{
-			GridView gva = (GridView) findViewById(R.id.gridview_atalhos);
-			ImgItem imgi = (ImgItem) gva.getChildAt(0);
+			ImgItem imgi = (ImgItem) gridview_atalhos.getChildAt(0);
 			
 			int cmd = imgi.getAssocImagemSom().getCmd();
 			// tocar som frase
@@ -97,7 +96,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 		{
 			if (mostrarComandos)
 			{
-				CarregarImagensComandos cixmlc = new CarregarImagensComandos()
+				CarregarImagensComandos cic = new CarregarImagensComandos()
 				{
 
 					// metodo que roda na UI Thread antes da atividade em background
@@ -106,18 +105,18 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 					{
 						super.onPreExecute();
 						activeContext = ModoVarreduraActivity.this;
-						gridview 	= (GridView) ModoVarreduraActivity.this.findViewById(R.id.gridview);
+						gridview 	= ModoVarreduraActivity.this.gridview;
 						pgrbar		= (ProgressBar) ModoVarreduraActivity.this.findViewById(R.id.progressBar1);
 						
 						pgrbar.setVisibility(View.VISIBLE);							
 					}
 					
 				};
-				cixmlc.execute(CarregarImagensComandos.OPCAO_CARREGAR_TODOS_COMANDOS); // false: mostrar todos os comandos
+				cic.execute(CarregarImagensComandos.OPCAO_CARREGAR_TODOS_COMANDOS); // false: mostrar todos os comandos
 			} 
 			else if (esconderComandos)
 			{
-				CarregarImagensTelas cixml = new CarregarImagensTelas()
+				CarregarImagensTelas cit = new CarregarImagensTelas()
 				{
 					// metodo que roda na UI Thread antes da atividade em background
 					@Override
@@ -125,7 +124,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 					{
 						super.onPreExecute();
 						activeContext = ModoVarreduraActivity.this;
-						gridview 	= (GridView) ModoVarreduraActivity.this.findViewById(R.id.gridview);
+						gridview 	= ModoVarreduraActivity.this.gridview;
 						pgrbar		= (ProgressBar) ModoVarreduraActivity.this.findViewById(R.id.progressBar1);
 						
 						pgrbar.setVisibility(View.VISIBLE);									
@@ -133,14 +132,14 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 			
 				};
 				
-				cixml.execute(current_page, CarregarImagensTelas.OPCAO_CARREGAR_IMAGENS, current_categoriaId);					
+				cit.execute(current_page, CarregarImagensTelas.OPCAO_CARREGAR_IMAGENS, current_categoriaId);					
 			}
 			alternarEventoBtnShowHideCommands();
 			alternarEventoAoSelecionarImagemDeGridViewPrincipal();				
 		}
 		else if (estadoAtual == ESTADO_BUTTON_PROXIMA_TELA_ATIVO) // proxima pagina
 		{
-			CarregarImagensTelas cixml = new CarregarImagensTelas()
+			CarregarImagensTelas cit = new CarregarImagensTelas()
 			{
 				// metodo que roda na UI Thread antes da atividade em background
 				@Override
@@ -148,22 +147,20 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 				{
 					super.onPreExecute();
 					activeContext = ModoVarreduraActivity.this;
-					gridview 	= (GridView) ModoVarreduraActivity.this.findViewById(R.id.gridview);
+					gridview 	= ModoVarreduraActivity.this.gridview;
 					pgrbar		= (ProgressBar) ModoVarreduraActivity.this.findViewById(R.id.progressBar1);
 					
 					pgrbar.setVisibility(View.VISIBLE);								
 				}
 		
 			};
-			vaiParaProximaPagina(cixml, CarregarImagensTelas.OPCAO_CARREGAR_IMAGENS, current_categoriaId);
+			vaiParaProximaPagina(cit, CarregarImagensTelas.OPCAO_CARREGAR_IMAGENS, current_categoriaId);
 		}
 		else if (estadoAtual == ESTADO_ITERANDO_ITENS_GRIDVIEW_PRINCIPAL) // adicionar imagem a frase / acionar comando
 		{
-			GridView gv = (GridView) findViewById(R.id.gridview);
-			
 			int indiceAtual = indiceItemPrincipal - 1;
 			indiceAtual = (indiceAtual < 0) ? 0 : indiceAtual;
-			ImgItem imgi = (ImgItem) gv.getChildAt(indiceAtual);
+			ImgItem imgi = (ImgItem) gridview.getChildAt(indiceAtual);
 			
 			if (adicionarImagemFrase)
 				addImagemFrase(imgi);
@@ -220,13 +217,15 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 		alternarEventoBtnShowHideCommands();
 		alternarEventoAoSelecionarImagemDeGridViewPrincipal();
 		
+		resetIndices();
+		
 		setEstadoVarredura(ESTADO_GRIDVIEW_PRINCIPAL_ATIVO);
 		
-		if (!(copiarFraseGlobalParaFraseLocal()))
+		if (copiarFraseGlobalParaFraseLocal())
+			// transferindo as imagens globais para o gridview frase 
+			gridview_frase.setAdapter(new ImageAdapterFrase(lista_imagens_frase));
+		else
 			lista_imagens_frase = new ArrayList<ImgItem>();
-		else // transferindo as imagens globais para o gridview frase 
-			((GridView) findViewById(R.id.gridview_frase))
-			.setAdapter(new ImageAdapterFrase(lista_imagens_frase));
 
 		animationTimer = new Timer();
 		
@@ -256,7 +255,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 		};
 		
 		// aqui carregam-se as imagens da primeira pagina
-		CarregarImagensTelas cixml = new CarregarImagensTelas()
+		CarregarImagensTelas cit = new CarregarImagensTelas()
 		{
 			// metodo que roda na UI Thread antes da atividade em background
 			@Override
@@ -264,7 +263,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 			{
 				super.onPreExecute();
 				activeContext = ModoVarreduraActivity.this;
-				gridview 	= (GridView) ModoVarreduraActivity.this.findViewById(R.id.gridview);
+				gridview 	= ModoVarreduraActivity.this.gridview;
 				pgrbar		= (ProgressBar) ModoVarreduraActivity.this.findViewById(R.id.progressBar1);
 				
 				pgrbar.setVisibility(View.VISIBLE);		
@@ -284,10 +283,10 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 			}			
 		};
 		
-		cixml.execute(init_page, CarregarImagensTelas.OPCAO_CARREGAR_IMAGENS, current_categoriaId);
+		cit.execute(init_page, CarregarImagensTelas.OPCAO_CARREGAR_IMAGENS, current_categoriaId);
 		
 		// aqui carregam-se as imagens-comandos que sao atalhos
-		CarregarImagensComandos cixmlc = new CarregarImagensComandos()
+		CarregarImagensComandos cic = new CarregarImagensComandos()
 		{
 
 			// metodo que roda na UI Thread antes da atividade em background
@@ -296,12 +295,12 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 			{
 				super.onPreExecute();
 				activeContext = ModoVarreduraActivity.this;
-				gridview 	= (GridView) ModoVarreduraActivity.this.findViewById(R.id.gridview_atalhos);
+				gridview 	= ModoVarreduraActivity.this.gridview_atalhos;
 			}
 			
 		};
 		
-		cixmlc.execute(CarregarImagensComandos.OPCAO_CARREGAR_ATALHOS); // true: mostrar atalhos
+		cic.execute(CarregarImagensComandos.OPCAO_CARREGAR_ATALHOS); // true: mostrar atalhos
 		
 		// aqui carrega-se o service de reprodução de som
 		sservice_intent = new Intent(this, SoundService.class);
@@ -407,9 +406,6 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 	// metodo que descreve os estados
 	protected void setEstadoVarredura(int estado)
 	{
-		
-		
-		GridView gridview = (GridView) findViewById(R.id.gridview);
 		LinearLayout llFrase = (LinearLayout) findViewById(R.id.frase);
 		LinearLayout llAtalhos = (LinearLayout) findViewById(R.id.atalhos);
 		
@@ -485,25 +481,24 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 	
 	protected void iteracaoTimerGridViewPrincipal()
 	{
-		GridView gv  = (GridView) findViewById(R.id.gridview);
-		if (!(indiceItemPrincipal == gv.getChildCount()))
+		if (!(indiceItemPrincipal == gridview.getChildCount()))
 		{
 			
 			// ir removendo a borda da imagem anterior
 			if (indiceItemPrincipal > 0)
 			{
-				ImgItem iii = (ImgItem) gv.getChildAt(indiceItemPrincipal - 1);
+				ImgItem iii = (ImgItem) gridview.getChildAt(indiceItemPrincipal - 1);
 				setBorda(iii, false);
 			}
 			
-			ImgItem ii = (ImgItem) gv.getChildAt(indiceItemPrincipal++);
+			ImgItem ii = (ImgItem) gridview.getChildAt(indiceItemPrincipal++);
 				
 			setBorda(ii, true);
 		}
 		else
 		{
 			// quando chegar no ultimo item, tirar borda dele
-			ImgItem ii = (ImgItem) gv.getChildAt(indiceItemPrincipal++ - 1);
+			ImgItem ii = (ImgItem) gridview.getChildAt(indiceItemPrincipal++ - 1);
 			setBorda(ii, false);
 		}
 			
@@ -511,7 +506,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 	
 	private void iteracaoTimerGridViewFrase()
 	{
-		GridView gv  = (GridView) findViewById(R.id.gridview_frase);
+		GridView gv  = this.gridview_frase;
 		if (!(indiceItemFrase == gv.getChildCount()))
 		{
 			// ir removendo a borda da imagem anterior
@@ -623,7 +618,7 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 	// transição da varredura externa para interna
 	protected void entrar()
 	{
-		GridView gvf = (GridView) findViewById(R.id.gridview_frase);
+		GridView gvf = gridview_frase;
 		
 		// se gridview frase não contiver itens, não entra
 		if (estadoAtual == ESTADO_GRIDVIEW_FRASE_ATIVO && !(hasItens(gvf)))
@@ -684,38 +679,39 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 		@Override
 		public void run()
 		{
-			GridView gv = (GridView) findViewById(R.id.gridview);
-			GridView gvf = (GridView) findViewById(R.id.gridview_frase);
-			int cc;
+			int gridview_items_count;
 			
 			// a iteracao ocorre entre o conteúdo do controle e o próprio controle
 			
-			if (estadoAtual == ESTADO_GRIDVIEW_PRINCIPAL_ATIVO || estadoAtual == ESTADO_GRIDVIEW_FRASE_ATIVO || estadoAtual == ESTADO_GRIDVIEW_ATALHOS_ATIVO)
+			if (
+					estadoAtual == ESTADO_GRIDVIEW_PRINCIPAL_ATIVO 
+					|| estadoAtual == ESTADO_GRIDVIEW_FRASE_ATIVO 
+					|| estadoAtual == ESTADO_GRIDVIEW_ATALHOS_ATIVO
+				)
 				setEstadoVarredura(transicaoIteracaoInternaPartindoDe(estadoAtual));
 			
 			// Varre GridView Principal
 			if 	(   	
 					(iteracaoInternaPrincipalAtiva) 
-					&& 	((cc = gv.getChildCount()) > 0) 
-					&& 	(indiceItemPrincipal <= cc) 
+					&& 	((gridview_items_count = gridview.getChildCount()) > 0) 
+					&& 	(indiceItemPrincipal <= gridview_items_count) 
 				)
 			{
 				
 				iteracaoTimerGridViewPrincipal();
-				if (indiceItemPrincipal == (cc + 1))
+				if (indiceItemPrincipal == (gridview_items_count + 1))
 					setEstadoVarredura(transicaoIteracaoInternaPartindoDe(ESTADO_ITERANDO_ITENS_GRIDVIEW_PRINCIPAL));
 			}
 
 			// Varre GridView Frase							
 			if 	( 		
 					(iteracaoInternaFraseAtiva) 
-					&& 	((cc = gvf.getChildCount()) > 0) 
-					&& 	(indiceItemFrase <= cc) 
+					&& 	((gridview_items_count = gridview_frase.getChildCount()) > 0) 
+					&& 	(indiceItemFrase <= gridview_items_count) 
 				)
 			{
 				iteracaoTimerGridViewFrase();
-				// transicao para GridViewComandos
-				if (indiceItemFrase == (cc + 1))
+				if (indiceItemFrase == (gridview_items_count + 1))
 					setEstadoVarredura(transicaoIteracaoInternaPartindoDe(ESTADO_ITERANDO_ITENS_GRIDVIEW_FRASE));
 			}		
 			
@@ -727,18 +723,6 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 	{
 		super.onRestart();
 	}
-	
-	@Override
-	protected void onRestart()
-	{
-		super.onRestart();
-		
-		if (!(copiarFraseGlobalParaFraseLocal()))
-			lista_imagens_frase = new ArrayList<ImgItem>();
-		else // transferindo as imagens globais para o gridview frase 
-			((GridView) findViewById(R.id.gridview_frase))
-			.setAdapter(new ImageAdapterFrase(lista_imagens_frase));
-	}		
 	
 	// metodo que intercepta os clicks na tela
 	@Override

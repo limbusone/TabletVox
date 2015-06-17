@@ -18,6 +18,7 @@ import com.example.tabletvox03f.management.Opcoes;
 
 public class TelaBaseActivity extends ActionBarActivity
 {
+	public static ArrayList<ImgItem> lista_imagens_frase_global;
 	protected ArrayList<ImgItem> lista_imagens_frase;
 	protected Intent sservice_intent; // servico de som
 	protected int current_page;
@@ -27,6 +28,10 @@ public class TelaBaseActivity extends ActionBarActivity
 	private String currentTitle;
 	
 	protected int current_categoriaId;
+	
+	protected GridView gridview;
+	protected GridView gridview_frase;
+	protected GridView gridview_atalhos;
 	
 	private static final int TOCAR_SOM_FRASE_COD_CMD 	= 1;
 	private static final int VOLTAR_TELA_COD_CMD 		= 2;
@@ -44,9 +49,9 @@ public class TelaBaseActivity extends ActionBarActivity
 		setContentView(R.layout.telas_interface);
 		
 		// altera layout params dos gridviews de acordo com as opções do usuário
-		GridView gridview 			= (GridView) findViewById(R.id.gridview);
-		GridView gridview_atalhos 	= (GridView) findViewById(R.id.gridview_atalhos);
-		GridView gridview_frase 	= (GridView) findViewById(R.id.gridview_frase);
+		gridview 			= (GridView) findViewById(R.id.gridview);
+		gridview_frase 		= (GridView) findViewById(R.id.gridview_frase);
+		gridview_atalhos	= (GridView) findViewById(R.id.gridview_atalhos);
 		
 		SharedPreferences sp 	= PreferenceManager.getDefaultSharedPreferences(this);
 		int tamanhoImagem 		= Integer.parseInt(sp.getString("tamanho_imagem", "" + Opcoes.TAMANHO_IMAGEM_DEFAULT));
@@ -127,13 +132,16 @@ public class TelaBaseActivity extends ActionBarActivity
 	}
 
 	// copia frase global para frase local
-	@SuppressWarnings("unchecked")
 	public boolean copiarFraseGlobalParaFraseLocal()
 	{
 		// verifica antes se a frase global está inicializada e se possue elementos
-		if (!(Utils.lista_imagens_frase_global == null) && !(Utils.lista_imagens_frase_global.isEmpty()))
+		if (!(TelaBaseActivity.lista_imagens_frase_global == null) && !(TelaBaseActivity.lista_imagens_frase_global.isEmpty()))
 		{
-			lista_imagens_frase = (ArrayList<ImgItem>) Utils.lista_imagens_frase_global.clone();
+			//lista_imagens_frase = (ArrayList<ImgItem>) TelaBaseActivity.lista_imagens_frase_global.clone();
+			lista_imagens_frase = new ArrayList<ImgItem>();
+			
+			for (int i = 0, length = TelaBaseActivity.lista_imagens_frase_global.size(); i < length; i++)
+				lista_imagens_frase.add(new ImgItem(TelaBaseActivity.lista_imagens_frase_global.get(i)));
 			return true;
 		}
 		
@@ -240,11 +248,10 @@ public class TelaBaseActivity extends ActionBarActivity
 	{
 		lista_imagens_frase.add(new ImgItem(imgi));
 		
-		Utils.lista_imagens_frase_global.add(new ImgItem(imgi));
+		TelaBaseActivity.lista_imagens_frase_global.add(new ImgItem(imgi));
 		
-		((GridView) findViewById(R.id.gridview_frase))
-		.setAdapter(new ImageAdapterFrase(lista_imagens_frase));
-		
+		gridview_frase.setAdapter(new ImageAdapterFrase(lista_imagens_frase));
+
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
 		if (sp.getBoolean("tocar_som_ao_selecionar_imagem", true))
 		{	
@@ -258,9 +265,8 @@ public class TelaBaseActivity extends ActionBarActivity
 	public void removerImagemDaFrase(int position)
 	{
 		lista_imagens_frase.remove(position);
-		Utils.lista_imagens_frase_global.remove(position);
-		((GridView) findViewById(R.id.gridview_frase))
-				.setAdapter(new ImageAdapterFrase(lista_imagens_frase));
+		TelaBaseActivity.lista_imagens_frase_global.remove(position);
+		gridview_frase.setAdapter(new ImageAdapterFrase(lista_imagens_frase));
 	}
 	
 	// paginacao circular

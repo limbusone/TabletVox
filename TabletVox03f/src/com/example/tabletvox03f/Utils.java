@@ -33,9 +33,6 @@ public class Utils
 	
 	public static ArrayList<Erro> erros = new ArrayList<Erro>();
 	
-	// frase global utilizada principalmente no perfil categorizado
-	public static ArrayList<ImgItem> lista_imagens_frase_global;
-	
     public static void limpaErros()
     {
     	erros.clear();

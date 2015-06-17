@@ -8,7 +8,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
-import android.widget.GridView;
 import android.widget.ProgressBar;
 
 import com.example.tabletvox03f.dal.CarregarImagensComandos;
@@ -40,8 +39,7 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 		}
 		else if (estadoAtual == ESTADO_GRIDVIEW_ATALHOS_ATIVO) // atalho
 		{
-			GridView gva = (GridView) findViewById(R.id.gridview_atalhos);
-			ImgItem imgi = (ImgItem) gva.getChildAt(0);
+			ImgItem imgi = (ImgItem) gridview_atalhos.getChildAt(0);
 			
 			int cmd = imgi.getAssocImagemSom().getCmd();
 			// tocar som frase
@@ -52,7 +50,7 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 		{
 			if (mostrarComandos)
 			{
-				CarregarImagensComandos cixmlc = new CarregarImagensComandos()
+				CarregarImagensComandos cic = new CarregarImagensComandos()
 				{
 
 					// metodo que roda na UI Thread antes da atividade em background
@@ -61,18 +59,18 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 					{
 						super.onPreExecute();
 						activeContext = ModoVarreduraCategoriasActivity.this;
-						gridview 	= (GridView) ModoVarreduraCategoriasActivity.this.findViewById(R.id.gridview);
+						gridview 	= ModoVarreduraCategoriasActivity.this.gridview;
 						pgrbar		= (ProgressBar) ModoVarreduraCategoriasActivity.this.findViewById(R.id.progressBar1);
 						
 						pgrbar.setVisibility(View.VISIBLE);							
 					}
 					
 				};
-				cixmlc.execute(CarregarImagensComandos.OPCAO_CARREGAR_TODOS_COMANDOS); // false: mostrar todos os comandos
+				cic.execute(CarregarImagensComandos.OPCAO_CARREGAR_TODOS_COMANDOS); // false: mostrar todos os comandos
 			} 
 			else if (esconderComandos)
 			{
-				CarregarImagensTelas cixml = new CarregarImagensTelas()
+				CarregarImagensTelas cit = new CarregarImagensTelas()
 				{
 					// metodo que roda na UI Thread antes da atividade em background
 					@Override
@@ -80,7 +78,7 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 					{
 						super.onPreExecute();
 						activeContext = ModoVarreduraCategoriasActivity.this;
-						gridview 	= (GridView) ModoVarreduraCategoriasActivity.this.findViewById(R.id.gridview);
+						gridview 	= ModoVarreduraCategoriasActivity.this.gridview;
 						pgrbar		= (ProgressBar) ModoVarreduraCategoriasActivity.this.findViewById(R.id.progressBar1);
 						
 						pgrbar.setVisibility(View.VISIBLE);									
@@ -88,7 +86,7 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 			
 				};
 				
-				cixml.execute(current_page, CarregarImagensTelas.OPCAO_CARREGAR_CATEGORIAS);					
+				cit.execute(current_page, CarregarImagensTelas.OPCAO_CARREGAR_CATEGORIAS);					
 			}
 			alternarEventoBtnShowHideCommands();
 			alternarEventoAoSelecionarImagemDeGridViewPrincipal();				
@@ -103,7 +101,7 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 				{
 					super.onPreExecute();
 					activeContext = ModoVarreduraCategoriasActivity.this;
-					gridview 	= (GridView) ModoVarreduraCategoriasActivity.this.findViewById(R.id.gridview);
+					gridview 	= ModoVarreduraCategoriasActivity.this.gridview;
 					pgrbar		= (ProgressBar) ModoVarreduraCategoriasActivity.this.findViewById(R.id.progressBar1);
 					
 					pgrbar.setVisibility(View.VISIBLE);								
@@ -114,11 +112,9 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 		}
 		else if (estadoAtual == ESTADO_CARREGAR_CATEGORIA_ACIONAR_COMANDO) // carregar categoria / acionar comando
 		{
-			GridView gv = (GridView) findViewById(R.id.gridview);
-			
 			int indiceAtual = indiceItemPrincipal - 1;
 			indiceAtual = (indiceAtual < 0) ? 0 : indiceAtual;
-			ImgItem imgi = (ImgItem) gv.getChildAt(indiceAtual);
+			ImgItem imgi = (ImgItem) gridview.getChildAt(indiceAtual);
 			
 			if (carregarCategoria)
 				carregarCategoriaModoVarredura(imgi);
@@ -176,8 +172,7 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 		if (!(copiarFraseGlobalParaFraseLocal()))
 			lista_imagens_frase = new ArrayList<ImgItem>();
 		else // transferindo as imagens globais para o gridview frase 
-			((GridView) findViewById(R.id.gridview_frase))
-			.setAdapter(new ImageAdapterFrase(lista_imagens_frase));		
+			gridview_frase.setAdapter(new ImageAdapterFrase(lista_imagens_frase));		
 		
 		animationTimer = new Timer();
 		
@@ -207,7 +202,7 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 		};
 		
 		// carrega categorias do perfil
-		CarregarImagensTelas cixml = new CarregarImagensTelas()
+		CarregarImagensTelas cit = new CarregarImagensTelas()
 		{
 			// metodo que roda na UI Thread antes da atividade em background
 			@Override
@@ -215,7 +210,7 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 			{
 				super.onPreExecute();
 				activeContext = ModoVarreduraCategoriasActivity.this;
-				gridview 	= (GridView) ModoVarreduraCategoriasActivity.this.findViewById(R.id.gridview);
+				gridview 	= ModoVarreduraCategoriasActivity.this.gridview;
 				pgrbar		= (ProgressBar) ModoVarreduraCategoriasActivity.this.findViewById(R.id.progressBar1);
 				
 				pgrbar.setVisibility(View.VISIBLE);
@@ -235,10 +230,10 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 
 			}			
 		};
-		cixml.execute(init_page, CarregarImagensTelas.OPCAO_CARREGAR_CATEGORIAS);
+		cit.execute(init_page, CarregarImagensTelas.OPCAO_CARREGAR_CATEGORIAS);
 		
 		// aqui carregam-se as imagens-comandos que sao atalhos
-		CarregarImagensComandos cixmlc = new CarregarImagensComandos()
+		CarregarImagensComandos cic = new CarregarImagensComandos()
 		{
 
 			// metodo que roda na UI Thread antes da atividade em background
@@ -246,12 +241,12 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 			protected void onPreExecute()
 			{
 				super.onPreExecute();
-				activeContext = ModoVarreduraCategoriasActivity.this;
-				gridview 	= (GridView) ModoVarreduraCategoriasActivity.this.findViewById(R.id.gridview_atalhos);
+				activeContext 	= ModoVarreduraCategoriasActivity.this;
+				gridview 		= ModoVarreduraCategoriasActivity.this.gridview_atalhos;
 			}
 			
 		};
-		cixmlc.execute(CarregarImagensComandos.OPCAO_CARREGAR_ATALHOS); // true: mostrar atalhos		
+		cic.execute(CarregarImagensComandos.OPCAO_CARREGAR_ATALHOS); // true: mostrar atalhos		
 	}
 	
 	@Override
@@ -316,9 +311,9 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 		
 		if (!(copiarFraseGlobalParaFraseLocal()))
 			lista_imagens_frase = new ArrayList<ImgItem>();
-		else // transferindo as imagens globais para o gridview frase 
-			((GridView) findViewById(R.id.gridview_frase))
-			.setAdapter(new ImageAdapterFrase(lista_imagens_frase));		
+
+		// transferindo as imagens globais para o gridview frase 
+		gridview_frase.setAdapter(new ImageAdapterFrase(lista_imagens_frase));		
 		
 		// quando a interface desta activity voltar ao foco, reiniciar/recriar o timer
 	

@@ -4,8 +4,16 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
+import android.graphics.Canvas;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.MotionEvent;
@@ -218,6 +226,8 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 		alternarEventoAoSelecionarImagemDeGridViewPrincipal();
 		
 		resetIndices();
+		
+		armazenarBackgroundDosComponentes();
 		
 		setEstadoVarredura(ESTADO_GRIDVIEW_PRINCIPAL_ATIVO);
 		
@@ -528,23 +538,110 @@ public class ModoVarreduraActivity extends TelaBaseActivity
 		}
 	}	
 	
+	@SuppressWarnings("deprecation")
+	@SuppressLint("NewApi")
 	private void setBorda(View v, boolean s)
 	{
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
 		
-		int cor = Integer.parseInt(sp.getString(Opcoes.COR_BORDA_KEY, "" + Opcoes.BORDA_VERMELHA));
+		int cor = Integer.parseInt(sp.getString(Opcoes.COR_BORDA_KEY, "" + Opcoes.COR_BORDA_DEFAULT));
 		
 		switch (cor)
 		{
 			case Opcoes.BORDA_PRETA:
-				v.setBackgroundResource((s) ? R.drawable.borda_preta : 0);
+				
+				if (s)
+				{
+					GradientDrawable borda_preta_dg = (GradientDrawable) getResources().getDrawable(R.drawable.borda_preta);
+					borda_preta_dg.setColor(getColor((ColorDrawable) v.getTag()));
+					if (Build.VERSION.SDK_INT < 16)
+						v.setBackgroundDrawable(borda_preta_dg);
+					else 
+						v.setBackground(borda_preta_dg);
+				}
+				else
+				{
+					if (Build.VERSION.SDK_INT < 16)
+						v.setBackgroundDrawable((Drawable) v.getTag());
+					else 
+						v.setBackground((Drawable) v.getTag());
+				}
 				break;
 		
 			case Opcoes.BORDA_VERMELHA:
 			default:
-				v.setBackgroundResource((s) ? R.drawable.borda : 0);
+				if (s)
+				{
+					GradientDrawable borda_vermelha_dg = (GradientDrawable) getResources().getDrawable(R.drawable.borda);
+					borda_vermelha_dg.setColor(getColor((ColorDrawable) v.getTag()));
+					if (Build.VERSION.SDK_INT < 16)
+						v.setBackgroundDrawable(borda_vermelha_dg);
+					else 
+						v.setBackground(borda_vermelha_dg);
+				}
+				else
+				{
+					if (Build.VERSION.SDK_INT < 16)
+						v.setBackgroundDrawable((Drawable) v.getTag());
+					else 
+						v.setBackground((Drawable) v.getTag());
+				}				
+		}
+	}
+	
+	private void setBorda(ImgItem imgi, boolean s)
+	{
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+		
+		int cor = Integer.parseInt(sp.getString(Opcoes.COR_BORDA_KEY, "" + Opcoes.COR_BORDA_DEFAULT));
+		
+		switch (cor)
+		{
+			case Opcoes.BORDA_PRETA:
+				imgi.setBackgroundResource((s) ? R.drawable.borda_preta : 0);
+				break;
+		
+			case Opcoes.BORDA_VERMELHA:
+			default:
+				imgi.setBackgroundResource((s) ? R.drawable.borda : 0);
 				
 		}
+	}
+	
+	protected void armazenarBackgroundDosComponentes()
+	{
+		LinearLayout llFrase = (LinearLayout) findViewById(R.id.frase);
+		LinearLayout llAtalhos = (LinearLayout) findViewById(R.id.atalhos);
+		
+		LinearLayout llShowHideCommands = (LinearLayout) findViewById(R.id.show_hide_commands);
+		LinearLayout llNext				= (LinearLayout) findViewById(R.id.next);
+		
+		llFrase.setTag(llFrase.getBackground());
+		
+		llAtalhos.setTag(llAtalhos.getBackground());
+		llShowHideCommands.setTag(llShowHideCommands.getBackground());
+		llNext.setTag(llNext.getBackground());
+		gridview.setTag(gridview.getBackground());
+
+	}
+	
+	@SuppressLint("NewApi")
+	protected int getColor(ColorDrawable colorDrawable)
+	{
+		int corDoDrawable = 0;
+		
+		if (Build.VERSION.SDK_INT < 11)
+		{
+			Bitmap bitmap = Bitmap.createBitmap(1, 1, Config.ARGB_8888);
+			Canvas canvas = new Canvas(bitmap);
+			colorDrawable.draw(canvas);
+			corDoDrawable = bitmap.getPixel(0, 0);
+			bitmap.recycle();
+		}
+		else
+			corDoDrawable = colorDrawable.getColor();
+		
+		return corDoDrawable;
 	}
 	
 	protected void resetIndices()

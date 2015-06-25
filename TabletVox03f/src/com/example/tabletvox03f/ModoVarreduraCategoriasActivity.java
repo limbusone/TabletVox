@@ -167,6 +167,8 @@ public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 
 		resetIndices();
 		
+		armazenarBackgroundDosComponentes();
+		
 		setEstadoVarredura(ESTADO_CARREGAR_CATEGORIA_ACIONAR_COMANDO);
 		
 		if (!(copiarFraseGlobalParaFraseLocal()))

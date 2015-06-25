@@ -8,9 +8,9 @@
 	<LinearLayout 
 	    android:layout_width="fill_parent"
 	    android:layout_alignParentBottom="true"
-	    android:background="#005500" 
+	    android:background="#00A2E8" 
 	    android:layout_height="wrap_content"
-	    android:gravity="left"
+	    android:gravity="start"
 	    android:orientation="horizontal"
 	    android:id="@+id/rodape" android:padding="10dip">
 
@@ -19,7 +19,7 @@
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:orientation="horizontal"
-		    android:background="#00DD00" >
+		    android:background="#DDDDDD" >
 
 			<GridView
 			    android:id="@+id/gridview_atalhos"
@@ -37,7 +37,7 @@
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:orientation="horizontal"
-		    android:background="#00AA00"
+		    android:background="#7EC6E5"
 		    android:paddingLeft="10dp" 
 		    android:paddingRight="10dp">
 			
@@ -61,8 +61,9 @@
 	    android:layout_width="40dp"
 	    android:layout_height="fill_parent"
 	    android:layout_alignParentLeft="true"
+	    android:layout_alignParentStart="true"
 	   	android:layout_above="@id/rodape"
-	    android:background="#005500"
+	    android:background="#FFFFFF"
 	    android:orientation="horizontal">
 		
 		<Button
@@ -78,7 +79,8 @@
 	    android:layout_height="fill_parent"
 	   	android:layout_above="@id/rodape"
 	    android:layout_alignParentRight="true"
-	    android:background="#550000"
+	    android:layout_alignParentEnd="true"
+	    android:background="#FFFFFF"
 	    android:orientation="horizontal">
 		<Button 
 		    android:id="@+id/btnNext"
@@ -92,23 +94,17 @@
 	    android:layout_width="wrap_content"
 	    android:layout_height="fill_parent"
 	    android:layout_toLeftOf="@id/next"
+	    android:layout_toStartOf="@id/next"
 	    android:layout_toRightOf="@id/show_hide_commands"
+	    android:layout_toEndOf="@id/show_hide_commands"
 	    android:layout_above="@id/rodape"
 	    
 	    android:horizontalSpacing="0dp"
 	    android:numColumns="auto_fit"
 	    android:stretchMode="none"
-	    android:verticalSpacing="0dp" />
+	    android:verticalSpacing="0dp"
+	    android:background="#EFEFEF" />
  
-<!-- 	<WebView  -->
-<!-- 	    android:id="@+id/webview" -->
-<!-- 	    android:layout_width="42dp" -->
-<!-- 	    android:layout_height="wrap_content" -->
-<!-- 	    android:layout_centerHorizontal="true" -->
-<!-- 	    android:layout_centerVertical="true" -->
-<!-- 	    android:visibility="invisible" -->
-<!-- 	    /> -->
-
 	<ProgressBar
 	    android:id="@+id/progressBar1"
 	    style="?android:attr/progressBarStyleLarge"

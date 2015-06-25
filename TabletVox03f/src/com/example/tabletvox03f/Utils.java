@@ -449,6 +449,7 @@ public class Utils
 		dao_ais.create("ser", 			"", 		"", 		"jpg", 'v', 0);
 		
 		dao_ais.create("comando voltar", "cmd11", "cmd11", "jpg", 'n', 2);
+		dao_ais.create("apagarTudo", "lf152", 	"", 	"jpg", 'n', 3);
 		
 		
 		// incluindo as categorias de fato

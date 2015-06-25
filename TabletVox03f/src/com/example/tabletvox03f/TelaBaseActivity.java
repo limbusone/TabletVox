@@ -35,6 +35,7 @@ public class TelaBaseActivity extends ActionBarActivity
 	
 	private static final int TOCAR_SOM_FRASE_COD_CMD 	= 1;
 	private static final int VOLTAR_TELA_COD_CMD 		= 2;
+	private static final int APAGAR_TODA_FRASE_CMD		= 3;
 
 	public TelaBaseActivity()
 	{
@@ -240,6 +241,9 @@ public class TelaBaseActivity extends ActionBarActivity
 			case VOLTAR_TELA_COD_CMD:
 				finish();
 				break;
+			case APAGAR_TODA_FRASE_CMD:
+				removerTodasImagensDaFrase();
+				break;
 		}	
 	}
 	
@@ -267,6 +271,17 @@ public class TelaBaseActivity extends ActionBarActivity
 		lista_imagens_frase.remove(position);
 		TelaBaseActivity.lista_imagens_frase_global.remove(position);
 		gridview_frase.setAdapter(new ImageAdapterFrase(lista_imagens_frase));
+	}
+	
+	// remover todas as imagens da lista
+	public void removerTodasImagensDaFrase() {
+	
+		
+		lista_imagens_frase.clear();
+		TelaBaseActivity.lista_imagens_frase_global.clear();
+		
+		gridview_frase.setAdapter(new ImageAdapterFrase(lista_imagens_frase));
+		
 	}
 	
 	// paginacao circular

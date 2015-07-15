@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
+import android.util.AttributeSet;
 import android.widget.ImageView;
 
 import com.example.tabletvox03f.dal.FilesIO;
@@ -25,6 +26,13 @@ public class ImgItem extends ImageView
 		super(ctx);
 	}
 	
+	public ImgItem(Context ctx, AttributeSet attrs)
+	{
+		super(ctx, attrs);
+	}
+
+	
+	
 	//construtor de copia
 	public ImgItem(ImgItem i)
 	{
@@ -32,6 +40,14 @@ public class ImgItem extends ImageView
 		setImageDrawable(i.getDrawable());		
 		ais = i.getAssocImagemSom();
 	}
+	
+	//construtor de copia	
+	public ImgItem(ImgItem i, AttributeSet attrs)
+	{
+		super(i.getContext(), attrs);
+		setImageDrawable(i.getDrawable());		
+		ais = i.getAssocImagemSom();
+	}	
 
 	public void setAssocImagemSom(AssocImagemSom value) 
 	{
@@ -73,6 +89,11 @@ public class ImgItem extends ImageView
 			e.printStackTrace();
 		}
 		mp.start();
+	}
+	
+	public boolean tocandoSom()
+	{
+		return mp.isPlaying();
 	}
 	
 	public void encerrarMediaPlayer()

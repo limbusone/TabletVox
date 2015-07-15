@@ -450,6 +450,28 @@ public class Utils
 		
 		dao_ais.create("comando voltar", "cmd11", "cmd11", "jpg", 'n', 2);
 		
+		// incluindo imagens da versão alessandro
+		
+		dao_ais.create("Ale", 					"Ale", 						"ale", 					"jpg", 'n', 0);
+		dao_ais.create("Angélica", 				"Angelica", 				"angelica", 			"jpg", 'n', 0);
+		dao_ais.create("Carla", 				"Carla", 					"carla", 				"jpg", 'n', 0);
+		dao_ais.create("Christiane", 			"Christiane", 				"chris", 				"jpg", 'n', 0);
+		dao_ais.create("Fernando e Sorocaba", 	"fernando e sorocaba 1", 	"fernando_e_sorocaba", 	"jpg", 'n', 0);
+		dao_ais.create("Isabella", 				"Isabella", 				"isabella", 			"jpg", 'n', 0);
+		dao_ais.create("Júlia", 				"Julia", 					"julia", 				"jpg", 'n', 0);
+		dao_ais.create("KELMA", 				"KELMA", 					"kelma", 				"jpg", 'n', 0);
+		dao_ais.create("Lucas Feitosa", 		"Lucas Feitosa", 			"lucas_feitosa", 		"jpg", 'n', 0);
+		dao_ais.create("Lucas Ferreira", 		"Lucas Ferreira", 			"lucas_ferreira", 		"jpg", 'n', 0);
+		dao_ais.create("Mãe Sueli", 			"Mae", 						"mae_sueli", 			"jpg", 'n', 0);
+		dao_ais.create("Marcela", 				"Marcela", 					"marcela", 				"jpg", 'n', 0);
+		dao_ais.create("Marcelo", 				"Marcelo", 					"marcelo", 				"jpg", 'n', 0);
+		dao_ais.create("MARCIA", 				"MARCIA", 					"marcia", 				"jpg", 'n', 0);
+		dao_ais.create("RAFAEL", 				"RAFAEL", 					"rafael", 				"jpg", 'n', 0);
+		dao_ais.create("Regina", 				"Regina", 					"regina", 				"jpg", 'n', 0);
+		dao_ais.create("RENATA", 				"RENATA", 					"renata", 				"jpg", 'n', 0);
+		dao_ais.create("TALITA", 				"TALITA", 					"talita", 				"jpg", 'n', 0);
+		dao_ais.create("Vitor e Leo", 			"vitor e leo", 				"vitor_e_leo", 			"jpg", 'n', 0);
+		dao_ais.create("WELLINGTON", 			"WELLINGTON", 				"wellington", 			"jpg", 'n', 0);		
 		
 		// incluindo as categorias de fato
 		CategoriaDAO dao_cat = new CategoriaDAO(context);
@@ -470,7 +492,7 @@ public class Utils
 		dao_cat.create(40, "sensacoes", 	dao_ais.getImagensByIdInterval(173, 184), 1);
 		dao_cat.create(41, "transporte", 	dao_ais.getImagensByIdInterval(185, 196), 1);
 		dao_cat.create(42, "verbos", 		dao_ais.getImagensByIdInterval(197, 208), 1);
-		
+
 		dao_ais.close();
 		
 		PerfilDAO dao_pfl = new PerfilDAO(context);
@@ -482,8 +504,6 @@ public class Utils
 		dao_cat.close();
 		
 		dao_pfl.close();
-		
-		
 	}	
 
 }

@@ -37,9 +37,7 @@
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:orientation="horizontal"
-		    android:background="#7EC6E5"
-		    android:paddingLeft="10dp" 
-		    android:paddingRight="10dp">
+		    android:background="#7EC6E5">
 			
 			<GridView
 			    android:id="@+id/gridview_frase"

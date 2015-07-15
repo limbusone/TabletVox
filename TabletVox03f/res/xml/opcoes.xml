@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     
     <EditTextPreference 
         android:key="intervalo_tempo_tocar_frase"
         android:title="@string/intervalo_tempo_tocar_frase"
-        android:defaultValue="2000"/>
+        android:defaultValue="1000"/>
     
     <EditTextPreference 
         android:key="intervalo_tempo_varredura"

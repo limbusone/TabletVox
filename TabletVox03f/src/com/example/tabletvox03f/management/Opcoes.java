@@ -4,8 +4,8 @@ package com.example.tabletvox03f.management;
 public class Opcoes
 {
 	public static final String INTERVALO_TEMPO_TOCAR_FRASE_KEY = "intervalo_tempo_tocar_frase";
-	public static final int INTERVALO_TEMPO_TOCAR_FRASE_DEFAULT = 2500;
-	public static final int INTERVALO_TEMPO_TOCAR_FRASE_MIN		= 2000;
+	public static final int INTERVALO_TEMPO_TOCAR_FRASE_DEFAULT = 1000;
+	public static final int INTERVALO_TEMPO_TOCAR_FRASE_MIN		= 100;
 	public static final int INTERVALO_TEMPO_TOCAR_FRASE_MAX		= 5000;
 	
 	public static final String INTERVALO_TEMPO_VARREDURA_KEY = "intervalo_tempo_varredura";

@@ -327,6 +327,7 @@ public class TelaBaseActivity extends ActionBarActivity
 					ImgItem imgi = lif.get(i);
 					imgi.tocarSom(TelaBaseActivity.this);
 					
+					while (imgi.tocandoSom());
 					try
 					{
 						SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(TelaBaseActivity.this);

@@ -1,7 +1,5 @@
 package com.example.tabletvox03f.management.categoria;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.text.Editable;
 import android.view.MenuItem;

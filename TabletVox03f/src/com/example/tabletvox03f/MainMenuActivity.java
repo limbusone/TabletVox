@@ -3,9 +3,12 @@ package com.example.tabletvox03f;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -141,6 +144,9 @@ public class MainMenuActivity extends Activity
 				
 				startActivity(intent);
 				break;
+			case R.id.action_sobre:
+				showSobreDialog();
+				break;
 		}
 		
 		return false;
@@ -200,4 +206,31 @@ public class MainMenuActivity extends Activity
 		return (categorias.size() > 0);
 	}
 	
+	private void showSobreDialog()
+	{
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		
+	    // Get the layout inflater
+	    LayoutInflater inflater = getLayoutInflater();
+
+	    builder.setView(inflater.inflate(R.layout.sobre_dialog, null));
+		
+		builder.setTitle(getString(R.string.titulo_sobre_dialog));
+		
+		builder.setNeutralButton(R.string.fechar, new DialogInterface.OnClickListener()
+		{
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which)
+			{
+				return;
+			}
+		});
+		
+		AlertDialog dialog = builder.create();
+		
+		dialog.show();
+		
+		
+	}
 }

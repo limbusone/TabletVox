@@ -103,5 +103,14 @@
     <string name="erro_nao_e_possivel_deletar_perfil_default">Perfil padrão, não é possível deletá-lo!</string>
     <string name="erro_nao_existem_categorias_no_perfil">Não existem imagens no perfil atual!</string>
     
+    <string name="titulo_sobre_dialog">Sobre</string>
+    <string name="desenvolvido_por">Desenvolvido por:</string>
+    <string name="leonardo">Leonardo Ono Fernandes</string>
+    <string name="duduchi">Marcelo Duduchi</string>
+    <string name="pibic_cnpq">Projeto PIBIC do CNPq</string>
+    <string name="fatec_ceeteps">FATEC-SP do CEETEPS</string>
+    
+    <string name="fechar">Fechar</string>
+    
 
 </resources>

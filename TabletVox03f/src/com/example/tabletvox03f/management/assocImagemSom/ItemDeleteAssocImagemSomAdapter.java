@@ -16,7 +16,6 @@ import android.widget.Toast;
 import com.example.tabletvox03f.R;
 import com.example.tabletvox03f.dal.FilesIO;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
-import com.example.tabletvox03f.management.OnImagemSelectedListener;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class ItemDeleteAssocImagemSomAdapter extends ItemAssocImagemSomAdapter
@@ -26,7 +25,6 @@ public class ItemDeleteAssocImagemSomAdapter extends ItemAssocImagemSomAdapter
 			ArrayList<AssocImagemSom> lista)
 	{
 		super(context, lista);
-		mListener = (OnImagemSelectedListener) context;
 	}
 	
 	private class ViewHolder 

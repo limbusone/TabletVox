@@ -259,6 +259,8 @@ public class TelaBaseActivity extends ActionBarActivity
 			imgi.tocarSom(sservice_intent);
 			sservice_intent.removeExtra("titulo_som");
 		}
+		
+		finish();
 	}
 	
 	// remover imagem da frase

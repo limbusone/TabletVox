@@ -20,7 +20,6 @@ import com.example.tabletvox03f.dal.categoria.ListaCategoria;
 import com.example.tabletvox03f.dal.perfil.PerfilDAO;
 import com.example.tabletvox03f.management.OpcoesActivity;
 import com.example.tabletvox03f.management.OpcoesActivityOldApi;
-import com.example.tabletvox03f.management.assocImagemSom.ListaImagensActivity;
 import com.example.tabletvox03f.management.categoria.ListaCategoriasActivity;
 import com.example.tabletvox03f.management.perfil.SelecionarPerfilActivity;
 
@@ -99,7 +98,7 @@ public class MainMenuActivity extends Activity
 			
 		});		
 		
-	
+		showSobreDialog();
 	}
 	
 	@Override
@@ -128,10 +127,10 @@ public class MainMenuActivity extends Activity
 				intent = new Intent(MainMenuActivity.this, SelecionarPerfilActivity.class);
 				startActivityForResult(intent, 1);				
 				break;
-			case R.id.action_gerenciar_imagens:
-				intent = new Intent(this, ListaImagensActivity.class);
-				startActivity(intent);				
-				break;
+//			case R.id.action_gerenciar_imagens:
+//				intent = new Intent(this, ListaImagensActivity.class);
+//				startActivity(intent);				
+//				break;
 			case R.id.action_gerenciar_categorias:
 				intent = new Intent(this, ListaCategoriasActivity.class);
 				startActivity(intent);

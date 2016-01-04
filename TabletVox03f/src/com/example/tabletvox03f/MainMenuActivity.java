@@ -99,7 +99,7 @@ public class MainMenuActivity extends Activity
 			
 		});		
 		
-	
+		showSobreDialog();
 	}
 	
 	@Override

@@ -66,6 +66,7 @@
     <string name="add_categoria">Adicionar Categoria</string>
     <string name="opcoes">Opções</string>
     <string name="tocar_som_ao_selecionar_imagem">Tocar som ao selecionar imagem</string>
+	<string name="voltar_automaticamente_para_tela_categorias">Voltar automaticamente para a tela de categorias</string>
     <string name="intervalo_tempo_tocar_frase">Intervalo de tempo ao tocar som da frase (ms)</string>
     <string name="intervalo_tempo_varredura">Intervalo de tempo da varredura (ms)</string>
     <string name="cor_borda">Cor da Borda do modo Varredura</string>

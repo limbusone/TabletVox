@@ -16,6 +16,9 @@ public class Opcoes
 	public static final String TOCAR_SOM_AO_SELECIONAR_IMAGEM_KEY = "tocar_som_ao_selecionar_imagem";
 	public static final boolean TOCAR_SOM_AO_SELECIONAR_IMAGEM_DEFAULT = true;
 	
+	public static final String VOLTAR_AUTOMATICAMENTE_PARA_TELA_CATEGORIAS_KEY 		= "voltar_automaticamente_para_tela_categorias";
+	public static final boolean VOLTAR_AUTOMATICAMENTE_PARA_TELA_CATEGORIAS_DEFAULT = false;	
+	
 	public static final String TAMANHO_IMAGEM_KEY = "tamanho_imagem";
 	public static final int TAMANHO_IMAGEM_DEFAULT = 96;
 	

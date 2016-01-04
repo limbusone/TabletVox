@@ -16,6 +16,11 @@
         android:title="@string/tocar_som_ao_selecionar_imagem"
         android:defaultValue="true" />
     
+    <CheckBoxPreference 
+        android:key="voltar_automaticamente_para_tela_categorias"
+        android:title="@string/voltar_automaticamente_para_tela_categorias"
+        android:defaultValue="false"/>    
+    
     <ListPreference 
         android:key="tamanho_imagem"
         android:title="@string/tamanho_imagem"

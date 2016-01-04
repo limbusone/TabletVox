@@ -66,12 +66,12 @@ public class SelecionarImagemActivity extends ListaImagensActivity
 	{
 		switch (item.getItemId())
 		{
-			case R.id.action_add:
-				// chamar activity criar imagem
-				Intent intent = new Intent(this, FormularioAssocImagemSomActivity.class);
-				intent.putExtra("tipo_form", FormularioBaseActivity.FORM_INCLUIR); // 0, para form do tipo 'criar' e 1 para form do tipo 'editar'
-				startActivityForResult(intent, 1);			
-				break;		
+//			case R.id.action_add:
+//				// chamar activity criar imagem
+//				Intent intent = new Intent(this, FormularioAssocImagemSomActivity.class);
+//				intent.putExtra("tipo_form", FormularioBaseActivity.FORM_INCLUIR); // 0, para form do tipo 'criar' e 1 para form do tipo 'editar'
+//				startActivityForResult(intent, 1);			
+//				break;		
 			// cancela a ação e volta pro formulario
 			case R.id.action_cancelar:
 				this.setResult(RC_SELECIONAR_IMG_CANCELADO);
@@ -93,57 +93,57 @@ public class SelecionarImagemActivity extends ListaImagensActivity
 	@Override
 	protected int getMenuID()
 	{
-		return R.menu.action_add_cancelar;
+		return R.menu.action_cancelar;
 	}
 	
 	// callback ao voltar da tela adicionar
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data)
-	{
-		super.onActivityResult(requestCode, resultCode, data);
-		
-		if (resultCode == FormularioAssocImagemSomActivity.RC_IMG_INCLUIDA_SUCESSO)
-		{
-			AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-			// conteudo da dialog
-			builder.setMessage(getString(R.string.add_img_recem_criada));
-			builder.setTitle(getString(R.string.add_imagem));
-			
-			final Intent ais = data;
-			
-			// botoes
-			
-			// botao sim
-			// mandar imagem recem criada para o formulario de categorias
-			builder.setPositiveButton(getString(R.string.sim), new DialogInterface.OnClickListener() 
-			{
-
-				@Override
-				public void onClick(DialogInterface dialog, int which)
-				{
-					SelecionarImagemActivity.this.setResult(RC_SELECIONAR_IMG_SUCESSO, ais);
-					finish();
-				}
-			});
-			
-			// botao nao
-			builder.setNegativeButton(getString(R.string.nao), new DialogInterface.OnClickListener()
-			{
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which)
-				{
-					return;
-				}
-			});
-			
-			AlertDialog dialog = builder.create();
-			
-			dialog.show();			
-			
-			Toast.makeText(this, getString(R.string.img_incluida_com_sucesso), Toast.LENGTH_SHORT).show();
-		}
-	}		
+//	@Override
+//	protected void onActivityResult(int requestCode, int resultCode, Intent data)
+//	{
+//		super.onActivityResult(requestCode, resultCode, data);
+//		
+//		if (resultCode == FormularioAssocImagemSomActivity.RC_IMG_INCLUIDA_SUCESSO)
+//		{
+//			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//
+//			// conteudo da dialog
+//			builder.setMessage(getString(R.string.add_img_recem_criada));
+//			builder.setTitle(getString(R.string.add_imagem));
+//			
+//			final Intent ais = data;
+//			
+//			// botoes
+//			
+//			// botao sim
+//			// mandar imagem recem criada para o formulario de categorias
+//			builder.setPositiveButton(getString(R.string.sim), new DialogInterface.OnClickListener() 
+//			{
+//
+//				@Override
+//				public void onClick(DialogInterface dialog, int which)
+//				{
+//					SelecionarImagemActivity.this.setResult(RC_SELECIONAR_IMG_SUCESSO, ais);
+//					finish();
+//				}
+//			});
+//			
+//			// botao nao
+//			builder.setNegativeButton(getString(R.string.nao), new DialogInterface.OnClickListener()
+//			{
+//				
+//				@Override
+//				public void onClick(DialogInterface dialog, int which)
+//				{
+//					return;
+//				}
+//			});
+//			
+//			AlertDialog dialog = builder.create();
+//			
+//			dialog.show();			
+//			
+//			Toast.makeText(this, getString(R.string.img_incluida_com_sucesso), Toast.LENGTH_SHORT).show();
+//		}
+//	}		
 	
 }

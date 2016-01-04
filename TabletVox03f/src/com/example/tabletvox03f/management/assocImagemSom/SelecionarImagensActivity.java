@@ -78,10 +78,10 @@ public class SelecionarImagensActivity extends ListaImagensActivity
 			this.setResult(RC_ADD_IMG_CANCELADO);
 			finish();			
 			break;
-		case R.id.action_gerenciar:
-			Intent intent_lia = new Intent(this, ListaImagensActivity.class);
-			startActivityForResult(intent_lia, 1);
-			break;
+//		case R.id.action_gerenciar:
+//			Intent intent_lia = new Intent(this, ListaImagensActivity.class);
+//			startActivityForResult(intent_lia, 1);
+//			break;
 		}
 	}
 
@@ -105,7 +105,7 @@ public class SelecionarImagensActivity extends ListaImagensActivity
 	@Override
 	protected int getMenuID()
 	{
-		return R.menu.action_concluir_cancelar_manage;
+		return R.menu.action_concluir_cancelar;
 	}
 	
 	// callback ao voltar da tela listar imagens

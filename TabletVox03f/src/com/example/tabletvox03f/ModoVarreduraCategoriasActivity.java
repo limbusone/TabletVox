@@ -15,6 +15,7 @@ import com.example.tabletvox03f.dal.CarregarImagensTelas;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
 import com.example.tabletvox03f.dal.perfil.PerfilDAO;
 import com.example.tabletvox03f.management.Opcoes;
+import com.example.tabletvoxdemo.R;
 
 public class ModoVarreduraCategoriasActivity extends ModoVarreduraActivity
 {

@@ -6,7 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.tabletvox03f.R;
+import com.example.tabletvoxdemo.R;
 
 public abstract class FormularioBaseActivity extends ActionBarActivity
 {

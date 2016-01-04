@@ -22,6 +22,7 @@ import com.example.tabletvox03f.management.OpcoesActivity;
 import com.example.tabletvox03f.management.OpcoesActivityOldApi;
 import com.example.tabletvox03f.management.categoria.ListaCategoriasActivity;
 import com.example.tabletvox03f.management.perfil.SelecionarPerfilActivity;
+import com.example.tabletvoxdemo.R;
 
 public class MainMenuActivity extends Activity
 {

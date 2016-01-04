@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 import com.example.tabletvox03f.dal.CarregarImagensComandos;
 import com.example.tabletvox03f.dal.CarregarImagensTelas;
 import com.example.tabletvox03f.dal.categoria.CategoriaDAO;
+import com.example.tabletvoxdemo.R;
 
 public class ModoTouchActivity extends TelaBaseActivity 
 {

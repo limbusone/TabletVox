@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.tabletvox03f.Erro;
-import com.example.tabletvox03f.R;
+import com.example.tabletvoxdemo.R;
 import com.example.tabletvox03f.Utils;
 import com.example.tabletvox03f.dal.categoria.Categoria;
 import com.example.tabletvox03f.dal.categoria.CategoriaDAO;

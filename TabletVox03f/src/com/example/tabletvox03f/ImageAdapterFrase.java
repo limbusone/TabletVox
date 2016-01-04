@@ -16,6 +16,7 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 
 import com.example.tabletvox03f.management.Opcoes;
+import com.example.tabletvoxdemo.R;
 
 public class ImageAdapterFrase extends BaseAdapter 
 {

@@ -11,7 +11,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Toast;
 
-import com.example.tabletvox03f.R;
+import com.example.tabletvoxdemo.R;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSomDAO;
 import com.example.tabletvox03f.management.FormularioBaseActivity;

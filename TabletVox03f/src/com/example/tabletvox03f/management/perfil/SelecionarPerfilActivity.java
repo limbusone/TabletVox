@@ -13,7 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.Toast;
 
 import com.example.tabletvox03f.Erro;
-import com.example.tabletvox03f.R;
+import com.example.tabletvoxdemo.R;
 import com.example.tabletvox03f.Utils;
 import com.example.tabletvox03f.dal.perfil.Perfil;
 import com.example.tabletvox03f.dal.perfil.PerfilDAO;

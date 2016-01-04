@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.example.tabletvox03f.R;
+import com.example.tabletvoxdemo.R;
 
 public abstract class FormularioNaoPersistenteBaseActivity extends FormularioBaseActivity
 {

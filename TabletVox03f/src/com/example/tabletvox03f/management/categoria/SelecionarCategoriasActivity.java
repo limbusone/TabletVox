@@ -9,7 +9,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 
-import com.example.tabletvox03f.R;
+import com.example.tabletvoxdemo.R;
 import com.example.tabletvox03f.dal.categoria.Categoria;
 import com.example.tabletvox03f.dal.categoria.CategoriaDAO;
 import com.example.tabletvox03f.dal.categoria.ListaCategoria;

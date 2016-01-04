@@ -12,7 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.tabletvox03f.R;
+import com.example.tabletvoxdemo.R;
 import com.example.tabletvox03f.dal.categoria.Categoria;
 import com.example.tabletvox03f.dal.categoria.CategoriaDAO;
 import com.example.tabletvox03f.dal.categoria.ListaCategoria;

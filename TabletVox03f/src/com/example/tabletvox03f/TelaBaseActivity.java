@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.tabletvox03f.management.Opcoes;
+import com.example.tabletvoxdemo.R;
 
 public class TelaBaseActivity extends ActionBarActivity
 {

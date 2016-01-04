@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.tabletvox03f.R;
+import com.example.tabletvoxdemo.R;
 
 public abstract class ListaComBuscaManageActivity extends ActionBarActivity
 {

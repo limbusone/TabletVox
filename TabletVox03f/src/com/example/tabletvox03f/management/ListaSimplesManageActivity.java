@@ -10,7 +10,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
-import com.example.tabletvox03f.R;
+import com.example.tabletvoxdemo.R;
 
 public abstract class ListaSimplesManageActivity extends ActionBarActivity
 {

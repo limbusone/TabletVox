@@ -5,7 +5,7 @@ import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
-import com.example.tabletvox03f.R;
+import com.example.tabletvoxdemo.R;
 
 public class OpcoesActivityOldApi extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener
 {

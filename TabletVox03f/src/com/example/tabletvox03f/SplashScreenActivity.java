@@ -1,4 +1,5 @@
 package com.example.tabletvox03f;
+import com.example.tabletvoxdemo.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 

@@ -18,6 +18,7 @@ import android.widget.GridView;
 import com.example.tabletvox03f.dal.FilesIO;
 import com.example.tabletvox03f.dal.assocImagemSom.AssocImagemSom;
 import com.example.tabletvox03f.management.Opcoes;
+import com.example.tabletvoxdemo.R;
 
 public class ImageAdapter extends BaseAdapter 
 {

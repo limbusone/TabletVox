@@ -6,7 +6,7 @@ import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 
-import com.example.tabletvox03f.R;
+import com.example.tabletvoxdemo.R;
 
 @SuppressLint("NewApi")
 public class OpcoesFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener

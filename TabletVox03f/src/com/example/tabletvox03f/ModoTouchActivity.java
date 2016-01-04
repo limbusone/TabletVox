@@ -269,7 +269,7 @@ public class ModoTouchActivity extends TelaBaseActivity
 	protected void onDestroy()
 	{
 		super.onDestroy();
-		stopService(sservice_intent);
+		//stopService(sservice_intent);
 	}
 
 }

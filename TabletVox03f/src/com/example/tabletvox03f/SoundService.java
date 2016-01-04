@@ -11,7 +11,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.IBinder;
 
-public class SoundService extends Service implements MediaPlayer.OnPreparedListener
+public class SoundService extends Service implements MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener
 {
     private MediaPlayer mMediaPlayer = null;
     private Bundle extras;
@@ -72,6 +72,13 @@ public class SoundService extends Service implements MediaPlayer.OnPreparedListe
         }
         */
     }
+    
+    /** Called when MediaPlayer is done */
+	@Override
+	public void onCompletion(MediaPlayer player)
+	{
+		stopSelf();
+	}    
 
 	@Override
 	public IBinder onBind(Intent arg0)
@@ -90,5 +97,6 @@ public class SoundService extends Service implements MediaPlayer.OnPreparedListe
 			mMediaPlayer = null;
 		}
 	}
+
 }
 

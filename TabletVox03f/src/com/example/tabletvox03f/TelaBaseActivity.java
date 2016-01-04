@@ -260,7 +260,8 @@ public class TelaBaseActivity extends ActionBarActivity
 			sservice_intent.removeExtra("titulo_som");
 		}
 		
-		finish();
+		if (sp.getBoolean(Opcoes.VOLTAR_AUTOMATICAMENTE_PARA_TELA_CATEGORIAS_KEY, Opcoes.TOCAR_SOM_AO_SELECIONAR_IMAGEM_DEFAULT))
+			finish();
 	}
 	
 	// remover imagem da frase

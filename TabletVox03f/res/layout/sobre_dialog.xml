@@ -16,6 +16,7 @@
 	    android:layout_height="wrap_content"
 	    android:text="@string/desenvolvido_por"
 	    android:layout_gravity="center_horizontal"
+	    android:layout_marginTop="10dp"
 	/>
 	
 	<TextView 
@@ -48,6 +49,7 @@
 	    android:text="@string/fatec_ceeteps"
 	    android:textAppearance="?android:attr/textAppearanceMedium"
 	    android:layout_gravity="center_horizontal"
+	    android:layout_marginBottom="10dp"
 	/>	
     
 </LinearLayout>

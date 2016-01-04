@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Tablet Vox</string>
+    <string name="app_name">Tablet Vox Demo</string>
     <string name="title_activity_main_menu">Tablet Vox</string>
     <string name="title_activity_modo_touch">Modo Touch</string>
     <string name="title_activity_modo_varredura">Modo Varredura</string>

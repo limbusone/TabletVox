@@ -329,39 +329,39 @@ public class Utils
 		
 		
 		// familia1
-		dao_ais.create("lucas", 		"FSP01", "FSP01", "jpg", 'n', 0);
-		dao_ais.create("mamãe", 		"FSP02", "FSP02", "jpg", 'n', 0);
-		dao_ais.create("papai", 		"FSP03", "FSP03", "jpg", 'n', 0);
-		dao_ais.create("helena", 		"FSP04", "FSP04", "jpg", 'n', 0);
-		dao_ais.create("tata", 			"FSP05", "FSP05", "jpg", 'n', 0);
-		dao_ais.create("vó geny", 		"FSP06", "FSP07", "jpg", 'n', 0);
-		dao_ais.create("vô brandão", 	"FSP07", "FSP06", "jpg", 'n', 0);
-		dao_ais.create("tio murilo", 	"FSP08", "FSP08", "jpg", 'n', 0);
-		dao_ais.create("baba", 			"FSP09", "FSP09", "jpg", 'n', 0);
-		dao_ais.create("tia lidia", 	"FSP10", "FSP10", "jpg", 'n', 0);
-		dao_ais.create("tio fernando", 	"FSP11", "FSP11", "jpg", 'n', 0);
-		dao_ais.create("tia ivania", 	"FSP12", "FSP12", "jpg", 'n', 0);
-		dao_ais.create("tio ridley", 	"FSP13", "FSP13", "jpg", 'n', 0);
-		dao_ais.create("tia olga", 		"FSP14", "FSP14", "jpg", 'n', 0);
-		dao_ais.create("erica", 		"FSP15", "FSP15", "jpg", 'n', 0);
-		dao_ais.create("bruna", 		"FSP16", "FSP16", "jpg", 'n', 0);
+//		dao_ais.create("lucas", 		"FSP01", "FSP01", "jpg", 'n', 0);
+//		dao_ais.create("mamãe", 		"FSP02", "FSP02", "jpg", 'n', 0);
+//		dao_ais.create("papai", 		"FSP03", "FSP03", "jpg", 'n', 0);
+//		dao_ais.create("helena", 		"FSP04", "FSP04", "jpg", 'n', 0);
+//		dao_ais.create("tata", 			"FSP05", "FSP05", "jpg", 'n', 0);
+//		dao_ais.create("vó geny", 		"FSP06", "FSP07", "jpg", 'n', 0);
+//		dao_ais.create("vô brandão", 	"FSP07", "FSP06", "jpg", 'n', 0);
+//		dao_ais.create("tio murilo", 	"FSP08", "FSP08", "jpg", 'n', 0);
+//		dao_ais.create("baba", 			"FSP09", "FSP09", "jpg", 'n', 0);
+//		dao_ais.create("tia lidia", 	"FSP10", "FSP10", "jpg", 'n', 0);
+//		dao_ais.create("tio fernando", 	"FSP11", "FSP11", "jpg", 'n', 0);
+//		dao_ais.create("tia ivania", 	"FSP12", "FSP12", "jpg", 'n', 0);
+//		dao_ais.create("tio ridley", 	"FSP13", "FSP13", "jpg", 'n', 0);
+//		dao_ais.create("tia olga", 		"FSP14", "FSP14", "jpg", 'n', 0);
+//		dao_ais.create("erica", 		"FSP15", "FSP15", "jpg", 'n', 0);
+//		dao_ais.create("bruna", 		"FSP16", "FSP16", "jpg", 'n', 0);
 		
 		
 		// familia2
-		dao_ais.create("vô claudio", 	"FLD02", "FLD02", "jpg", 'n', 0);
-		dao_ais.create("vó natalia", 	"FLD01", "FLD01", "jpg", 'n', 0);
-		dao_ais.create("tia vania", 	"FLD03", "FLD03", "jpg", 'n', 0);
-		dao_ais.create("tia ana", 		"FLD04", "FLD04", "jpg", 'n', 0);
-		dao_ais.create("tia lidia", 	"FLD05", "FLD05", "jpg", 'n', 0);
-		dao_ais.create("tio manuel", 	"FLD06", "FLD06", "jpg", 'n', 0);
-		dao_ais.create("tia gata", 		"FLD07", "FLD07", "jpg", 'n', 0);
-		dao_ais.create("tia cecilia", 	"FLD08", "FLD08", "jpg", 'n', 0);
-		dao_ais.create("tia alexandra", "FLD09", "FLD09", "jpg", 'n', 0);
-		dao_ais.create("cynara", 		"FLD10", "FLD10", "jpg", 'n', 0);
-		dao_ais.create("juliana", 		"FLD11", "FLD11", "jpg", 'n', 0);
-		dao_ais.create("suze", 			"FLD12", "FLD12", "jpg", 'n', 0);
-		dao_ais.create("rebecca", 		"FLD13", "FLD13", "jpg", 'n', 0);
-		dao_ais.create("tais", 			"FLD14", "FLD14", "jpg", 'n', 0);
+//		dao_ais.create("vô claudio", 	"FLD02", "FLD02", "jpg", 'n', 0);
+//		dao_ais.create("vó natalia", 	"FLD01", "FLD01", "jpg", 'n', 0);
+//		dao_ais.create("tia vania", 	"FLD03", "FLD03", "jpg", 'n', 0);
+//		dao_ais.create("tia ana", 		"FLD04", "FLD04", "jpg", 'n', 0);
+//		dao_ais.create("tia lidia", 	"FLD05", "FLD05", "jpg", 'n', 0);
+//		dao_ais.create("tio manuel", 	"FLD06", "FLD06", "jpg", 'n', 0);
+//		dao_ais.create("tia gata", 		"FLD07", "FLD07", "jpg", 'n', 0);
+//		dao_ais.create("tia cecilia", 	"FLD08", "FLD08", "jpg", 'n', 0);
+//		dao_ais.create("tia alexandra", "FLD09", "FLD09", "jpg", 'n', 0);
+//		dao_ais.create("cynara", 		"FLD10", "FLD10", "jpg", 'n', 0);
+//		dao_ais.create("juliana", 		"FLD11", "FLD11", "jpg", 'n', 0);
+//		dao_ais.create("suze", 			"FLD12", "FLD12", "jpg", 'n', 0);
+//		dao_ais.create("rebecca", 		"FLD13", "FLD13", "jpg", 'n', 0);
+//		dao_ais.create("tais", 			"FLD14", "FLD14", "jpg", 'n', 0);
 
 		// frutas
 		dao_ais.create("abacate", 	"af013", 	"af013", "jpg", 'n', 0);
@@ -452,26 +452,26 @@ public class Utils
 		
 		// incluindo imagens da versão alessandro
 		
-		dao_ais.create("Ale", 					"Ale", 						"ale", 					"jpg", 'n', 0);
-		dao_ais.create("Angélica", 				"Angelica", 				"angelica", 			"jpg", 'n', 0);
-		dao_ais.create("Carla", 				"Carla", 					"carla", 				"jpg", 'n', 0);
-		dao_ais.create("Christiane", 			"Christiane", 				"chris", 				"jpg", 'n', 0);
-		dao_ais.create("Fernando e Sorocaba", 	"fernando e sorocaba 1", 	"fernando_e_sorocaba", 	"jpg", 'n', 0);
-		dao_ais.create("Isabella", 				"Isabella", 				"isabella", 			"jpg", 'n', 0);
-		dao_ais.create("Júlia", 				"Julia", 					"julia", 				"jpg", 'n', 0);
-		dao_ais.create("KELMA", 				"KELMA", 					"kelma", 				"jpg", 'n', 0);
-		dao_ais.create("Lucas Feitosa", 		"Lucas Feitosa", 			"lucas_feitosa", 		"jpg", 'n', 0);
-		dao_ais.create("Lucas Ferreira", 		"Lucas Ferreira", 			"lucas_ferreira", 		"jpg", 'n', 0);
-		dao_ais.create("Mãe Sueli", 			"Mae", 						"mae_sueli", 			"jpg", 'n', 0);
-		dao_ais.create("Marcela", 				"Marcela", 					"marcela", 				"jpg", 'n', 0);
-		dao_ais.create("Marcelo", 				"Marcelo", 					"marcelo", 				"jpg", 'n', 0);
-		dao_ais.create("MARCIA", 				"MARCIA", 					"marcia", 				"jpg", 'n', 0);
-		dao_ais.create("RAFAEL", 				"RAFAEL", 					"rafael", 				"jpg", 'n', 0);
-		dao_ais.create("Regina", 				"Regina", 					"regina", 				"jpg", 'n', 0);
-		dao_ais.create("RENATA", 				"RENATA", 					"renata", 				"jpg", 'n', 0);
-		dao_ais.create("TALITA", 				"TALITA", 					"talita", 				"jpg", 'n', 0);
-		dao_ais.create("Vitor e Leo", 			"vitor e leo", 				"vitor_e_leo", 			"jpg", 'n', 0);
-		dao_ais.create("WELLINGTON", 			"WELLINGTON", 				"wellington", 			"jpg", 'n', 0);		
+//		dao_ais.create("Ale", 					"Ale", 						"ale", 					"jpg", 'n', 0);
+//		dao_ais.create("Angélica", 				"Angelica", 				"angelica", 			"jpg", 'n', 0);
+//		dao_ais.create("Carla", 				"Carla", 					"carla", 				"jpg", 'n', 0);
+//		dao_ais.create("Christiane", 			"Christiane", 				"chris", 				"jpg", 'n', 0);
+//		dao_ais.create("Fernando e Sorocaba", 	"fernando e sorocaba 1", 	"fernando_e_sorocaba", 	"jpg", 'n', 0);
+//		dao_ais.create("Isabella", 				"Isabella", 				"isabella", 			"jpg", 'n', 0);
+//		dao_ais.create("Júlia", 				"Julia", 					"julia", 				"jpg", 'n', 0);
+//		dao_ais.create("KELMA", 				"KELMA", 					"kelma", 				"jpg", 'n', 0);
+//		dao_ais.create("Lucas Feitosa", 		"Lucas Feitosa", 			"lucas_feitosa", 		"jpg", 'n', 0);
+//		dao_ais.create("Lucas Ferreira", 		"Lucas Ferreira", 			"lucas_ferreira", 		"jpg", 'n', 0);
+//		dao_ais.create("Mãe Sueli", 			"Mae", 						"mae_sueli", 			"jpg", 'n', 0);
+//		dao_ais.create("Marcela", 				"Marcela", 					"marcela", 				"jpg", 'n', 0);
+//		dao_ais.create("Marcelo", 				"Marcelo", 					"marcelo", 				"jpg", 'n', 0);
+//		dao_ais.create("MARCIA", 				"MARCIA", 					"marcia", 				"jpg", 'n', 0);
+//		dao_ais.create("RAFAEL", 				"RAFAEL", 					"rafael", 				"jpg", 'n', 0);
+//		dao_ais.create("Regina", 				"Regina", 					"regina", 				"jpg", 'n', 0);
+//		dao_ais.create("RENATA", 				"RENATA", 					"renata", 				"jpg", 'n', 0);
+//		dao_ais.create("TALITA", 				"TALITA", 					"talita", 				"jpg", 'n', 0);
+//		dao_ais.create("Vitor e Leo", 			"vitor e leo", 				"vitor_e_leo", 			"jpg", 'n', 0);
+//		dao_ais.create("WELLINGTON", 			"WELLINGTON", 				"wellington", 			"jpg", 'n', 0);		
 		
 		// incluindo as categorias de fato
 		CategoriaDAO dao_cat = new CategoriaDAO(context);
@@ -484,14 +484,14 @@ public class Utils
 		dao_cat.create(32, "banheiro",  	dao_ais.getImagensByIdInterval(76, 87), 1);
 		dao_cat.create(33, "bebidas", 		dao_ais.getImagensByIdInterval(88, 94), 1);
 		dao_cat.create(34, "corpo", 		dao_ais.getImagensByIdInterval(95, 106), 1);
-		dao_cat.create(35, "familia 1", 	dao_ais.getImagensByIdInterval(107, 122), 1);
-		dao_cat.create(36, "familia 2", 	dao_ais.getImagensByIdInterval(123, 136), 1);
-		dao_cat.create(37, "frutas", 		dao_ais.getImagensByIdInterval(137, 148), 1);
-		dao_cat.create(38, "lugares", 		dao_ais.getImagensByIdInterval(149, 160), 1);
-		dao_cat.create(39, "pessoas", 		dao_ais.getImagensByIdInterval(161, 172), 1);
-		dao_cat.create(40, "sensacoes", 	dao_ais.getImagensByIdInterval(173, 184), 1);
-		dao_cat.create(41, "transporte", 	dao_ais.getImagensByIdInterval(185, 196), 1);
-		dao_cat.create(42, "verbos", 		dao_ais.getImagensByIdInterval(197, 208), 1);
+//		dao_cat.create(35, "familia 1", 	dao_ais.getImagensByIdInterval(107, 122), 1);
+//		dao_cat.create(36, "familia 2", 	dao_ais.getImagensByIdInterval(123, 136), 1);
+		dao_cat.create(37, "frutas", 		dao_ais.getImagensByIdInterval(107, 118), 1);
+		dao_cat.create(38, "lugares", 		dao_ais.getImagensByIdInterval(119, 130), 1);
+		dao_cat.create(39, "pessoas", 		dao_ais.getImagensByIdInterval(131, 142), 1);
+		dao_cat.create(40, "sensacoes", 	dao_ais.getImagensByIdInterval(143, 154), 1);
+		dao_cat.create(41, "transporte", 	dao_ais.getImagensByIdInterval(155, 166), 1);
+		dao_cat.create(42, "verbos", 		dao_ais.getImagensByIdInterval(167, 178), 1);
 
 		dao_ais.close();
 		
